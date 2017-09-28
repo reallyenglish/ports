@@ -2,7 +2,7 @@
 
 COMMENT =		ssh based config management framework
 
-MODPY_EGG_VERSION =	2.1.0.0
+MODPY_EGG_VERSION =	2.3.2.0
 DISTNAME =		ansible-${MODPY_EGG_VERSION}
 
 CATEGORIES =		sysutils
