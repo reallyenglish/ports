@@ -1,12 +1,12 @@
-# $OpenBSD: Makefile,v 1.6 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.10 2017/10/09 20:05:07 bluhm Exp $
 
 COMMENT =	crypto and TLS for C++11
 
-VERSION =	2.1.0
+VERSION =	2.3.0
 DISTNAME =	Botan-${VERSION}
 PKGNAME =	botan2-${VERSION}
 
-SHARED_LIBS =	botan-2		1.0
+SHARED_LIBS =	botan-2		3.0
 
 CATEGORIES =	security
 
@@ -17,7 +17,8 @@ MAINTAINER =		Alexander Bluhm <bluhm@openbsd.org>
 # BSD 2-Clause
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		bz2 c m lzma pthread z
+WANTLIB =		bz2 c crypto m lzma pthread z
+WANTLIB +=		${COMPILER_LIBCXX}
 
 MASTER_SITES =		${HOMEPAGE}releases/
 
@@ -36,10 +37,10 @@ CONFIGURE_STYLE =	simple
 CONFIGURE_SCRIPT =	${WRKSRC}/configure.py
 CONFIGURE_ARGS =	--with-build-dir=${WRKBUILD} \
 			--prefix=${PREFIX} \
-			--destdir=${DESTDIR}${PREFIX} \
 			--distribution-info="`uname -sr`" \
 			--with-bzip2 \
 			--with-lzma \
+			--with-openssl \
 			--with-zlib \
 			--without-sphinx
 
@@ -54,18 +55,25 @@ SUBST_VARS =		CXX CXXFLAGS LIBbotan-2_VERSION
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/src/build-data/cc/gcc.txt
 	${SUBST_CMD} ${WRKSRC}/src/build-data/os/openbsd.txt
+	${SUBST_CMD} ${WRKSRC}/src/tests/main.cpp
 	ln -sf ${MODPY_BIN} ${WRKDIR}/bin/python
 
 do-test:
-	cd ${WRKSRC} && LD_LIBRARY_PATH=${WRKBUILD} ${WRKBUILD}/botan-test
+	LD_LIBRARY_PATH=${WRKBUILD} ${WRKBUILD}/botan-test \
+	    --data-dir=${WRKSRC}/src/tests/data
 
 post-install:
 	${MODPY_BIN} ${MODPY_LIBDIR}/compileall.py \
 	    ${PREFIX}/lib/python${MODPY_VERSION}/site-packages/botan2.py
 	cd ${PREFIX}/share/doc && mv botan-${VERSION} botan-2
+	${INSTALL_PROGRAM} ${WRKBUILD}/botan-test ${PREFIX}/bin
+	${INSTALL_DATA_DIR} ${PREFIX}/share/botan-2
+	cd ${WRKSRC}/src/tests && find data \
+	    -type d -exec ${INSTALL_DATA_DIR} ${PREFIX}/share/botan-2/{} \; -o \
+	    -type f -exec ${INSTALL_DATA} {} ${PREFIX}/share/botan-2/{} \;
 
 .include <bsd.port.mk>
-# clang does not have /usr/local in its path, but more importantly,
+# clang does not have ${LOCALBASE} in its path, but more importantly,
 # if we don't explicitly configure for it, it passes as a good enough gcc,
 # and then we get lots of warnings for unknown warning options...
 .if ${PROPERTIES:Mclang}

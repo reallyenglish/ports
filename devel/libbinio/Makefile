@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.2 2017/04/10 11:45:26 sthen Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/26 22:45:18 sthen Exp $
 
 COMMENT =	binary I/O stream class library
 
 DISTNAME =	libbinio-1.4
+REVISION =	1
 SHARED_LIBS +=	binio	0.0	# 1.0
 CATEGORIES =	devel
 
@@ -13,7 +14,7 @@ MAINTAINER =	Frederic Cambus <fcambus@openbsd.org>
 # LGPLv2.1+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB +=	m ${LIBCXX}
+WANTLIB +=	m ${COMPILER_LIBCXX}
 
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=libbinio/}
 

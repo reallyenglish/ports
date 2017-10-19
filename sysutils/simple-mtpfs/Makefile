@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.5 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.7 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT=		MTP device filesystem
 
@@ -7,6 +7,7 @@ GH_ACCOUNT=		phatina
 GH_PROJECT=		simple-mtpfs
 GH_TAGNAME=		simple-mtpfs-${V}
 DISTNAME=		${GH_PROJECT}-0.3.0
+REVISION=		0
 
 CATEGORIES=		sysutils
 
@@ -15,7 +16,7 @@ MAINTAINER=		Antoine Jacoutot <ajacoutot@openbsd.org>
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c fuse m mtp pthread usb-1.0 ${LIBECXX}
+WANTLIB += c fuse m mtp pthread usb-1.0 ${COMPILER_LIBCXX}
 
 # c++11
 COMPILER =		gcc

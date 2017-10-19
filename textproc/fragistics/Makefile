@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.2 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT =	Quake 3 statistics program
 
 DISTNAME =	fragistics-1.7.0
+REVISION =	1
 
 CATEGORIES =	textproc games
 
@@ -13,7 +14,7 @@ MAINTAINER =	Adam Wolk <awolk@openbsd.org>
 # License GPL + Perl
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c m ${LIBCXX}
+WANTLIB += c m ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=fragistics/}
 

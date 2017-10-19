@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.18 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:29 sthen Exp $
 
 COMMENT =		library for nipper
 
 DISTNAME =		libnipper-0.12.6
-REVISION =		3
+REVISION =		5
 CATEGORIES =		security net
 
 SHARED_LIBS =		nipper 0.0
@@ -16,7 +16,7 @@ PERMIT_PACKAGE_FTP =	Yes
 
 EXTRACT_SUFX =		.tgz
 
-WANTLIB=		m ${LIBCXX}
+WANTLIB=		m ${COMPILER_LIBCXX}
 MODULES +=		devel/cmake
 
 NO_TEST =		Yes

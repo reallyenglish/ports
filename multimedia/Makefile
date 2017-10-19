@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.96 2017/06/09 11:13:18 czarkoff Exp $
+# $OpenBSD: Makefile,v 1.99 2017/10/15 11:33:25 bcallah Exp $
 
      SUBDIR =
      SUBDIR += atomicparsley
@@ -13,6 +13,7 @@
      SUBDIR += ffmpeg2theora
      SUBDIR += get_flash_videos
      SUBDIR += get_iplayer
+     SUBDIR += gnome-twitch
      SUBDIR += gstreamer-0.10
      SUBDIR += gstreamer1
      SUBDIR += hdhomerun
@@ -62,7 +63,7 @@
      SUBDIR += p5-Mac-iTunes-Library
      SUBDIR += p5-Storable-AMF
      SUBDIR += phonon
-     SUBDIR += phonon,qt5
+     SUBDIR += phonon-qt5
      SUBDIR += phonon-backend
      SUBDIR += py-pafy
      SUBDIR += qt-gstreamer
@@ -70,6 +71,7 @@
      SUBDIR += sfml
      SUBDIR += shrip
      SUBDIR += streamdvd
+     SUBDIR += streamlink
      SUBDIR += subrip
      SUBDIR += subtitleripper
      SUBDIR += swfmill

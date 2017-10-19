@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.40 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.43 2017/08/05 12:31:01 sthen Exp $
 
 COMMENT-main=	multimedia communication library (SIP, RTP, ICE, etc)
 COMMENT-pjsua=	lightweight sip client
 
 V=		2.4.5
-REVISION-pjsua=	0
+REVISION=	2
 DISTNAME=	pjproject-$V
 PKGNAME-main=	pjsip-$V
 PKGNAME-pjsua=	pjsua-$V
@@ -32,8 +32,6 @@ CATEGORIES=	telephony
 HOMEPAGE=	http://www.pjsip.org/
 MASTER_SITES=	${HOMEPAGE}release/$V/
 
-MAINTAINER=	Stuart Henderson <sthen@openbsd.org>
-
 # GPLv2+
 PERMIT_PACKAGE_CDROM=	Yes
 
@@ -45,7 +43,7 @@ WANTLIB-pjsua += c g7221codec ilbccodec pj pjlib-util pjmedia pjmedia-audiodev
 WANTLIB-pjsua += pjmedia-codec pjmedia-videodev pjnath pjsip pjsip-simple
 WANTLIB-pjsua += pjsip-ua pjsua resample
 
-WANTLIB-main = ${WANTLIB} ${LIBCXX}
+WANTLIB-main = ${WANTLIB} ${COMPILER_LIBCXX}
 
 MULTI_PACKAGES=	-main -pjsua
 

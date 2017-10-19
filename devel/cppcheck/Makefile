@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.43 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.48 2017/10/09 00:58:36 gsoares Exp $
 
 COMMENT =		C/C++ static checker
 
-DISTNAME =		cppcheck-1.79
+DISTNAME =		cppcheck-1.81
 
 CATEGORIES =		devel
 
@@ -13,7 +13,7 @@ MAINTAINER =		Gleydson Soares <gsoares@openbsd.org>
 # GPLv3+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c execinfo m pcre ${LIBECXX}
+WANTLIB =		c execinfo m pcre ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS =		textproc/docbook-xsl
 

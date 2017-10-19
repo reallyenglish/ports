@@ -1,12 +1,13 @@
-# $OpenBSD: Makefile,v 1.19 2016/01/06 11:05:34 zhuk Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/27 11:57:50 sthen Exp $
 
 COMMENT =	KDE document viewer
 DISTNAME =	okular-${MODKDE4_VERSION}
-REVISION =	3
+REVISION =	5
 
 SHARED_LIBS =	okularcore		51.0	# 1.7
 
 WANTLIB =  c m pthread z
+WANTLIB += ${COMPILER_LIBCXX}
 WANTLIB += lib/qt4/QtDBus lib/qt4/QtDeclarative lib/qt4/QtGui
 WANTLIB += lib/qt4/QtNetwork lib/qt4/QtScript lib/qt4/QtSvg lib/qt4/QtXml
 WANTLIB += ${KDE4LIB}/kactivities ${KDE4LIB}/kdeui ${KDE4LIB}/kexiv2
@@ -15,7 +16,7 @@ WANTLIB += ${KDE4LIB}/kio ${KDE4LIB}/kjs ${KDE4LIB}/kjsapi
 WANTLIB += ${KDE4LIB}/kparts ${KDE4LIB}/kprintutils ${KDE4LIB}/kpty
 WANTLIB += ${KDE4LIB}/nepomuk ${KDE4LIB}/nepomukutils
 WANTLIB += ${KDE4LIB}/qmobipocket
-WANTLIB += chm djvulibre epub freetype jpeg kscreen poppler-qt4 qca2 qimageblitz
+WANTLIB += chm djvulibre epub freetype jpeg kscreen poppler-qt4 qca qimageblitz
 WANTLIB += qjson soprano solid spectre threadweaver tiff
 
 MODULES =	multimedia/phonon
@@ -30,7 +31,7 @@ LIB_DEPENDS = 	devel/chmlib \
 		graphics/tiff \
 		print/libspectre \
 		print/poppler,,-qt4 \
-		security/qca2 \
+		security/qca \
 		textproc/ebook-tools \
 		x11/libkscreen<5 \
 		${MODKDE4_DEP_DIR}/graphics-mobipocket>=${MODKDE4_DEP_VERSION} \

@@ -1,16 +1,16 @@
-# $OpenBSD: Makefile,v 1.18 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:31 sthen Exp $
 
 COMMENT=	interface to the GNU aspell library
 
 MODULES=	cpan
 DISTNAME=	Text-Aspell-0.09
-REVISION=	7
+REVISION =	9
 CATEGORIES=	devel textproc
 
 # Perl
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c perl ${LIBCXX} aspell>=16
+WANTLIB += c perl ${COMPILER_LIBCXX} aspell>=16
 
 LIB_DEPENDS=	textproc/aspell/core
 

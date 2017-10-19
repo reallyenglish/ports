@@ -1,18 +1,20 @@
-# $OpenBSD: Makefile,v 1.3 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.7 2017/08/03 08:53:34 bentley Exp $
 
 COMMENT =	third-person rabbit combat action game
 
-DISTNAME =	lugaru-1.1
+DISTNAME =	lugaru-1.2
 
 CATEGORIES =	games
 
 HOMEPAGE =	https://osslugaru.gitlab.io/
 
+MAINTAINER = 	Kaashif Hymabaccus <kaashif@kaashif.co.uk>
+
 # GPLv2+
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL GLU SDL2 c jpeg m ogg openal png pthread vorbisfile
-WANTLIB += z ${LIBECXX}
+WANTLIB += z ${COMPILER_LIBCXX}
 
 MASTER_SITES =		https://bitbucket.org/osslugaru/lugaru/downloads/
 

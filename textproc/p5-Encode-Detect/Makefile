@@ -1,16 +1,16 @@
-# $OpenBSD: Makefile,v 1.11 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.14 2017/07/26 22:45:31 sthen Exp $
 
 COMMENT =	Encode::Encoding subclass that detects the encoding of data
 
 MODULES =	cpan
 DISTNAME =	Encode-Detect-1.01
-REVISION =	4
+REVISION =	6
 CATEGORIES =	textproc
 
 # Perl
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c perl ${LIBCXX}
+WANTLIB += c perl ${COMPILER_LIBCXX}
 
 CONFIGURE_STYLE =	modbuild
 

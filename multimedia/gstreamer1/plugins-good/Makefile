@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.49 2017/05/13 10:33:14 espie Exp $
+# $OpenBSD: Makefile,v 1.54 2017/09/28 21:14:37 naddy Exp $
 
 # XXX ossaudio(3) is only enabled to be used as a mixing device by
 # x11/xfce4/xfce4-mixer
@@ -12,6 +12,9 @@ PKGNAME=		${GST_PKGNAME_PREFIX}-plugins-good-${V}
 PKGNAME-main=		${PKGNAME}
 PKGNAME-pulse=		${GST_PKGNAME_PREFIX}-plugins-pulse-${V}
 
+REVISION-main=		0
+REVISION-pulse=		1
+
 MASTER_SITES=		${MASTER_SITE_GST:=gst-plugins-good/}
 
 WANTLIB += ffi glib-2.0 gmodule-2.0 gobject-2.0 gstaudio-1.0 gstbase-1.0
@@ -23,7 +26,7 @@ WANTLIB-main += FLAC Xdamage Xfixes bz2 xml2 pthread-stubs
 WANTLIB-main += gdk_pixbuf-2.0 gio-2.0 gstcontroller-1.0 lzma
 WANTLIB-main += gstfft-1.0 gstnet-1.0 gstriff-1.0 gstrtp-1.0 gstrtsp-1.0 xcb-render
 WANTLIB-main += gstallocators-1.0 gstsdp-1.0 jpeg ogg ossaudio png shout soup-2.4
-WANTLIB-main += speex sqlite3 ${LIBCXX} tag theora vorbis vpx>=5 wavpack xcb-shm
+WANTLIB-main += speex sqlite3 ${COMPILER_LIBCXX} tag theora vorbis vpx>=5 wavpack xcb-shm
 WANTLIB-main += Xrender cairo cairo-gobject expat fontconfig freetype pixman-1
 WANTLIB-main += v4l2 v4lconvert
 
@@ -34,7 +37,7 @@ WANTLIB-main += $(LIBECXX)
 .endif
 
 WANTLIB-pulse += ${WANTLIB}
-WANTLIB-pulse += gdbm pulse sndfile X11-xcb Xi Xtst ICE FLAC ogg
+WANTLIB-pulse += pulse sndfile X11-xcb Xi Xtst ICE FLAC ogg
 WANTLIB-pulse += vorbis vorbisenc dbus-1 SM
 
 MULTI_PACKAGES=		-main -pulse

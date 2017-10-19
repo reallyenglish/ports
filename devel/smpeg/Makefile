@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.47 2017/04/10 11:45:27 sthen Exp $
+# $OpenBSD: Makefile,v 1.49 2017/07/26 22:45:18 sthen Exp $
 
 COMMENT=	MPEG video player library with sound support
 
 DISTNAME=	smpeg-0.4.4
-REVISION=	14
+REVISION=	15
 CATEGORIES=	devel graphics
 MASTER_SITES=	https://distfiles.nl/
 
@@ -16,7 +16,7 @@ MAINTAINER=	Peter Valchev <pvalchev@sightly.net>
 # GPLv2+
 PERMIT_PACKAGE_CDROM=   Yes
 
-WANTLIB=	SDL c iconv m pthread sndio ${LIBCXX} usbhid
+WANTLIB=	SDL c iconv m pthread sndio ${COMPILER_LIBCXX} usbhid
 
 LIB_DEPENDS=	converters/libiconv \
 		devel/sdl

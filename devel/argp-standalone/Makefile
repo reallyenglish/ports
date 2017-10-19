@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/16 19:51:09 sthen Exp $
+# $OpenBSD: Makefile,v 1.8 2017/09/29 23:36:03 sthen Exp $
 
 COMMENT=	standalone version of argument parsing functions from GLIBC
 
-DISTNAME=		argp-standalone-1.3
-REVISION=		1
+DISTNAME=	argp-standalone-1.3
+REVISION=	3
 
-CATEGORIES=		devel
+CATEGORIES=	devel
 
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
@@ -13,7 +13,8 @@ PERMIT_PACKAGE_CDROM=	Yes
 MASTER_SITES=		http://www.lysator.liu.se/~nisse/misc/
 
 SEPARATE_BUILD=		Yes
-CONFIGURE_STYLE=	gnu
+AUTOCONF_VERSION=	2.59
+CONFIGURE_STYLE=	autoconf
 CONFIGURE_ARGS+=	--disable-dependency-tracking
 CFLAGS+=		--std=gnu89
 

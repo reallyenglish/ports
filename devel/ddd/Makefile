@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.71 2017/04/10 11:45:25 sthen Exp $
+# $OpenBSD: Makefile,v 1.74 2017/07/26 22:45:17 sthen Exp $
 
 COMMENT=	Data Display Debugger, graphical front-end for GDB, etc
 
 DISTNAME=	ddd-3.3.12
-REVISION=	8
+REVISION =	10
 CATEGORIES=	devel
 MASTER_SITES=	${MASTER_SITE_GNU:=ddd/}
 
@@ -12,7 +12,7 @@ HOMEPAGE=	https://www.gnu.org/software/ddd/
 # GPLv2 / LGPLv2.1
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	ICE SM X11 Xaw Xau Xdmcp Xext Xmu Xpm Xt c m z ${LIBCXX} \
+WANTLIB=	ICE SM X11 Xaw Xau Xdmcp Xext Xmu Xpm Xt c m z ${COMPILER_LIBCXX} \
 		Xft Xrender expat fontconfig freetype iconv ncurses \
 		pthread-stubs xcb jpeg png Xm
 

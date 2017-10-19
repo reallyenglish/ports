@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.13 2015/04/03 15:12:28 pascal Exp $
+# $OpenBSD: Makefile,v 1.15 2017/09/26 16:21:10 dcoppa Exp $
 
 COMMENT=		file integrity checker
 
 DISTNAME=		integrit-4.1
-REVISION=		0
+REVISION=		2
 CATEGORIES=		security
 
 HOMEPAGE=		http://sourceforge.net/projects/integrit/
@@ -13,9 +13,12 @@ MAINTAINER=		Benoit Lecocq <benoit@openbsd.org>
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
+WANTLIB += c
+
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=integrit/}
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE=	autoconf
+AUTOCONF_VERSION=	2.59
 
 ALL_TARGET=		integrit utils
 

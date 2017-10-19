@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.24 2017/04/10 11:46:36 sthen Exp $
+# $OpenBSD: Makefile,v 1.26 2017/07/26 22:45:33 sthen Exp $
 
 COMMENT=	gui for ogle
 CATEGORIES=	x11
 
 DISTNAME=	goggles-0.9.1
-REVISION=	3
+REVISION=	4
 
 EXTRACT_SUFX=	.tar.bz2
 MASTER_SITES=	${MASTER_SITE_GOOGLECODE:=gogglesmm/}
@@ -49,6 +49,6 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += FOX-1.6>=1 GL GLU X11 Xau Xcursor Xdmcp Xext Xfixes Xft
 WANTLIB += Xrandr Xrender bz2 c dvdcontrol expat fontconfig freetype
-WANTLIB += jpeg m msgevents png pthread pthread-stubs ${LIBCXX} tiff xcb z
+WANTLIB += jpeg m msgevents png pthread pthread-stubs ${COMPILER_LIBCXX} tiff xcb z
 
 .include <bsd.port.mk>

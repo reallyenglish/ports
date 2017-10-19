@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.15 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.17 2017/07/26 22:45:21 sthen Exp $
 
 ONLY_FOR_ARCHS=	i386 amd64
 
@@ -17,6 +17,8 @@ V=		1.5.8
 PKGNAME=	${N}-${V}
 PKGNAME-main=	${N}-${V}
 PKGNAME-data=	${N}-data-${V}
+REVISION-data=	0
+REVISION-main=	0
 
 DISTFILES=	redeclipse-{base/archive/v}${V}${EXTRACT_SUFX}
 
@@ -45,7 +47,7 @@ LIB_DEPENDS-main=	devel/sdl2-mixer \
 			devel/sdl2-image \
 			net/enet>=1.3.12
 WANTLIB-main+=		GL X11 SDL2 SDL2_image SDL2_mixer c enet m pthread \
-			${LIBCXX} z
+			${COMPILER_LIBCXX} z
 
 WRKDIST=		${WRKDIR}/base-${V}/src
 USE_GMAKE=		Yes

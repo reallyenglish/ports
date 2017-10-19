@@ -1,21 +1,20 @@
-# $OpenBSD: Makefile,v 1.23 2017/06/13 14:22:57 schwarze Exp $
+# $OpenBSD: Makefile,v 1.29 2017/09/05 23:49:07 kurt Exp $
 
 ONLY_FOR_ARCHS=	i386 amd64
 USE_WXNEEDED=	Yes
 
 COMMENT-main=	OpenJDK Software Development Kit v${V}
 COMMENT-jre=	OpenJDK Runtime Environment v${V}
-U=		121
+U=		144
 V=		1.8.0.${U}
-B=		b13
+B=		b01
 PKGNAME=	jdk-${V}
 PKGNAME-main=	jdk-${V}
 PKGNAME-jre=	jre-${V}
 EPOCH=		0
-REVISION=	5
 
 DIST_SUBDIR=	jdk
-DISTNAME=	openjdk-8u121b13-bsd-port-20170201
+DISTNAME=	openjdk-8u144b01-bsd-port-20170828
 EXTRACT_SUFX=	.tar.xz
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX}
 
@@ -64,6 +63,7 @@ DISTFILES+=	${BOOT_JDK_DIST}:1
 DISTFILES+=	${APACHE_ANT}:2
 MAKE_ENV+=	ANT_HOME=${WRKDIR}/apache-ant-1.9.3 \
 		LD_LIBRARY_PATH=${WRKDIR}/bootjdk-libs
+CONFIGURE_ENV+=	LD_LIBRARY_PATH=${WRKDIR}/bootjdk-libs
 BOOT_JDK=	${WRKDIR}/bootjdk
 .endif
 
@@ -75,7 +75,7 @@ BUILD_DEPENDS+=	archivers/zip \
 LIB_DEPENDS=	converters/libiconv \
 		graphics/giflib
 
-WANTLIB=	X11 Xext Xi Xrender Xtst c freetype gif iconv m pthread ${LIBCXX} z
+WANTLIB=	X11 Xext Xi Xrender Xtst c freetype gif iconv m pthread ${COMPILER_LIBCXX} z
 
 USE_GMAKE=	Yes
 GMAKE=		${LOCALBASE}/bin/gmake
@@ -100,7 +100,7 @@ CONFIGURE_ARGS=	--disable-option-checking \
 		--with-milestone=fcs \
 		--with-update-version=${U} \
 		--with-build-number=${B}
-CONFIGURE_ENV=	ac_cv_path_NAWK=awk
+CONFIGURE_ENV+=	ac_cv_path_NAWK=awk
 MODGNU_CONFIG_GUESS_DIRS=${WRKSRC}/common/autoconf/build-aux
 
 # MAKE_FLAGS=	LOG=debug

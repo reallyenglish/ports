@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.8 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT=		RTSP proxy reference implementation
 
 DISTNAME=		osrtspproxy_2_0
 PKGNAME=		osrtspproxy-2.0
-REVISION=		1
+REVISION=		2
 CATEGORIES=		net
 HOMEPAGE=		http://www.rtsp.org/
 
@@ -19,7 +19,7 @@ CONFIGURE_STYLE=	simple
 
 NO_TEST=Yes
 
-WANTLIB += c m pthread ${LIBCXX}
+WANTLIB += c m pthread ${COMPILER_LIBCXX}
 
 do-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/osrtspproxy

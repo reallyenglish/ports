@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.9 2017/06/01 11:57:42 espie Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT =		interpreter for some LucasArts 3D games
 
 V =			0.2.1
-REVISION =		2
+REVISION =		3
 DISTNAME =		residualvm-${V}-sources
 PKGNAME =		residualvm-${V}
 
@@ -14,7 +14,7 @@ HOMEPAGE =		http://residualvm.org/
 # GPLv2+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += GL SDL c freetype iconv jpeg m mad mpeg2 ogg png pthread ${LIBECXX}
+WANTLIB += GL SDL c freetype iconv jpeg m mad mpeg2 ogg png pthread ${COMPILER_LIBCXX}
 WANTLIB += theoradec vorbis vorbisfile z
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=residualvm/}

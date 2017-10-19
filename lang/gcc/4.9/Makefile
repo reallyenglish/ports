@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.48 2017/06/07 23:34:02 brynet Exp $
+# $OpenBSD: Makefile,v 1.51 2017/08/21 19:25:52 naddy Exp $
 
-ONLY_FOR_ARCHS = amd64 arm hppa i386 mips64 mips64el powerpc sparc64
+ONLY_FOR_ARCHS = ${GCC49_ARCHS}
 DPB_PROPERTIES = parallel
 
 V = 4.9.4
-REVISION = 5
+REVISION = 6
 FULL_VERSION = $V
 FULL_PKGVERSION = $V
 
@@ -237,7 +237,7 @@ post-extract:
 	cp ${FULLDISTDIR}/${ECJ} ${WRKSRC}/ecj.jar
 .endif
 .if ${BUILD_PACKAGES:M-ada}
-	perl -pi -e 's,^#define (_GLIBCXX_HAVE_GETS) .*,/* #undef $$1 */,' \
+	perl -pi -e 's,^#define (_GCOMPILER_LIBCXX_HAVE_GETS) .*,/* #undef $$1 */,' \
 		${WRKDIR}/bootstrap/include/c++/*/*/bits/c++config.h
 .endif
 

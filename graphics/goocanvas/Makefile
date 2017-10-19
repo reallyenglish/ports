@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.22 2017/04/28 17:57:46 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.24 2017/07/26 22:45:24 sthen Exp $
 
 PORTROACH=		limit:^1
 
@@ -8,7 +8,7 @@ GNOME_PROJECT=		goocanvas
 GNOME_VERSION=		1.0.0
 SHARED_LIBS +=  goocanvas            1.0      # .6.0
 CATEGORIES=		graphics
-REVISION=		4
+REVISION=		5
 
 # LGPLv2
 PERMIT_PACKAGE_CDROM=	Yes
@@ -18,7 +18,7 @@ WANTLIB += Xinerama Xrandr Xrender Xxf86vm atk-1.0 cairo drm expat ffi
 WANTLIB += fontconfig freetype gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0
 WANTLIB += glib-2.0 gmodule-2.0 gobject-2.0 graphite2 gthread-2.0
 WANTLIB += gtk-x11-2.0 harfbuzz m pango-1.0 pangocairo-1.0 pangoft2-1.0
-WANTLIB += pcre pixman-1 png pthread-stubs pthread ${LIBCXX} xcb
+WANTLIB += pcre pixman-1 png pthread-stubs pthread ${COMPILER_LIBCXX} xcb
 WANTLIB += xcb-render xcb-shm z
 
 EXTRACT_SUFX=		.tar.bz2

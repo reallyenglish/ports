@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.46 2017/04/10 11:46:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.48 2017/07/26 22:45:25 sthen Exp $
 
 # uses gcj which is only supported on select archs
 ONLY_FOR_ARCHS=	amd64 i386 sparc64
@@ -7,7 +7,7 @@ BROKEN-sparc64= gcj blows during build
 COMMENT=	essential libraries for Java
 
 DISTNAME=	classpath-0.98
-REVISION=	21
+REVISION=	22
 
 CATEGORIES=	lang java
 
@@ -31,7 +31,7 @@ WANTLIB += cairo dbus-1 dbus-glib-1 drm expat ffi fontconfig freetype
 WANTLIB += gconf-2 gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0 glib-2.0
 WANTLIB += gmodule-2.0 gmp gobject-2.0 graphite2 gthread-2.0 gtk-x11-2.0
 WANTLIB += harfbuzz m magic pango-1.0 pangocairo-1.0 pangoft2-1.0 pcre
-WANTLIB += pixman-1 png pthread pthread-stubs ${LIBCXX} xcb xcb-render
+WANTLIB += pixman-1 png pthread pthread-stubs ${COMPILER_LIBCXX} xcb xcb-render
 WANTLIB += xcb-shm z
 
 MODULES=	devel/gettext gcc4

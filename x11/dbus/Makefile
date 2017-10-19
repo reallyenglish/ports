@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.140 2017/04/23 14:22:44 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.144 2017/10/06 15:25:54 ajacoutot Exp $
 
 PORTROACH=		limitw:1,even
 DPB_PROPERTIES=		parallel
@@ -6,16 +6,14 @@ DPB_PROPERTIES=		parallel
 COMMENT-main=		message bus system
 COMMENT-suid=		DBus setuid helper for starting system services
 
-V=			1.10.18
+V=			1.10.24
 DISTNAME=		dbus-${V}
 EPOCH-main=		0
 
 PKGNAME-main=		${DISTNAME}
 PKGNAME-suid=		dbus-daemon-launch-helper-${V}
 
-REVISION-main=		0
-
-SHARED_LIBS +=  dbus-1               11.1     # 17.11
+SHARED_LIBS +=  dbus-1               11.1     # 17.14
 
 CATEGORIES=		x11
 
@@ -42,7 +40,8 @@ BUILD_DEPENDS=		textproc/xmlto
 
 LIB_DEPENDS-suid=	${BASE_PKGPATH},-main
 
-CONFIGURE_STYLE=	gnu
+AUTOCONF_VERSION=	2.69
+CONFIGURE_STYLE=	autoconf
 CONFIGURE_ENV=		CPPFLAGS="-I${LOCALBASE}/include" \
 			LDFLAGS="-L${LOCALBASE}/lib"
 CONFIGURE_ARGS=		--with-dbus-user=_dbus \

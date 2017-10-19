@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.14 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.17 2017/08/24 09:45:23 sthen Exp $
 
 ONLY_FOR_ARCHS =	amd64 i386
 USE_WXNEEDED =		Yes
@@ -10,7 +10,7 @@ COMMENT =		convert HTML to PDF using Webkit
 GH_ACCOUNT =		wkhtmltopdf
 GH_PROJECT =		wkhtmltopdf
 GH_TAGNAME =		0.12.3.2
-REVISION =		1
+REVISION =		3
 QT_COMMIT =		8dae19a82231e87366d81c683bafcb025aea9c1d
 MASTER_SITES0 =		https://github.com/wkhtmltopdf/qt/archive/
 DISTFILES =		${DISTNAME}.tar.gz \
@@ -28,7 +28,7 @@ MAINTAINER =		Frank Groeneveld <frank@frankgroeneveld.nl>
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += X11 Xext Xrender c fontconfig freetype iconv jpeg m
-WANTLIB += png pthread ${LIBCXX} z
+WANTLIB += png pthread ${COMPILER_LIBCXX} z
 
 WANTLIB += icui18n # dlopen()d via QLibrary
 

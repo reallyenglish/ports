@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.32 2017/05/31 08:08:16 espie Exp $
+# $OpenBSD: Makefile,v 1.35 2017/07/26 22:45:23 sthen Exp $
 
 ONLY_FOR_ARCHS = ${GCC4_ARCHS} ${CLANG_ARCHS}
 .if (${MACHINE_ARCH} != "i386" && ${MACHINE_ARCH} != "amd64" && ${MACHINE_ARCH} != "arm64")
@@ -12,17 +12,16 @@ BROKEN-alpha =	enblend-enblend.o: .got subsegment exceeds 64K (size 77816)
 COMMENT =	blend seams in panoramic image mosaics
 
 DISTNAME =	enblend-enfuse-4.2
+REVISION =	1
 CATEGORIES =	graphics
 
 HOMEPAGE =	http://enblend.sourceforge.net/
-
-MAINTAINER =	Stuart Henderson <sthen@openbsd.org>
 
 # GPLv2+, MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += Half Iex IexMath IlmImf IlmThread Imath c gsl gslcblas
-WANTLIB += jpeg lcms2 m png pthread tiff vigraimpex z ${LIBECXX}
+WANTLIB += jpeg lcms2 m png pthread tiff vigraimpex z ${COMPILER_LIBCXX}
 
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=enblend/}
 

@@ -1,9 +1,11 @@
-# $OpenBSD: Makefile,v 1.71 2017/05/21 17:48:10 jasper Exp $
+# $OpenBSD: Makefile,v 1.77 2017/09/29 23:32:16 sthen Exp $
 
 COMMENT=		window and compositing manager
 
 GNOME_PROJECT=		mutter
-GNOME_VERSION=		3.24.2
+GNOME_VERSION=		3.24.4
+
+REVISION=		1
 
 API_SUFFIX =	-0
 SHARED_LIBS +=  mutter-0                    0.0 # 0.0
@@ -42,10 +44,13 @@ BUILD_DEPENDS=		devel/gsettings-desktop-schemas>=3.16.0 \
 RUN_DEPENDS=		devel/gsettings-desktop-schemas>=3.16.0 \
 			x11/gnome/zenity
 
-CONFIGURE_STYLE=	gnu
+AUTOMAKE_VERSION=	1.15
+AUTOCONF_VERSION=	2.69
+AUTOCONF_DIR=		${WRKSRC} ${WRKSRC}/clutter
+CONFIGURE_STYLE=	autoconf automake
 
 # Required by embedded cogl/clutter forks.
-CONFIGURE_ARGS +=	--with-x \
+CONFIGURE_ARGS +=	--with-x
 # cogl
 CONFIGURE_ARGS +=       --with-gl-libname=libGL.so \
                         --with-gles1-libname=libGLESv1_CM \
@@ -70,7 +75,7 @@ pre-configure:
 		-e 's,-Werror=redundant-decls,,' \
 		-e 's,-Werror=format-nonliteral,,' \
 		-e 's,-Wvla,,' \
-		${WRKSRC}/{,cogl,clutter}/configure \
+		${WRKSRC}/{,cogl,clutter}/configure{,.ac} \
 		${WRKSRC}/cogl/tests/conform/Makefile.in \
 		${WRKSRC}/cogl/test-fixtures/Makefile.in
 

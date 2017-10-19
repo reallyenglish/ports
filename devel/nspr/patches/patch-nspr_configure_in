@@ -1,12 +1,14 @@
-$OpenBSD: patch-nspr_configure_in,v 1.7 2016/03/01 21:02:30 landry Exp $
---- nspr/configure.in.orig	Fri Feb 12 14:51:25 2016
-+++ nspr/configure.in	Tue Mar  1 21:13:55 2016
-@@ -2126,9 +2126,11 @@ tools are selected during the Xcode/Developer Tools in
+$OpenBSD: patch-nspr_configure_in,v 1.9 2017/08/07 18:47:47 landry Exp $
+Index: nspr/configure.in
+--- nspr/configure.in.orig
++++ nspr/configure.in
+@@ -2170,10 +2170,12 @@ tools are selected during the Xcode/Developer Tools in
      AC_DEFINE(OPENBSD)
      AC_DEFINE(HAVE_BSD_FLOCK)
      AC_DEFINE(HAVE_SOCKLEN_T)
 +    AC_DEFINE(_PR_HAVE_GETPROTO_R)
 +    AC_DEFINE(_PR_HAVE_GETPROTO_R_INT)
+     AC_DEFINE(HAVE_POINTER_LOCALTIME_R)
      CFLAGS="$CFLAGS -ansi -Wall"
      CXXFLAGS="$CXXFLAGS -ansi -Wall"
 -    DLL_SUFFIX=so.1.0

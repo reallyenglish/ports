@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.44 2017/04/10 11:45:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.46 2017/07/26 22:45:14 sthen Exp $
 
 COMMENT=	advanced music player
 
 VERSION=	1.0
 DISTNAME=	aqualung-${VERSION}
-REVISION=	1
+REVISION=	2
 EPOCH=		0
 CATEGORIES=	audio
 
@@ -19,7 +19,7 @@ WANTLIB += X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
 WANTLIB += Xrandr Xrender atk-1.0 bz2 c cairo fontconfig
 WANTLIB += freetype gio-2.0 glib-2.0 gobject-2.0
 WANTLIB += gthread-2.0 m mp3lame ogg pango-1.0 pangocairo-1.0
-WANTLIB += pangoft2-1.0 pthread samplerate sndfile sndio ${LIBCXX}
+WANTLIB += pangoft2-1.0 pthread samplerate sndfile sndio ${COMPILER_LIBCXX}
 WANTLIB += vorbis vorbisenc vorbisfile z gtk-x11-2.0 gdk-x11-2.0
 WANTLIB += gdk_pixbuf-2.0 xml2 mac mad mpcdec FLAC avcodec
 WANTLIB += avformat avutil wavpack lrdf oggz speex cddb cdio

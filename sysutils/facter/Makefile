@@ -1,14 +1,13 @@
-# $OpenBSD: Makefile,v 1.43 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.48 2017/10/12 06:35:03 sebastia Exp $
 
 # XXXTODO: Subpackage facter.jar for use with puppetserver
 COMMENT =		collect and display system facts
 
-VERSION =		3.6.4
+VERSION =		3.9.2
 DISTNAME =		facter-${VERSION}
-SHARED_LIBS +=  	facter                    3.1 # 3.2
+SHARED_LIBS +=  	facter                    3.2 # 3.2
 PKGSPEC =		facter->=3.0,<4.0
 CATEGORIES =		sysutils
-REVISION =		0
 
 MAINTAINER =		Sebastian Reitenbach <sebastia@openbsd.org>
 
@@ -26,7 +25,7 @@ WANTLIB += boost_atomic-mt boost_chrono-mt boost_date_time-mt
 WANTLIB += boost_filesystem-mt boost_locale-mt
 WANTLIB += boost_program_options-mt boost_regex-mt boost_system-mt
 WANTLIB += boost_thread-mt c crypto curl m pthread yaml-cpp
-WANTLIB += ${LIBECXX} cpp-hocon
+WANTLIB += ${COMPILER_LIBCXX} cpp-hocon
 WANTLIB += leatherman_curl leatherman_dynamic_library
 WANTLIB += leatherman_execution leatherman_file_util leatherman_locale
 WANTLIB += leatherman_logging leatherman_ruby leatherman_util
@@ -65,6 +64,5 @@ pre-configure:
 # to load with the version appended.
 post-install:
 	ln -s ./libfacter.so.${LIBfacter_VERSION} ${PREFIX}/lib/libfacter.so
-	mv ${PREFIX}/bin/facter-${VERSION} ${PREFIX}/bin/facter
 
 .include <bsd.port.mk>

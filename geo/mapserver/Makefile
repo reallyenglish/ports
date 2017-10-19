@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.46 2017/05/15 10:02:01 landry Exp $
+# $OpenBSD: Makefile,v 1.50 2017/09/23 10:51:07 sthen Exp $
 
 MULTI_PACKAGES=	-utils -main -php -perl
 
@@ -7,13 +7,17 @@ COMMENT-utils=	mapserver utilities
 COMMENT-php=	PHP Mapscript extension
 COMMENT-perl=	Perl Mapscript binding
 
-V =		7.0.5
+V =		7.0.6
 DISTNAME=	mapserver-${V}
 PKGNAME-main=	${DISTNAME}
 PKGNAME-utils=	mapserver-utils-${V}
 PKGNAME-php=	php-mapscript-${V}
 PKGNAME-perl=	p5-mapscript-${V}
 SHARED_LIBS +=	mapserver 2.0
+REVISION-main=	0
+REVISION-perl=	1
+REVISION-php=	0
+REVISION-utils=	0
 
 CATEGORIES=	geo www
 
@@ -47,10 +51,10 @@ WANTLIB += gdal geos_c cairo fribidi gif harfbuzz
 LIB_DEPENDS-utils =	STEM->=${V}:${BUILD_PKGPATH},-main
 LIB_DEPENDS-php =	STEM->=${V}:${BUILD_PKGPATH},-main
 LIB_DEPENDS-perl =	STEM->=${V}:${BUILD_PKGPATH},-main
-WANTLIB-main =	${WANTLIB} c fcgi pthread ${LIBCXX}
+WANTLIB-main =	${WANTLIB} c fcgi pthread ${COMPILER_LIBCXX}
 WANTLIB-utils =	${WANTLIB} c mapserver pthread
 WANTLIB-php =	${WANTLIB} mapserver
-WANTLIB-perl =	${WANTLIB} mapserver perl
+WANTLIB-perl =	${WANTLIB} c mapserver perl
 
 CONFIGURE_ARGS +=	-DPHP5_CONFIG_EXECUTABLE=${LOCALBASE}/bin/php-config-${MODPHP_VERSION} \
 			-DWITH_CLIENT_WFS=1 \

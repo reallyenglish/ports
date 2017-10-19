@@ -1,10 +1,10 @@
- # $OpenBSD: Makefile,v 1.8 2017/04/10 11:46:19 sthen Exp $
+ # $OpenBSD: Makefile,v 1.10 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT =		modernization of the classic DOS game Scorched Earth
 
 DISTNAME =		Scorched3D-43.1c-src
 PKGNAME =		${DISTNAME:L:S/-src//}
-REVISION =		2
+REVISION =		3
 
 CATEGORIES =		games x11
 
@@ -13,7 +13,7 @@ HOMEPAGE =		http://www.scorched3d.co.uk/
 # GPLv2+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB +=		GL GLU c expat freetype m pthread ${LIBCXX} z
+WANTLIB +=		GL GLU c expat freetype m pthread ${COMPILER_LIBCXX} z
 WANTLIB +=		SDL SDL_net alut fftw3f jpeg openal png ogg vorbisfile
 WANTLIB +=		wx_base wx_base_net wx_base_odbc wx_base_xml vorbis
 WANTLIB +=		wx_gtk2_adv wx_gtk2_aui wx_gtk2_core wx_gtk2_dbgrid

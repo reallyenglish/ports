@@ -1,8 +1,14 @@
-$OpenBSD: README-main,v 1.16 2015/07/07 14:33:34 ajacoutot Exp $
+$OpenBSD: README-main,v 1.18 2017/08/17 08:53:36 ajacoutot Exp $
 
 +-----------------------------------------------------------------------
 | Running ${FULLPKGNAME} on OpenBSD
 +-----------------------------------------------------------------------
+
+WARNING: CUPS lp commands are not compatible with the base system ones. When
+using the CUPS command line, make sure to use the full path, e.g.
+    ${PREFIX}/bin/lpr
+The same is true for manual pages, e.g.
+    man -m ${PREFIX}/man lpr
 
 Adding and/or configuring CUPS printers can be done with lpadmin(8), but
 for a quick and easy (graphical) setup, after starting the CUPS daemon,
@@ -55,6 +61,14 @@ Alternatively, hotplugd(8) attach/detach scripts can automate this.
 *** WARNING ***
 ulpt(4) needs to be disabled in the kernel (see config(8)) or the printer
 will not be available to libusb.
+
+PARALLEL
+========
+To print to a parallel port attached printer, the CUPS daemon needs access to
+the corresponding devices, e.g:
+    chown _cups /dev/lp[a,t]0
+
+This can be automated at boot time using rc.local(8).
 
 Printer Sharing using mDNS
 ==========================

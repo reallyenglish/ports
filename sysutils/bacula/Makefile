@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.107 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.115 2017/09/12 13:05:13 sthen Exp $
 
 # XXX building this port while a version is already installed on the
 # system will lead to unexpected hidden dependencies!!!
@@ -10,7 +10,7 @@ COMMENT-mysql=		Bacula libbaccats support for MySQL
 COMMENT-pgsql=		Bacula libbaccats support for PostgreSQL
 COMMENT-sqlite3=	Bacula libbaccats support for SQLite3
 
-V=			7.4.7
+V=			9.0.4
 DISTNAME=		bacula-$V
 PKGNAME-main=		bacula-client-$V
 PKGNAME-server=		bacula-server-$V
@@ -21,12 +21,13 @@ PKGNAME-sqlite3=	bacula-sqlite3-$V
 
 CATEGORIES=		sysutils
 
-SHARED_LIBS +=  bac                  6.0
-SHARED_LIBS +=  baccfg               6.0
-SHARED_LIBS +=  bacfind              5.1
-SHARED_LIBS +=  bacsql               5.0
+SHARED_LIBS +=  bac                  8.0
+SHARED_LIBS +=  baccfg               7.0
+SHARED_LIBS +=  bacfind              6.0
+SHARED_LIBS +=  bacsd                1.0
+SHARED_LIBS +=  bacsql               6.0
 
-BACCATS_LIBV =	3.0
+BACCATS_LIBV =	4.0
 SHARED_LIBS +=  baccats              ${BACCATS_LIBV}
 SHARED_LIBS +=  baccats-mysql        ${BACCATS_LIBV}
 SHARED_LIBS +=  baccats-postgresql   ${BACCATS_LIBV}
@@ -37,7 +38,7 @@ HOMEPAGE=		http://www.bacula.org/
 
 MAINTAINER=		Stuart Henderson <sthen@openbsd.org>
 
-WANTLIB += c pthread crypto ssl z m ${LIBCXX}
+WANTLIB += c pthread crypto ssl z m ${COMPILER_LIBCXX}
 
 # AGPLv3 with exception for OpenSSL (majority),
 # FDL (docs), LGPL (some libraries), and PD
@@ -49,6 +50,7 @@ MODULES=		devel/gettext
 LOCALSTATEDIR=		${BASELOCALSTATEDIR}/bacula
 SYSCONFDIR=		${BASESYSCONFDIR}/bacula
 
+PATCHORIG=		.orig.port
 CONFIGURE_STYLE=	gnu
 USE_GMAKE=		Yes
 NO_TEST=		Yes
@@ -90,6 +92,7 @@ CONFIGURE_ARGS +=	--with-mysql \
 			--with-sqlite3
 
 MAKE_FLAGS=		NO_ECHO=
+LIBTOOL_FLAGS=		--tag=disable-static
 
 CONFIGURE_ENV=		CPPFLAGS="-I${LOCALBASE}/include" \
 			LDFLAGS="-L${LOCALBASE}/lib" \
@@ -115,13 +118,13 @@ LIB_DEPENDS-server=	${LIB_DEPENDS} \
 			sysutils/bacula,-main \
 			bacula-pgsql-*|bacula-mysql-*|bacula-sqlite3-*:sysutils/bacula,-pgsql
 
-WANTLIB-pgsql += pq crypto m ssl ${LIBCXX}
+WANTLIB-pgsql += pq crypto m ssl ${COMPILER_LIBCXX}
 LIB_DEPENDS-pgsql +=	databases/postgresql
 
-WANTLIB-mysql += mysqlclient_r crypto m pthread ssl ${LIBCXX} z
+WANTLIB-mysql += mysqlclient_r crypto m pthread ssl ${COMPILER_LIBCXX} z
 LIB_DEPENDS-mysql +=	databases/mariadb
 
-WANTLIB-sqlite3 += sqlite3 m pthread ${LIBCXX}
+WANTLIB-sqlite3 += sqlite3 m pthread ${COMPILER_LIBCXX}
 LIB_DEPENDS-sqlite3=	databases/sqlite3
 
 WANTLIB-bat += ${WANTLIB}
@@ -153,7 +156,7 @@ post-install:
 	${INSTALL_SCRIPT} ${WRKSRC}/examples/autochangers/chio-changer-openbsd \
 		${PREFIX}/libexec/bacula/chio-changer-openbsd.dist
 	rm ${PREFIX}/libexec/bacula/updatedb/update*.in
-	rm ${PREFIX}/lib/libbaccats.{a,la}
+	rm ${PREFIX}/lib/libbaccats.la
 	mv ${PREFIX}/libexec/bacula/query.sql{,.dist}
 	mv ${PREFIX}/libexec/bacula/mtx-changer.conf{,.dist}
 	rm ${PREFIX}/sbin/bacula

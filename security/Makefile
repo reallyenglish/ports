@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.458 2017/06/15 07:52:33 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.468 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += ADMsnmp
@@ -51,12 +51,15 @@
      SUBDIR += fragroute
      SUBDIR += fragrouter
      SUBDIR += fwbuilder
+     SUBDIR += fwknop
      SUBDIR += glib-openssl
      SUBDIR += gnupg
      SUBDIR += gnupg,card,ldap
      SUBDIR += gnupg2
      SUBDIR += gnutls
      SUBDIR += go-crypto
+     SUBDIR += go-siphash
+     SUBDIR += go-ed25519
      SUBDIR += gpa
      SUBDIR += gpgme
      SUBDIR += gringotts
@@ -85,6 +88,7 @@
      SUBDIR += kedpm
      SUBDIR += keepassx
      SUBDIR += keepassxc
+     SUBDIR += keepassxc,yubikey
      SUBDIR += keybase
      SUBDIR += keychain
      SUBDIR += klaxon
@@ -232,7 +236,6 @@
      SUBDIR += pear-Auth-HTTP
      SUBDIR += pear-Auth-SASL
      SUBDIR += pecl-libsodium
-     SUBDIR += pgp
      SUBDIR += pgp5
      SUBDIR += pgpdump
      SUBDIR += pidgin-otr
@@ -260,6 +263,7 @@
      SUBDIR += py-cryptography_vectors
      SUBDIR += py-cryptography_vectors,python3
      SUBDIR += py-dfdatetime
+     SUBDIR += py-dfdatetime,python3
      SUBDIR += py-dfvfs
      SUBDIR += py-dfwinreg
      SUBDIR += py-ecdsa
@@ -290,10 +294,7 @@
      SUBDIR += py-service_identity
      SUBDIR += py-service_identity,python3
      SUBDIR += qca
-     SUBDIR += qca-gnupg
-     SUBDIR += qca-ossl
-     SUBDIR += qca-tls
-     SUBDIR += qca2
+     SUBDIR += qca-qt5
      SUBDIR += qoauth
      SUBDIR += qtkeychain
      SUBDIR += qtkeychain,qt5
@@ -302,12 +303,11 @@
      SUBDIR += rdp
      SUBDIR += regripper
      SUBDIR += reop
+     SUBDIR += rhash
      SUBDIR += routersploit
      SUBDIR += ruby-akami
-     SUBDIR += ruby-bcrypt,ruby22
      SUBDIR += ruby-bcrypt,ruby23
      SUBDIR += ruby-bcrypt,ruby24
-     SUBDIR += ruby-pledge,ruby22
      SUBDIR += ruby-pledge,ruby23
      SUBDIR += ruby-pledge,ruby24
      SUBDIR += ruby-ezcrypto
@@ -334,6 +334,7 @@
      SUBDIR += ssh-askpass-fullscreen
      SUBDIR += ssh-ldap-helper
      SUBDIR += sshguard
+     SUBDIR += sshlockout
      SUBDIR += sslScanner
      SUBDIR += sslscan
      SUBDIR += sslscan,openssl

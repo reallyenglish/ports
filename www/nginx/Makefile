@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.109 2017/04/10 11:46:35 sthen Exp $
+# $OpenBSD: Makefile,v 1.113 2017/07/27 22:01:58 robert Exp $
 
 BROKEN-arm=	src/core/ngx_rwlock.c:116:2: error: \#error ngx_atomic_cmp_set() is not defined!
 BROKEN-hppa=	src/core/ngx_rwlock.c:116:2: error: \#error ngx_atomic_cmp_set() is not defined!
@@ -14,7 +14,7 @@ COMMENT-lua=		nginx lua scripting module
 COMMENT-perl=		nginx perl scripting module
 COMMENT-passenger=	nginx passenger (ruby/python/nodejs) integration module
 
-VERSION=	1.10.2
+VERSION=	1.12.1
 DISTNAME=	nginx-${VERSION}
 CATEGORIES=	www
 
@@ -29,11 +29,7 @@ PKGNAME-lua=		nginx-lua-${VERSION}
 PKGNAME-perl=		nginx-perl-${VERSION}
 PKGNAME-passenger=	nginx-passenger-${VERSION}
 
-REVISION-main=	2
-REVISION-perl=	0
-REVISION-passenger=	0
-
-MASTER_SITES=	http://nginx.org/download/
+MASTER_SITES=	https://nginx.org/download/
 MASTER_SITES0=	https://github.com/simpl/ngx_devel_kit/archive/
 MASTER_SITES1=	https://github.com/nbs-system/naxsi/archive/
 MASTER_SITES2=	https://github.com/openresty/lua-nginx-module/archive/
@@ -70,7 +66,7 @@ WANTLIB-xslt=		exslt xml2 xslt
 WANTLIB-naxsi=
 WANTLIB-lua=		${MODLUA_WANTLIB} m
 WANTLIB-perl=		c m perl
-WANTLIB-passenger=	m pthread ${LIBCXX}
+WANTLIB-passenger=	m pthread ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS+=		${MODRUBY_PKG_PREFIX}-passenger-*:www/ruby-passenger
 

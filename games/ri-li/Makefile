@@ -1,16 +1,17 @@
-# $OpenBSD: Makefile,v 1.12 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.14 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT=	drive a toy wood engine
 
 DISTNAME=	Ri-li-2.0.1
 CATEGORIES=	games
+REVISION=	0
 
 HOMEPAGE=	http://ri-li.sourceforge.net
 
 # GPLv3
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += SDL SDL_mixer c m pthread ${LIBCXX}
+WANTLIB += SDL SDL_mixer c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ri-li/}
 EXTRACT_SUFX=	.tar.bz2

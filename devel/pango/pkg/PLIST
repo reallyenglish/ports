@@ -1,4 +1,4 @@
-@comment $OpenBSD: PLIST,v 1.39 2017/02/28 08:53:07 ajacoutot Exp $
+@comment $OpenBSD: PLIST,v 1.41 2017/08/19 13:54:38 ajacoutot Exp $
 @bin bin/pango-view
 include/pango-1.0/
 include/pango-1.0/pango/

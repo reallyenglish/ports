@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.38 2017/04/17 21:19:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.40 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT=	spell checker designed to eventually replace Ispell
 
 DISTNAME=	aspell-0.60.6.1
-REVISION=	4
+REVISION=	5
 SHARED_LIBS +=  aspell               17.0     # .16.4
 SHARED_LIBS +=  pspell               17.0     # .16.4
 DIST_SUBDIR=	aspell
@@ -22,7 +22,7 @@ HOMEPAGE=	http://aspell.net/
 # LGPLv2.1
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=		c iconv intl m ncursesw pthread ${LIBCXX}
+WANTLIB=		c iconv intl m ncursesw pthread ${COMPILER_LIBCXX}
 
 LIB_DEPENDS=		devel/gettext
 

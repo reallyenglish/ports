@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.70 2017/03/14 12:23:21 jca Exp $
+# $OpenBSD: Makefile,v 1.73 2017/09/29 19:46:53 naddy Exp $
 
 BROKEN-hppa =		undefined reference to __sync_fetch_and_add_4
 BROKEN-sparc64 =	infinite loop or aborts during build
@@ -6,7 +6,7 @@ BROKEN-sparc64 =	infinite loop or aborts during build
 COMMENT =		Prolog for the real world
 
 V =			6.6.4
-REVISION =		10
+REVISION =		12
 DISTNAME =		pl-$V
 PKGNAME =		swi-prolog-$V
 CATEGORIES =		lang
@@ -54,13 +54,20 @@ MODULES =		gcc4
 # for atomic builtins
 MODGCC4_ARCHS =		arm
 
-BUILD_DEPENDS =		${RUN_DEPENDS}
+AUTOCONF_VERSION =	2.69
+BUILD_DEPENDS =		${MODGNU_AUTOCONF_DEPENDS} \
+			${RUN_DEPENDS}
 LIB_DEPENDS =		devel/gmp \
 			devel/libexecinfo \
 			graphics/jpeg
 
 FULLARCH =		${MACHINE_ARCH:S/amd64/x86_64/}-openbsd${OSREV}
 SUBST_VARS +=		V BOOT FULLARCH
+
+# only packages/clib/maildrop/rfc822/configure.in is patched
+pre-configure:
+	cd ${WRKSRC}/packages/clib/maildrop/rfc822 && \
+	    AUTOCONF_VERSION=${AUTOCONF_VERSION} autoconf
 
 post-install:
 	cd ${PREFIX}/lib && \

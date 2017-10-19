@@ -1,18 +1,18 @@
-# $OpenBSD: Makefile,v 1.21 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.23 2017/07/26 22:45:16 sthen Exp $
 
 COMMENT=	sends AM radio signals using a monitor
 
 VERSION=	1.0.5
 DISTNAME=	tempest_for_eliza-${VERSION}
 PKGNAME=	tempest-${VERSION}
-REVISION=	3
+REVISION=	4
 CATEGORIES=	audio
 
 HOMEPAGE=	http://www.erikyyy.de/tempest/
 
 PERMIT_PACKAGE_CDROM=   Yes
 
-WANTLIB += SDL c m pthread ${LIBCXX}
+WANTLIB += SDL c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES=	${HOMEPAGE}
 

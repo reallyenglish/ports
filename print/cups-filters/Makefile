@@ -1,16 +1,16 @@
-# $OpenBSD: Makefile,v 1.112 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.128 2017/10/07 14:39:03 ajacoutot Exp $
 
 BROKEN-alpha=	ICE in cupsfilters/image-jpeg.c:316
 BROKEN-hppa=	ICE on filter/pdftopdf/qpdf_pdftopdf.cc:147
 
 COMMENT=	OpenPrinting CUPS filters
 
-DISTNAME=	cups-filters-1.14.0
-CATEGORIES=	print
-REVISION=	1
+DISTNAME=	cups-filters-1.17.9
 
-SHARED_LIBS +=  cupsfilters          1.1      # 1.0
-SHARED_LIBS +=  fontembed            0.0      # 1.0
+CATEGORIES=	print
+
+SHARED_LIBS +=  cupsfilters          1.2      # 1.0
+SHARED_LIBS +=  fontembed            1.0      # 1.0
 
 HOMEPAGE=	http://www.linuxfoundation.org/collaborate/workgroups/openprinting
 
@@ -25,6 +25,7 @@ WANTLIB += gmodule-2.0 gmp gnutls gobject-2.0 hogweed iconv idn2
 WANTLIB += ijs intl jpeg lcms2 m nettle openjp2 p11-kit pcre
 WANTLIB += png poppler pthread pthread-stubs qpdf tasn1 tiff
 WANTLIB += unistring z
+WANTLIB += ${COMPILER_LIBCXX}
 
 MASTER_SITES=	http://www.openprinting.org/download/cups-filters/
 
@@ -46,7 +47,7 @@ RUN_DEPENDS=	print/ghostscript/gnu \
 LIB_DEPENDS=	print/cups,-libs \
 		print/ijs \
 		print/poppler \
-		print/qpdf
+		print/qpdf>=7.0beta1
 
 # make it easier for users: bring in foomatic-db and allow the
 # regeneration of PPD files from share/foomatic/db/source/*/*.xml

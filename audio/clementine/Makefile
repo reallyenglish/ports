@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.24 2017/06/19 19:57:07 natano Exp $
+# $OpenBSD: Makefile,v 1.27 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT =	Qt4-based featureful music player
 
 V =		1.2.3
 DISTNAME =	clementine-${V}
 CATEGORIES =	audio x11
-REVISION =	6
+REVISION =	8
 
 HOMEPAGE =	http://clementine-player.org/
 
@@ -26,7 +26,7 @@ WANTLIB += gdk_pixbuf-2.0 gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0 gthread-2.0
 WANTLIB += gstapp-0.10 gstbase-0.10 gstcdda-0.10 gstreamer-0.10
 WANTLIB += gsttag-0.10
 WANTLIB += cdio chromaprint gpod execinfo fftw3 lastfm mtp mygpo-qt
-WANTLIB += protobuf qca2 qjson tag>=5.0 usb-1.0 xml2 ${LIBECXX}
+WANTLIB += protobuf qca qjson tag>=5.0 usb-1.0 xml2 ${COMPILER_LIBCXX}
 # those are dlopen'ed
 WANTLIB += plist
 
@@ -58,7 +58,7 @@ LIB_DEPENDS =		audio/chromaprint \
 			multimedia/gstreamer-0.10/core \
 			multimedia/gstreamer-0.10/plugins-base \
 			net/libmygpo-qt \
-			security/qca2
+			security/qca
 
 TEST_DEPENDS =		${MODPY_BUILD_DEPENDS}
 

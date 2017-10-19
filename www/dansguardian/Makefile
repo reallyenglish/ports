@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.17 2017/04/10 11:46:35 sthen Exp $
+# $OpenBSD: Makefile,v 1.20 2017/07/26 22:45:31 sthen Exp $
 
 # note, this isn't really maintained upstream any more
 # see e2guardian.org for a maintained fork
 
 COMMENT =	content scanning web filter
 DISTNAME =	dansguardian-2.12.0.3
+REVISION =	1
 EXTRACT_SUFX =	.tar.bz2
 CATEGORIES =	www net
 
@@ -13,7 +14,7 @@ HOMEPAGE =	http://www.dansguardian.org/
 # GPLv2+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c m pcre pcreposix ${LIBCXX} z
+WANTLIB =		c m pcre pcreposix ${COMPILER_LIBCXX} z
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=dansguardian/}
 

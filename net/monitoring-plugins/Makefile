@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.12 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.17 2017/09/22 20:52:58 sthen Exp $
 
 COMMENT-main=	monitoring plugins (for Nagios, Icinga, etc)
 COMMENT-dbi=	dbi monitoring plugin
@@ -12,7 +12,7 @@ COMMENT-snmp=	monitoring plugins using snmp
 COMMENT-radius=	RADIUS monitoring plugin
 
 V=		2.2
-REVISION-main=	1
+REVISION-main=	3
 DISTNAME=	monitoring-plugins-$V
 PKGNAME-main=	monitoring-plugins-$V
 PKGNAME-dbi=	monitoring-plugins-dbi-$V
@@ -25,15 +25,15 @@ PKGNAME-samba=	monitoring-plugins-samba-$V
 PKGNAME-snmp=	monitoring-plugins-snmp-$V
 PKGNAME-radius=	monitoring-plugins-radius-$V
 CATEGORIES=	net
-REVISION-dbi=	0
-REVISION-fping=	0
-REVISION-game=	0
-REVISION-ldap=	0
-REVISION-mysql=	0
-REVISION-pgsql=	0
-REVISION-radius=0
-REVISION-samba=	0
-REVISION-snmp=	0
+REVISION-dbi=	1
+REVISION-fping=	1
+REVISION-game=	1
+REVISION-ldap=	1
+REVISION-mysql=	1
+REVISION-pgsql=	1
+REVISION-radius=2
+REVISION-samba=	1
+REVISION-snmp=	1
 
 HOMEPAGE=	https://www.monitoring-plugins.org/
 
@@ -52,6 +52,7 @@ FAKE_FLAGS=	setuid_root_mode=0555
 
 CONFIGURE_STYLE= autoconf
 AUTOCONF_VERSION= 2.69
+CONFIGURE_ENV+= LDFLAGS="-L${LOCALBASE}/lib"
 # cgiurl is only used to produce an href to traceroute.cgi in check_ping output
 CONFIGURE_ARGS+= --libexecdir=${PREFIX}/libexec/nagios \
 		--with-cgiurl=/cgi-bin/nagios \
@@ -101,7 +102,7 @@ RUN_DEPENDS-snmp=	${RUN_DEPENDS} \
 
 LIB_DEPENDS-radius=	net/radcli
 WANTLIB-radius+=	${WANTLIB} ffi gmp gnutls hogweed idn2 nettle
-WANTLIB-radius+=	p11-kit radcli tasn1 z
+WANTLIB-radius+=	p11-kit radcli tasn1 unistring z
 
 # MYSQL
 .if !${BUILD_PACKAGES:M-mysql}
@@ -110,7 +111,7 @@ CONFIGURE_ARGS += --without-mysql
 CONFIGURE_ARGS += --with-mysql=${LOCALBASE}
 .endif
 LIB_DEPENDS-mysql = ${LIB_DEPENDS} databases/mariadb
-WANTLIB-mysql = ${WANTLIB} crypto m mysqlclient ssl ${LIBCXX} z
+WANTLIB-mysql = ${WANTLIB} crypto m mysqlclient ssl ${COMPILER_LIBCXX} z
 
 # PGSQL
 .if !${BUILD_PACKAGES:M-pgsql}

@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.24 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.27 2017/07/26 22:45:31 sthen Exp $
 
 COMMENT=		documentation metadata library
 
 GNOME_PROJECT=		rarian
 GNOME_VERSION=		0.8.1
 EXTRACT_SUFX=		.tar.bz2
-REVISION=		14
+REVISION =		16
 
 SHARED_LIBS +=	rarian               0.0      # .0.0
 
@@ -16,7 +16,7 @@ HOMEPAGE=		http://rarian.freedesktop.org/
 # LGPLv2.1/GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c m ${LIBCXX}
+WANTLIB += c m ${COMPILER_LIBCXX}
 
 MODULES=		x11/gnome
 

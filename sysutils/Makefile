@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.442 2017/06/13 21:47:42 fcambus Exp $
+# $OpenBSD: Makefile,v 1.455 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += accountsservice
@@ -10,6 +10,8 @@
      SUBDIR += apachetop
      SUBDIR += apcd
      SUBDIR += apcupsd
+     SUBDIR += arm-trusted-firmware
+     SUBDIR += atf-allwinner
      SUBDIR += augeas
      SUBDIR += autossh
      SUBDIR += awless
@@ -23,6 +25,7 @@
      SUBDIR += binwalk
      SUBDIR += bitrot
      SUBDIR += borgbackup
+     SUBDIR += borgmatic
      SUBDIR += bubblemon-dockapp
      SUBDIR += cdrtools
      SUBDIR += cfengine
@@ -57,6 +60,7 @@
      SUBDIR += diskrescue
      SUBDIR += dmassage
      SUBDIR += dmidecode
+     SUBDIR += dosfstools
      SUBDIR += downtimed
      SUBDIR += dsh
      SUBDIR += dtb
@@ -91,6 +95,7 @@
      SUBDIR += glastree
      SUBDIR += go-cs
      SUBDIR += google-cloud-sdk
+     SUBDIR += google-compute-engine
      SUBDIR += gource
      SUBDIR += gpioflicker
      SUBDIR += grive2
@@ -106,7 +111,6 @@
      SUBDIR += ioping
      SUBDIR += ipmitool
      SUBDIR += iwatch
-     SUBDIR += knutclient
      SUBDIR += krename-kde4
      SUBDIR += ktsuss
      SUBDIR += libesedb
@@ -211,6 +215,8 @@
      SUBDIR += py-lockfile
      SUBDIR += py-lockfile,python3
      SUBDIR += py-metlog
+     SUBDIR += py-parallel-ssh
+     SUBDIR += py-parallel-ssh,python3
      SUBDIR += py-psutil
      SUBDIR += py-psutil,python3
      SUBDIR += py-statgrab
@@ -233,18 +239,18 @@
      SUBDIR += rpl
      SUBDIR += rsyslog
      SUBDIR += rtty
-     SUBDIR += ruby-augeas,ruby22
+     SUBDIR += ruby-augeas,ruby23
+     SUBDIR += ruby-augeas,ruby24
      SUBDIR += ruby-capistrano
      SUBDIR += ruby-directory_watcher
-     SUBDIR += ruby-libvirt,ruby22
-     SUBDIR += ruby-posix-spawn,ruby22
+     SUBDIR += ruby-libvirt,ruby23
+     SUBDIR += ruby-libvirt,ruby24
      SUBDIR += ruby-posix-spawn,ruby23
      SUBDIR += ruby-posix-spawn,ruby24
      SUBDIR += ruby-puppet
      SUBDIR += ruby-puppet-lint
      SUBDIR += ruby-puppet-syntax
      SUBDIR += ruby-r10k
-     SUBDIR += ruby-shadow,ruby22
      SUBDIR += ruby-shadow,ruby23
      SUBDIR += ruby-shadow,ruby24
      SUBDIR += ruby-vlad
@@ -286,6 +292,7 @@
      SUBDIR += tabled
      SUBDIR += tarsnap
      SUBDIR += tarsnap-gui
+     SUBDIR += tarsnapper
      SUBDIR += tentakel
      SUBDIR += terraform
      SUBDIR += testdisk
@@ -293,7 +300,6 @@
      SUBDIR += tmate
      SUBDIR += tmux-mem-cpu-load
      SUBDIR += tmuxinator
-     SUBDIR += toad
      SUBDIR += torture
      SUBDIR += tpb
      SUBDIR += tphdisk
@@ -310,8 +316,10 @@
      SUBDIR += usbutils
      SUBDIR += usmb
      SUBDIR += virt-manager
+     SUBDIR += virt-what
      SUBDIR += vmdktool
      SUBDIR += vmwh
+     SUBDIR += waagent
      SUBDIR += whowatch
      SUBDIR += wmapm
      SUBDIR += wmcb
@@ -321,6 +329,7 @@
      SUBDIR += xbatt
      SUBDIR += xbattbar
      SUBDIR += xjobs
+     SUBDIR += xorriso
      SUBDIR += xps
      SUBDIR += xstatbar
      SUBDIR += xuvmstat

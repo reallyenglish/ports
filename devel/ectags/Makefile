@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.20 2016/12/29 14:48:51 shadchin Exp $
+# $OpenBSD: Makefile,v 1.22 2017/09/06 21:45:22 jca Exp $
 
 COMMENT=	multilanguage implementation of ctags
 
@@ -19,6 +19,13 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ctags/}
 CONFIGURE_STYLE=gnu
 
 DOCS=		FAQ NEWS README EXTENDING.html
+
+# Application software must not redefine macros in the
+# implementation namespace.  For example, redefining __unused__
+# blows up in our <ctype.h>.
+post-extract:
+	find ${WRKSRC} -type f -name '*.[ch]' -exec sed -i \
+	's/__unused__/ect_unused/g; s/__printf__/ect_printf/g' {} +
 
 do-install:
 	${INSTALL_PROGRAM} ${WRKBUILD}/ctags ${PREFIX}/bin/ectags

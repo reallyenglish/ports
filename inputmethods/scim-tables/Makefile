@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.19 2017/04/10 11:46:21 sthen Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:25 sthen Exp $
 
 COMMENT=	input method data tables for scim
 
 DISTNAME=	scim-tables-0.5.8
-REVISION=	8
+REVISION=	9
 
 CATEGORIES=	inputmethods chinese japanese korean
 
@@ -18,7 +18,7 @@ WANTLIB+= fontconfig freetype gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0
 WANTLIB+= glib-2.0 gmodule-2.0 gobject-2.0 graphite2 gthread-2.0
 WANTLIB+= gtk-x11-2.0 harfbuzz m pango-1.0 pangocairo-1.0 pangoft2-1.0
 WANTLIB+= pcre pixman-1 png pthread pthread-stubs scim-1.0
-WANTLIB+= scim-gtkutils-1.0 scim-x11utils-1.0 ${LIBCXX} xcb xcb-render
+WANTLIB+= scim-gtkutils-1.0 scim-x11utils-1.0 ${COMPILER_LIBCXX} xcb xcb-render
 WANTLIB+= xcb-shm z
 
 MODULES=	devel/gettext

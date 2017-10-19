@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.51 2017/06/06 08:45:02 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.56 2017/10/16 09:04:07 ajacoutot Exp $
 
 COMMENT=		digital camera library
 
-VERSION=		2.5.14
+VERSION=		2.5.16
 DISTNAME=		libgphoto2-${VERSION}
 PKGNAME=		libgphoto-${VERSION}
 
@@ -33,7 +33,9 @@ LIB_DEPENDS=		graphics/gd \
 			devel/libtool,-ltdl \
 			textproc/libxml
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE=	autoconf
+AUTOCONF_VERSION=	2.69
+AUTOCONF_DIR=		${WRKSRC} ${WRKSRC}/libgphoto2_port
 CONFIGURE_ENV=		CPPFLAGS="-I${LOCALBASE}/include" \
 			LDFLAGS="-L${LOCALBASE}/lib -L${X11BASE}/lib" \
 			ac_cv_path_DOXYGEN=false
@@ -48,6 +50,12 @@ CONFIGURE_ARGS +=	--with-libusb-1.0=no
 # /usr/local/lib/libiconv.a(localcharset.o)(.text+0x0): In function `locale_charset':
 # multiple definition of `locale_charset'
 MAKE_FLAGS=		INTLLIBS='$$(LTLIBINTL)'
+
+# avoid triggering autotools cascade after patching configure.ac
+pre-configure:
+	@for d in ${AUTOCONF_DIR}; do \
+	    touch -r $$d/aclocal.m4 $$d/configure.ac; \
+	done
 
 post-install:
 	rm ${PREFIX}/lib/libgphoto2/${VERSION}/*.{a,la}

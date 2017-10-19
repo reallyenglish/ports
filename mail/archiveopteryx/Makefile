@@ -1,16 +1,17 @@
-# $OpenBSD: Makefile,v 1.18 2017/04/10 11:46:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.20 2017/07/26 22:45:25 sthen Exp $
 
 COMMENT =		mail server storing messages in a database
 
 DISTNAME =		archiveopteryx-3.2.0
 CATEGORIES =		mail databases
+REVISION =		0
 
 HOMEPAGE =		http://www.archiveopteryx.org/
 
 # BSD
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c crypto m pthread ssl ${LIBCXX} z
+WANTLIB =		c crypto m pthread ssl ${COMPILER_LIBCXX} z
 
 
 MASTER_SITES =		${HOMEPAGE}/download/

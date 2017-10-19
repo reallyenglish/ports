@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.106 2017/03/21 19:48:01 dcoppa Exp $
+# $OpenBSD: Makefile,v 1.108 2017/09/14 16:21:15 dcoppa Exp $
 
 COMMENT=		highly configurable framework window manager
 
-VER=			4.1
+VER=			4.2
 DISTNAME=		awesome-${VER}
+REVISION=		0
 EXTRACT_SUFX=		.tar.xz
 CATEGORIES=		x11
 
@@ -16,7 +17,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB=		X11 c cairo dbus-1 execinfo \
 			gdk_pixbuf-2.0 glib-2.0 gobject-2.0 \
-			${MODLUA_WANTLIB} m \
+			intl ${MODLUA_WANTLIB} m \
 			startup-notification-1 xcb xcb-cursor \
 			xcb-icccm xcb-keysyms xcb-randr \
 			xcb-render xcb-shape xcb-util \
@@ -26,7 +27,6 @@ WANTLIB=		X11 c cairo dbus-1 execinfo \
 MASTER_SITES=		https://github.com/awesomeWM/awesome/releases/download/v${VER}/
 
 MODULES=		devel/cmake \
-			devel/gettext \
 			lang/lua
 
 MODLUA_VERSION=		5.2
@@ -57,28 +57,23 @@ CONFIGURE_ARGS=		-DCOMPRESS_MANPAGES=off \
 			-DGENERATE_DOC=off \
 			-DSYSCONFDIR=${SYSCONFDIR}
 
-SEPARATE_BUILD=		No
-
 NO_TEST=		Yes
 
 pre-configure:
 	${SUBST_CMD} ${WRKSRC}/awesomeConfig.cmake \
+		${WRKSRC}/docs/06-appearance.md.lua \
 		${WRKSRC}/lib/awful/completion.lua \
 		${WRKSRC}/lib/awful/util.lua \
 		${WRKSRC}/lib/beautiful/init.lua \
+		${WRKSRC}/lib/gears/filesystem.lua \
 		${WRKSRC}/lib/menubar/icon_theme.lua \
-		${WRKSRC}/lib/menubar/menu_gen.lua \
 		${WRKSRC}/lib/naughty/core.lua \
 		${WRKSRC}/themes/default/theme.lua \
 		${WRKSRC}/themes/xresources/theme.lua \
 		${WRKSRC}/utils/awesome-client
 
 post-install:
-	@rm ${WRKINST}${LOCALBASE}/share/awesome/lib/awful/*.{beforesubst,orig} \
-		${WRKINST}${LOCALBASE}/share/awesome/lib/beautiful/*.{beforesubst,orig} \
-		${WRKINST}${LOCALBASE}/share/awesome/lib/menubar/*.{beforesubst,orig} \
-		${WRKINST}${LOCALBASE}/share/awesome/lib/naughty/*.{beforesubst,orig} \
-		${WRKINST}${LOCALBASE}/share/awesome/themes/default/*.{beforesubst,orig} \
+	@rm ${WRKINST}${LOCALBASE}/share/awesome/themes/default/*.{beforesubst,orig} \
 		${WRKINST}${LOCALBASE}/share/awesome/themes/xresources/*.{beforesubst,orig}
 	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/awesome
 	@mv ${WRKINST}${SYSCONFDIR}/xdg/awesome/rc.lua \

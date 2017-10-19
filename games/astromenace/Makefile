@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.4 2017/04/10 11:45:28 sthen Exp $
+# $OpenBSD: Makefile,v 1.6 2017/07/26 22:45:20 sthen Exp $
 
 COMMENT =		hardcore 3D space shmup
 BROKEN-sparc64 =	SIGABRT terminate called after throwing an instance of 'std::bad_alloc'
@@ -7,6 +7,7 @@ BROKEN-powerpc =	SIGABRT terminate called after throwing an instance of 'std::ba
 V =			1.3.2
 DISTNAME =		astromenace-src-$V
 PKGNAME =		astromenace-$V
+REVISION =		0
 
 CATEGORIES =		games
 
@@ -16,7 +17,7 @@ HOMEPAGE =		http://www.viewizard.com/
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL GLU ICE SDL SM X11 Xext Xinerama alut c fontconfig
-WANTLIB += freetype m ogg openal pthread ${LIBCXX} vorbis vorbisfile
+WANTLIB += freetype m ogg openal pthread ${COMPILER_LIBCXX} vorbis vorbisfile
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=openastromenace/}
 EXTRACT_SUFX =		.tar.bz2

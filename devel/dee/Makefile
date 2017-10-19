@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.7 2017/04/10 11:45:25 sthen Exp $
+# $OpenBSD: Makefile,v 1.10 2017/08/24 09:45:23 sthen Exp $
 
 COMMENT=		library for Model-View-Controller type across DBus
 
 DISTNAME=		dee-1.0.14
+REVISION=		1
 
 SHARED_LIBS +=  dee-1.0                   0.0 # 5.1
 
@@ -14,7 +15,7 @@ HOMEPAGE=		https://launchpad.net/dee
 PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += c ffi gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0 gthread-2.0
-WANTLIB += icudata icui18n icuuc m pcre pthread ${LIBCXX} z
+WANTLIB += icudata icui18n icuuc m pcre pthread ${COMPILER_LIBCXX} z
 
 MASTER_SITES=	https://launchpad.net/dee/1.0/1.0.14/+download/
 

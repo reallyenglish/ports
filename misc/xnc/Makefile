@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.34 2017/04/10 11:46:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.37 2017/07/26 22:45:26 sthen Exp $
 
 COMMENT=	filemanager for X Window
 
 DISTNAME=	xnc-4.4.7
-REVISION=	8
+REVISION =	10
 DISTFILES=	${DISTNAME}.src${EXTRACT_SUFX}
 SHARED_LIBS=	xncaqua	1.0 \
 		xncfive	1.0
@@ -16,7 +16,7 @@ MASTER_SITES=	${HOMEPAGE}/src/
 
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += ICE SM X11 Xext c jpeg m png ${LIBCXX} util z tiff 
+WANTLIB += ICE SM X11 Xext c jpeg m png ${COMPILER_LIBCXX} util z tiff 
 
 LIB_DEPENDS=	graphics/tiff \
 		graphics/png

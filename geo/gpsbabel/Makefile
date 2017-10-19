@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.29 2017/04/10 11:46:20 sthen Exp $
+# $OpenBSD: Makefile,v 1.31 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT-main=		GPS waypoint, track, and route conversion tool
 COMMENT-tk=		Tk front-end to gpsbabel
@@ -11,9 +11,9 @@ PKGNAME-tk=		gpsbabel-tk-${VERSION}
 PKGNAME-qt=		gpsbabel-qt-${VERSION}
 CATEGORIES=		geo
 
-REVISION-main=		0
-REVISION-tk=		0
-REVISION-qt=		0
+REVISION-main=		1
+REVISION-tk=		1
+REVISION-qt=		1
 
 HOMEPAGE=		http://www.gpsbabel.org/
 
@@ -48,7 +48,7 @@ cWANTLIB = 		c m pthread
 WANTLIB-main += expat shp>=1 usb z ${cWANTLIB}
 WANTLIB-tk = 
 WANTLIB-qt += ICE QtCore QtGui QtNetwork QtWebKit QtXml SM X11 Xext Xi
-WANTLIB-qt += Xinerama Xrender fontconfig freetype ${LIBCXX} ${cWANTLIB}
+WANTLIB-qt += Xinerama Xrender fontconfig freetype ${COMPILER_LIBCXX} ${cWANTLIB}
 
 LIB_DEPENDS-tk=
 PKG_ARCH-tk=	*

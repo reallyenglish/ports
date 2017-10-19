@@ -1,0 +1,19 @@
+$OpenBSD: patch-virt-what_in,v 1.2 2017/08/10 13:32:55 jasper Exp $
+
+From eefc1e7e3dd8fb422baf0f13aec1df9880541b83 Mon Sep 17 00:00:00 2001
+From: Jasper Lievisse Adriaanse <bug@jasper.la>
+Date: Thu, 10 Aug 2017 08:44:01 +0100
+Subject: [PATCH] Missing have_cpuinfo check.
+
+Index: virt-what.in
+--- virt-what.in.orig
++++ virt-what.in
+@@ -308,7 +308,7 @@ if ! "$skip_qemu_kvm"; then
+         # option, since /proc/cpuinfo will not contain the QEMU
+         # string. QEMU 2.10 added a new CPUID leaf, so this
+         # problem only triggered for older QEMU
+-        if grep -q 'QEMU' "${root}/proc/cpuinfo"; then
++        if have_cpuinfo && grep -q 'QEMU' "${root}/proc/cpuinfo"; then
+             echo qemu
+         fi
+     fi

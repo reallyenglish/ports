@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.21 2017/05/09 14:51:11 schwarze Exp $
+# $OpenBSD: Makefile,v 1.24 2017/07/26 22:45:24 sthen Exp $
 
 COMMENT=	translate PostScript/PDF graphics to other vector formats
 
 DISTNAME=	pstoedit-3.70
-REVISION=	1
+REVISION =	3
 SHARED_LIBS=	pstoedit 3.0
 CATEGORIES=	graphics
 
@@ -24,7 +24,7 @@ CONFIGURE_ARGS=	--without-libplot	\
 		--without-emf	 	\
 		--without-swf		\
 		--without-magick
-WANTLIB=	c ${LIBCXX} m
+WANTLIB=	c ${COMPILER_LIBCXX} m
 
 post-install:
 	${INSTALL_MAN} ${WRKSRC}/doc/pstoedit.1 ${PREFIX}/man/man1

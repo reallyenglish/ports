@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:45:25 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/09/13 10:30:22 robert Exp $
 
 COMMENT=		SOAP/REST Web Services and XML-Based apps toolkit
 
-V=			2.8.22
+V=			2.8.53
 DISTNAME=		gsoap_${V}
 PKGNAME=		gsoap-${V}
 EXTRACT_SUFX=		.zip
@@ -35,7 +35,7 @@ WANTLIB += c crypto m pthread ssl ${LIBCXX} z
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gsoap2/gSOAP/}
 
 CONFIGURE_STYLE=	gnu
-CONFIGURE_ENV=		LDFLAGS="-pthread"
+CONFIGURE_ENV=		CPPFLAGS="-DWITH_NO_C_LOCALE=1" LDFLAGS="-pthread"
 
 pre-configure:
 	cd ${WRKSRC} && env AUTOCONF_VERSION=${AUTOCONF_VERSION} \

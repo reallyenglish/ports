@@ -1,16 +1,13 @@
-# $OpenBSD: Makefile,v 1.14 2016/06/03 11:57:57 sebastia Exp $
+# $OpenBSD: Makefile,v 1.16 2017/09/07 21:17:18 sebastia Exp $
 
 COMMENT=	view images and do slideshows
 
-REVISION =	7
-DISTNAME =	LaternaMagica-0.4
+DISTNAME =	LaternaMagica-0.5
 
 HOMEPAGE=	http://gap.nongnu.org/laternamagica/
 MASTER_SITES=	${MASTER_SITE_SAVANNAH:=gap/}
 
 MODULES=	x11/gnustep
-
-post-extract:
-	rm ${WRKSRC}/AppController.m.orig
+WANTLIB += ${COMPILER_LIBCXX}
 
 .include <bsd.port.mk>

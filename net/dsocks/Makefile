@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.15 2017/01/03 08:28:41 jca Exp $
+# $OpenBSD: Makefile,v 1.17 2017/07/06 05:49:10 espie Exp $
 
 COMMENT=		SOCKS client wrapper for *BSD
 DISTNAME=		dsocks-1.7

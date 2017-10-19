@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.17 2017/05/31 08:08:16 espie Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/27 09:55:45 sthen Exp $
 
 COMMENT =	Context Free Design Grammar
 
 VERSION =	3.0.9
 DISTNAME =	ContextFreeSource${VERSION}
 PKGNAME =	cfdg-${VERSION}
+REVISION =	0
 
 CATEGORIES =	graphics
 
@@ -19,6 +20,7 @@ MASTER_SITES =	http://www.contextfreeart.org/download/
 EXTRACT_SUFX =	.tgz
 
 WANTLIB =	c m png z
+WANTLIB += ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS =	devel/bison
 
@@ -31,7 +33,7 @@ USE_GMAKE =	Yes
 WRKDIST =	${WRKDIR}/context-free-${VERSION}
 
 MAKE_ENV +=	CPPFLAGS="${CFLAGS}"
-MAKE_FLAGS =	CXX=c++ CC=c++ LIBCXX="${LIBCXX}"
+MAKE_FLAGS =	CXX=c++ CC=c++ COMPILER_LIBCXX="${LIBCXX}"
 
 EXAMPLEDIR =	${PREFIX}/share/examples/cfdg
 

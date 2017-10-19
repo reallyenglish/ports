@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT =		MCP LADSPA plugins
 
 DISTNAME =		MCP-plugins-0.4.0
 PKGNAME =		${DISTNAME:L}
-REVISION =		0
+REVISION =		2
 CATEGORIES =		audio
 
 HOMEPAGE =		http://kokkinizita.net/linuxaudio/ladspa/index.html
@@ -12,7 +12,7 @@ HOMEPAGE =		http://kokkinizita.net/linuxaudio/ladspa/index.html
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		m ${LIBCXX}
+WANTLIB =		m ${COMPILER_LIBCXX}
 
 EXTRACT_SUFX =		.tar.bz2
 

@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.15 2017/04/26 07:03:39 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.19 2017/09/25 17:12:46 ajacoutot Exp $
 
 COMMENT=		unified interface for interacting with cloud services
 
-MODPY_EGG_VERSION=	2.0.0
+MODPY_EGG_VERSION=	2.2.1
 DISTNAME=		apache-libcloud-${MODPY_EGG_VERSION}
 PKGNAME=		py-libcloud-${MODPY_EGG_VERSION}
 
@@ -21,17 +21,22 @@ MODULES=		lang/python
 
 MODPY_SETUPTOOLS=	Yes
 
+BUILD_DEPENDS=		devel/py-test-runner
+
 RUN_DEPENDS=		sysutils/py-lockfile
 
 # XXX needs https://pypi.python.org/pypi/requests-mock
 TEST_DEPENDS=		devel/flake8 \
 			devel/pep8 \
 			devel/py-mock \
+			devel/py-test-runner \
 			sysutils/py-lockfile
 
 # python2
 RUN_DEPENDS +=		devel/py-backports-ssl-match-hostname
 TEST_DEPENDS +=		devel/py-backports-ssl-match-hostname
+# XXX needs https://pypi.python.org/simple/requests_mock/
+TEST_IS_INTERACTIVE=	Yes
 
 post-install:
 	rm -rf ${PREFIX}/lib/python${MODPY_VERSION}/site-packages/libcloud/test/

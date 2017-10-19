@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/10 11:46:36 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:33 sthen Exp $
 
 COMMENT =		template and text document library for Qt4
 PKG_VERSION =		0.5.1
-REVISION =		0
+REVISION =		2
 PLIST_VERSION =		${PKG_VERSION:R}
 DISTNAME =		grantlee-${PKG_VERSION}
 CATEGORIES =		devel x11
@@ -20,7 +20,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 MASTER_SITES =		http://downloads.grantlee.org/ \
 			http://www.loegria.net/grantlee/
 
-WANTLIB =		c m ${LIBCXX}
+WANTLIB =		c m ${COMPILER_LIBCXX}
 WANTLIB +=		lib/qt4/QtGui lib/qt4/QtScript
 
 MODULES =		devel/cmake x11/qt4

@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.19 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT=	import and export WordPerfect(tm) documents
 
 DISTNAME=	libwpd-0.8.9
 CATEGORIES=	textproc
 
-REVISION=	8
+REVISION=	9
 
 SHARED_LIBS=	wpd-0.8		8.9 \
 		wpd-stream-0.8	8.9
@@ -18,7 +18,7 @@ MAINTAINER=	Robert Nagy <robert@openbsd.org>
 PERMIT_PACKAGE_CDROM=   Yes
 
 WANTLIB += bz2 c ffi gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0 gsf-1
-WANTLIB += gthread-2.0 lzma m pcre pthread ${LIBCXX} xml2 z
+WANTLIB += gthread-2.0 lzma m pcre pthread ${COMPILER_LIBCXX} xml2 z
 
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=libwpd/}
 

@@ -1,53 +1,54 @@
-# $OpenBSD: Makefile,v 1.123 2017/05/30 18:53:37 ajacoutot Exp $
-
-ONLY_FOR_ARCHS-mono=	${MONO_ARCHS}
+# $OpenBSD: Makefile,v 1.126 2017/09/06 07:21:05 ajacoutot Exp $
 
 COMMENT-main=		framework for Multicast DNS Service Discovery
 COMMENT-gtk=		gtk+2 avahi-ui libraries
 COMMENT-gtk3=		gtk+3 avahi-ui libraries
 COMMENT-gui=		GUI client utilities for avahi
-COMMENT-mono=		mono (.NET) bindings for avahi
 COMMENT-python=		python bindings for avahi
 COMMENT-ui=		common avahi-ui header for gtk+2 and gtk+3
 
-V=			0.6.32
-DISTNAME=		avahi-${V}
-CATEGORIES=		net devel
+V=			0.7
+GH_ACCOUNT=		lathiat
+GH_PROJECT=		avahi
+GH_TAGNAME=		v${V}
 
 PKGNAME-main=		avahi-${V}
 PKGNAME-gtk=		avahi-gtk-${V}
 PKGNAME-gtk3=		avahi-gtk3-${V}
 PKGNAME-gui=		avahi-gui-${V}
-PKGNAME-mono=		mono-avahi-${V}
 PKGNAME-python=		py-avahi-${V}
 PKGNAME-ui=		avahi-ui-${V}
 
-REVISION-main=		1
-REVISION-gui=		1
+REVISION-main=		0
+REVISION-gtk=		0
+REVISION-gtk3=		0
+REVISION-gui=		0
+REVISION-python=	0
+REVISION-ui=		0
+
+CATEGORIES=		net devel
 
 MAINTAINER=		Antoine Jacoutot <ajacoutot@openbsd.org>
 
-SHARED_LIBS +=  avahi-common         0.0      # 8.3
-SHARED_LIBS +=  avahi-core           0.0      # 7.2
-SHARED_LIBS +=  avahi-client         0.0      # 5.9
-SHARED_LIBS +=  avahi-glib           0.0      # 1.2
-SHARED_LIBS +=  avahi-gobject        0.0      # 0.4
-SHARED_LIBS +=  dns_sd               0.0      # 1.0
-SHARED_LIBS +=  howl                 0.0      # 0.0
-SHARED_LIBS +=  avahi-ui             0.0      # 1.4
-SHARED_LIBS +=  avahi-ui-gtk3        0.0      # 1.4
+SHARED_LIBS +=  avahi-common         0.1      # 8.3
+SHARED_LIBS +=  avahi-core           0.1      # 7.2
+SHARED_LIBS +=  avahi-client         0.1      # 5.9
+SHARED_LIBS +=  avahi-glib           0.1      # 1.2
+SHARED_LIBS +=  avahi-gobject        0.1      # 0.5
+SHARED_LIBS +=  dns_sd               0.1      # 1.0
+SHARED_LIBS +=  howl                 0.1      # 0.0
+SHARED_LIBS +=  avahi-ui             0.1      # 1.4
+SHARED_LIBS +=  avahi-ui-gtk3        0.1      # 1.4
 
 HOMEPAGE=		http://www.avahi.org/
 
 # LGPLv2.1
 PERMIT_PACKAGE_CDROM=	Yes
 
-MASTER_SITES=		https://github.com/lathiat/avahi/releases/download/v${V}/
+PSEUDO_FLAVORS=		no_gui bootstrap
+FLAVOR?=		no_gui bootstrap
 
-PSEUDO_FLAVORS=		no_gui no_mono bootstrap
-FLAVOR?=		no_gui no_mono bootstrap
-
-MULTI_PACKAGES= 	-main -mono -gui -gtk -gtk3 -python -ui
+MULTI_PACKAGES= 	-main -gui -gtk -gtk3 -python -ui
 
 MODULES=		textproc/intltool
 
@@ -67,32 +68,21 @@ LIB_DEPENDS-main=	devel/glib2 \
 			devel/libdaemon \
 			x11/dbus
 
+CONFIGURE_ARGS=		--disable-mono \
+			--disable-monodoc
+
 .include <bsd.port.arch.mk>
 
 .if !${BUILD_PACKAGES:M-gui}
 # all these vanish together
-BUILD_PACKAGES :=	${BUILD_PACKAGES:N-mono:N-gtk:N-gtk3:N-python:N-ui}
-.endif
-
-.if ${BUILD_PACKAGES:M-mono}
-MODULES+=		lang/mono
-BUILD_DEPENDS+= 	${MODMONO_BUILD_DEPENDS} \
-			x11/mono-gtk2
-RUN_DEPENDS-mono=	${MODMONO_RUN_DEPENDS} \
-			${BUILD_PKGPATH},-gtk \
-			x11/mono-gtk2
-LIB_DEPENDS-mono=	#empty
-WANTLIB-mono +=		#empty
-.else
-CONFIGURE_ARGS+=	--disable-mono \
-			--disable-monodoc
+BUILD_PACKAGES :=	${BUILD_PACKAGES:N-gtk:N-gtk3:N-python:N-ui}
 .endif
 
 .if ${BUILD_PACKAGES:M-gui}
 ### common
 MODULES+=		lang/python
-BUILD_DEPENDS+=		lang/python/${MODPY_VERSION},-gdbm \
-			x11/py-gtk2 \
+BUILD_DEPENDS+=		devel/py-gobject3 \
+			lang/python/${MODPY_VERSION},-gdbm \
 			x11/dbus-python
 
 ### -gtk
@@ -128,9 +118,11 @@ LIB_DEPENDS-gui=	${BUILD_PKGPATH},-gtk3
 RUN_DEPENDS-gui=	${MODPY_RUN_DEPENDS} \
 			${BUILD_PKGPATH},-python \
 			x11/dbus-python \
-			x11/py-gtk2 \
 			devel/py-twisted \
 			devel/desktop-file-utils
+
+# pygobject GTK2 introspection (not provided by indirect dependencies)
+RUN_DEPENDS-gui +=	x11/gtk+2
 
 WANTLIB-gui += X11 Xcomposite Xcursor Xdamage Xext Xfixes
 WANTLIB-gui += Xi Xinerama Xrandr Xrender atk-1.0 avahi-client
@@ -158,14 +150,13 @@ WANTLIB-ui +=		#empty
 CONFIGURE_ARGS+=	--disable-gtk \
 			--disable-gtk3 \
 			--disable-python \
-			--disable-pygtk \
+			--disable-pygobject \
 			--disable-python-dbus
 .endif
 
 USE_GMAKE=		Yes
 
 MODPY_RUNDEP=		No
-MODMONO_DEPS=		No
 
 CFLAGS+=		-D_BSD_SOURCE
 
@@ -206,21 +197,28 @@ PC_FILES=		avahi-ui.pc avahi-client.pc avahi-compat-howl.pc \
 
 PORTHOME=		${WRKBUILD}
 
+AUTOCONF_VERSION=	2.69
+AUTOMAKE_VERSION=	1.15
+# see patch-autogen_sh
+SUBST_VARS=		AUTOCONF_VERSION AUTOMAKE_VERSION
+BUILD_DEPENDS +=	${MODGNU_AUTOCONF_DEPENDS} \
+			${MODGNU_AUTOMAKE_DEPENDS} \
+			devel/libtool
+
 pre-configure:
 	find ${WRKSRC} -name Makefile.in -exec \
 		sed -i -e 's,LIBINTL,INTLLIBS,g;' \
 			-e 's,LIBICONV,LTLIBICONV,g' {} \;
 	find ${WRKSRC}/man -name '*.[1-9]*' | xargs \
 		sed -i 's,/etc/avahi,${SYSCONFDIR}/avahi,g'
-	sed -i 's,dbus_connection_disconnect,dbus_connection_close,g' \
-		${WRKSRC}/avahi-client/client.c \
-		${WRKSRC}/avahi-daemon/dbus-protocol.c
-	sed -i 's,-ldl,,g' ${WRKSRC}/configure \
-		${WRKSRC}/avahi-client/Makefile.in \
-		${WRKSRC}/avahi-daemon/Makefile.in
 	for i in ${PC_FILES}; do \
 		sed -i -e 's,Libs:,Libs: -pthread,;' \
 			-e 's,Cflags:,Cflags: -pthread,' ${WRKSRC}/$${i}.in; done
+	cd ${WRKSRC} && ${SETENV} \
+		AUTOCONF_VERSION=${AUTOCONF_VERSION} \
+		AUTOMAKE_VERSION=${AUTOMAKE_VERSION} \
+		NOCONFIGURE=1 \
+		/bin/sh ./autogen.sh
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/avahi
@@ -229,8 +227,5 @@ post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/dbus-1/system-services
 	${INSTALL_DATA} ${WRKBUILD}/avahi-daemon/org.freedesktop.Avahi.service \
 		${PREFIX}/share/dbus-1/system-services
-	# XXX DLLMAP_FILES won't work here since the files are generated during the build process
-	find ${PREFIX} -name avahi-sharp.dll.config -or -name avahi-ui-sharp.dll.config | \
-		xargs perl -pi -e 's,\.so(\.[0-9])+,\.so,g'
 
 .include <bsd.port.mk>

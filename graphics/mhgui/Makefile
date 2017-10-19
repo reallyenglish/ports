@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.21 2017/04/10 11:46:21 sthen Exp $
+# $OpenBSD: Makefile,v 1.23 2017/07/26 22:45:24 sthen Exp $
 
 COMMENT=	GUI widget library used in MakeHuman
 
 DISTNAME=	mhgui-0.2
 CATEGORIES=	graphics
-REVISION=	3
+REVISION=	4
 
 SHARED_LIBS +=  mhgui                1.0      # unknown
 
@@ -14,7 +14,7 @@ HOMEPAGE=	http://www.dedalo-3d.com/
 PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += GL GLU ICE SM X11 Xdamage Xext Xfixes Xi Xmu Xt Xxf86vm
-WANTLIB += animorph drm glut m png ${LIBCXX} xcb z
+WANTLIB += animorph drm glut m png ${COMPILER_LIBCXX} xcb z
 WANTLIB += X11-xcb Xrandr Xrender glapi pthread
 WANTLIB += usbhid xcb-dri2 xcb-glx expat
 

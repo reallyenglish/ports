@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.159 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.172 2017/08/24 09:45:23 sthen Exp $
 
 USE_WXNEEDED=	Yes
 
@@ -9,8 +9,9 @@ COMMENT-kde=	optional integration of LibreOffice to the KDE environment
 COMMENT-java=	optional integration of LibreOffice java features
 
 BV=		5.2
-VERSION=	${BV}.4.2
-DISTNAME=	libreoffice-${VERSION}
+VERSION=	${BV}.7.2
+REVISION=	1
+REVISION-main=	6
 DISTNAME=	libreoffice-${VERSION}
 WRKDIST=	${WRKDIR}/libreoffice-${VERSION}
 PKGNAME=	libreoffice-${VERSION}
@@ -19,8 +20,6 @@ PKGNAME-kde=	libreoffice-kde-${VERSION}
 PKGNAME-java=	libreoffice-java-${VERSION}
 CATEGORIES=	editors productivity
 DPB_PROPERTIES=	parallel tag:kde4
-REVISION=	1
-REVISION-java=	2
 
 EPOCH=		0
 
@@ -192,7 +191,7 @@ LIB_DEPENDS-main=x11/gtk+2 \
 		textproc/redland \
 		textproc/hunspell
 
-WANTLIB-main=	${LIBECXX} gdk-x11-2.0>=400.14 gtk-x11-2.0>=400.14 \
+WANTLIB-main=	${COMPILER_LIBCXX} gdk-x11-2.0>=400.14 gtk-x11-2.0>=400.14 \
 		xslt>=3 curl>=7 neon>=24 pq>=2 \
 		icuuc>=0 icui18n \
 		rdf>=0
@@ -206,7 +205,7 @@ WANTLIB-main+=	ICE SM X11 Xcomposite Xcursor Xdamage \
 WANTLIB-main+=	hunspell-1.6
 WANTLIB-main+=	${MODPY_WANTLIB}
 WANTLIB-main+=	clucene-contribs-lib clucene-core clucene-shared
-WANTLIB-main+=	cups exslt gcrypt gpg-error lcms2
+WANTLIB-main+=	cups exslt lcms2
 WANTLIB-main+=	nspr4 nss3 plc4 plds4 smime3 softokn3 ssl3
 WANTLIB-main+=	png raptor2
 WANTLIB-main+=	lber ldap
@@ -219,6 +218,7 @@ WANTLIB-main+=	poppler
 
 RUN_DEPENDS-main=	devel/desktop-file-utils \
 			devel/libexecinfo \
+			devel/xdg-utils \
 			graphics/glew \
 			misc/shared-mime-info \
 			security/nss \
@@ -233,7 +233,7 @@ LIB_DEPENDS-kde=	x11/kde4/libs \
 			${MODGCC4_CPPLIBDEP}
 WANTLIB-kde+=		ICE SM Xext icuuc
 WANTLIB-kde+=		GL GLEW GLU
-WANTLIB-kde+=		X11 ${LIBECXX} glib-2.0 intl m pthread
+WANTLIB-kde+=		X11 ${COMPILER_LIBCXX} glib-2.0 intl m pthread
 WANTLIB-kde+=		QtCore QtGui QtNetwork kdecore kdeui kfile kio
 
 .include <bsd.port.arch.mk>
@@ -248,7 +248,7 @@ RUN_DEPENDS-java=	${MODJAVA_RUN_DEPENDS} \
 			databases/db/v4,-java \
 			editors/libreoffice \
 			java/javaPathHelper
-WANTLIB-java=		c ${LIBECXX} m pthread
+WANTLIB-java=		c ${COMPILER_LIBCXX} m pthread
 
 USE_GMAKE=	Yes
 NO_TEST=	Yes
@@ -273,14 +273,9 @@ CONFIGURE_ARGS+=\
 		--disable-dbus \
 		--disable-epm \
 		--disable-fetch-external \
-		--disable-gconf \
-		--disable-gnome-vfs \
-		--disable-lockdown \
 		--disable-odk \
-		--disable-randr-link \
 		--disable-firebird-sdbc \
 		--disable-mergelibs \
-		--disable-packagekit \
 		--disable-dependency-tracking \
 		--disable-online-update \
 		--disable-orcus \
@@ -308,7 +303,6 @@ CONFIGURE_ARGS+=\
 		--with-system-jpeg \
 		--with-system-lcms2 \
 		--with-system-libpng \
-		--with-system-mesa-headers \
 		--with-system-neon \
 		--with-system-nss \
 		--with-system-openldap \
@@ -375,7 +369,8 @@ pre-patch:
 	touch ${WRKSRC}/src.downloaded ${WRKSRC}/autogen.lastrun
 
 pre-configure:
-	${SUBST_CMD} ${WRKSRC}/configure
+	${SUBST_CMD} ${WRKSRC}/configure ${WRKSRC}/shell/source/unix/exec/shellexec.cxx \
+		${WRKSRC}/shell/source/unix/misc/senddoc.sh
 
 post-install:
 	${INSTALL_SCRIPT} ${FILESDIR}/soffice.sh ${PREFIX}/bin/soffice

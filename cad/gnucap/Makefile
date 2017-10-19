@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.12 2017/05/01 19:29:26 espie Exp $
+# $OpenBSD: Makefile,v 1.15 2017/07/26 22:45:16 sthen Exp $
 
 # gcc spins compiling d_mos7
 NOT_FOR_ARCHS=		m88k
@@ -6,7 +6,7 @@ NOT_FOR_ARCHS=		m88k
 COMMENT=		Gnu Circuit Analysis Package
 
 DISTNAME=		gnucap-0.35
-REVISION=		2
+REVISION =		4
 CATEGORIES=		cad
 
 HOMEPAGE=		http://www.gnucap.org/
@@ -14,7 +14,7 @@ HOMEPAGE=		http://www.gnucap.org/
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=		c m ${LIBCXX} readline termcap
+WANTLIB=		c m ${COMPILER_LIBCXX} readline termcap
 
 MASTER_SITES=		${HOMEPAGE}dist/ \
 			http://www.geda.seul.org/dist/

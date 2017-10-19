@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.50 2017/06/05 20:46:51 sebastia Exp $
+# $OpenBSD: Makefile,v 1.53 2017/09/19 05:34:00 landry Exp $
 
      SUBDIR =
      SUBDIR += emerillon
@@ -39,12 +39,17 @@
      SUBDIR += p5-Geo-Functions
      SUBDIR += p5-Geo-Inverse
      SUBDIR += p5-Geo-METAR
+     SUBDIR += p5-Geo-Parse-OSM
      SUBDIR += p5-Geo-StreetAddress-US
      SUBDIR += p5-Geo-TigerLine
      SUBDIR += p5-Geo-UK-Postcode-Regex
      SUBDIR += p5-Geography-Countries
+     SUBDIR += pdal
+     SUBDIR += pgpointcloud
      SUBDIR += pgrouting
      SUBDIR += postgis
+     SUBDIR += py-laspy
+     SUBDIR += py-laspy,python3
      SUBDIR += py-planet
      SUBDIR += py-planet,python3
      SUBDIR += py-proj

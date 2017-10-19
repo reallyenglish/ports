@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.55 2017/06/12 21:31:20 schwarze Exp $
+# $OpenBSD: Makefile,v 1.58 2017/08/11 19:04:49 sthen Exp $
 
 # archs with atomic ops
 ONLY_FOR_ARCHS-server=	alpha aarch64 amd64 i386 mips64 mips64el powerpc sparc64
@@ -8,12 +8,11 @@ COMMENT-main=	multithreaded SQL database (client)
 COMMENT-server=	multithreaded SQL database (server)
 COMMENT-tests=	multithreaded SQL database (regression test suite/benchmark)
 
-VERSION=	10.0.30
+VERSION=	10.0.32
 DISTNAME=	mariadb-${VERSION}
 PKGNAME-main=	mariadb-client-${VERSION}
 PKGNAME-server=	mariadb-server-${VERSION}
 PKGNAME-tests= 	mariadb-tests-${VERSION}
-REVISION=	3
 EPOCH=		1
 
 CATEGORIES=	databases
@@ -31,7 +30,7 @@ MAINTAINER=	Brad Smith <brad@comstyle.com>
 # GPLv2 and LGPLv2.1
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	c crypto m pthread ssl ${LIBCXX} z
+WANTLIB=	c crypto m pthread ssl ${COMPILER_LIBCXX} z
 WANTLIB-main=	curses readline ${WANTLIB}
 WANTLIB-server=	mysqlclient ${WANTLIB}
 WANTLIB-tests=	mysqlclient ${WANTLIB}

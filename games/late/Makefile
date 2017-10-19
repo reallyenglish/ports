@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.16 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.18 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT=	puzzle game resembling the arcade game Qix
 DISTNAME=	late-0.1.0
-REVISION=	1
+REVISION=	2
 EXTRACT_SUFX=	.tar.bz2
 CATEGORIES=	games x11
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=late/}
@@ -11,7 +11,7 @@ HOMEPAGE=	http://late.sourceforge.net/
 
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
-WANTLIB=		SDL X11 Xext c m pthread pthread-stubs ${LIBCXX} \
+WANTLIB=		SDL X11 Xext c m pthread pthread-stubs ${COMPILER_LIBCXX} \
 			usbhid xcb SDL_image
 
 LIB_DEPENDS=	devel/sdl-image

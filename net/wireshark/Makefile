@@ -1,20 +1,18 @@
-# $OpenBSD: Makefile,v 1.52 2017/06/02 01:52:01 sthen Exp $
-
-# XXX should add pledge to dumpcap.
+# $OpenBSD: Makefile,v 1.59 2017/10/11 14:42:34 sthen Exp $
 
 BROKEN-alpha =	.got subsegment exceeds 64K (size 101480)
 BROKEN-sparc64 = cc: Internal error: Illegal instruction (program cc1)
 
 COMMENT-main =	graphical network protocol analyzer, Qt user-interface
-COMMENT-gtk =	graphical network protocol analyzer, Gtk+3 user-interface
 COMMENT-text =	network protocol analyzer
+COMMENT-gtk =	graphical network protocol analyzer, Gtk+3 user-interface
 
-WVER =		2.2.7
+WVER =		2.4.2
 PORTROACH =	limitw:1,even
 DISTNAME =	wireshark-${WVER}
 PKGNAME-main =	wireshark-${WVER}
-PKGNAME-gtk =	wireshark-gtk-${WVER}
 PKGNAME-text =	tshark-${WVER}
+PKGNAME-gtk =	wireshark-gtk-${WVER}
 
 SHARED_LIBS +=	wscodecs             0.0      # 0.0
 SHARED_LIBS +=	wsutil               3.0      # 5.0
@@ -25,9 +23,7 @@ CATEGORIES =	net security x11
 
 HOMEPAGE =	http://www.wireshark.org/
 
-EXTRACT_SUFX =	.tar.bz2
-
-USE_GMAKE =	Yes
+EXTRACT_SUFX =	.tar.xz
 
 # Mostly GPLv2 or later. Some files are less restrictive.
 # tools/pidl is GPLv3 or later. See COPYING.
@@ -48,15 +44,17 @@ MODLUA_RUNDEP =	No
 MODPY_RUNDEP =	No
 
 WANTLIB-text =	${cWANTLIB} ${MODLUA_WANTLIB}
-WANTLIB-text +=	GeoIP cares gcrypt gmodule-2.0 gnutls gpg-error smi ssh
+WANTLIB-text += GeoIP cares gcrypt gmodule-2.0 gnutls gpg-error lz4
+WANTLIB-text += nghttp2 smi spandsp snappy ssh xml2
 
-WANTLIB-main =	${cWANTLIB} ${WANTLIB}
-WANTLIB-main +=	pthread wireshark wiretap wscodecs wsutil
-WANTLIB-main +=	Qt5Core Qt5Gui Qt5Multimedia Qt5PrintSupport Qt5Widgets
+WANTLIB-main =	${cWANTLIB} ${COMPILER_LIBCXX}
+WANTLIB-main += pthread wireshark wiretap wscodecs wsutil
+WANTLIB-main += Qt5Core Qt5Gui Qt5Multimedia Qt5PrintSupport Qt5Widgets
 
-WANTLIB-gtk =	${cWANTLIB} wireshark wiretap wscodecs wsutil
-WANTLIB-gtk +=	cairo gdk_pixbuf-2.0 gdk-3 gio-2.0 gobject-2.0 gtk-3
-WANTLIB-gtk +=	pango-1.0 pangocairo-1.0 portaudio 
+WANTLIB-gtk =	${cWANTLIB}
+WANTLIB-gtk += cairo gdk-3 gdk_pixbuf-2.0 gio-2.0 gobject-2.0 gtk-3
+WANTLIB-gtk += pango-1.0 pangocairo-1.0 portaudio wireshark wiretap
+WANTLIB-gtk += wscodecs wsutil
 
 MASTER_SITES =		http://www.wireshark.org/download/src/all-versions/ \
 			http://www.wireshark.org/download/automated/src/
@@ -69,20 +67,25 @@ BUILD_DEPENDS +=	devel/bison \
 			textproc/libxslt \
 			devel/xdg-utils \
 			textproc/asciidoc
-RUN_DEPENDS-main =	${RUN_DEPENDS} \
-			devel/desktop-file-utils \
+RUN_DEPENDS =		devel/desktop-file-utils \
 			devel/xdg-utils \
 			misc/shared-mime-info \
 			x11/gtk+3,-guic
+RUN_DEPENDS-text =	# empty
 
 LIB_DEPENDS-text =	${MODLUA_LIB_DEPENDS} \
+			archivers/lz4 \
+			archivers/snappy \
 			devel/glib2 \
 			net/libcares \
 			net/libsmi \
 			net/GeoIP  \
 			security/gnutls \
 			security/libgcrypt \
-			security/libssh
+			security/libssh \
+			telephony/spandsp \
+			textproc/libxml \
+			www/nghttp2
 
 LIB_DEPENDS-main +=	${LIB_DEPENDS} \
 			tshark-${WVER}:${BUILD_PKGPATH:S/,$//},-text \
@@ -100,7 +103,8 @@ LIB_DEPENDS-gtk +=	tshark-${WVER}:${BUILD_PKGPATH:S/,$//},-text \
 
 MODULES +=		devel/cmake
 CONFIGURE_STYLE =	cmake
-CONFIGURE_ARGS =	-DDUMPCAP_INST_VALS=suid \
+CONFIGURE_ARGS =	-DBUILD_wireshark_gtk=true \
+			-DDUMPCAP_INST_VALS=suid \
 			-DCMAKE_INSTALL_MANDIR=${TRUEPREFIX}/man \
 			-DCOMPILER_CAN_HANDLE_SSE4_2=false \
 			-DSH_EXECUTABLE=/bin/ksh

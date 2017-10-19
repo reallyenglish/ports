@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.22 2017/04/10 11:45:24 sthen Exp $
+# $OpenBSD: Makefile,v 1.24 2017/07/26 22:45:16 sthen Exp $
 
 COMMENT=		GUI client for MySQL
 
@@ -6,13 +6,14 @@ VERSION=		1.0.2
 DISTNAME=		mysqlcc-${VERSION}-src
 PKGNAME=		mysqlcc-${VERSION}
 CATEGORIES=		databases
+REVISION=		0
 
 HOMEPAGE=		http://mysqlcc.sourceforge.net/
 
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += X11 Xext c m pthread ${LIBCXX} z
+WANTLIB += X11 Xext c m pthread ${COMPILER_LIBCXX} z
 WANTLIB += lib/mysql/mysqlclient
 
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=mysqlcc/}

@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.57 2017/05/19 09:19:48 landry Exp $
+# $OpenBSD: Makefile,v 1.60 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT-main =	translator library for geospatial data formats
 COMMENT-python =python bindings and utilities for GDAL
 COMMENT-perl =	perl bindings for GDAL
 
-V =		2.2.0
+V =		2.2.1
 DISTNAME =	gdal-${V}
 DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
 		gdalautotest-${V}${EXTRACT_SUFX}
@@ -12,6 +12,9 @@ DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
 PKGNAME-main =	${DISTNAME}
 PKGNAME-python =py-${DISTNAME}
 PKGNAME-perl =	p5-Geo-GDAL-${V}
+REVISION-main =	0
+REVISION-perl =	0
+REVISION-python =	0
 
 SHARED_LIBS =	gdal 29.0 #22.0
 CATEGORIES =	geo devel
@@ -48,13 +51,13 @@ LIB_DEPENDS-main =	${LIB_DEPENDS} \
 			devel/proj \
 			devel/geotiff
 
-WANTLIB-main =		${WANTLIB} c expat m ${LIBCXX} z tiff openjp2 ssl crypto qhull \
+WANTLIB-main =		${WANTLIB} c expat m ${COMPILER_LIBCXX} z tiff openjp2 ssl crypto qhull \
 			curl pq geos geos_c png gif jpeg jasper json-c geotiff \
 			proj pthread freexl pcre spatialite sqlite3 xml2 lzma nghttp2 webp
 
 
 LIB_DEPENDS-python =	${PKGNAME}:${BASE_PKGPATH},-main
-WANTLIB-python =	${MODPY_WANTLIB} gdal m pthread ${LIBCXX}
+WANTLIB-python =	${MODPY_WANTLIB} gdal m pthread ${COMPILER_LIBCXX}
 
 LIB_DEPENDS-perl =	${PKGNAME}:${BASE_PKGPATH},-main
 WANTLIB-perl =		perl gdal # uses perl ABI

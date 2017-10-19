@@ -1,11 +1,12 @@
-# $OpenBSD: Makefile,v 1.28 2017/05/10 12:37:37 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.37 2017/09/19 11:51:50 ajacoutot Exp $
 
 # XXX change proxy settings without network-manager?
 
 COMMENT=		GNOME control center
 
 GNOME_PROJECT=		gnome-control-center
-GNOME_VERSION=		3.24.2
+GNOME_VERSION=		3.24.3
+REVISION=		1
 
 CATEGORIES=		x11
 
@@ -18,7 +19,7 @@ WANTLIB += accountsservice atk-1.0 atk-bridge-2.0 atspi avahi-common
 WANTLIB += c cairo cairo-gobject canberra canberra-gtk3 colord
 WANTLIB += colord-gtk colordprivate crack crypto cups unistring
 WANTLIB += dbus-1 dbus-glib-1 drm epoxy execinfo expat ffi fontconfig
-WANTLIB += freetype gbm gcrypt gdbm gdk-3 gdk_pixbuf-2.0 gio-2.0
+WANTLIB += freetype gbm gcrypt gdk-3 gdk_pixbuf-2.0 gio-2.0
 WANTLIB += glapi glib-2.0 gmodule-2.0 gmp gnome-desktop-3 goa-1.0
 WANTLIB += goa-backend-1.0 gobject-2.0 gpg-error graphite2 grilo-0.3
 WANTLIB += gstaudio-1.0 gstbase-1.0 gstreamer-1.0 gsttag-1.0 gstvideo-1.0
@@ -29,8 +30,9 @@ WANTLIB += nettle ogg orc-0.4 p11-kit pango-1.0 pangocairo-1.0
 WANTLIB += pangoft2-1.0 pcre pixman-1 png polkit-gobject-1
 WANTLIB += pthread-stubs pulse pulse-mainloop-glib pwquality rest-0.7
 WANTLIB += sasl2 secret-1 smbclient sndfile soup-2.4 soup-gnome-2.4
-WANTLIB += sqlite3 ssl ${LIBCXX} tasn1 telepathy-glib upower-glib
+WANTLIB += sqlite3 ssl ${COMPILER_LIBCXX} tasn1 telepathy-glib upower-glib
 WANTLIB += vorbis vorbisenc vorbisfile webkit2gtk-4.0 xcb xcb-dri2
+WANTLIB += EGL GL GLESv2 gstallocators-1.0 gstbadallocators-1.0
 WANTLIB += xcb-glx xcb-render xcb-shm xcb-xfixes xml2 z
 WANTLIB += heimdal/lib/heimsqlite
 
@@ -71,7 +73,8 @@ RUN_DEPENDS +=		x11/gnome/color-manager
 RUN_DEPENDS +=		x11/gnome/power-manager
 
 # needed for gnome-printers-panel
-RUN_DEPENDS +=		print/cups-pk-helper
+RUN_DEPENDS +=		print/cups-pk-helper \
+			print/system-config-printer
 
 # gkbd-keyboard-display
 RUN_DEPENDS +=		x11/gnome/libgnomekbd
@@ -104,5 +107,7 @@ pre-configure:
 		AUTOMAKE_VERSION=${AUTOMAKE_VERSION} \
 		autoreconf -fi
 ###
+
+	${SUBST_CMD} ${WRKSRC}/panels/printers/pp-host.c
 
 .include <bsd.port.mk>

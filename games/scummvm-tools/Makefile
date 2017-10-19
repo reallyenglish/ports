@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.27 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.29 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT=	collection of various tools for scummvm
 V=		1.9.0
 DISTNAME=	scummvm-tools-${V}
 CATEGORIES=	games
 MASTER_SITES=	http://www.scummvm.org/frs/scummvm-tools/${V}/
+REVISION=	0
 
 HOMEPAGE=	http://www.scummvm.org/
 
@@ -13,7 +14,7 @@ MAINTAINER=	Jonathan Gray <jsg@openbsd.org>
 # GPLv2+
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=		c freetype iconv m ogg ${LIBCXX} z FLAC mad png pthread vorbis \
+WANTLIB=		c freetype iconv m ogg ${COMPILER_LIBCXX} z FLAC mad png pthread vorbis \
 			vorbisenc vorbisfile \
 			wx_base_net wx_base wx_base_odbc wx_base_xml \
 			wx_gtk2_adv wx_gtk2_aui wx_gtk2_core \

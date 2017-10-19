@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.14 2017/06/13 11:32:01 sthen Exp $
+# $OpenBSD: Makefile,v 1.19 2017/10/13 16:27:13 sthen Exp $
 
 COMMENT=	tty-based e-mail client, Mutt with patches
 
 GH_ACCOUNT=	neomutt
 GH_PROJECT=	neomutt
-GH_TAGNAME=	neomutt-20170609
+GH_TAGNAME=	neomutt-20171013
 DISTNAME=	${GH_TAGNAME}
 
 CATEGORIES=	mail
@@ -35,8 +35,7 @@ CONFIGURE_STYLE= autoconf
 BUILD_DEPENDS+=	${MODGNU_AUTOCONF_DEPENDS} \
 		${MODGNU_AUTOMAKE_DEPENDS} \
 		devel/gettext-tools
-CONFIGURE_ARGS+= --enable-dotlock \
-		--disable-fcntl \
+CONFIGURE_ARGS+= --disable-fcntl \
 		--enable-flock \
 		--disable-notmuch \
 		--mandir=${PREFIX}/man \
@@ -76,7 +75,7 @@ CONFIGURE_ARGS+= --without-kyotocabinet \
 		--with-qdbm
 .else
 LIB_DEPENDS+=	databases/kyotocabinet
-WANTLIB+=	kyotocabinet pthread
+WANTLIB+=	kyotocabinet
 CONFIGURE_ARGS+= --with-kyotocabinet \
 		--without-qdbm
 .endif

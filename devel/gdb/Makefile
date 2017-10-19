@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.49 2017/05/25 22:59:13 sthen Exp $
+# $OpenBSD: Makefile,v 1.51 2017/07/26 22:45:17 sthen Exp $
 
 # adjust lang/ocaml if gdb is ported to aarch64
 NOT_FOR_ARCHS=	aarch64
@@ -7,6 +7,7 @@ COMMENT=	GNU debugger
 CATEGORIES=	devel
 
 DISTNAME=	gdb-7.12.1
+REVISION=	0
 
 HOMEPAGE=	https://www.gnu.org/software/gdb/
 
@@ -21,7 +22,7 @@ EXTRACT_SUFX=	.tar.xz
 
 MODGNU_CONFIG_GUESS_DIRS=	${WRKSRC} ${WRKSRC}/gdb
 
-WANTLIB = c expat kvm m ncurses pthread ${MODPY_WANTLIB} ${LIBCXX} util
+WANTLIB = c expat kvm m ncurses pthread ${MODPY_WANTLIB} ${COMPILER_LIBCXX} util
 
 #SEPARATE_BUILD = Yes
 CONFIGURE_STYLE=gnu

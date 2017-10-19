@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/21 19:44:31 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.7 2017/08/17 14:29:52 visa Exp $
 
 # Memory hog, stuck for days on the same file (configoptions.cpp) during build.
 # XXX check with different optimizer level? see doc/install.doc
@@ -9,6 +9,7 @@ COMMENT=	GUI front-end for doxygen
 
 VERSION=	1.8.13
 DISTNAME=	doxygen-${VERSION}.src
+REVISION =	1
 PKGNAME=	doxygen-gui-${VERSION}
 
 CATEGORIES=	devel textproc
@@ -20,7 +21,7 @@ MAINTAINER=	Rafael Sadowski <rafael@sizeofvoid.org>
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += QtGui QtXml c m ${LIBCXX}
+WANTLIB += QtGui QtXml c m ${COMPILER_LIBCXX}
 
 MASTER_SITES=	http://ftp.stack.nl/pub/users/dimitri/ \
 		ftp://ftp.stack.nl/pub/users/dimitri/
@@ -34,8 +35,7 @@ MODULES=	devel/cmake \
 MODPY_RUNDEP=	No
 
 .if ${MACHINE_ARCH} == "mips64" || ${MACHINE_ARCH} == "mips64el"
-# ld(1) fails
-CONFIGURE_ARGS+=-Denglish_only:Bool=ON
+CXXFLAGS+=	-mxgot
 .endif
 
 BUILD_DEPENDS+=	devel/bison

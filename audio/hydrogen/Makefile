@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.19 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT=		software drum machine
 
 DISTNAME=		hydrogen-0.9.4
-REVISION=		3
+REVISION=		4
 CATEGORIES=		audio
 
 HOMEPAGE=		http://www.hydrogen-music.org/
@@ -11,7 +11,7 @@ HOMEPAGE=		http://www.hydrogen-music.org/
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c m ogg pthread sndio ${LIBCXX} QtGui QtNetwork QtXml sndfile>=1
+WANTLIB += c m ogg pthread sndio ${COMPILER_LIBCXX} QtGui QtNetwork QtXml sndfile>=1
 WANTLIB += FLAC>=8 FLAC++>=7 jack archive lrdf
 
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=hydrogen/}

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.95 2017/04/10 11:46:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.99 2017/09/28 20:23:35 naddy Exp $
 
 COMMENT-main=		bad elements for GStreamer
 COMMENT-neon=		neon element for GStreamer (plugins-bad)
@@ -12,9 +12,9 @@ PKGNAME-main=		gstreamer-plugins-bad-${V}
 PKGNAME-neon=		gstreamer-neon-${V}
 PKGNAME-mjpeg=		gstreamer-mjpeg-${V}
 
-REVISION-main=		25
-REVISION-mjpeg=		10
-REVISION-neon=		11
+REVISION-main=		28
+REVISION-mjpeg=		13
+REVISION-neon=		14
 
 SHARED_LIBS +=  gstphotography-0.10       1.0 # 23.0
 SHARED_LIBS +=  gstsignalprocessor-0.10   1.0 # 23.0
@@ -28,7 +28,7 @@ MASTER_SITES =		${MASTER_SITE_GST:=gst-plugins-bad/}
 
 MODULES =		devel/dconf
 
-WANTLIB += glib-2.0 gmodule-2.0 gobject-2.0 gthread-2.0 xml2
+WANTLIB += glib-2.0 gmodule-2.0 gobject-2.0 gthread-2.0 iconv intl xml2
 WANTLIB += lzma pthread z m pcre gstreamer-0.10 ffi
 
 WANTLIB-main += ${WANTLIB}
@@ -41,14 +41,14 @@ WANTLIB-main += gstpbutils-0.10 gstriff-0.10 gstrtp-0.10 gstsdp-0.10
 WANTLIB-main += gsttag-0.10 gstvideo-0.10 jasper jpeg lrdf mms
 WANTLIB-main += mpcdec nghttp2 opus orc-0.4 pango-1.0 pangocairo-1.0 pangoft2-1.0
 WANTLIB-main += pixman-1 png pthread-stubs raptor2 rsvg-2
-WANTLIB-main += sndfile sndio spandsp ssl ${LIBCXX} tiff usbhid vpx xcb
+WANTLIB-main += sndfile sndio spandsp ssl ${COMPILER_LIBCXX} tiff usbhid vpx xcb
 WANTLIB-main += xcb-render xcb-shm xslt harfbuzz
 WANTLIB-main += yajl FLAC graphite2 ogg vorbis vorbisenc
 
 WANTLIB-neon += ${WANTLIB} crypto expat gstbase-0.10 neon proxy ssl
 
 WANTLIB-mjpeg += ${WANTLIB}
-WANTLIB-mjpeg += gstbase-0.10 mjpegutils mpeg2encpp mplex2 ${LIBCXX}
+WANTLIB-mjpeg += gstbase-0.10 mjpegutils mpeg2encpp mplex2 ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS=		audio/ladspa \
 			graphics/libexif
@@ -73,8 +73,7 @@ LIB_DEPENDS-main=	${LIB_DEPENDS} \
 			telephony/spandsp \
 			textproc/liblrdf \
 			x11/gnome/librsvg
-RUN_DEPENDS-main=	${MODGETTEXT_RUN_DEPENDS} \
-			${MODDCONF_RUN_DEPENDS}
+RUN_DEPENDS-main=	${MODDCONF_RUN_DEPENDS}
 
 LIB_DEPENDS-neon=	${LIB_DEPENDS} \
 			net/neon

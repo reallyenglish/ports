@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.3 2017/05/30 21:59:34 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.6 2017/07/13 08:40:06 robert Exp $
 
 COMMENT=		standard MATE themes
 
 MATE_PROJECT=		mate-themes
-MATE_VERSION=		3.22.9
+MATE_VERSION=		3.22.13
 
 MASTER_SITES=		http://pub.mate-desktop.org/releases/themes/${MATE_VERSION:C/^([0-9]+\.[0-9]+).*/\1/}/
 
@@ -12,7 +12,8 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MODULES=		x11/gnome
 
-BUILD_DEPENDS=		x11/gtk+3
+BUILD_DEPENDS=		x11/gtk+2 \
+			x11/gtk+3
 
 MODGNOME_TOOLS=		gtk-update-icon-cache
 

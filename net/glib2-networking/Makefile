@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.46 2017/04/12 12:48:20 sthen Exp $
+# $OpenBSD: Makefile,v 1.48 2017/07/26 22:45:27 sthen Exp $
 
 COMMENT=		network-related gio modules for GLib
 
 GNOME_VERSION=		2.50.0
 GNOME_PROJECT=		glib-networking
 PKGNAME=		glib2-networking-${GNOME_VERSION}
-REVISION=		2
+REVISION=		3
 
 CATEGORIES=		net
 
@@ -18,7 +18,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += c ffi gio-2.0 glib-2.0 gmodule-2.0 gmp gnutls gobject-2.0
 WANTLIB += hogweed iconv idn2 intl m nettle p11-kit pcre proxy
-WANTLIB += pthread ${LIBCXX} tasn1 unistring z
+WANTLIB += pthread ${COMPILER_LIBCXX} tasn1 unistring z
 
 MODULES=		x11/gnome
 

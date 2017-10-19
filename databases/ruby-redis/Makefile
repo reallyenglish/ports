@@ -1,15 +1,14 @@
-# $OpenBSD: Makefile,v 1.25 2017/02/23 09:05:08 dcoppa Exp $
+# $OpenBSD: Makefile,v 1.28 2017/09/16 14:26:26 dcoppa Exp $
 
 COMMENT =	client library for the Redis key-value store
 
 VERSION =	3.3.3
-EPOCH =		0
+REVISION =	0
+EPOCH =		1
 DISTNAME =	redis-${VERSION}
 CATEGORIES =	databases
 
 HOMEPAGE =	http://redis-rb.keyvalue.org/
-
-MAINTAINER =	David Coppa <dcoppa@openbsd.org>
 
 # BSD
 PERMIT_PACKAGE_CDROM =	Yes
@@ -31,7 +30,7 @@ pre-configure:
 	${SUBST_CMD} ${WRKSRC}/test/publish_subscribe_test.rb
 
 post-install:
-	@find ${PREFIX}/${GEM_LIB}/ -name '.git*' -print0 | xargs -0 rm
+	@find ${PREFIX}/${GEM_LIB}/ -name '.git*' -print0 | xargs -r0 rm
 	@rm ${PREFIX}/${GEM_LIB}/gems/${DISTNAME}/test/*.beforesubst
 
 .include <bsd.port.mk>

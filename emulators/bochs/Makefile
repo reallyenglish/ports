@@ -1,17 +1,18 @@
-# $OpenBSD: Makefile,v 1.69 2017/04/23 13:25:29 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.71 2017/07/26 22:45:19 sthen Exp $
 
 COMMENT=	x86 machine simulator
 
 DISTNAME=	bochs-2.6.9
 CATEGORIES=	emulators
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=bochs/}
+REVISION=	0
 
 HOMEPAGE=	http://bochs.sourceforge.net/
 
 # LGPLv2.1+ and MIT
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	c m pthread ${LIBCXX} termlib
+WANTLIB=	c m pthread ${COMPILER_LIBCXX} termlib
 
 CONFIGURE_STYLE= gnu
 CONFIGURE_ARGS=	--enable-all-optimizations \

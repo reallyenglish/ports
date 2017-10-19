@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.14 2017/04/30 14:36:00 benoit Exp $
+# $OpenBSD: Makefile,v 1.17 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT =		data recovery tool
 
 DISTNAME =		ddrescue-1.22
+REVISION =		1
 
 CATEGORIES =		sysutils
 
@@ -11,7 +12,7 @@ HOMEPAGE =		https://www.gnu.org/software/ddrescue/ddrescue.html
 # GPLv2+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c m ${LIBCXX}
+WANTLIB =		c m ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_GNU:=ddrescue/}
 

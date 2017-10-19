@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.13 2017/05/31 08:08:16 espie Exp $
+# $OpenBSD: Makefile,v 1.15 2017/07/26 22:45:26 sthen Exp $
 
 COMMENT=		C++ bindings for GStreamer
 
 V=			1.8.0
 DISTNAME=		gstreamermm-${V}
 PKGNAME=		gstreamer1mm-${V}
-REVISION=		2
+REVISION=		3
 
 SHARED_LIBS +=  gstreamermm-1.0      1.0      # 1.0
 
@@ -16,7 +16,7 @@ WANTLIB += gobject-2.0 gstallocators-1.0 gstapp-1.0 gstaudio-1.0
 WANTLIB += gstbase-1.0 gstcheck-1.0 gstcontroller-1.0 gstfft-1.0
 WANTLIB += gstnet-1.0 gstpbutils-1.0 gstreamer-1.0 gstriff-1.0
 WANTLIB += gstrtp-1.0 gstrtsp-1.0 gstsdp-1.0 gsttag-1.0 gstvideo-1.0
-WANTLIB += iconv intl m orc-0.4 pcre pthread sigc-2.0 z $(LIBECXX)
+WANTLIB += iconv intl m orc-0.4 pcre pthread sigc-2.0 z $(COMPILER_LIBCXX)
 
 
 LIB_DEPENDS=		devel/glib2mm \

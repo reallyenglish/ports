@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.61 2017/04/10 11:46:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.71 2017/09/29 22:05:30 naddy Exp $
 
 COMMENT-main=		authentication library for courier
 COMMENT-ldap=		ldap authentication module for courier-authLib
@@ -6,7 +6,8 @@ COMMENT-mysql=		mysql authentication module for courier-authLib
 COMMENT-pgsql=		pgsql authentication module for courier-authLib
 COMMENT-userdb=		userdb authentication module for courier-authLib
 
-DISTNAME=		courier-authlib-0.67.0
+DISTNAME=		courier-authlib-0.68.0
+REVISION=		2
 PKGNAME-main=		${DISTNAME}
 PKGNAME-ldap=		${DISTNAME:S/lib-/lib-ldap-/}
 PKGNAME-mysql=		${DISTNAME:S/lib-/lib-mysql-/}
@@ -37,7 +38,10 @@ MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=courier/}
 EXTRACT_SUFX=		.tar.bz2
 
 USE_GMAKE=		Yes
-CONFIGURE_STYLE=	gnu
+AUTOCONF_VERSION=	2.69
+# only libs/rfc822/configure.ac is patched
+AUTOCONF_DIR=		${WRKSRC}/libs/rfc822
+CONFIGURE_STYLE=	autoconf
 
 CONFIGURE_ENV=		LIBS="-L${LOCALBASE}/lib" \
 			LDFLAGS="-L${LOCALBASE}/lib" \
@@ -68,44 +72,48 @@ CONFIGURE_ARGS+=	--enable-static \
 
 RUN_DEPENDS-main=	lang/expect
 BUILD_DEPENDS=		lang/expect \
-			mail/courier-unicode
+			mail/courier-unicode>=2.0
 
 DOCS=			COPYING COPYING.GPL INSTALL NEWS README
 
-MODULES=		devel/gettext \
-			textproc/intltool
+MODULES=		textproc/intltool
 
 MULTI_PACKAGES=		-main -ldap -mysql -pgsql -userdb
 PSEUDO_FLAVORS=		no_ldap no_mysql no_pgsql no_userdb
 FLAVOR?=
 
-WANTLIB-main=		c ltdl pthread sqlite3
+WANTLIB-main=		c ltdl m pthread sqlite3 ${COMPILER_LIBCXX}
 
 LIB_DEPENDS-main=	databases/sqlite3 \
 			devel/libtool,-ltdl
 
+# statically linked
+WANTLIB-main+=		iconv idn intl
+LIB_DEPENDS-main+=	devel/gettext \
+			devel/libidn
+
 WANTLIB-ldap=		crypto ssl courierauthcommon courierauth \
-			ldap-2.4 lber-2.4 sasl2
+			m ldap-2.4 lber-2.4 sasl2 ${COMPILER_LIBCXX}
 RUN_DEPENDS-ldap=
 LIB_DEPENDS-ldap=	${BUILD_PKGPATH} \
 			databases/openldap \
 			security/cyrus-sasl2
 
 WANTLIB-mysql=		crypto m ssl z courierauthcommon courierauth \
-			mysqlclient pthread ${LIBCXX}
+			mysqlclient pthread ${COMPILER_LIBCXX}
 RUN_DEPENDS-mysql=
 LIB_DEPENDS-mysql=	${BUILD_PKGPATH} \
 			databases/mariadb
 
-WANTLIB-pgsql=		m courierauthcommon courierauth pq crypto ssl
+WANTLIB-pgsql=		m courierauthcommon courierauth pq crypto ssl \
+			${COMPILER_LIBCXX}
 RUN_DEPENDS-pgsql=
 LIB_DEPENDS-pgsql=	${BUILD_PKGPATH} \
 			databases/postgresql
 
 WANTLIB-userdb=		c courierauthcommon courierauth \
-			gdbm>=3 ${MODGETTEXT_WANTLIB}
+			gdbm>=3 iconv intl
 LIB_DEPENDS-userdb=	${BUILD_PKGPATH} \
-			${MODGETTEXT_LIB_DEPENDS} \
 			databases/gdbm
 
 .include <bsd.port.arch.mk>
@@ -142,6 +150,12 @@ CONFIGURE_ARGS+=	--with-makedatprog=${PREFIX}/libexec/courier-authlib/makedatpro
 CONFIGURE_ARGS+=	--without-authuserdb \
 			--without-makedatprog
 .endif
+
+# avoid triggering autotools cascade after patching configure.ac
+pre-configure:
+	@for d in ${AUTOCONF_DIR}; do \
+	    touch -r $$d/aclocal.m4 $$d/configure.ac; \
+	done
 
 post-install:
 	mv ${PREFIX}/lib/courier-authlib/lib* ${PREFIX}/lib

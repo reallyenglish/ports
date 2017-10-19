@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.5 2017/04/10 11:45:26 sthen Exp $
+# $OpenBSD: Makefile,v 1.7 2017/07/26 22:45:18 sthen Exp $
 
 COMMENT =		testing framework
 DISTNAME =		kyua-cli-0.8
-REVISION =		1
+REVISION =		2
 
 CATEGORIES =		devel
 HOMEPAGE =		https://github.com/jmmv/kyua
@@ -12,7 +12,7 @@ MAINTAINER =		Sergey Bronnikov <estetus@gmail.com>
 # BSD
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += ${MODLUA_WANTLIB} atf-c atf-c++ c lutok m pthread sqlite3 ${LIBCXX}
+WANTLIB += ${MODLUA_WANTLIB} atf-c atf-c++ c lutok m pthread sqlite3 ${COMPILER_LIBCXX}
 
 MASTER_SITES =		https://github.com/jmmv/kyua/releases/download/${DISTNAME}/
 

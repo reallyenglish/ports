@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.32 2017/04/14 12:59:28 sthen Exp $
+# $OpenBSD: Makefile,v 1.38 2017/07/27 09:55:44 sthen Exp $
 
 COMMENT-main =		easy to use LaTeX and ConTeXt editor
 COMMENT-python =	Python scripting for TeXworks
@@ -11,6 +11,10 @@ DISTNAME =		texworks-${V}-r${R}
 PKGNAME-main =		texworks-${V}
 PKGNAME-lua =		texworks-lua-${V}
 PKGNAME-python =	texworks-python-${V}
+
+REVISION-main =		3
+REVISION-lua =		3
+REVISION-python =	3
 
 EPOCH =			0
 
@@ -32,29 +36,33 @@ MODQMAKE_PROJECTS =	plugins-src/TWLuaPlugin/TWLuaPlugin.pro \
 			plugins-src/TWPythonPlugin/TWPythonPlugin.pro \
 			TeXworks.pro
 
+# c++-11 required for poppler
+COMPILER =		gcc
+
+WANTLIB += ${COMPILER_LIBCXX}
 WANTLIB += ICE QtDBus QtGui QtScript QtScriptTools QtXml SM X11
 WANTLIB += Xext Xi Xinerama Xrender c fontconfig freetype hunspell-1.6
-WANTLIB += m poppler-qt4 pthread ${LIBCXX} z
+WANTLIB += m poppler-qt4 pthread z
 
 WANTLIB-lua =	${MODLUA_WANTLIB}
 WANTLIB-lua +=	ICE QtCore QtGui QtXml SM X11 Xext Xi Xinerama Xrender
-WANTLIB-lua +=	fontconfig freetype m ${LIBCXX} pthread
+WANTLIB-lua +=	fontconfig freetype m pthread ${COMPILER_LIBCXX}
 
 WANTLIB-python =  ${MODPY_WANTLIB}
 WANTLIB-python += ICE QtCore QtGui QtXml SM X11 Xext Xi Xinerama Xrender
-WANTLIB-python += fontconfig freetype m ${LIBCXX} pthread
+WANTLIB-python += fontconfig freetype m pthread ${COMPILER_LIBCXX}
 
 MULTI_PACKAGES =	-main -lua -python
 
 MASTER_SITES =		${MASTER_SITE_GOOGLECODE:=texworks/}
 
-LIB_DEPENDS-main =	qt4->=4.8.2:${MODQT4_LIB_DEPENDS} \
+LIB_DEPENDS-main =	${LIB_DEPENDS} \
+			qt4->=4.8.2:${MODQT4_LIB_DEPENDS} \
 			textproc/hunspell \
-			x11/dbus \
 			print/poppler,,-qt4
-LIB_DEPENDS-lua =	${MODQT4_LIB_DEPENDS} \
+LIB_DEPENDS-lua =	${LIB_DEPENDS} \
 			${MODLUA_LIB_DEPENDS}
-LIB_DEPENDS-python =	${MODQT4_LIB_DEPENDS} \
+LIB_DEPENDS-python =	${LIB_DEPENDS} \
 			${MODPY_LIB_DEPENDS}
 
 RUN_DEPENDS-main = 	print/texlive/base \

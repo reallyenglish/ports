@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.24 2017/06/17 15:04:08 schwarze Exp $
+# $OpenBSD: Makefile,v 1.26 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT=	manipulate image meta-data such as exif and ipct
 
 DISTNAME=	exiv2-0.25
 CATEGORIES=	graphics devel
-REVISION=	1
+REVISION=	2
 
 SHARED_LIBS +=  exiv2                8.0      # 14.0
 
@@ -15,7 +15,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MASTER_SITES=	${HOMEPAGE}
 
-WANTLIB += 	c iconv intl m ${LIBCXX} z expat pthread
+WANTLIB += 	c iconv intl m ${COMPILER_LIBCXX} z expat pthread
 
 USE_GMAKE=	Yes
 

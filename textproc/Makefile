@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.534 2017/05/28 13:53:12 jasper Exp $
+# $OpenBSD: Makefile,v 1.542 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += TclXML
@@ -48,7 +48,6 @@
      SUBDIR += gnuvd
      SUBDIR += go-text
      SUBDIR += go-xlsx
-     SUBDIR += gonzui
      SUBDIR += gpresent
      SUBDIR += grepcidr
      SUBDIR += groff
@@ -252,6 +251,7 @@
      SUBDIR += p5-Text-Diff
      SUBDIR += p5-Text-Diff-HTML
      SUBDIR += p5-Text-DoubleMetaphone
+     SUBDIR += p5-Text-Flow
      SUBDIR += p5-Text-Format
      SUBDIR += p5-Text-German
      SUBDIR += p5-Text-Glob
@@ -356,6 +356,7 @@
      SUBDIR += py-cssutils
      SUBDIR += py-cssutils,python3
      SUBDIR += py-defusedxml
+     SUBDIR += py-defusedxml,python3
      SUBDIR += py-demjson
      SUBDIR += py-demjson,python3
      SUBDIR += py-docutils
@@ -395,9 +396,13 @@
      SUBDIR += py-pyRFC3339,python3
      SUBDIR += py-pygments
      SUBDIR += py-pygments,python3
+     SUBDIR += py-pykwalify
+     SUBDIR += py-pykwalify,python3
      SUBDIR += py-rdflib
      SUBDIR += py-rdflib,python3
      SUBDIR += py-rtf
+     SUBDIR += py-ruamel.yaml
+     SUBDIR += py-ruamel.yaml,python3
      SUBDIR += py-snowballstemmer
      SUBDIR += py-snowballstemmer,python3
      SUBDIR += py-sphinx
@@ -430,19 +435,15 @@
      SUBDIR += ruby-builder
      SUBDIR += ruby-classifier
      SUBDIR += ruby-erubis
-     SUBDIR += ruby-fast-stemmer,ruby22
      SUBDIR += ruby-fast-stemmer,ruby23
      SUBDIR += ruby-fast-stemmer,ruby24
-     SUBDIR += ruby-fast_xs,ruby22
      SUBDIR += ruby-fast_xs,ruby23
      SUBDIR += ruby-fast_xs,ruby24
      SUBDIR += ruby-gyoku
      SUBDIR += ruby-haml
-     SUBDIR += ruby-hpricot,ruby22
      SUBDIR += ruby-hpricot,ruby23
      SUBDIR += ruby-hpricot,ruby24
      SUBDIR += ruby-htmlentities
-     SUBDIR += ruby-hyperestraier,ruby22
      SUBDIR += ruby-hyperestraier,ruby23
      SUBDIR += ruby-hyperestraier,ruby24
      SUBDIR += ruby-icalendar
@@ -451,24 +452,19 @@
      SUBDIR += ruby-markaby
      SUBDIR += ruby-maruku
      SUBDIR += ruby-mustache
-     SUBDIR += ruby-nokogiri,ruby22
      SUBDIR += ruby-nokogiri,ruby23
      SUBDIR += ruby-nokogiri,ruby24
      SUBDIR += ruby-nori
      SUBDIR += ruby-pdf-reader
      SUBDIR += ruby-pygments.rb
-     SUBDIR += ruby-rdiscount,ruby22
      SUBDIR += ruby-rdiscount,ruby23
      SUBDIR += ruby-rdiscount,ruby24
-     SUBDIR += ruby-redcarpet,ruby22
      SUBDIR += ruby-redcarpet,ruby23
      SUBDIR += ruby-redcarpet,ruby24
-     SUBDIR += ruby-redcloth,ruby22
      SUBDIR += ruby-redcloth,ruby23
      SUBDIR += ruby-redcloth,ruby24
      SUBDIR += ruby-rexical
      SUBDIR += ruby-ronn
-     SUBDIR += ruby-rss
      SUBDIR += ruby-rtex
      SUBDIR += ruby-syntax
      SUBDIR += ruby-templater

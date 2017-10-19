@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.62 2017/04/10 11:46:21 sthen Exp $
+# $OpenBSD: Makefile,v 1.67 2017/09/23 10:27:35 nigel Exp $
 
 COMMENT=	Python charting and plotting API
 
 MODPY_EGG_VERSION =	1.5.3
 DISTNAME =		matplotlib-${MODPY_EGG_VERSION}
 PKGNAME =		py-${DISTNAME}
-REVISION =		2
+REVISION =		6
 CATEGORIES =		graphics devel math
 
 HOMEPAGE=	http://matplotlib.sourceforge.net/
@@ -15,8 +15,8 @@ MAINTAINER =	Daniel Dickman <daniel@openbsd.org>
 # BSD-like
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += ${MODPY_WANTLIB}
-WANTLIB += freetype m png ${LIBCXX} z
+WANTLIB += ${MODPY_WANTLIB} ${COMPILER_LIBCXX}
+WANTLIB += freetype m png z
 
 MODULES=	lang/python
 
@@ -37,6 +37,7 @@ COMMON_DEPENDS=	devel/py-tz${MODPY_FLAVOR} \
 
 BUILD_DEPENDS=	${COMMON_DEPENDS}
 RUN_DEPENDS=	${COMMON_DEPENDS}
+LIB_DEPENDS=	graphics/png
 
 .if ${FLAVOR:Mpython3}
 COMMON_DEPENDS +=	devel/py-cairocffi${MODPY_FLAVOR} \
@@ -44,10 +45,16 @@ COMMON_DEPENDS +=	devel/py-cairocffi${MODPY_FLAVOR} \
 # pygobject GTK3 introspection (not provided by indirect dependencies)
 COMMON_DEPENDS +=	x11/gtk+3
 .else
+WANTLIB += X11 Xau Xcomposite Xcursor Xdamage Xdmcp Xext Xfixes
+WANTLIB += Xi Xinerama Xrandr Xrender atk-1.0 cairo expat ffi
+WANTLIB += fontconfig gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0
+WANTLIB += glib-2.0 gmodule-2.0 gobject-2.0 graphite2 gtk-x11-2.0
+WANTLIB += harfbuzz intl pango-1.0 pangocairo-1.0 pangoft2-1.0
+WANTLIB += pcre pixman-1 pthread-stubs xcb xcb-render xcb-shm
 COMMON_DEPENDS +=	x11/py-gtk2
+LIB_DEPENDS +=	x11/gtk+2
 .endif
 
-LIB_DEPENDS=	graphics/png
 TEST_DEPENDS =	${RUN_DEPENDS} \
 		devel/py-nose${MODPY_FLAVOR}
 

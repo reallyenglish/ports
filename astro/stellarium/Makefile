@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.49 2017/04/26 16:36:03 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.52 2017/09/25 18:00:28 ajacoutot Exp $
 
 COMMENT=	free open source planetarium
 
-DISTNAME=	stellarium-0.15.2
+DISTNAME=	stellarium-0.16.1
 
 CATEGORIES=	astro x11
 
@@ -15,7 +15,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += Qt5Concurrent Qt5Core Qt5Gui Qt5Multimedia Qt5MultimediaWidgets
 WANTLIB += Qt5Network Qt5PrintSupport Qt5Script Qt5SerialPort Qt5Widgets
-WANTLIB += c m pthread z
+WANTLIB += c m pthread z ${COMPILER_LIBCXX}
 
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=stellarium/}
 
@@ -36,6 +36,9 @@ CONFIGURE_ARGS=	-Wno-dev \
 		-DCMAKE_C_FLAGS="${CFLAGS} -I${X11BASE}/include" \
 		-DCMAKE_CXX_FLAGS="${CXXFLAGS} -I${X11BASE}/include" \
 		-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:Bool=Yes
+
+# XXX needs FindQt5Positioning.cmake
+CONFIGURE_ARGS=	-DENABLE_GPS=0 -DENABLE_LIBGPS=0
 
 PORTHOME=	${WRKDIR}
 

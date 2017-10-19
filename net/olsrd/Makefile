@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.29 2017/06/04 11:45:04 stsp Exp $
+# $OpenBSD: Makefile,v 1.32 2017/06/23 14:54:03 ajacoutot Exp $
 
 COMMENT-main=		OLSR routing daemon
 COMMENT-gui=		OLSR routing daemon GUI
@@ -7,7 +7,9 @@ VERSION=		0.9.6.1
 DISTNAME=		olsrd-${VERSION}
 PKGNAME-main=		olsrd-${VERSION}
 PKGNAME-gui=		olsrd-gui-${VERSION}
-PKGNAME-plugins=	olsrd-plugins-${VERSION}
+
+REVISION-main=		1
+REVISION-gui=		1
 
 CATEGORIES=	net
 
@@ -23,29 +25,25 @@ MULTI_PACKAGES= -main -gui
 
 BUILD_DEPENDS=	devel/bison
 
-LIB_DEPENDS-main= net/libnet/1.1
-WANTLIB-main=	c lib/libnet-1.1/net=11
+WANTLIB-main=	c
 
 LIB_DEPENDS-gui= x11/gtk+2
-WANTLIB-gui=	${MODGETTEXT_WANTLIB}
 WANTLIB-gui += X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama
 WANTLIB-gui += Xrandr Xrender atk-1.0 c cairo fontconfig freetype
 WANTLIB-gui += gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0 glib-2.0 gobject-2.0
-WANTLIB-gui += gtk-x11-2.0 m pango-1.0 pangocairo-1.0 pangoft2-1.0
+WANTLIB-gui += gtk-x11-2.0 intl m pango-1.0 pangocairo-1.0 pangoft2-1.0
 WANTLIB-gui += z
-
 
 USE_GMAKE=	Yes
 NO_TEST=	Yes
 
-MODULES=	devel/gettext
-
 ALL_TARGET=	build_all
-MAKE_FLAGS=	CC="${CC}" OS=obsd LIBNET=1
+MAKE_FLAGS=	CC="${CC}" OS=obsd VERBOSE=1
 .ifdef DEBUG
 MAKE_FLAGS+=	DEBUG=1
+.else
+MAKE_FLAGS+=	DEBUG=0
 .endif
-CPPFLAGS+=	"-I${PREFIX}/libnet-1.1"
 FAKE_FLAGS=	SBINDIR=${DESTDIR}/${PREFIX}/sbin \
 		ETCDIR=${DESTDIR}/${PREFIX}/share/examples/olsrd \
 		LIBDIR=${DESTDIR}/${PREFIX}/lib/olsrd-plugins \
@@ -56,7 +54,7 @@ pre-configure:
 	${SUBST_CMD} ${WRKSRC}/src/plugin_loader.c
 
 post-build:
-	cd ${WRKSRC}/gui/linux-gtk; ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM}
+	cd ${WRKSRC}/gui/linux-gtk; ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} ${MAKE_FLAGS}
 
 INSTALL_TARGET=	install_all
 

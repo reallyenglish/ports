@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.25 2017/04/10 11:45:25 sthen Exp $
+# $OpenBSD: Makefile,v 1.28 2017/07/26 22:45:17 sthen Exp $
 
 COMMENT=	C++ reference implementation of the Atlas protocol
 
 VERSION=	0.4.3.1
 DISTNAME=	Atlas-C++-${VERSION}
 PKGNAME=	${DISTNAME:S/C++-//:L}
-REVISION=	5
+REVISION =	7
 SHARED_LIBS +=	Atlas                2.0      # .1.1
 SHARED_LIBS +=	AtlasObjects         2.0      # .1.1
 SHARED_LIBS +=	AtlasObjectsEntity   2.0      # .1.1
@@ -23,7 +23,7 @@ PERMIT_PACKAGE_CDROM=   Yes
 MASTER_SITES=	ftp://ftp.ecs.soton.ac.uk/pub/worldforge/acorn/0.4/src/ \
 		http://kafka.i-site.com/~novalis/mirrors/acorn/0.4/src/
 
-WANTLIB+=	m ${LIBCXX}
+WANTLIB+=	m ${COMPILER_LIBCXX}
 
 
 SEPARATE_BUILD=	Yes

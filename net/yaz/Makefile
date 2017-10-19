@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.19 2017/06/02 10:51:56 schwarze Exp $
+# $OpenBSD: Makefile,v 1.22 2017/08/24 09:45:23 sthen Exp $
 
 COMMENT=		Z39.50/SR client and API library
 DISTNAME=		yaz-3.0.49
 CATEGORIES=		net
-REVISION=		5
+REVISION=		7
 
 SHARED_LIBS+=		yaz		1.1	# 3.0
 SHARED_LIBS+=		yaz_icu		1.2	# 3.0
@@ -18,7 +18,7 @@ MODULES=		devel/gettext
 
 WANTLIB=		c m ncurses pthread readline z \
 			xml2 gpg-error gcrypt exslt xslt icudata \
-			icui18n icuuc lzma ${LIBCXX} 
+			icui18n icuuc lzma ${COMPILER_LIBCXX} 
 
 MASTER_SITES=		http://ftp.indexdata.dk/pub/yaz/
 

@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.17 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.20 2017/09/27 08:13:00 phessler Exp $
 
 COMMENT =	POCO C++ libraries for network based applications
 
 VERSION =	1.4.6p1
 DISTNAME =	poco-${VERSION}-all
 PKGNAME =	poco-${VERSION:S/p/pl/}
-REVISION =	1
+REVISION =	3
 CATEGORIES =	net devel
 SHLIB_VERSION =	1.0
 
@@ -21,7 +21,7 @@ MAINTAINER =	Sebastian Reitenbach <sebastia@openbsd.org>
 # Boost software license
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c crypto m pthread ssl ${LIBCXX} iodbc iodbcinst mysqlclient
+WANTLIB += c crypto m pthread ssl ${COMPILER_LIBCXX} iodbc iodbcinst mysqlclient
 WANTLIB += expat pcre sqlite3 z
 
 LIB_DEPENDS =	databases/iodbc \

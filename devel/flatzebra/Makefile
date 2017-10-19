@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.17 2017/04/10 11:45:25 sthen Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/26 22:45:17 sthen Exp $
 
 COMMENT=	generic game engine library
 
 VERSION =	0.1.6
 DISTNAME=	flatzebra-${VERSION}
-REVISION=	0
+REVISION=	1
 
 SHARED_LIBS +=	flatzebra-0.1 2.0	# .2.0
 
@@ -16,7 +16,7 @@ HOMEPAGE=	http://sarrazip.com/dev/afternoonstalker.html
 PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += FLAC SDL SDL_image SDL_mixer iconv jpeg m mikmod ogg png
-WANTLIB += smpeg sndio ${LIBCXX} tiff usbhid vorbis vorbisfile z
+WANTLIB += smpeg sndio ${COMPILER_LIBCXX} tiff usbhid vorbis vorbisfile z
 WANTLIB += pthread webp
 
 MASTER_SITES=	http://sarrazip.com/dev/

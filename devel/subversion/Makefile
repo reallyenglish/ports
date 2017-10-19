@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.154 2016/11/29 16:31:00 stsp Exp $
+# $OpenBSD: Makefile,v 1.161 2017/09/23 15:59:03 jeremy Exp $
 
 COMMENT-main=		subversion revision control system
 COMMENT-perl=		perl interface to subversion
@@ -7,7 +7,7 @@ COMMENT-ruby=		ruby interface to subversion
 COMMENT-ap2=		apache2 subversion modules
 COMMENT-gnome-keyring=	GNOME keyring support for subversion
 
-VERSION=		1.9.5
+VERSION=		1.9.7
 DISTNAME=		subversion-${VERSION}
 PKGNAME-main=		${DISTNAME}
 FULLPKGNAME-perl=	p5-SVN-${VERSION}
@@ -20,6 +20,12 @@ FULLPKGNAME-ap2=	ap2-subversion-${VERSION}
 FULLPKGPATH-ap2=	devel/subversion,-ap2
 FULLPKGNAME-gnome-keyring= gnome-keyring-subversion-${VERSION}
 FULLPKGPATH-gnome-keyring= devel/subversion,-gnome-keyring
+
+REVISION-main=	1
+REVISION-ruby=	1
+REVISION-perl=	0
+REVISION-gnome-keyring=	0
+REVISION-ap2=	0
 
 SO_VERSION=	2.0
 SVN_LIBS=	svn_client-1 svn_delta-1 svn_diff-1 svn_fs-1 \
@@ -53,7 +59,7 @@ FLAVOR += no_perl no_python no_ruby
 
 MODULES=	devel/gettext lang/python
 
-WANTLIB=	expat pthread z
+WANTLIB=	expat m pthread z
 
 # autogen.sh checks for libtoolize
 BUILD_DEPENDS=	${MODGNU_AUTOCONF_DEPENDS} \
@@ -91,7 +97,7 @@ WANTLIB-ap2 +=	${_lib}>=${SO_VERSION}
 .endfor
 RUN_DEPENDS-ap2=	www/apache-httpd
 
-WANTLIB-perl=		${WANTLIB} apr-1 aprutil-1 sqlite3 
+WANTLIB-perl=		${WANTLIB} apr-1 aprutil-1 c perl sqlite3 
 RUN_DEPENDS-perl=	${MODGETTEXT_RUN_DEPENDS}
 LIB_DEPENDS-perl=	${MODGETTEXT_LIB_DEPENDS} ${MAINSPEC}
 .for _lib in svn_diff-1 svn_ra-1 svn_delta-1 svn_subr-1 svn_fs-1 \
@@ -109,7 +115,6 @@ LIB_DEPENDS-python=	${MODPY_LIB_DEPENDS} ${MODGETTEXT_LIB_DEPENDS} \
 WANTLIB-python +=	${_lib}>=${SO_VERSION}
 .endfor
 
-MODRUBY_REV=		1.8
 WANTLIB-ruby=		${WANTLIB} apr-1 aprutil-1 \
 			db m sasl2 serf-1>=1.0 sqlite3 \
 			${MODRUBY_WANTLIB}
@@ -177,7 +182,7 @@ CONFIGURE_ARGS+=--without-gnome-keyring
 
 TEST_DEPENDS=${MODPY_RUN_DEPENDS}
 TEST_DEPENDS+=	${FULLPKGNAME-gnome-keyring}:${BUILD_PKGPATH},-gnome-keyring
-SUBST_VARS+=	LOCALBASE SO_VERSION
+SUBST_VARS+=	LOCALBASE SO_VERSION MODRUBY_BINREV
 
 pre-patch:
 	@ln -s ${MODPY_BIN} ${WRKDIR}/bin/python
@@ -222,9 +227,9 @@ post-build:
 
 do-test:
 	@cd ${WRKBUILD} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} \
-		${ALL_TEST_FLAGS} check FS_TYPE=bdb
+		${ALL_TEST_FLAGS} check FS_TYPE=bdb CLEANUP=1
 	@cd ${WRKBUILD} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} \
-		${ALL_TEST_FLAGS} check FS_TYPE=fsfs
+		${ALL_TEST_FLAGS} check FS_TYPE=fsfs CLEANUP=1
 .if ${BUILD_PACKAGES:M-perl}
 	@cd ${WRKBUILD} && ${SETENV} ${MAKE_ENV} ${MAKE_PROGRAM} \
 		${ALL_TEST_FLAGS} TMPDIR=${WRKBUILD} check-swig-pl

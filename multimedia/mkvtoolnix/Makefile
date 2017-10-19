@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.68 2017/06/02 10:51:56 schwarze Exp $
+# $OpenBSD: Makefile,v 1.71 2017/10/11 15:53:48 jeremy Exp $
 
 COMMENT=	create, alter and inspect Matroska files
 
 DISTNAME=	mkvtoolnix-9.7.1
-REVISION=	0
+REVISION=	1
 CATEGORIES=	multimedia x11
 MASTER_SITES=	${HOMEPAGE}sources/
 EXTRACT_SUFX=	.tar.xz
@@ -16,7 +16,7 @@ MAINTAINER=	Brad Smith <brad@comstyle.com>
 PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB=	FLAC boost_filesystem-mt boost_regex-mt boost_system-mt \
-		c ebml m magic matroska ogg pthread vorbis z ${LIBECXX}
+		c ebml m magic matroska ogg pthread vorbis z ${COMPILER_LIBCXX}
 
 MODULES=	devel/gettext \
 		lang/ruby
@@ -25,7 +25,6 @@ MODRUBY_RUNDEP=	No
 
 COMPILER =	gcc
 
-BUILD_DEPENDS=	devel/ruby-rake
 LIB_DEPENDS=	audio/flac \
 		audio/libogg \
 		audio/libvorbis \

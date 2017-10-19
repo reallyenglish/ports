@@ -1,8 +1,9 @@
-$OpenBSD: patch-src_libstd_sys_unix_ext_net_rs,v 1.5 2017/03/27 12:35:31 danj Exp $
+$OpenBSD: patch-src_libstd_sys_unix_ext_net_rs,v 1.7 2017/10/17 17:19:24 danj Exp $
 Disable 4 failing tests (related to unix socket). Needs more investigation.
---- src/libstd/sys/unix/ext/net.rs.orig	Fri Mar 10 23:55:21 2017
-+++ src/libstd/sys/unix/ext/net.rs	Thu Mar 16 05:40:27 2017
-@@ -1231,7 +1231,7 @@ impl UnixDatagram {
+Index: src/libstd/sys/unix/ext/net.rs
+--- src/libstd/sys/unix/ext/net.rs.orig
++++ src/libstd/sys/unix/ext/net.rs
+@@ -1260,7 +1260,7 @@ impl UnixDatagram {
      ///
      /// # Examples
      ///
@@ -11,7 +12,7 @@ Disable 4 failing tests (related to unix socket). Needs more investigation.
      /// use std::os::unix::net::UnixDatagram;
      /// use std::time::Duration;
      ///
-@@ -1248,7 +1248,7 @@ impl UnixDatagram {
+@@ -1285,7 +1285,7 @@ impl UnixDatagram {
      ///
      /// # Examples
      ///
@@ -20,7 +21,7 @@ Disable 4 failing tests (related to unix socket). Needs more investigation.
      /// use std::os::unix::net::UnixDatagram;
      /// use std::time::Duration;
      ///
-@@ -1341,7 +1341,7 @@ mod test {
+@@ -1412,7 +1412,7 @@ mod test {
      use thread;
      use io;
      use io::prelude::*;
@@ -29,7 +30,7 @@ Disable 4 failing tests (related to unix socket). Needs more investigation.
      use sys_common::io::test::tmpdir;
  
      use super::*;
-@@ -1356,6 +1356,7 @@ mod test {
+@@ -1427,6 +1427,7 @@ mod test {
      }
  
      #[test]
@@ -37,7 +38,7 @@ Disable 4 failing tests (related to unix socket). Needs more investigation.
      fn basic() {
          let dir = tmpdir();
          let socket_path = dir.path().join("sock");
-@@ -1480,6 +1481,7 @@ mod test {
+@@ -1551,6 +1552,7 @@ mod test {
      }
  
      #[test]

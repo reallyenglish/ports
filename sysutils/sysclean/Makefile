@@ -1,25 +1,26 @@
-# $OpenBSD: Makefile,v 1.12 2017/04/07 14:25:10 sthen Exp $
+# $OpenBSD: Makefile,v 1.15 2017/09/03 14:12:25 danj Exp $
 
 COMMENT =	list obsolete files between OpenBSD upgrades
 
 GH_ACCOUNT =	semarie
 GH_PROJECT =	sysclean
-GH_TAGNAME =	2.2
+GH_TAGNAME =	2.5
 
 CATEGORIES =	sysutils
 HOMEPAGE =	https://github.com/semarie/sysclean/
 
 MAINTAINER =	Sebastien Marie <semarie@online.fr>
 
-# BSD
+# ISC
 PERMIT_PACKAGE_CDROM =	Yes
 
-MAKE_ENV =		BINDIR=${LOCALBASE}/bin \
+MAKE_ENV =		BINDIR=${LOCALBASE}/sbin \
 			MANDIR=${LOCALBASE}/man/man
 
 NO_BUILD =		Yes
-NO_TEST =		Yes
 PKG_ARCH =		*
+
+TEST_TARGET =		regress
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/examples/sysclean

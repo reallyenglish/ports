@@ -1,4 +1,4 @@
-@comment $OpenBSD: PLIST-main,v 1.9 2016/06/24 15:59:12 krw Exp $
+@comment $OpenBSD: PLIST-main,v 1.11 2017/09/14 15:43:45 chrisz Exp $
 %%native%%
 @bin bin/ocaml
 @bin bin/ocamlc
@@ -10,7 +10,6 @@
 @bin bin/ocamlmklib
 @bin bin/ocamlmktop
 @bin bin/ocamlobjinfo
-@bin bin/ocamloptp
 @bin bin/ocamlprof
 @bin bin/ocamlrun
 @bin bin/ocamlyacc
@@ -157,6 +156,8 @@ lib/ocaml/compiler-libs/bytesections.cmi
 lib/ocaml/compiler-libs/bytesections.cmt
 lib/ocaml/compiler-libs/bytesections.cmti
 lib/ocaml/compiler-libs/ccomp.cmi
+lib/ocaml/compiler-libs/ccomp.cmt
+lib/ocaml/compiler-libs/ccomp.cmti
 lib/ocaml/compiler-libs/clflags.cmi
 lib/ocaml/compiler-libs/clflags.cmt
 lib/ocaml/compiler-libs/clflags.cmti
@@ -189,6 +190,9 @@ lib/ocaml/compiler-libs/ctype.cmti
 lib/ocaml/compiler-libs/datarepr.cmi
 lib/ocaml/compiler-libs/datarepr.cmt
 lib/ocaml/compiler-libs/datarepr.cmti
+lib/ocaml/compiler-libs/debuginfo.cmi
+lib/ocaml/compiler-libs/debuginfo.cmt
+lib/ocaml/compiler-libs/debuginfo.cmti
 lib/ocaml/compiler-libs/dll.cmi
 lib/ocaml/compiler-libs/dll.cmt
 lib/ocaml/compiler-libs/dll.cmti
@@ -310,6 +314,8 @@ lib/ocaml/compiler-libs/printlambda.cmi
 lib/ocaml/compiler-libs/printlambda.cmt
 lib/ocaml/compiler-libs/printlambda.cmti
 lib/ocaml/compiler-libs/printtyp.cmi
+lib/ocaml/compiler-libs/printtyp.cmt
+lib/ocaml/compiler-libs/printtyp.cmti
 lib/ocaml/compiler-libs/printtyped.cmi
 lib/ocaml/compiler-libs/printtyped.cmt
 lib/ocaml/compiler-libs/printtyped.cmti
@@ -353,6 +359,8 @@ lib/ocaml/compiler-libs/topdirs.cmi
 lib/ocaml/compiler-libs/topdirs.cmt
 lib/ocaml/compiler-libs/topdirs.cmti
 lib/ocaml/compiler-libs/toploop.cmi
+lib/ocaml/compiler-libs/toploop.cmt
+lib/ocaml/compiler-libs/toploop.cmti
 lib/ocaml/compiler-libs/topmain.cmi
 lib/ocaml/compiler-libs/topmain.cmt
 lib/ocaml/compiler-libs/topmain.cmti
@@ -393,6 +401,8 @@ lib/ocaml/compiler-libs/typedtreeIter.cmi
 lib/ocaml/compiler-libs/typedtreeIter.cmt
 lib/ocaml/compiler-libs/typedtreeIter.cmti
 lib/ocaml/compiler-libs/typedtreeMap.cmi
+lib/ocaml/compiler-libs/typedtreeMap.cmt
+lib/ocaml/compiler-libs/typedtreeMap.cmti
 lib/ocaml/compiler-libs/typemod.cmi
 lib/ocaml/compiler-libs/typemod.cmt
 lib/ocaml/compiler-libs/typemod.cmti
@@ -403,6 +413,8 @@ lib/ocaml/compiler-libs/types.cmi
 lib/ocaml/compiler-libs/types.cmt
 lib/ocaml/compiler-libs/types.cmti
 lib/ocaml/compiler-libs/typetexp.cmi
+lib/ocaml/compiler-libs/typetexp.cmt
+lib/ocaml/compiler-libs/typetexp.cmti
 lib/ocaml/compiler-libs/untypeast.cmi
 lib/ocaml/compiler-libs/untypeast.cmt
 lib/ocaml/compiler-libs/untypeast.cmti
@@ -496,6 +508,8 @@ lib/ocaml/listLabels.cmti
 lib/ocaml/listLabels.ml
 lib/ocaml/listLabels.mli
 lib/ocaml/map.cmi
+lib/ocaml/map.cmt
+lib/ocaml/map.cmti
 lib/ocaml/map.ml
 lib/ocaml/map.mli
 lib/ocaml/marshal.cmi
@@ -726,9 +740,6 @@ lib/ocaml/weak.mli
 @man man/man1/ocamldoc.1
 @man man/man1/ocamllex.1
 @man man/man1/ocamlmktop.1
-@man man/man1/ocamlopt.1
-@man man/man1/ocamlopt.opt.1
-@man man/man1/ocamloptp.1
 @man man/man1/ocamlprof.1
 @man man/man1/ocamlrun.1
 @man man/man1/ocamlyacc.1

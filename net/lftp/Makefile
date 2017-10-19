@@ -1,24 +1,22 @@
-# $OpenBSD: Makefile,v 1.115 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.121 2017/10/16 22:01:13 rsadowski Exp $
 
 COMMENT=	shell-like command line ftp and sftp client
 
-DISTNAME=	lftp-4.7.7
+DISTNAME=	lftp-4.8.3
 CATEGORIES=	net
 
 HOMEPAGE=	https://lftp.tech/
 
-MAINTAINER=	Rafael Sadowski <rafael@sizeofvoid.org>
+MAINTAINER=	Rafael Sadowski <rsadowski@openbsd.org>
 
 # GPLv3+
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c crypto curses ereadline expat iconv idn intl m ssl
-WANTLIB += ${LIBCXX} util z
-
-USE_GROFF=	Yes
+WANTLIB += ${COMPILER_LIBCXX} c crypto curses ereadline expat
+WANTLIB += iconv idn2 intl m ssl unistring util z
 
 # lftp needs add_history_time()
-LIB_DEPENDS=	devel/libidn \
+LIB_DEPENDS=	devel/libidn2 \
 		devel/gettext \
 		devel/readline>=6.1p2
 
@@ -40,6 +38,7 @@ NO_TEST=	Yes
 FAKE_FLAGS=	sysconfdir=${PREFIX}/share/examples/lftp
 
 post-install:
-	rm -f ${PREFIX}/lib/liblftp-{jobs,tasks}.{a,la}
+	rm -rf ${PREFIX}/lib/liblftp-{jobs,tasks}.{a,la} \
+		${PREFIX}/share/{icons,applications}
 
 .include <bsd.port.mk>

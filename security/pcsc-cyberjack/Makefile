@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/26 22:45:29 sthen Exp $
 
 COMMENT =		REINER SCT cyberJack chipcard reader driver
 
 DISTNAME =		pcsc-cyberjack-3.99.5final.SP08
+REVISION =		0
 
 SHARED_LIBS =		ifd-cyberjack		0.0 # 6.0
 
@@ -15,7 +16,7 @@ MAINTAINER =		Ingo Feinerer <feinerer@logic.at>
 # LGPL2.1+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += m pthread ${LIBCXX} usb-1.0
+WANTLIB += m pthread ${COMPILER_LIBCXX} usb-1.0
 
 MASTER_SITES =		http://support.reiner-sct.de/downloads/LINUX/V3.99.5_SP08/
 

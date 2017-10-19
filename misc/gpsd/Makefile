@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.64 2017/06/15 00:41:06 schwarze Exp $
+# $OpenBSD: Makefile,v 1.66 2017/07/26 22:45:26 sthen Exp $
 
 COMMENT-main=		service daemon that monitors one or more GPSes
 COMMENT-x11=		GUI test apps using gpsd
@@ -13,9 +13,9 @@ SHARED_LIBS=		gps	19.0 \
 			gpsd	0.0
 CATEGORIES=		misc geo
 
-REVISION-main=		8
-REVISION-php=		8
-REVISION-x11=		3
+REVISION-main=		9
+REVISION-php=		9
+REVISION-x11=		4
 
 HOMEPAGE=		http://www.catb.org/gpsd/
 
@@ -55,7 +55,7 @@ CONFIGURE_ARGS+=	--without-x
 CONFIGURE_ENV +=	LDFLAGS="-lm -pthread -lutil"
 .endif
 
-WANTLIB-main=		m ncurses c pthread ${LIBCXX} usb-1.0 util ${MODPY_WANTLIB}
+WANTLIB-main=		m ncurses c pthread ${COMPILER_LIBCXX} usb-1.0 util ${MODPY_WANTLIB}
 
 # the php display script doesn't depend on having any of gpsd around,
 # it just sits there and looks pretty.

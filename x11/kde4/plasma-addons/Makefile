@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.13 2015/06/26 09:18:40 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.15 2017/07/27 11:57:50 sthen Exp $
 
 COMMENT =	extra KDE plasmoids
 DISTNAME =	kdeplasma-addons-${MODKDE4_VERSION}
-REVISION =	2
+REVISION =	4
 
 SHARED_LIBS =	lancelot-datamodels		51.1 # 1.7
 SHARED_LIBS +=	lancelot			51.1 # 1.9
@@ -13,6 +13,7 @@ SHARED_LIBS +=	plasmaweather			51.1 # 4.7
 SHARED_LIBS +=	rtm				51.1 # 4.7
 
 WANTLIB =  c m pthread
+WANTLIB += ${COMPILER_LIBCXX}
 WANTLIB += ICE SM X11 Xext Xrender Xtst
 WANTLIB += lib/qt4/QtDBus lib/qt4/QtDeclarative lib/qt4/QtGui
 WANTLIB += lib/qt4/QtNetwork lib/qt4/QtScript lib/qt4/QtSql lib/qt4/QtSvg
@@ -33,7 +34,7 @@ WANTLIB += ${KDE4LIB}/taskmanager
 WANTLIB += ${KDE4LIB}/threadweaver ${KDE4LIB}/weather_ion
 WANTLIB += gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0 gthread-2.0 ibus-1.0
 WANTLIB += scim-1.0
-WANTLIB += attica cln dbusmenu-qt qalculate qca2 qimageblitz qjson qoauth
+WANTLIB += attica cln dbusmenu-qt qalculate qca qimageblitz qjson qoauth
 WANTLIB += qwt soprano xml2
 
 MODULES =	devel/gettext multimedia/phonon
@@ -51,7 +52,7 @@ LIB_DEPENDS =	devel/qjson \
 		inputmethods/scim \
 		math/libqalculate \
 		productivity/attica \
-		security/qca2 \
+		security/qca \
 		security/qoauth \
 		x11/dbusmenu-qt \
 		x11/qwt \

@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.30 2017/06/12 11:48:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.36 2017/09/01 08:25:02 sthen Exp $
 
 BROKEN-sparc64=	SIGBUS during phar generation
 
 PV=		7.0
-V=		${PV}.20
+V=		${PV}.23
 
-WANTLIB-main+=	${LIBCXX} ncurses readline
+WANTLIB-main+=	${COMPILER_LIBCXX} ncurses readline
 
 BUILD_DEPENDS+=	devel/bison
 

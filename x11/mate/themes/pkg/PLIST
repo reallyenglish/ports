@@ -1,4 +1,4 @@
-@comment $OpenBSD: PLIST,v 1.2 2017/05/30 19:23:59 robert Exp $
+@comment $OpenBSD: PLIST,v 1.4 2017/07/13 08:40:06 robert Exp $
 @unexec-delete rm -f %D/share/icons/ContrastHigh/icon-theme.cache
 share/icons/ContrastHigh/
 share/icons/ContrastHigh/16x16/
@@ -3385,6 +3385,7 @@ share/icons/mate/cursors/bottom_side
 share/icons/mate/cursors/bottom_tee
 share/icons/mate/cursors/c7088f0f3e6c8088236ef8e1e3e70000
 share/icons/mate/cursors/circle
+share/icons/mate/cursors/color-picker
 share/icons/mate/cursors/copy
 share/icons/mate/cursors/cross
 share/icons/mate/cursors/cross_reverse
@@ -3456,6 +3457,8 @@ share/locale/es_CO/
 share/locale/es_CO/LC_MESSAGES/
 share/locale/es_MX/
 share/locale/es_MX/LC_MESSAGES/
+share/locale/fy/
+share/locale/fy/LC_MESSAGES/
 share/locale/ky/
 share/locale/ky/LC_MESSAGES/
 share/themes/BlackMATE/
@@ -4140,6 +4143,8 @@ share/themes/BlueMenta/xfwm4/top-left-inactive.xpm
 share/themes/BlueMenta/xfwm4/top-right-active-shaded.xpm
 share/themes/BlueMenta/xfwm4/top-right-active.xpm
 share/themes/BlueMenta/xfwm4/top-right-inactive.xpm
+share/themes/ContrastHigh/
+share/themes/ContrastHigh/index.theme
 share/themes/ContrastHighInverse/
 share/themes/ContrastHighInverse/gtk-2.0/
 share/themes/ContrastHighInverse/gtk-2.0/gtkrc

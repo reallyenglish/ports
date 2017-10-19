@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.12 2017/04/19 11:16:03 sthen Exp $
+# $OpenBSD: Makefile,v 1.14 2017/07/26 22:45:15 sthen Exp $
 
 ONLY_FOR_ARCHS =	${GCC4_ARCHS} ${CLANG_ARCHS}
 
 COMMENT =		music studio with tracking, sampling and MIDI
 
 DISTNAME =		lmms-0.4.8
-REVISION =		3
+REVISION =		4
 CATEGORIES =		audio
 
 HOMEPAGE =		http://lmms.sourceforge.net/
@@ -16,7 +16,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 WANTLIB =		ICE SM QtGui QtXml X11 Xext Xft Xinerama c fltk jack \
 			fftw3f fluidsynth fontconfig freetype m ncurses ogg \
 			pthread readline samplerate sndfile sndio vorbis \
-			vorbisenc vorbisfile z ${LIBCXX}
+			vorbisenc vorbisfile z ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=lmms/}
 EXTRACT_SUFX =		.tar.bz2

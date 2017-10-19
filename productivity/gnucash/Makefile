@@ -1,10 +1,13 @@
-# $OpenBSD: Makefile,v 1.89 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.93 2017/10/11 08:21:16 ajacoutot Exp $
 
 COMMENT =		personal and small-business financial-accounting software
 
 GNOME_PROJECT =		gnucash
-GNOME_VERSION =		2.6.16
+GNOME_VERSION =		2.6.18
 EXTRACT_SUFX =		.tar.bz2
+
+DISTFILES =		${DISTNAME}-1${EXTRACT_SUFX} \
+			gnucash-docs-${GNOME_VERSION}.tar.gz
 
 SHARED_LIBS +=  gnc-qof              2.0      # 1.4
 SHARED_LIBS +=  gnc-core-utils       0.0      # unknown
@@ -36,14 +39,11 @@ WANTLIB += gsttag-1.0 gstvideo-1.0 gthread-2.0 gtk-x11-2.0 guile
 WANTLIB += harfbuzz harfbuzz-icu iconv icudata icui18n icuuc intl
 WANTLIB += javascriptcoregtk-1.0 jpeg ltdl lzma m orc-0.4 pango-1.0
 WANTLIB += pangocairo-1.0 pangoft2-1.0 pcre pixman-1 png pthread
-WANTLIB += pthread-stubs secret-1 soup-2.4 sqlite3 ${LIBCXX} webkitgtk-1.0
+WANTLIB += pthread-stubs secret-1 soup-2.4 sqlite3 ${COMPILER_LIBCXX} webkitgtk-1.0
 WANTLIB += webp xcb xcb-dri2 xcb-glx xcb-render xcb-shm xcb-xfixes
 WANTLIB += xml2 xslt z
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=gnucash/}
-
-DISTFILES =		${DISTNAME}${EXTRACT_SUFX} \
-			gnucash-docs-${GNOME_VERSION}.tar.gz
 
 MODULES =		devel/dconf \
 			x11/gnome
@@ -80,12 +80,12 @@ DOC_DIR =		${WRKDIR}/gnucash-docs-${GNOME_VERSION}
 # XXX prefer guile1: guile2 segfaults during build when using dpb(1)
 # XXX make sure guile2 headers are picked up first (over guile1);
 # cannot use CPPFLAGS/CFLAGS since they get appended last
-#MAKE_FLAGS +=		CC="${CC} -I${LOCALBASE}/include/guile/2.0"
+#MAKE_FLAGS +=		CC="${CC} -I${LOCALBASE}/include/guile/2.2"
 pre-configure:
 	sed -i 's,guile-2.0,guile-99.99,g' ${WRKSRC}/configure
 
 # XXX hack: check if still needed at next release (autohell)
-DOCS_ENV=		ACLOCAL=true AUTOCONF=true AUTOMAKE=true AUTOHEADER=true
+DOCS_ENV =		ACLOCAL=true AUTOCONF=true AUTOMAKE=true AUTOHEADER=true
 
 post-configure:
 	cd ${DOC_DIR} && ${SETENV} ${CONFIGURE_ENV} /bin/sh ./configure

@@ -1,6 +1,6 @@
 #-*- mode: Makefile; tab-width: 4; -*-
 # ex:ts=4 sw=4 filetype=make:
-#	$OpenBSD: bsd.port.mk,v 1.1356 2017/06/19 13:27:00 visa Exp $
+#	$OpenBSD: bsd.port.mk,v 1.1369 2017/10/11 14:27:20 espie Exp $
 #
 #	bsd.port.mk - 940820 Jordan K. Hubbard.
 #	This file is in the public domain.
@@ -301,6 +301,19 @@ MODULES ?=
 _MODULES_DONE =
 .  include "${PORTSDIR}/infrastructure/mk/modules.port.mk"
 .endif
+
+# this only happens if we exit modules without having ever gone
+# thru compiler.port.mk
+COMPILER ?= base-clang base-gcc gcc3
+COMPILER_LANGS ?= c c++
+.if ${PROPERTIES:Mclang}
+CHOSEN_COMPILER ?= base-clang
+.elif ${PROPERTIES:Mgcc4}
+CHOSEN_COMPILER ?= base-gcc
+.else
+CHOSEN_COMPILER ?= gcc3
+.endif
+COMPILER_LIBCXX ?= ${LIBCXX}
 
 ###
 ### Variable setup that can happen after modules
@@ -749,7 +762,12 @@ BZIP2 ?= bzip2
 # MODULES for compilers (gcc4.port.mk, clang.port.mk) also append to this,
 # used to write wrappers to WRKDIR/bin which is at the head of the PATH.
 .if ${PROPERTIES:Mclang}
-COMPILER_LINKS += clang /usr/bin/clang clang++ /usr/bin/clang++ 
+.  if !${COMPILER_LINKS:Mclang}
+COMPILER_LINKS += clang /usr/bin/clang 
+.  endif
+.  if !${COMPILER_LINKS:Mclang++}
+COMPILER_LINKS += clang++ /usr/bin/clang++ 
+.  endif
 .endif
 .if ! ${COMPILER_LINKS:Mcc}
 .  if ${CC} == cc
@@ -1045,6 +1063,11 @@ _substvars${_S} += -D${_v}=${${_v:S/^^//}:Q}
 _tmpvars += ${_v}=${${_v:S/^^//}:Q}
 .    endif
 .  endfor
+
+# maybe this will want some more fine-grained variable
+.  if "${PKG_ARCH${_S}}" != "*"
+PKG_ARGS${_S} += ${_PKG_ARGS_VERSION}
+.  endif
 
 PKG_ARGS${_S} += ${_substvars${_S}}
 PKG_ARGS${_S} += -DFULLPKGPATH=${FULLPKGPATH${_S}}
@@ -1701,7 +1724,7 @@ _PACKAGE_CHECKSUM_DIR = ${PACKAGE_REPOSITORY}/${MACHINE_ARCH}/cksums
 _do_checksum_package = \
 	install -d ${PACKAGE_REPOSITORY_MODE} ${_PACKAGE_CHECKSUM_DIR} && \
 	cd ${_TMP_REPO} && \
-	cksum -b -a sha256 $$pkgname \
+	cksum -b -a sha256 -- $$pkgname \
 		>${_PACKAGE_CHECKSUM_DIR}/$$(basename $$pkgname .tgz).sha256
 
 .if ${CHECKSUM_PACKAGES:L} == "yes"
@@ -1832,6 +1855,10 @@ _check_lib_depends =:
 
 _CHECK_LIB_DEPENDS = PORTSDIR=${PORTSDIR} ${_PERLSCRIPT}/check-lib-depends
 _CHECK_LIB_DEPENDS += -d ${_PKG_REPO} -B ${WRKINST}
+_CHECK_LIB_DEPENDS += -S COMPILER_LIBCXX="${COMPILER_LIBCXX}"
+_CHECK_LIB_DEPENDS += -S LIBECXX="${LIBECXX}"
+_CHECK_LIB_DEPENDS += -S LIBCXX="${LIBCXX}"
+_CHECK_LIB_DEPENDS += -F pthread
 
 .for _s in ${MULTI_PACKAGES}
 .  if ${STATIC_PLIST${_s}:L} == "no"
@@ -1905,7 +1932,7 @@ check-register-all:
 ${_CACHE_REPO}${_PKGFILE${_S}}:
 	@install -d ${PACKAGE_REPOSITORY_MODE} ${@D}
 	@${ECHO_MSG} -n "===>  Looking for ${_PKGFILE${_S}} in \$$PKG_PATH - "
-	@if ${SETENV} ${_TERM_ENV} PKG_CACHE=${_CACHE_REPO} PKG_PATH=${_CACHE_REPO}:${_PKG_REPO}:${PACKAGE_REPOSITORY}/${NO_ARCH}/:${_PKG_PATH} ${_PKG_ADD} -n -q ${_PKG_ADD_FORCE} -r -D installed -D downgrade ${_PKGFILE${_S}} >/dev/null 2>&1; then \
+	@if ${SETENV} ${_TERM_ENV} PKG_CACHE=${_CACHE_REPO} TRUSTED_PKG_PATH=${_CACHE_REPO}:${_PKG_REPO}:${PACKAGE_REPOSITORY}/${NO_ARCH}/:${TRUSTED_PKG_PATH} PKG_PATH=${_PKG_PATH} ${_PKG_ADD} -n -q ${_PKG_ADD_FORCE} -r -D installed -D downgrade ${_PKGFILE${_S}} >/dev/null 2>&1; then \
 		${ECHO_MSG} "found"; \
 		exit 0; \
 	else \
@@ -1926,6 +1953,7 @@ ${_PACKAGE_COOKIE${_S}}:
 .  else
 	@${_MAKE} ${_PACKAGE_COOKIE_DEPS}
 # What PACKAGE normally does:
+	@${_MAKE} _internal-generate-readmes
 	@${ECHO_MSG} "===>  Building package for ${FULLPKGNAME${_S}}"
 	@${ECHO_MSG} "Create ${_PACKAGE_COOKIE${_S}}"
 	@cd ${.CURDIR} && \
@@ -2010,7 +2038,7 @@ makesum:
 	@mv -f ${CHECKSUM_FILE}{,.orig} 2>/dev/null || true
 	@${MAKE} fetch-all _MAKESUM=true
 .if !empty(MAKESUMFILES)
-	@cd ${DISTDIR} && cksum -b -a "${_CIPHER}" ${MAKESUMFILES} >> ${CHECKSUM_FILE}
+	@cd ${DISTDIR} && cksum -b -a "${_CIPHER}" -- ${MAKESUMFILES} >> ${CHECKSUM_FILE}
 	@cd ${DISTDIR} && \
 		for file in ${MAKESUMFILES}; do \
 			${_size_fragment} $$file $$file >> ${CHECKSUM_FILE}; \
@@ -2196,7 +2224,7 @@ _internal-all _internal-build _internal-checksum _internal-configure \
 	_internal-install _internal-install-all _internal-manpages-check \
 	_internal-package _internal-patch _internal-plist _internal-test \
 	_internal-subpackage _internal-subupdate _internal-uninstall \
-	_internal-update _internal-update-or-install \
+	_internal-update _internal-update-or-install _internal-generate-readmes \
 	_internal-update-or-install-all _internal-update-plist \
 	lib-depends-check port-lib-depends-check update-patches:
 .  if !defined(IGNORE_SILENT)
@@ -2357,6 +2385,7 @@ _extra_info += DEPPATHS${_s}="$$(${SETENV} FLAVOR=${FLAVOR:Q} SUBPACKAGE=${_s} P
 _internal-plist _internal-update-plist: _internal-fake ${_FAKESUDO_CHECK_COOKIE}
 	@${ECHO_MSG} "===>  Updating plist for ${FULLPKGNAME}${_MASTER}"
 	@mkdir -p ${PKGDIR}
+	@${_MAKE} _internal-generate-readmes
 	@DESTDIR=${WRKINST} \
 	PREFIX=${TRUEPREFIX} \
 	INSTALL_PRE_COOKIE=${_INSTALL_PRE_COOKIE} \
@@ -2389,7 +2418,7 @@ update-patches:
 
 .for _t in extract patch distpatch configure build all install fake \
 	subupdate fetch fetch-all checksum test prepare install-depends \
-	test-depends clean manpages-check plist update-plist \
+	test-depends clean manpages-check plist update-plist generate-readmes \
 	update update-or-install update-or-install-all package install-all
 .  if defined(_LOCK)
 ${_t}:
@@ -2477,7 +2506,7 @@ ${_WRKDIR_COOKIE}:
 		echo "*** $$0 was called without gettext-tools dependency ***" >&2\n\
 		exit 1\n' > ${WRKDIR}/bin/msgfmt
 	@chmod 555 ${WRKDIR}/bin/msgfmt
-.  for name in msgcat msginit
+.  for name in msgcat msginit autopoint
 	@ln -sf msgfmt ${WRKDIR}/bin/${name}
 .  endfor
 .endif
@@ -2607,6 +2636,12 @@ ${_PATCH_COOKIE}: ${_EXTRACT_COOKIE}
 # End of PATCH.
 .endif
 .if ${USE_WXNEEDED:L} == "yes"
+	@wrktmp=`df -P ${WRKOBJDIR} | awk 'END { print $$6 }'`; \
+	if ! mount | grep -q " $${wrktmp} .*wxallowed"; then \
+		echo "Fatal: ${WRKOBJDIR} must be on a wxallowed filesystem" \
+			"(in ${PKGPATH})" >&2; \
+		false; \
+	fi
 	@printf '#!/bin/sh\nexec /usr/bin/ld -z wxneeded "$$@"\n' > ${WRKDIR}/bin/ld
 	@chmod 555 ${WRKDIR}/bin/ld
 .endif
@@ -2788,22 +2823,26 @@ ${_FAKE_COOKIE}: ${_BUILD_COOKIE} ${_FAKESUDO_CHECK_COOKIE}
 .if target(_hook-post-install)
 	@${_SUDOMAKESYS} _hook-post-install ${FAKE_SETUP}
 .endif
+	@${_FAKESUDO} ${_MAKE_COOKIE} $@
+
+# XXX this is a separate step that is "always on" and doesn't generate
+# cookies
+_internal-generate-readmes: ${_FAKE_COOKIE}
 .if ${MULTI_PACKAGES} == "-"
-	@if test -e ${PKGDIR}/README; then \
-		r=${WRKINST}${_README_DIR}/${FULLPKGNAME}; \
+	@r=${WRKINST}${_README_DIR}/${FULLPKGNAME}; \
+	if test -e ${PKGDIR}/README; then \
 		echo "Installing ${PKGDIR}/README as $$r"; \
 		${_FAKESUDO} ${SUBST_CMD} ${_SHAREOWNGRP} -m ${SHAREMODE} -c ${PKGDIR}/README $$r; \
 	fi
 .else
 .  for _s in ${MULTI_PACKAGES}
-	@if test -e ${PKGDIR}/README${_s}; then \
-		r=${WRKINST}${_README_DIR}/${FULLPKGNAME${_s}}; \
+	@r=${WRKINST}${_README_DIR}/${FULLPKGNAME${_s}}; \
+	if test -e ${PKGDIR}/README${_s}; then \
 		echo "Installing ${PKGDIR}/README${_s} as $$r"; \
 		${_FAKESUDO} ${SUBST_CMD${_s}} ${_SHAREOWNGRP} -m ${SHAREMODE} -c ${PKGDIR}/README${_s} $$r; \
 	fi
 .  endfor
 .endif
-	@mkdir -p ${PKGDIR}
 	@cd ${PKGDIR} && for i in *.rc; do \
 		if test X"$$i" != "X*.rc"; then \
 			r=${WRKINST}${RCDIR}/$${i%.rc}; \
@@ -2811,8 +2850,6 @@ ${_FAKE_COOKIE}: ${_BUILD_COOKIE} ${_FAKESUDO_CHECK_COOKIE}
 			${_FAKESUDO} ${SUBST_CMD} ${_BINOWNGRP} -m ${BINMODE} -c $$i $$r; \
 		fi; \
 	done
-
-	@${_FAKESUDO} ${_MAKE_COOKIE} $@
 
 print-plist:
 	@${_PKG_CREATE} -n -q ${PKG_ARGS${SUBPACKAGE}} ${_PACKAGE_COOKIE${SUBPACKAGE}}
@@ -3098,18 +3135,12 @@ ${_i:L}-depends-list:
 # recursive depend targets
 
 print-package-signature print-update-signature:
-	@echo -n ${FULLPKGNAME${SUBPACKAGE}}
-.if !empty(_DEPRUNLIBS)
-	@${_cache_fragment}; cd ${.CURDIR} && ${MAKE} _print-package-signature-lib _print-package-signature-run| \
-		sort -u| \
-		while read i; do echo -n ",$$i"; done
-.else
-	@cd ${.CURDIR} && PKGPATH=${PKGPATH} ${MAKE} _print-package-signature-run | \
-		sort -u| \
-		while read i; do echo -n ",$$i"; done
-.endif
-	@echo
-
+	@if a=`SUBPACKAGE=${SUBPACKAGE} PKGPATH=${PKGPATH} ${MAKE} print-package-args`; \
+	then \
+		${_PKG_CREATE} -n -S $$a ${PKG_ARGS${SUBPACKAGE}} ${_PACKAGE_COOKIE${SUBPACKAGE}}; \
+	else \
+		exit 1; \
+	fi
 
 print-package-args: run-depends-args
 

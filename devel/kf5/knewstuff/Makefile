@@ -1,7 +1,8 @@
-# $OpenBSD: Makefile,v 1.3 2017/06/07 17:03:38 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/27 09:34:38 sthen Exp $
 
 COMMENT =		KDE framework for sharing additional application data
 DISTNAME =		knewstuff-${VERSION}
+REVISION =		1
 
 SHARED_LIBS +=  KF5NewStuff               2.0
 SHARED_LIBS +=  KF5NewStuffCore           1.0
@@ -10,7 +11,7 @@ WANTLIB += KF5Archive KF5Attica KF5Auth KF5Codecs KF5Completion
 WANTLIB += KF5ConfigCore KF5ConfigGui KF5ConfigWidgets KF5CoreAddons
 WANTLIB += KF5I18n KF5IconThemes KF5ItemViews KF5JobWidgets KF5KIOCore
 WANTLIB += KF5KIOWidgets KF5Service KF5SonnetUi KF5TextWidgets
-WANTLIB += KF5WidgetsAddons KF5XmlGui Qt5Core Qt5DBus Qt5Gui Qt5Network
+WANTLIB += KF5WidgetsAddons KF5XmlGui ${COMPILER_LIBCXX} Qt5Core Qt5DBus Qt5Gui Qt5Network
 WANTLIB += Qt5Qml Qt5Quick Qt5Widgets Qt5Xml m
 
 BUILD_DEPENDS =		devel/gettext-tools

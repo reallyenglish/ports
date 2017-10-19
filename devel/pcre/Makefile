@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.64 2017/05/31 20:16:49 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.67 2017/07/26 22:45:18 sthen Exp $
 
 COMMENT=	perl-compatible regular expression library
 
 DISTNAME=	pcre-8.40
+REVISION =	1
 
 SHARED_LIBS +=  pcre                 3.0      # 0.1
 SHARED_LIBS +=  pcre16               0.0      # 0.0
@@ -22,7 +23,7 @@ MAINTAINER=	Robert Nagy <robert@openbsd.org>
 # BSD
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c curses m readline ${LIBCXX}
+WANTLIB += c curses m readline ${COMPILER_LIBCXX}
 
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ARGS=		--enable-pcre8 \

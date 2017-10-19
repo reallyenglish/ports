@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.27 2017/04/10 11:45:24 sthen Exp $
+# $OpenBSD: Makefile,v 1.30 2017/07/28 00:03:46 espie Exp $
 
 COMMENT=	Qt-based 2D CAD system
 
 V=		2.0.5.0
 DISTNAME=	qcad-${V}-1-community.src
 PKGNAME=	qcad-${V}
-REVISION=	4
+REVISION=	5
 CATEGORIES=	cad graphics
 
 HOMEPAGE=	http://www.ribbonsoft.com/qcad.html
@@ -15,7 +15,7 @@ PERMIT_PACKAGE_CDROM=	Non-free data files
 PERMIT_PACKAGE_FTP=	Non-free data files
 PERMIT_DISTFILES_FTP=	Non-free data files
 
-WANTLIB=		X11 Xext c m pthread ${LIBCXX}
+WANTLIB=		X11 Xext c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES=	http://www.ribbonsoft.com/archives/qcad/
 
@@ -27,7 +27,8 @@ NO_TEST=	Yes
 PORTHOME=	${WRKDIR}
 
 MAKE_ENV+=	QTDIR=${MODQT_LIBDIR} \
-		MAKE=${MAKE_PROGRAM}
+		MAKE=${MAKE_PROGRAM} \
+		CC='${CC}' CXX='${CXX}'
 
 SUBST_VARS=	CXXFLAGS LOCALBASE MODQT_LIBDIR
 

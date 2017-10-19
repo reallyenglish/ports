@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.96 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.100 2017/09/22 21:37:18 sthen Exp $
 
 COMMENT=		RFC 2222 SASL (Simple Authentication and Security Layer)
 
 DISTNAME=		cyrus-sasl-2.1.26
-REVISION=		21
+REVISION=		24
 
 SHARED_LIBS +=  sasl2                3.0      # 3.0
 
@@ -79,7 +79,7 @@ PKG_ARGS=		-Dsql=0
 
 .if ${FLAVOR:Mmysql}
 LIB_DEPENDS +=		databases/mariadb
-WANTLIB+= m pthread ssl ${LIBCXX} z lib/mysql/mysqlclient
+WANTLIB+= m pthread ssl ${COMPILER_LIBCXX} z lib/mysql/mysqlclient
 .else
 CONFIGURE_ARGS +=	--without-mysql
 .endif
@@ -94,7 +94,7 @@ CONFIGURE_ARGS +=	--without-pgsql
 
 .if ${FLAVOR:Msqlite3}
 LIB_DEPENDS +=		databases/sqlite3
-WANTLIB += pthread sqlite3
+WANTLIB += m pthread sqlite3
 .else
 CONFIGURE_ARGS +=	--without-sqlite3
 .endif

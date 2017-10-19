@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.24 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.26 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT=	event-driven I/O for Ruby using the Reactor pattern
 
 DISTNAME=	eventmachine-1.2.0.1
 CATEGORIES=	net devel
+REVISION=	0
 
 HOMEPAGE=	http://rubyeventmachine.com/
 
@@ -12,7 +13,7 @@ PERMIT_PACKAGE_CDROM=	yes
 
 MODULES=	lang/ruby
 
-WANTLIB=	crypto ssl ${LIBCXX}
+WANTLIB=	crypto ssl ${COMPILER_LIBCXX}
 
 CONFIGURE_STYLE=ruby gem ext
 

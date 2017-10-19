@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.29 2017/04/10 11:46:35 sthen Exp $
+# $OpenBSD: Makefile,v 1.32 2017/07/26 22:45:32 sthen Exp $
 
 COMMENT=		text editor widget for FLTK
 
 V=			0.4.5
 DISTNAME=		fl_editor-${V}
 PKGNAME=		fleditor-${V}
-REVISION=		5
+REVISION =		7
 
 SHARED_LIBS=		fleditor 3.0
 CATEGORIES=		x11
@@ -15,7 +15,7 @@ HOMEPAGE=		http://www.robertk.com/source/
 # LPGL
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += m ${LIBCXX}
+WANTLIB += m ${COMPILER_LIBCXX}
 
 MASTER_SITES=		http://www.robertk.com/source/fl_editor/
 EXTRACT_SUFX=		.tgz

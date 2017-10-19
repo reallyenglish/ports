@@ -1,17 +1,19 @@
-# $OpenBSD: Makefile,v 1.63 2017/04/10 11:46:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.69 2017/09/16 22:56:41 jeremy Exp $
 
 # Runtime failures on i386 in IO#pos and IO#rewind
 ONLY_FOR_ARCHS = amd64
 
 COMMENT =	pure-Java implementation of the Ruby language
 
-V =		9.1.8.0
+V =		9.1.13.0
 DISTNAME =	jruby-bin-${V}
 PKGNAME =	jruby-${V}
 CATEGORIES =	lang lang/ruby
 DISTFILES =	${DISTNAME}.tar.gz \
 		jnr-jffi-1.2.2-0-g4c196bb.tar.gz:0 \
 		${JRUBY_LAUNCHER_GEM}:1
+
+REVISION =	0
 
 HOMEPAGE =	http://www.jruby.org/
 
@@ -20,7 +22,7 @@ MAINTAINER =	Jeremy Evans <jeremy@openbsd.org>
 # EPLv1/GPLv2/LGPLv2.1/Ruby/MIT/BSD/Apache/CPL
 PERMIT_PACKAGE_CDROM =	Yes
 
-MASTER_SITES =	http://jruby.org.s3.amazonaws.com/downloads/${V}/
+MASTER_SITES =	https://s3.amazonaws.com/jruby.org/downloads/${V}/
 MASTER_SITES0 =	http://www.distfiles.nl/
 MASTER_SITES1 =	${MASTER_SITE_RUBYGEMS}
 
@@ -29,7 +31,7 @@ MODJAVA_VER =	1.8+
 MODJAVA_JRERUN = Yes
 USE_GMAKE =	Yes
 
-WANTLIB =	c m pthread ${LIBCXX}
+WANTLIB =	c m pthread ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS =	devel/apache-ant \
 		shells/bash \

@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.96 2017/05/30 21:21:47 sthen Exp $
+# $OpenBSD: Makefile,v 1.100 2017/10/13 16:27:20 sthen Exp $
 
 COMMENT=	tty-based e-mail client
 
-DISTNAME=	mutt-1.8.3
+DISTNAME=	mutt-1.9.1
+REVISION=	0
 EPOCH=		3
 
 CATEGORIES=	mail
@@ -17,6 +18,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 WANTLIB+=	c crypto iconv idn intl qdbm ssl z
 
 MASTER_SITES=	http://ftp.mutt.org/pub/mutt/ \
+		https://ftp.osuosl.org/pub/mutt/ \
 		https://bitbucket.org/mutt/mutt/downloads/ \
 		ftp://ftp.mutt.org/pub/mutt/
 

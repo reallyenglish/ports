@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/10 11:45:26 sthen Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/26 22:45:18 sthen Exp $
 
 COMMENT =		library for creating GUIs for games and 3D applications
 
@@ -7,6 +7,7 @@ GH_ACCOUNT = 		MyGUI
 GH_PROJECT = 		mygui
 GH_TAGNAME = 		MyGUI${V}
 DISTNAME = 		mygui-${V}
+REVISION =              0
 
 SHARED_LIBS +=		MyGUIEngine 0.0
 SHARED_LIBS +=		MyGUI.OgrePlatform 0.0
@@ -21,7 +22,7 @@ MAINTAINER =		Kirill Bychkov <kirby@openbsd.org>
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += OgreMain boost_atomic-mt boost_chrono-mt boost_date_time-mt
-WANTLIB += boost_system-mt boost_thread-mt freetype m pthread ${LIBCXX}
+WANTLIB += boost_system-mt boost_thread-mt freetype m pthread ${COMPILER_LIBCXX}
 
 MODULES =		devel/cmake
 BUILD_DEPENDS =		devel/ois

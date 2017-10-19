@@ -1,11 +1,13 @@
-# $OpenBSD: Makefile,v 1.61 2017/05/15 14:37:41 sthen Exp $
+# $OpenBSD: Makefile,v 1.65 2017/09/14 09:30:50 sthen Exp $
 
 COMMENT =		ebook management application
 
+# XXX 3.x removes loads of bundled deps which need to be ported
 V =			2.85.1
 DISTNAME =		calibre-$V
 CATEGORIES =		textproc
 EXTRACT_SUFX =		.tar.xz
+REVISION =		3
 
 HOMEPAGE =		http://calibre-ebook.com/
 
@@ -17,7 +19,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 WANTLIB += EGL GL Qt5Core Qt5DBus Qt5Gui Qt5Widgets X11 Xext Xrender
 WANTLIB += chm crypto fontconfig freetype glib-2.0 gthread-2.0
 WANTLIB += icudata icui18n icuio icuuc intl m podofo pthread
-WANTLIB += z ${MODPY_WANTLIB}
+WANTLIB += z ${MODPY_WANTLIB} ${COMPILER_LIBCXX}
 
 MASTER_SITES =	https://github.com/kovidgoyal/calibre/releases/download/v$V/
 

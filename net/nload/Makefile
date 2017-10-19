@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT=		network traffic and bandwidth usage in real time
 
 DISTNAME=		nload-0.7.4
-REVISION=		1
+REVISION =		3
 CATEGORIES=		net
 
 HOMEPAGE=		http://www.roland-riegel.de/nload/
@@ -17,6 +17,6 @@ MASTER_SITES=		${HOMEPAGE}
 CONFIGURE_STYLE=	gnu
 SEPARATE_BUILD=		Yes
 
-WANTLIB=		c form m ncurses ${LIBCXX}
+WANTLIB=		c form m ncurses ${COMPILER_LIBCXX}
 
 .include <bsd.port.mk>

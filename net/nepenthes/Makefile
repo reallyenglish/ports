@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.44 2017/05/22 16:26:49 espie Exp $
+# $OpenBSD: Makefile,v 1.47 2017/07/26 22:45:28 sthen Exp $
 #
 
 COMMENT=	determine the malware activity on a network
 
 DISTNAME=	nepenthes-0.2.2
 EPOCH=		1
-REVISION=	5
+REVISION =	7
 
 CATEGORIES=	net
 
@@ -14,7 +14,7 @@ HOMEPAGE=	http://nepenthes.mwcollect.org/
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += adns c crypto curl m magic nghttp2 pcap pcre pq>=4 ssl ${LIBCXX}
+WANTLIB += adns c crypto curl m magic nghttp2 pcap pcre pq>=4 ssl ${COMPILER_LIBCXX}
 WANTLIB += z
 
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nepenthes/}

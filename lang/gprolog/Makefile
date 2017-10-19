@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.17 2017/06/08 15:25:57 espie Exp $
+# $OpenBSD: Makefile,v 1.19 2017/08/22 10:27:33 espie Exp $
 
 ONLY_FOR_ARCHS=		amd64 i386
 
@@ -6,6 +6,7 @@ COMMENT=		Prolog compiler
 
 DISTNAME=		gprolog-1.4.4
 CATEGORIES=		lang
+REVISION =		0
 
 HOMEPAGE=		http://www.gprolog.org/
 
@@ -18,6 +19,8 @@ WANTLIB=		c m
 
 MASTER_SITES=		${MASTER_SITE_GNU:=gprolog/}
 
+COMPILER =		base-gcc ports-gcc
+COMPILER_LANGS =	c
 AUTOCONF_VERSION=	2.68
 CONFIGURE_STYLE=	autoconf dest no-autoheader
 

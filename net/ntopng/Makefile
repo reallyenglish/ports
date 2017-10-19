@@ -1,10 +1,12 @@
-# $OpenBSD: Makefile,v 1.5 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/10/17 10:39:12 sthen Exp $
 
-COMMENT=	network traffic probe with web ui and dpi
+COMMENT=	network traffic probe with web ui and deep packet inspection
 
-DISTNAME=	ntopng-2.4-stable
-PKGNAME=	${DISTNAME:S/-stable//}
-REVISION=	0
+GH_ACCOUNT=	ntop
+GH_PROJECT=	ntopng
+GH_TAGNAME=	3.0
+NDPI_V=		2.0
+DISTFILES=	ntopng-${GH_TAGNAME}.tar.gz ndpi-${NDPI_V}.tar.gz:0
 
 CATEGORIES=	net
 
@@ -15,10 +17,11 @@ MAINTAINER=	Stuart Henderson <sthen@openbsd.org>
 # GPLv3+
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += GeoIP c crypto curl hiredis json-c luajit-5.1 m
-WANTLIB += mysqlclient pcap pthread rrd sqlite3 ssl ${LIBCXX} z zmq
+WANTLIB += ${COMPILER_LIBCXX}
+WANTLIB += GeoIP c crypto curl hiredis json-c luajit-5.1 m mysqlclient
+WANTLIB += pcap rrd sodium sqlite3 ssl z zmq
 
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ntop/}
+MASTER_SITES0=	https://github.com/ntop/ndpi/archive/${NDPI_V}/
 
 BUILD_DEPENDS=	devel/libtool \
 		${MODGNU_AUTOCONF_DEPENDS} \
@@ -52,6 +55,9 @@ AUTOMAKE_VERSION=	1.15
 MODGNU_CONFIG_GUESS_DIRS= ${WRKSRC} ${WRKSRC}/nDPI
 
 NO_TEST=	Yes
+
+post-extract:
+	cd ${WRKDIR}; mv nDPI-${NDPI_V} ${WRKSRC}/nDPI
 
 post-patch:
 	cd ${WRKSRC}; env AUTOCONF_VERSION=${AUTOCONF_VERSION} \

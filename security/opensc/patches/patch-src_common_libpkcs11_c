@@ -1,32 +1,20 @@
-$OpenBSD: patch-src_common_libpkcs11_c,v 1.1 2016/11/24 09:54:51 dcoppa Exp $
+$OpenBSD: patch-src_common_libpkcs11_c,v 1.3 2017/09/11 09:27:38 dcoppa Exp $
 
-commit 24346062c01ad690addb0db55b74f9c53b394c0c
-Author: Jakub Jelen <jjelen@redhat.com>
-Date:   Mon Nov 21 10:53:41 2016 +0100
+memory leak if C_UnloadModule() fails
+(upstream git commit e2fe24d56ac4a90bf140c670ebea02dee6a599d6)
 
-libpkcs11: Prevent double-free when the dlopen fails
-
-commit 12f402616050e6ac943217b2170e865c1a297e77
-Author: Jakuje <jakuje@gmail.com>
-Date:   Mon Oct 10 22:21:46 2016 +0200
-
-Fix Coverity remarks
-
---- src/common/libpkcs11.c.orig	Fri Jun  3 11:19:51 2016
-+++ src/common/libpkcs11.c	Thu Nov 24 10:06:56 2016
-@@ -56,10 +56,13 @@ C_LoadModule(const char *mspec, CK_FUNCTION_LIST_PTR_P
- 	rv = c_get_function_list(funcs);
- 	if (rv == CKR_OK)
+Index: src/common/libpkcs11.c
+--- src/common/libpkcs11.c.orig
++++ src/common/libpkcs11.c
+@@ -75,8 +75,9 @@ C_LoadModule(const char *mspec, CK_FUNCTION_LIST_PTR_P
  		return (void *) mod;
--	else
-+	else {
+ 	else {
  		fprintf(stderr, "C_GetFunctionList failed %lx", rv);
-+		C_UnloadModule((void *) mod);
-+		return NULL;
-+	}
+-		C_UnloadModule((void *) mod);
+-		return NULL;
++		rv = C_UnloadModule((void *) mod);
++		if (rv == CKR_OK)
++			mod = NULL; /* already freed */
+ 	}
  failed:
--	C_UnloadModule((void *) mod);
-+	free(mod);
- 	return NULL;
- }
- 
+ 	free(mod);

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.1622 2017/06/17 13:25:55 jasper Exp $
+# $OpenBSD: Makefile,v 1.1649 2017/10/16 21:36:43 remi Exp $
 
      SUBDIR =
      SUBDIR += ElectricFence
@@ -50,7 +50,6 @@
      SUBDIR += capstone
      SUBDIR += catalyst
      SUBDIR += catalyst-tutorial
-     SUBDIR += cargo
      SUBDIR += cargo-generate-vendor
      SUBDIR += cbmc
      SUBDIR += ccache
@@ -129,6 +128,7 @@
      SUBDIR += fox
      SUBDIR += frama-c
      SUBDIR += fribidi
+     SUBDIR += gas
      SUBDIR += gconf-editor
      SUBDIR += gconf2
      SUBDIR += gdb
@@ -156,7 +156,9 @@
      SUBDIR += gmc4cc
      SUBDIR += gmp
      SUBDIR += go-check-v1
+     SUBDIR += go-goptlib
      SUBDIR += go-tools
+     SUBDIR += go-sys
      SUBDIR += gobject-introspection
      SUBDIR += goffice
      SUBDIR += goffice08
@@ -375,7 +377,6 @@
      SUBDIR += libpeas
      SUBDIR += libplist
      SUBDIR += libproplist
-     SUBDIR += libqtelegram-aseman-edition
      SUBDIR += libregexp9
      SUBDIR += libsigc++-2
      SUBDIR += libsigsegv
@@ -466,7 +467,6 @@
      SUBDIR += mercurial
      SUBDIR += meson
      SUBDIR += metaauto
-     SUBDIR += mico
      SUBDIR += mingw
      SUBDIR += mk
      SUBDIR += mm
@@ -564,6 +564,7 @@
      SUBDIR += p5-Catalyst-Manual
      SUBDIR += p5-Catalyst-Plugin-C3
      SUBDIR += p5-Catalyst-Plugin-StackTrace
+     SUBDIR += p5-Check-ISA
      SUBDIR += p5-Class-Accessor
      SUBDIR += p5-Class-Accessor-Chained
      SUBDIR += p5-Class-Accessor-Grouped
@@ -607,8 +608,8 @@
      SUBDIR += p5-Class-Std
      SUBDIR += p5-Class-Std-Fast
      SUBDIR += p5-Class-Std-Utils
-     SUBDIR += p5-Class-Tiny
      SUBDIR += p5-Class-Throwable
+     SUBDIR += p5-Class-Tiny
      SUBDIR += p5-Class-Trigger
      SUBDIR += p5-Class-Unload
      SUBDIR += p5-Class-Virtual
@@ -781,6 +782,7 @@
      SUBDIR += p5-FileHandle-Unget
      SUBDIR += p5-Filesys-Statvfs
      SUBDIR += p5-Filter-Template
+     SUBDIR += p5-Forest
      SUBDIR += p5-FormValidator-Simple
      SUBDIR += p5-Fortran-Format
      SUBDIR += p5-FreezeThaw
@@ -804,7 +806,6 @@
      SUBDIR += p5-Hash-Util-FieldHash-Compat
      SUBDIR += p5-Heap
      SUBDIR += p5-Hook-LexWrap
-     SUBDIR += p5-I18N-LangTags
      SUBDIR += p5-IO-AIO
      SUBDIR += p5-IO-All
      SUBDIR += p5-IO-Capture
@@ -907,6 +908,7 @@
      SUBDIR += p5-MooseX-Role-Parameterized
      SUBDIR += p5-MooseX-Role-WithOverloading
      SUBDIR += p5-MooseX-SemiAffordanceAccessor
+     SUBDIR += p5-MooseX-Storage
      SUBDIR += p5-MooseX-Traits
      SUBDIR += p5-MooseX-Traits-Pluggable
      SUBDIR += p5-MooseX-Types
@@ -1023,8 +1025,8 @@
      SUBDIR += p5-Sub-Install
      SUBDIR += p5-Sub-Lambda
      SUBDIR += p5-Sub-Name
-     SUBDIR += p5-Sub-Quote
      SUBDIR += p5-Sub-Override
+     SUBDIR += p5-Sub-Quote
      SUBDIR += p5-Sub-Uplevel
      SUBDIR += p5-Switch
      SUBDIR += p5-Symbol-Global-Name
@@ -1061,6 +1063,8 @@
      SUBDIR += p5-Test-Command-Simple
      SUBDIR += p5-Test-Corpus-Audio-MPD
      SUBDIR += p5-Test-Deep
+     SUBDIR += p5-Test-Deep-JSON
+     SUBDIR += p5-Test-Deep-Type
      SUBDIR += p5-Test-Differences
      SUBDIR += p5-Test-DistManifest
      SUBDIR += p5-Test-Distribution
@@ -1072,7 +1076,6 @@
      SUBDIR += p5-Test-File-ShareDir
      SUBDIR += p5-Test-Group
      SUBDIR += p5-Test-HTML-Tidy
-     SUBDIR += p5-Test-Harness
      SUBDIR += p5-Test-Inline
      SUBDIR += p5-Test-Inter
      SUBDIR += p5-Test-JSON
@@ -1110,7 +1113,6 @@
      SUBDIR += p5-Test-SubCalls
      SUBDIR += p5-Test-Taint
      SUBDIR += p5-Test-TempDir
-     SUBDIR += p5-Test-Tester
      SUBDIR += p5-Test-Time
      SUBDIR += p5-Test-TrailingSpace
      SUBDIR += p5-Test-Trap
@@ -1125,7 +1127,6 @@
      SUBDIR += p5-Test-XML
      SUBDIR += p5-Test-YAML
      SUBDIR += p5-Test-YAML-Valid
-     SUBDIR += p5-Test-use-ok
      SUBDIR += p5-Text-FixEOL
      SUBDIR += p5-Text-vFile-asData
      SUBDIR += p5-Throwable
@@ -1316,6 +1317,7 @@
      SUBDIR += py-distutils-extra
      SUBDIR += py-distutils-extra,python3
      SUBDIR += py-docopt
+     SUBDIR += py-docopt,python3
      SUBDIR += py-doit
      SUBDIR += py-dtopt
      SUBDIR += py-dulwich
@@ -1330,8 +1332,12 @@
      SUBDIR += py-extremes
      SUBDIR += py-extras
      SUBDIR += py-extras,python3
+     SUBDIR += py-fasteners
+     SUBDIR += py-fasteners,python3
      SUBDIR += py-fastimport
      SUBDIR += py-fastimport,python3
+     SUBDIR += py-flexmock
+     SUBDIR += py-flexmock,python3
      SUBDIR += py-fpconst
      SUBDIR += py-freezegun
      SUBDIR += py-freezegun,python3
@@ -1341,6 +1347,7 @@
      SUBDIR += py-futures
      SUBDIR += py-gdata
      SUBDIR += py-gevent
+     SUBDIR += py-gevent,python3
      SUBDIR += py-gitdb
      SUBDIR += py-gitpython
      SUBDIR += py-gobject
@@ -1353,6 +1360,7 @@
      SUBDIR += py-hachoir-metadata
      SUBDIR += py-hachoir-parser
      SUBDIR += py-hg-git
+     SUBDIR += py-hgnested
      SUBDIR += py-hgsubversion
      SUBDIR += py-hgtools
      SUBDIR += py-hgtools,python3
@@ -1366,10 +1374,15 @@
      SUBDIR += py-incremental
      SUBDIR += py-incremental,python3
      SUBDIR += py-ioflo
+     SUBDIR += py-ioflo,python3
      SUBDIR += py-ipykernel
      SUBDIR += py-ipykernel,python3
      SUBDIR += py-ipython_genutils
      SUBDIR += py-ipython_genutils,python3
+     SUBDIR += py-iso3166
+     SUBDIR += py-iso3166,python3
+     SUBDIR += py-iso639
+     SUBDIR += py-iso639,python3
      SUBDIR += py-isodate
      SUBDIR += py-isodate,python3
      SUBDIR += py-isort
@@ -1401,6 +1414,8 @@
      SUBDIR += py-modulegraph
      SUBDIR += py-monthdelta
      SUBDIR += py-mox
+     SUBDIR += py-monotonic
+     SUBDIR += py-monotonic,python3
      SUBDIR += py-mxDateTime
      SUBDIR += py-nbconvert
      SUBDIR += py-nbconvert,python3
@@ -1438,6 +1453,7 @@
      SUBDIR += py-pretend
      SUBDIR += py-pretend,python3
      SUBDIR += py-prioritized_methods
+     SUBDIR += py-progress
      SUBDIR += py-progressbar
      SUBDIR += py-prompt_toolkit
      SUBDIR += py-prompt_toolkit,python3
@@ -1454,6 +1470,7 @@
      SUBDIR += py-robotframework
      SUBDIR += py-robotframework,python3
      SUBDIR += py-rope
+     SUBDIR += py-ruamel.ordereddict
      SUBDIR += py-ruledispatch
      SUBDIR += py-send2trash
      SUBDIR += py-serial
@@ -1467,6 +1484,7 @@
      SUBDIR += py-setuptools_scm
      SUBDIR += py-setuptools_scm,python3
      SUBDIR += py-sh
+     SUBDIR += py-sh,python3
      SUBDIR += py-silc
      SUBDIR += py-simpleeval
      SUBDIR += py-simpleeval,python3
@@ -1494,8 +1512,14 @@
      SUBDIR += py-test-capturelog,python3
      SUBDIR += py-test-cov
      SUBDIR += py-test-cov,python3
+     SUBDIR += py-test-expect
+     SUBDIR += py-test-expect,python3
+     SUBDIR += py-test-localserver
+     SUBDIR += py-test-localserver,python3
      SUBDIR += py-test-runner
      SUBDIR += py-test-runner,python3
+     SUBDIR += py-test-subtesthack
+     SUBDIR += py-test-subtesthack,python3
      SUBDIR += py-test-mock
      SUBDIR += py-test-mock,python3
      SUBDIR += py-test-httpbin
@@ -1565,6 +1589,7 @@
      SUBDIR += pyrex
      SUBDIR += pysvn
      SUBDIR += pyusb
+     SUBDIR += qbs
      SUBDIR += qgit
      SUBDIR += qjson
      SUBDIR += qt-creator
@@ -1582,7 +1607,6 @@
      SUBDIR += rlog
      SUBDIR += ruby-abstract
      SUBDIR += ruby-arrayfields
-     SUBDIR += ruby-atomic,ruby22
      SUBDIR += ruby-atomic,ruby23
      SUBDIR += ruby-atomic,ruby24
      SUBDIR += ruby-bacon
@@ -1601,7 +1625,6 @@
      SUBDIR += ruby-diff-lcs
      SUBDIR += ruby-extlib
      SUBDIR += ruby-fast_gettext
-     SUBDIR += ruby-ffi,ruby22
      SUBDIR += ruby-ffi,ruby23
      SUBDIR += ruby-ffi,ruby24
      SUBDIR += ruby-ffi-inliner
@@ -1619,7 +1642,6 @@
      SUBDIR += ruby-isolate
      SUBDIR += ruby-jeweler
      SUBDIR += ruby-json_pure
-     SUBDIR += ruby-kgio,ruby22
      SUBDIR += ruby-kgio,ruby23
      SUBDIR += ruby-kgio,ruby24
      SUBDIR += ruby-locale
@@ -1628,29 +1650,23 @@
      SUBDIR += ruby-minitest
      SUBDIR += ruby-mocha
      SUBDIR += ruby-mspec
-     SUBDIR += ruby-narray,ruby22
      SUBDIR += ruby-narray,ruby23
      SUBDIR += ruby-narray,ruby24
-     SUBDIR += ruby-ncurses,ruby22
      SUBDIR += ruby-ncurses,ruby23
      SUBDIR += ruby-ncurses,ruby24
      SUBDIR += ruby-needle
      SUBDIR += ruby-ole
      SUBDIR += ruby-open4
      SUBDIR += ruby-polyglot
-     SUBDIR += ruby-prof,ruby22
      SUBDIR += ruby-prof,ruby23
      SUBDIR += ruby-prof,ruby24
-     SUBDIR += ruby-puppet_forge,ruby22
      SUBDIR += ruby-puppet_forge,ruby23
      SUBDIR += ruby-puppet_forge,ruby24
-     SUBDIR += ruby-racc,ruby22
      SUBDIR += ruby-racc,ruby23
      SUBDIR += ruby-racc,ruby24
      SUBDIR += ruby-rake
      SUBDIR += ruby-rake-compiler
      SUBDIR += ruby-rake-remote_task
-     SUBDIR += ruby-rb-gsl,ruby22
      SUBDIR += ruby-rb-gsl,ruby23
      SUBDIR += ruby-rb-gsl,ruby24
      SUBDIR += ruby-ref
@@ -1664,11 +1680,9 @@
      SUBDIR += ruby-semantic_puppet
      SUBDIR += ruby-sexp_processor
      SUBDIR += ruby-stringex
-     SUBDIR += ruby-subset_sum,ruby22
      SUBDIR += ruby-subset_sum,ruby23
      SUBDIR += ruby-subset_sum,ruby24
      SUBDIR += ruby-systemu
-     SUBDIR += ruby-therubyracer,ruby22
      SUBDIR += ruby-therubyracer,ruby23
      SUBDIR += ruby-therubyracer,ruby24
      SUBDIR += ruby-thor
@@ -1677,7 +1691,6 @@
      SUBDIR += ruby-trollop
      SUBDIR += ruby-uuid
      SUBDIR += ruby-uuidtools
-     SUBDIR += ruby-yajl,ruby22
      SUBDIR += ruby-yajl,ruby23
      SUBDIR += ruby-yajl,ruby24
      SUBDIR += ruby-zentest
@@ -1738,6 +1751,7 @@
      SUBDIR += udis86
      SUBDIR += unibilium
      SUBDIR += universal-ctags
+     SUBDIR += universal-ctags,iconv
      SUBDIR += utfcpp
      SUBDIR += uthash
      SUBDIR += uuid
@@ -1752,7 +1766,6 @@
      SUBDIR += xdg-user-dirs
      SUBDIR += xdg-utils
      SUBDIR += xmake
-     SUBDIR += xulrunner
      SUBDIR += yaml-cpp
      SUBDIR += yasm
      SUBDIR += zeal

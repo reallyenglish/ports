@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.23 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.25 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT=		Python bindings to TagLib audio file tag library
 
 MODPY_EGG_VERSION =	2013.1
 DISTNAME =		tagpy-${MODPY_EGG_VERSION}
 PKGNAME =		py-${DISTNAME}
-REVISION =		6
+REVISION =		7
 
 CATEGORIES =		audio devel
 
@@ -14,7 +14,7 @@ HOMEPAGE =		http://mathema.tician.de/software/tagpy
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += boost_python${MODPY_MAJOR_VERSION:M3}-mt m pthread ${LIBCXX} tag ${MODPY_WANTLIB}
+WANTLIB += boost_python${MODPY_MAJOR_VERSION:M3}-mt m pthread ${COMPILER_LIBCXX} tag ${MODPY_WANTLIB}
 
 MODPY_PI =		Yes
 

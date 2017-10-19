@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.101 2017/04/10 11:46:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.105 2017/08/19 23:55:56 kili Exp $
 
 COMMENT-main=		mail and news client
 COMMENT-bogofilter=	bogofilter plugin
@@ -7,18 +7,15 @@ COMMENT-spamassassin=	spamassassin plugin
 COMMENT-pdfviewer=	pdfviewer plugin
 COMMENT-gdata=		gdata plugin
 
-V=			3.14.1
+V=			3.15.0
 DISTNAME=		claws-mail-${V}
 PKGNAME-main=		${DISTNAME}
 PKGNAME-bogofilter=	claws-mail-bogofilter-${V}
 PKGNAME-spamassassin=	claws-mail-spamassassin-${V}
 PKGNAME-pdfviewer=	claws-mail-pdfviewer-${V}
 PKGNAME-gdata=		claws-mail-gdata-${V}
-REVISION-main=		1
-REVISION-pdfviewer=	1
-REVISION-bogofilter=	0
-REVISION-gdata=		0
-REVISION-spamassassin=	0
+
+REVISION-main=		0
 
 CATEGORIES=		mail news
 
@@ -54,10 +51,11 @@ WANTLIB += pthread-stubs sasl2 ssl xcb xcb-render xcb-shm z
 
 WANTLIB-main =  ${WANTLIB}
 WANTLIB-main += ICE SM X11-xcb archive assuan bz2 c canberra canberra-gtk
-WANTLIB-main += dbus-1 dbus-glib-1 enchant gmp gnutls gpg-error gpgme
-WANTLIB-main += hogweed idn2 ltdl lz4 lzma lzo2 nettle notify ogg p11-kit
-WANTLIB-main += perl startup-notification-1 ${LIBCXX} tasn1 unistring vorbis
-WANTLIB-main += vorbisfile xcb-util
+WANTLIB-main += croco-0.6 dbus-1 dbus-glib-1 enchant gmp gnutls gpg-error gpgme
+WANTLIB-main += hogweed ical icalss icalvcal icui18n icuuc idn2 ltdl lz4
+WANTLIB-main += lzma nettle notify ogg p11-kit perl rsvg-2
+WANTLIB-main += startup-notification-1 ${COMPILER_LIBCXX} tasn1 unistring vorbis
+WANTLIB-main += vorbisfile xcb-util xml2
 
 WANTLIB-gdata = ${WANTLIB}
 WANTLIB-gdata += gck-1 gcr-base-3 gcrypt gdata goa-1.0 gpg-error json-glib-1.0
@@ -85,6 +83,7 @@ LIB_DEPENDS-main=	${LIB_DEPENDS} \
 			devel/libnotify \
 			security/gnutls>=2.2 \
 			security/gpgme \
+			textproc/libical \
 			x11/dbus-glib
 
 LIB_DEPENDS-pdfviewer=	${LIB_DEPENDS} \

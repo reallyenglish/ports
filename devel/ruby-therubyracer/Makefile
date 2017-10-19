@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.9 2017/04/10 11:45:27 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:18 sthen Exp $
 
 BROKEN =	port is holding back updates to lang/libv8
 
 COMMENT =	embeds the V8 javascript interpreter into ruby
 
 DISTNAME =	therubyracer-0.11.0
-REVISION =	3
+REVISION =	4
 CATEGORIES =	devel
 
 HOMEPAGE=	https://github.com/cowboyd/therubyracer
@@ -13,7 +13,7 @@ HOMEPAGE=	https://github.com/cowboyd/therubyracer
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =	pthread ${LIBCXX} v8
+WANTLIB =	pthread ${COMPILER_LIBCXX} v8
 MODULES =	lang/ruby
 CONFIGURE_STYLE = ruby gem ext
 

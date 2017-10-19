@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.18 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.20 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT=	city simulation game
 
 DISTNAME=	lincity-ng-2.0
-REVISION =	6
+REVISION =	7
 EXTRACT_SUFX=	.tar.bz2
 CATEGORIES=	games x11
 
@@ -14,7 +14,7 @@ MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=lincity-ng.berlios/}
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	GL SDL X11 c m pthread pthread-stubs ${LIBCXX} xcb z \
+WANTLIB=	GL SDL X11 c m pthread pthread-stubs ${COMPILER_LIBCXX} xcb z \
 		SDL_gfx SDL_image SDL_mixer SDL_ttf physfs xml2
 
 MODULES=	devel/gettext

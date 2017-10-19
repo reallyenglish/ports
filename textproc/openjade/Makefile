@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.28 2017/04/15 20:33:04 naddy Exp $
+# $OpenBSD: Makefile,v 1.30 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT=	object-oriented DSSSL engine
 
 DISTNAME=	openjade-1.3.3-pre1
 PKGNAME=	openjade-1.3.3pre1
-REVISION=	3
+REVISION=	4
 CATEGORIES=	textproc
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=openjade/}
 
@@ -18,7 +18,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MODULES=		devel/gettext
 LIB_DEPENDS=		textproc/opensp
-WANTLIB=		c m pthread ${LIBCXX} osp
+WANTLIB=		c m pthread ${COMPILER_LIBCXX} osp
 
 CONFIGURE_STYLE=	gnu
 USE_GMAKE=		Yes

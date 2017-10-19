@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.31 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.37 2017/08/21 14:33:54 ajacoutot Exp $
 
 COMMENT=		generic spell checking library
 
@@ -6,7 +6,12 @@ V=			1.6.1
 GH_ACCOUNT=		AbiWord
 GH_PROJECT=		enchant
 GH_TAGNAME=		enchant-${V:S/./-/g}
-PKGNAME=		${GH_PROJECT}-${V}
+REVISION=		1
+
+# XXX needed for portroach (DISTNAME must match the GH_PROJECT-GH_TAGNAME)
+MASTER_SITES=		https://github.com/AbiWord/enchant/releases/download/${GH_PROJECT}-${V:S/./-/g}/
+DISTNAME=		${GH_PROJECT}-${V}
+WRKDIST=		${WRKDIR}/${DISTNAME}
 
 SHARED_LIBS +=  enchant              6.1      # 7.1
 

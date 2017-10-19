@@ -1,17 +1,17 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:46:19 sthen Exp $ 
+# $OpenBSD: Makefile,v 1.8 2017/07/26 22:45:21 sthen Exp $ 
 COMMENT =		arcade-puzzle game
 V = 			0.3.2
 DISTNAME =		jag-${V}
 CATEGORIES =		games
 HOMEPAGE =		http://jag.xlabsoft.com
-REVISION =		0
+REVISION =		1
 
 # GPLv3
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL ICE QtGui QtOpenGL QtXml SDL SDL_mixer SM X11 Xext
 WANTLIB += Xi Xinerama Xrandr Xrender c fontconfig freetype m
-WANTLIB += pthread ${LIBCXX}
+WANTLIB += pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES = 		http://jag.xlabsoft.com/files/
 DISTFILES = 		jag-${V}-src.zip jag-${V}-data.zip

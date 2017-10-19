@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.22 2017/04/17 07:31:50 jasper Exp $
+# $OpenBSD: Makefile,v 1.24 2017/09/07 12:29:31 ajacoutot Exp $
 
 COMMENT=		GTK+3 remote desktop client
 
 V=			1.1.2
 DISTNAME=		remmina-${V}
+REVISION=		1
 
 GH_TAGNAME=		v${V}
 GH_PROJECT=		Remmina
@@ -30,7 +31,7 @@ BUILD_DEPENDS=		devel/gettext-tools
 
 LIB_DEPENDS=		devel/gettext \
 			devel/vte3 \
-			net/avahi,-gtk3,no_mono \
+			net/avahi,,-gtk3 \
 			net/libvncserver \
 			security/libssh \
 			x11/freerdp \

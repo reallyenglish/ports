@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.41 2017/04/10 11:45:24 sthen Exp $
+# $OpenBSD: Makefile,v 1.44 2017/07/26 22:45:16 sthen Exp $
 
 COMMENT =		audio player daemon with library management
 BROKEN-sparc64 =	waf build goes into an infinite loop
@@ -6,7 +6,7 @@ BROKEN-sparc64 =	waf build goes into an infinite loop
 V =			0.8
 DISTNAME =		xmms2-${V}DrO_o
 PKGNAME =		xmms2-${V}
-REVISION =		6
+REVISION =		7
 
 SHARED_LIBS +=		xmmsclient++		2.0 # 4.0.0
 SHARED_LIBS +=		xmmsclient++-glib	1.0 # 1.0.0
@@ -25,7 +25,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 WANTLIB += FLAC ao avahi-client avahi-common avahi-glib avcodec
 WANTLIB += avutil c curl gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0
 WANTLIB += gthread-2.0 jack m mad ncurses ogg pcre perl pthread readline
-WANTLIB += sndfile speex sqlite3 ${LIBCXX} vorbis vorbisfile
+WANTLIB += sndfile speex sqlite3 ${COMPILER_LIBCXX} vorbis vorbisfile
 WANTLIB += vorbisidec vpx x264 xml2 opus swresample x265 ${MODPY_WANTLIB}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=xmms2/}
@@ -64,7 +64,8 @@ pre-configure:
 # Disable speex and sun because they are broken
 # Disable shared memory support for visualization because it requires semtimedop()
 do-configure:
-	cd ${WRKSRC} && PYTHON=${MODPY_BIN} ${MODPY_BIN} ./waf configure \
+	cd ${WRKSRC} && PYTHON=${MODPY_BIN} CXX='${CXX}' CC='${CC}' \
+	    ${MODPY_BIN} ./waf configure \
 		--prefix=${PREFIX} \
 		--mandir=${PREFIX}/man \
 		--conf-prefix=${PREFIX} \

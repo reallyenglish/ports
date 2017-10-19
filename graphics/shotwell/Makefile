@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.80 2017/06/02 07:20:02 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.84 2017/09/23 11:41:31 sthen Exp $
 
 COMMENT =		digital photo organizer
 
-GNOME_VERSION =		0.26.2
+GNOME_VERSION =		0.26.3
 GNOME_PROJECT =		shotwell
+REVISION =		0
 
 CATEGORIES =		graphics
 
@@ -18,7 +19,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 WANTLIB += EGL GL ICE SM X11 X11-xcb Xcomposite Xcursor Xdamage
 WANTLIB += Xext Xfixes Xi Xinerama Xrandr Xrender Xt Xxf86vm atk-1.0
 WANTLIB += atk-bridge-2.0 atspi c cairo cairo-gobject crypto curl
-WANTLIB += dbus-1 drm enchant epoxy $(LIBECXX) exif exiv2 expat ffi
+WANTLIB += dbus-1 drm enchant epoxy $(COMPILER_LIBCXX) exif exiv2 expat ffi
 WANTLIB += fontconfig freetype gbm gck-1 gcr-base-3 gcr-ui-3 gcrypt
 WANTLIB += gdata gdk-3 gdk_pixbuf-2.0 gee-0.8 gexiv2 gio-2.0 glapi
 WANTLIB += glib-2.0 gmodule-2.0 goa-1.0 gobject-2.0 gpg-error
@@ -30,9 +31,11 @@ WANTLIB += jasper javascriptcoregtk-4.0 jpeg json-glib-1.0 lcms2
 WANTLIB += ltdl lzma m nghttp2 notify nspr4 nss3 oauth orc-0.4
 WANTLIB += p11-kit pango-1.0 pangocairo-1.0 pangoft2-1.0 pcre
 WANTLIB += pixman-1 plc4 plds4 png pthread pthread-stubs raw secret-1
-WANTLIB += smime3 softokn3 soup-2.4 sqlite3 ssl ssl3 ${LIBCXX} webkit2gtk-4.0
+WANTLIB += smime3 softokn3 soup-2.4 sqlite3 ssl ssl3 ${LIBECXX} webkit2gtk-4.0
 WANTLIB += webp xcb xcb-dri2 xcb-glx xcb-render xcb-shm xcb-xfixes
 WANTLIB += xml2 xslt z
+WANTLIB += GLESv2 gstallocators-1.0 gstbadallocators-1.0 gstgl-1.0
+WANTLIB += tasn1
 
 MODULES =		devel/dconf \
 			x11/gnome

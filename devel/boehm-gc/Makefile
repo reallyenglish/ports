@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.65 2017/04/15 14:02:46 naddy Exp $
+# $OpenBSD: Makefile,v 1.67 2017/07/26 22:45:17 sthen Exp $
 
 COMMENT-main=	garbage collection and memory leak detection for C and C++
 COMMENT-atomic=	access to hardware provided atomic memory operations
@@ -10,7 +10,8 @@ DISTNAME=	gc-${VERSION}
 
 PKGNAME-atomic=	libatomic_ops-${LIBAO_VERSION}
 PKGNAME-main=	boehm-gc-${VERSION}
-REVISION-main=	0
+REVISION-main=	1
+REVISION-atomic=0
 
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 		libatomic_ops-${LIBAO_VERSION}${EXTRACT_SUFX}
@@ -34,7 +35,7 @@ NOT_FOR_ARCHS=	m88k
 
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB-main += m pthread ${LIBCXX}
+WANTLIB-main += m pthread ${COMPILER_LIBCXX}
 
 MAKE_ENV=	CP="cp" \
 		INSTALL_DATA="${INSTALL_DATA}" \

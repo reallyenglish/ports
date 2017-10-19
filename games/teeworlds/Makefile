@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.21 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.23 2017/07/26 22:45:22 sthen Exp $
 
 # Crashes on strict-alignment archs, see: src/base/system.c:164
 ONLY_FOR_ARCHS=	amd64 i386 powerpc
@@ -9,6 +9,7 @@ V=		0.6.4
 DISTNAME=	teeworlds-${V}-src
 PKGNAME=	teeworlds-${V}
 CATEGORIES=	games
+REVISION=	0
 
 HOMEPAGE=	http://www.teeworlds.com/
 
@@ -23,7 +24,7 @@ DISTFILES=	${DISTNAME}${EXTRACT_SUFX} bam-${BAM_VERSION}${EXTRACT_SUFX}
 # BSD-like
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	GL GLU SDL X11 c freetype m pthread ${LIBCXX} wavpack z
+WANTLIB=	GL GLU SDL X11 c freetype m pthread ${COMPILER_LIBCXX} wavpack z
 
 LIB_DEPENDS=	audio/wavpack \
 		devel/sdl

@@ -1,7 +1,8 @@
-$OpenBSD: patch-chrome_browser_extensions_BUILD_gn,v 1.7 2017/04/28 14:21:00 robert Exp $
---- chrome/browser/extensions/BUILD.gn.orig.port	Wed Apr 19 21:06:29 2017
-+++ chrome/browser/extensions/BUILD.gn	Thu Apr 27 19:55:59 2017
-@@ -1133,6 +1133,10 @@ static_library("extensions") {
+$OpenBSD: patch-chrome_browser_extensions_BUILD_gn,v 1.10 2017/10/08 16:02:46 robert Exp $
+Index: chrome/browser/extensions/BUILD.gn
+--- chrome/browser/extensions/BUILD.gn.orig
++++ chrome/browser/extensions/BUILD.gn
+@@ -1129,6 +1129,10 @@ static_library("extensions") {
      defines += [ "ENABLE_HOTWORDING" ]
    }
  
@@ -11,4 +12,4 @@ $OpenBSD: patch-chrome_browser_extensions_BUILD_gn,v 1.7 2017/04/28 14:21:00 rob
 +
    if (enable_service_discovery) {
      sources += [
-       "api/mdns/dns_sd_delegate.cc",
+       "api/mdns/mdns_api.cc",

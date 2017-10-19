@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.5 2017/04/15 14:51:08 jasper Exp $
+# $OpenBSD: Makefile,v 1.7 2017/08/04 17:36:56 sthen Exp $
 
 BROKEN-macppc =			fontforge doesnt validate fonts
 BROKEN-sparc64 =		fontforge doesnt validate fonts

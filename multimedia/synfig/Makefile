@@ -1,7 +1,7 @@
-# $OpenBSD: Makefile,v 1.12 2017/05/31 08:08:16 espie Exp $
+# $OpenBSD: Makefile,v 1.17 2017/09/25 21:33:39 sthen Exp $
 
 COMMENT =		2D animation software
-REVISION =		4
+REVISION =		7
 
 V=			1.0.1
 DISTNAME =		synfig-$V
@@ -25,7 +25,7 @@ WANTLIB += gmodule-2.0 gobject-2.0 graphite2 gthread-2.0 harfbuzz
 WANTLIB += jbig jpeg lcms2 ltdl lzma m mlt mlt++ mng openjp2 pango-1.0
 WANTLIB += pangocairo-1.0 pangoft2-1.0 pcre pixman-1 png pthread
 WANTLIB += pthread-stubs sigc-2.0 tiff webp xcb xcb-render xcb-shm
-WANTLIB += xml++-2.6 xml2 z ${LIBECXX}
+WANTLIB += xml++-2.6 xml2 z boost_system-mt lcms ${COMPILER_LIBCXX}
 
 MASTER_SITES=		http://download.tuxfamily.org/synfig/releases/${V}/
 
@@ -45,13 +45,12 @@ LIB_DEPENDS =		archivers/xz \
 			multimedia/mlt \
 			textproc/libxml++
 
-# .libs/libsynfig.so.0.0: undefined reference to `lt_libltdlc_LTX_preloaded_symbols'
-USE_LIBTOOL=		gnu
-
+# XXX crash during multimedia/synfigstudio build with default -O2
+CXXFLAGS+=		-O1 -std=c++11
 CONFIGURE_ENV =		CPPFLAGS="-I${LOCALBASE}/include" \
-			CXXFLAGS="-std=c++11" \
 			LDFLAGS="-L${LOCALBASE}/lib"
-CONFIGURE_STYLE =	gnu
+CONFIGURE_STYLE =	autoconf
+AUTOCONF_VERSION =	2.69
 CONFIGURE_ARGS =	--without-included-ltdl
 
 FAKE_FLAGS =		sysconfdir=${PREFIX}/share/examples/synfig

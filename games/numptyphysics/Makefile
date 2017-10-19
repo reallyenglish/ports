@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.28 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.31 2017/08/11 09:46:58 dcoppa Exp $
 
 COMMENT-main =		physics-based drawing puzzle game
 COMMENT-npcomplete =	extra levels for physics-based drawing puzzle game
@@ -6,15 +6,13 @@ COMMENT-npcomplete =	extra levels for physics-based drawing puzzle game
 DISTNAME =		numptyphysics-0.3.r20100916
 PKGNAME-main =		${DISTNAME}
 PKGNAME-npcomplete =	npcomplete-0.0.r20100124
-REVISION-main =		1
-REVISION-npcomplete =	0
+REVISION-main =		3
+REVISION-npcomplete =	2
 
 MULTI_PACKAGES =	-main -npcomplete
 
 EXTRACT_SUFX =	.tar.bz2
 CATEGORIES =	games
-
-MAINTAINER =	David Coppa <dcoppa@openbsd.org>
 
 HOMEPAGE =	http://numptyphysics.garage.maemo.org/
 
@@ -27,7 +25,7 @@ DISTFILES =	${DISTNAME}${EXTRACT_SUFX} \
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB-main =		SDL SDL_image SDL_ttf X11 c m \
-			pthread ${LIBCXX} z
+			pthread ${COMPILER_LIBCXX} z
 
 RUN_DEPENDS-main =	devel/desktop-file-utils \
 			x11/gtk+3,-guic

@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.22 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.25 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT=		simple tcp re-engineering tool
 
 DISTNAME=		tcpreen-1.4.4
-REVISION=		1
+REVISION =		3
 CATEGORIES=		net
 
 HOMEPAGE=		http://www.remlab.net/tcpreen/
@@ -14,7 +14,7 @@ MASTER_SITES=		http://www.remlab.net/files/tcpreen/stable/
 
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
-WANTLIB=		c m ${LIBCXX} 
+WANTLIB=		c m ${COMPILER_LIBCXX} 
 
 EXTRACT_SUFX=		.tar.bz2
 

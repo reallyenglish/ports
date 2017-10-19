@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.10 2017/04/10 11:46:18 sthen Exp $
+# $OpenBSD: Makefile,v 1.12 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT=	remake of Konami's F1-Spirit
 
 DISTNAME=	f1spirit.src_0.rc9-1615
 PKGNAME=	${DISTNAME:S/.src_0.rc9-/-0./}
-REVISION =	2
+REVISION =	3
 WRKDIST=	${WRKDIR}/${DISTNAME:S/.src_0.rc9-/-0.rc9./}
 
 EXTRACT_SUFX=	.tgz
@@ -17,7 +17,7 @@ MASTER_SITES=	http://braingames.jorito.net/f1spirit/
 PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB+= GL GLU SDL SDL_image SDL_mixer SDL_net c crypto curl m nghttp2
-WANTLIB+= pthread ssl ${LIBCXX} z
+WANTLIB+= pthread ssl ${COMPILER_LIBCXX} z
 
 NO_TEST=	Yes
 USE_GMAKE=	Yes

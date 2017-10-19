@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.10 2017/04/10 11:46:20 sthen Exp $
+# $OpenBSD: Makefile,v 1.12 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT =		Color Transformation Language interpreter
 
@@ -17,12 +17,13 @@ HOMEPAGE =		https://github.com/ampas/CTL/
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += Half Iex IexMath IlmImf IlmThread Imath c m pthread
-WANTLIB += ${LIBCXX} tiff
+WANTLIB += ${COMPILER_LIBCXX} tiff
 
 GH_ACCOUNT =		ampas
 GH_PROJECT =		ctl
 GH_TAGNAME =		ctl-${V}
 MASTER_SITES =		${MASTER_SITES_GITHUB}
+REVISION =		0
 
 MODULES =		devel/cmake
 LIB_DEPENDS =		graphics/openexr \

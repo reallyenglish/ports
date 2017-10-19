@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.7 2017/04/10 11:46:18 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT =		free/libre action roleplaying engine
 
 V =			0.19
 PKGNAME =		flare-${V}
-REVISION =		1
+REVISION =		2
 
 CATEGORIES =		games
 
@@ -15,7 +15,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 MAINTAINER =		Kirill Bychkov <kirby@openbsd.org>
 
-WANTLIB +=		SDL SDL_image SDL_mixer SDL_ttf c m pthread ${LIBCXX}
+WANTLIB +=		SDL SDL_image SDL_mixer SDL_ttf c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=flare-game/}
 DISTFILES =		flare-engine.${V}.tar.gz \

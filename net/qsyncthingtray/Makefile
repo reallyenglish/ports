@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.3 2016/12/25 14:34:39 zhuk Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/30 14:54:28 espie Exp $
 
 COMMENT =	system tray app for Syncthing
 
@@ -6,7 +6,7 @@ GH_ACCOUNT =	sieren
 GH_PROJECT =	QSyncthingTray
 GH_TAGNAME =	0.5.5rc1
 PKGNAME =	qsyncthingtray-${GH_TAGNAME}
-REVISION =	0
+REVISION =	2
 
 CATEGORIES =	net x11
 HOMEPAGE =	https://github.com/sieren/QSyncthingTray
@@ -20,6 +20,7 @@ MODULES =	devel/cmake \
 
 WANTLIB += Qt5Core Qt5Gui Qt5Network Qt5PrintSupport
 WANTLIB += Qt5WebKit Qt5WebKitWidgets Qt5Widgets c m pthread
+WANTLIB += ${COMPILER_LIBCXX}
 
 LIB_DEPENDS =	x11/qt5/qtwebkit
 

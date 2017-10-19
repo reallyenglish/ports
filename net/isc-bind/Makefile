@@ -1,22 +1,22 @@
-# $OpenBSD: Makefile,v 1.68 2017/06/15 09:01:49 sthen Exp $
+# $OpenBSD: Makefile,v 1.72 2017/07/28 23:38:06 sthen Exp $
 
 COMMENT=	Berkeley Internet Name Daemon: DNS server and tools
 
-V=		9.10.5-P1
+V=		9.10.6
 
 DISTNAME=	bind-$V
 PKGNAME=	isc-bind-${V:S/-P/pl/}
 
-SHARED_LIBS +=	isc                  3.3      # 170.0
-SHARED_LIBS +=	isccc                0.0      # 140.5
-SHARED_LIBS +=	dns                  5.0      # 170.2
-SHARED_LIBS +=	isccfg               0.4      # 144.0
-SHARED_LIBS +=	bind9                0.1      # 140.12
-SHARED_LIBS +=	lwres                0.1      # 141.3
-SHARED_LIBS +=	irs                  0.0      # 141.5
+SHARED_LIBS +=  isc                  3.4      # 190.0
+SHARED_LIBS +=  isccc                0.0      # 140.5
+SHARED_LIBS +=  dns                  5.0      # 190.1
+SHARED_LIBS +=  isccfg               0.4      # 144.0
+SHARED_LIBS +=  bind9                0.1      # 141.0
+SHARED_LIBS +=  lwres                0.1      # 141.3
+SHARED_LIBS +=  irs                  0.0      # 141.7
 
 # not installed:
-#SHARED_LIBS +=	isc-nosymtbl         148.2    # 170.0
+#SHARED_LIBS += isc-nosymtbl         190.0    # 190.0
 #SHARED_LIBS +=	t_api                0.0      # unknown
 
 CATEGORIES=	net
@@ -49,6 +49,14 @@ CONFIGURE_ARGS=	--enable-filter-aaaa \
 		--with-python=${MODPY_BIN}
 
 CONFIGURE_ENV=	STD_CDEFINES="-DDIG_SIGCHASE=1"
+
+.include <bsd.port.arch.mk>
+
+# we don't link with libgcc, use the c++abi unwinder instead
+.if ${PROPERTIES:Mclang}
+MAKE_FLAGS +=	UNWINDERLIB=-lc++abi
+WANTLIB +=	c++abi
+.endif
 
 FAKE_FLAGS=	sysconfdir=${PREFIX}/share/examples/bind9
 

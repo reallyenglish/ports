@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.215 2017/04/17 10:24:27 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.222 2017/09/28 23:39:53 naddy Exp $
 
 COMMENT=		powerful desktop search tool and indexer
 
 GNOME_PROJECT=		tracker
-GNOME_VERSION=		1.12.0
+GNOME_VERSION=		1.12.3
+REVISION=		1
 
 # there is already audio/tracker, so this port has to live
 # as meta-tracker
@@ -20,10 +21,10 @@ SUBST_VARS=		TRACKER_API
 
 SHARED_LIBS +=  tracker-common       3.3      # unknown
 SHARED_LIBS +=  tracker-data         3.3      # unknown
-SHARED_LIBS +=  tracker-sparql-1.0   1.2      # 1200.0
+SHARED_LIBS +=  tracker-sparql-1.0   1.2      # 1201.0
 SHARED_LIBS +=  tracker-extract      0.1      # unknown
-SHARED_LIBS +=  tracker-miner-1.0    1.1      # 1200.0
-SHARED_LIBS +=  tracker-control-1.0  1.1      # 1200.0
+SHARED_LIBS +=  tracker-miner-1.0    1.1      # 1201.0
+SHARED_LIBS +=  tracker-control-1.0  1.1      # 1201.0
 
 # GPLv2+
 PERMIT_PACKAGE_CDROM=	Yes
@@ -40,7 +41,7 @@ WANTLIB += iconv icudata icui18n icuuc intl iptcdata jpeg json-glib-1.0
 WANTLIB += kvm lcms2 lz4 lzma m mediaart-2.0 openjp2 orc-0.4 osinfo-1.0
 WANTLIB += pango-1.0 pangocairo-1.0 pangoft2-1.0 pcre pixman-1
 WANTLIB += png poppler poppler-glib pthread pthread-stubs soup-2.4
-WANTLIB += sqlite3 ${LIBCXX} tag tag_c tiff totem-plparser upower-glib
+WANTLIB += sqlite3>=37.1 ${COMPILER_LIBCXX} tag tag_c tiff totem-plparser upower-glib
 WANTLIB += util uuid xcb xcb-render xcb-shm xml2 xslt z
 
 MODULES=		devel/dconf \
@@ -78,7 +79,8 @@ MODPY_RUNDEP=		No
 MODPY_ADJ_FILES=	tests/tracker-writeback/01-writeback.py \
 			utils/data-generators/cc/generate
 
-CONFIGURE_STYLE=	gnu
+CONFIGURE_STYLE=	autoconf
+AUTOCONF_VERSION=	2.69
 
 CONFIGURE_ARGS=		--disable-miner-thunderbird \
 			--disable-miner-firefox \
@@ -101,9 +103,6 @@ FAKE_FLAGS=		sysconfdir=${PREFIX}/share/examples/meta-tracker/
 pre-configure:
 	sed -i 's,/usr/bin,${LOCALBASE}/bin,' \
 		${WRKSRC}/src/tracker-needle/tracker-utils.vala
-# XXX LDFLAGS are reset in the configure script when checking for:
-# png, gif, jpeg and tiff
-	${SUBST_CMD} ${WRKSRC}/configure
 
 post-install:
 	rm ${PREFIX}/lib/tracker-${TRACKER_API}/extract-modules/*.{a,la}

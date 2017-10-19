@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.9 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.12 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT=	linux audio developer simple plugin API
 HOMEPAGE=	http://www.ladspa.org/
 CATEGORIES=	audio devel
 
 V=		1.13
-REVISION=	0
+REVISION =	2
 
 DISTNAME=	ladspa_sdk_${V}
 WRKDIST=	${WRKDIR}/ladspa_sdk
@@ -23,7 +23,7 @@ ALL_TARGET=	targets
 MAKE_FLAGS=	LIBRARIES=-lm OPTS="${CFLAGS}"
 
 PROGRAMS=	analyseplugin applyplugin listplugins
-WANTLIB=	c m ${LIBCXX}
+WANTLIB=	c m ${COMPILER_LIBCXX}
 
 do-install:
 .for i in ${PROGRAMS}

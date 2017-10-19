@@ -1,9 +1,8 @@
-# $OpenBSD: Makefile,v 1.14 2016/08/29 09:11:22 jca Exp $
+# $OpenBSD: Makefile,v 1.16 2017/09/10 20:26:07 sebastia Exp $
 
 COMMENT=	terminal emulator for GNUstep
 
-REVISION =	8
-DISTNAME=	Terminal-0.9.8
+DISTNAME=	Terminal-0.9.9
 PKGNAME=	gnustep-${DISTNAME:L}
 CATEGORIES=	sysutils
 
@@ -14,5 +13,6 @@ MODULES =	x11/gnustep
 LIB_DEPENDS =	converters/libiconv
 
 WANTLIB += iconv util
+WANTLIB += ${COMPILER_LIBCXX}
 
 .include <bsd.port.mk>

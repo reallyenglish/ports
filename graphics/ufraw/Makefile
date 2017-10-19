@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.42 2017/05/05 13:19:24 espie Exp $
+# $OpenBSD: Makefile,v 1.44 2017/07/26 22:45:24 sthen Exp $
 
 COMMENT=	read and manipulate raw images from digital cameras
 
 DISTNAME=	ufraw-0.22
-REVISION =	0
+REVISION =	1
 
 CATEGORIES=	graphics
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=ufraw/}
@@ -21,7 +21,7 @@ WANTLIB += gimpbase-2.0 gimpcolor-2.0 gimpconfig-2.0 gimpmath-2.0
 WANTLIB += gimpmodule-2.0 gimpui-2.0 gimpwidgets-2.0 gio-2.0 glib-2.0
 WANTLIB += gobject-2.0 gthread-2.0 gtk-x11-2.0 gtkimageview jasper
 WANTLIB += jpeg lcms2 m pango-1.0 pangocairo-1.0 pangoft2-1.0
-WANTLIB += png pthread ${LIBCXX} tiff z
+WANTLIB += png pthread ${COMPILER_LIBCXX} tiff z
 
 # don't remove unless you are sure:
 WANTLIB += lensfun

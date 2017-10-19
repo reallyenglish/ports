@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.75 2017/05/26 19:45:23 jung Exp $
+# $OpenBSD: Makefile,v 1.77 2017/09/15 13:44:51 ajacoutot Exp $
 
      SUBDIR =
      SUBDIR += akonadi
@@ -34,6 +34,7 @@
      SUBDIR += py-carddav
      SUBDIR += qhacc
      SUBDIR += radicale
+     SUBDIR += rednotebook
      SUBDIR += rubrica2
      SUBDIR += siag
      SUBDIR += sl
@@ -42,6 +43,7 @@
      SUBDIR += taskwarrior
      SUBDIR += tdl
      SUBDIR += thinkingrock
+     SUBDIR += tudu
      SUBDIR += vdirsyncer
      SUBDIR += vit
      SUBDIR += vym

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.15 2017/05/12 14:11:54 espie Exp $
+# $OpenBSD: Makefile,v 1.17 2017/07/26 22:45:21 sthen Exp $
 
 BROKEN-sparc64 =	Illegal operands error building SDL_gfxPrimitives.cpp
 
@@ -7,7 +7,7 @@ COMMENT =		blinkensisters - hunt for the lost pixels
 V =			0.5.3
 DISTNAME =		LostPixels-${V}-source-with-addons
 PKGNAME =		lostpixels-${V}
-REVISION =		4
+REVISION =		5
 HOMEPAGE =		http://www.blinkensisters.org
 
 CATEGORIES =		games
@@ -23,7 +23,7 @@ LIB_DEPENDS =		devel/sdl-net		\
 			devel/sdl-ttf
 
 WANTLIB +=		SDL SDL_image SDL_mixer SDL_net SDL_ttf X11 Xau
-WANTLIB +=		Xdmcp Xext Xrandr Xrender c freetype m pthread ${LIBCXX}
+WANTLIB +=		Xdmcp Xext Xrandr Xrender c freetype m pthread ${COMPILER_LIBCXX}
 
 USE_GMAKE =		Yes
 MODULES +=		devel/cmake \

@@ -1,4 +1,4 @@
-@comment $OpenBSD: PLIST-server,v 1.59 2017/06/05 15:26:32 sthen Exp $
+@comment $OpenBSD: PLIST-server,v 1.63 2017/10/13 10:08:46 sthen Exp $
 @conflict dovecot-sqlite-*
 @pkgpath mail/dovecot
 @pkgpath mail/dovecot,-server,bdb
@@ -67,6 +67,7 @@ include/dovecot/base64.h
 include/dovecot/bits.h
 include/dovecot/bsearch-insert-pos.h
 include/dovecot/buffer.h
+include/dovecot/byteorder.h
 include/dovecot/charset-utf8.h
 include/dovecot/child-wait.h
 include/dovecot/client-common.h
@@ -291,6 +292,7 @@ include/dovecot/istream-header-filter.h
 include/dovecot/istream-jsonstr.h
 include/dovecot/istream-mail.h
 include/dovecot/istream-metawrap.h
+include/dovecot/istream-multiplex.h
 include/dovecot/istream-nonuls.h
 include/dovecot/istream-private.h
 include/dovecot/istream-qp.h
@@ -363,6 +365,7 @@ include/dovecot/mailbox-list-fs.h
 include/dovecot/mailbox-list-index-storage.h
 include/dovecot/mailbox-list-index-sync.h
 include/dovecot/mailbox-list-index.h
+include/dovecot/mailbox-list-iter-private.h
 include/dovecot/mailbox-list-iter.h
 include/dovecot/mailbox-list-maildir.h
 include/dovecot/mailbox-list-notify-tree.h
@@ -452,9 +455,11 @@ include/dovecot/ostream-failure-at.h
 include/dovecot/ostream-file-private.h
 include/dovecot/ostream-hash.h
 include/dovecot/ostream-metawrap.h
+include/dovecot/ostream-multiplex.h
 include/dovecot/ostream-null.h
 include/dovecot/ostream-private.h
 include/dovecot/ostream-rawlog.h
+include/dovecot/ostream-unix.h
 include/dovecot/ostream-zlib.h
 include/dovecot/ostream.h
 include/dovecot/passdb-blocking.h
@@ -498,6 +503,7 @@ include/dovecot/push-notification-triggers.h
 include/dovecot/push-notification-txn-mbox.h
 include/dovecot/push-notification-txn-msg.h
 include/dovecot/qp-decoder.h
+include/dovecot/qp-encoder.h
 include/dovecot/quota-fs.h
 include/dovecot/quota-plugin.h
 include/dovecot/quota-private.h
@@ -598,12 +604,14 @@ lib/dovecot/lib20_fts_plugin.so
 lib/dovecot/lib20_listescape_plugin.so
 lib/dovecot/lib20_mail_log_plugin.so
 lib/dovecot/lib20_mailbox_alias_plugin.so
+lib/dovecot/lib20_notify_status_plugin.so
 lib/dovecot/lib20_push_notification_plugin.so
 lib/dovecot/lib20_quota_clone_plugin.so
 lib/dovecot/lib20_replication_plugin.so
 lib/dovecot/lib20_var_expand_crypt.so
 lib/dovecot/lib20_virtual_plugin.so
 lib/dovecot/lib20_zlib_plugin.so
+lib/dovecot/lib21_fts_solr_plugin.so
 lib/dovecot/lib21_fts_squat_plugin.so
 lib/dovecot/lib30_imap_zlib_plugin.so
 lib/dovecot/lib90_stats_plugin.so
@@ -900,6 +908,7 @@ share/doc/dovecot/wiki/Pigeonhole.Sieve.Troubleshooting.txt
 share/doc/dovecot/wiki/Pigeonhole.Sieve.Usage.txt
 share/doc/dovecot/wiki/Pigeonhole.Sieve.txt
 share/doc/dovecot/wiki/Pigeonhole.txt
+share/doc/dovecot/wiki/Plugins.Apparmor.txt
 share/doc/dovecot/wiki/Plugins.Autocreate.txt
 share/doc/dovecot/wiki/Plugins.Compress.txt
 share/doc/dovecot/wiki/Plugins.Expire.txt
@@ -915,6 +924,7 @@ share/doc/dovecot/wiki/Plugins.MailFilter.txt
 share/doc/dovecot/wiki/Plugins.MailLog.txt
 share/doc/dovecot/wiki/Plugins.MailboxAlias.txt
 share/doc/dovecot/wiki/Plugins.Notify.txt
+share/doc/dovecot/wiki/Plugins.NotifyStatus.txt
 share/doc/dovecot/wiki/Plugins.PushNotification.txt
 share/doc/dovecot/wiki/Plugins.QuotaClone.txt
 share/doc/dovecot/wiki/Plugins.Snarf.txt

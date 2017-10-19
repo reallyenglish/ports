@@ -1,22 +1,20 @@
-# $OpenBSD: Makefile,v 1.5 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.8 2017/09/06 08:59:44 sthen Exp $
 
 COMMENT=		highly DNS-, DoS- and abuse-aware loadbalancer
 
-DISTNAME=		dnsdist-1.1.0
+DISTNAME=		dnsdist-1.2.0
 EXTRACT_SUFX=		.tar.bz2
-
-REVISION=		0
 
 CATEGORIES=		net
 
-HOMEPAGE=		http://dnsdist.org/
+HOMEPAGE=		https://dnsdist.org/
 
 MAINTAINER=		Peter van Dijk <peter.van.dijk@powerdns.com>
 
 # GPLv2 only
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += ${MODLUA_WANTLIB} c curses edit m protobuf pthread z ${LIBECXX}
+WANTLIB += ${MODLUA_WANTLIB} c curses edit m protobuf pthread z ${COMPILER_LIBCXX}
 
 MASTER_SITES=		https://downloads.powerdns.com/releases/
 
@@ -25,7 +23,8 @@ AUTOCONF_VERSION=	2.69
 USE_GMAKE=		Yes
 
 CONFIGURE_ARGS+=	--disable-hardening \
-			--with-lua
+			--with-lua \
+			--without-net-snmp
 CONFIGURE_ENV+=		CPPFLAGS="-I${LOCALBASE}/include" \
 			LDFLAGS="-L${LOCALBASE}/lib" \
 			LIBEDIT_LIBS='-ledit -lcurses' \

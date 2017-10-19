@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.33 2017/04/14 19:49:06 schwarze Exp $
+# $OpenBSD: Makefile,v 1.38 2017/08/22 23:28:52 schwarze Exp $
 
 COMMENT =		GNU troff typesetter
 VERSION =		1.22.3
 SUBST_VARS =		VERSION
 DISTNAME =		groff-${VERSION}
-REVISION =		4
+REVISION =		8
 
 CATEGORIES =		textproc
 DPB_PROPERTIES =	parallel
@@ -15,7 +15,7 @@ MAINTAINER =		Ingo Schwarze <schwarze@openbsd.org>
 # GPLv3+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c m ${LIBCXX}
+WANTLIB =		c m ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_GNU:=groff/}
 

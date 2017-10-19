@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.92 2017/04/10 11:46:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.95 2017/08/21 19:25:52 naddy Exp $
 
 COMMENT =	high-level language for numerical computations
 
 VERSION =	4.0.2
 DISTNAME =	octave-${VERSION}
-REVISION =	2
+REVISION =	4
 CATEGORIES =	math
 
 SHARED_LIBS +=	octave		7.0 # 3.0
@@ -27,7 +27,7 @@ WANTLIB += cxsparse drm ereadline expat fftw3 fftw3_threads fftw3f
 WANTLIB += fftw3f_threads fltk fltk_gl fontconfig freetype gl2ps glapi
 WANTLIB += glpk glut gmp hdf5 lapack lcms2 ltdl lzma m ncurses nghttp2
 WANTLIB += ogg pcre png portaudio pthread pthread-stubs qhull qrupdate
-WANTLIB += qscintilla2 sndfile sndio ssl ${LIBCXX} suitesparseconfig
+WANTLIB += qscintilla2 sndfile sndio ssl ${COMPILER_LIBCXX} suitesparseconfig
 WANTLIB += umfpack usbhid util vorbis vorbisenc xcb xcb-dri2 xcb-glx z
 
 MASTER_SITES =	${MASTER_SITE_GNU:=octave/}

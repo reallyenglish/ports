@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.22 2017/05/01 16:36:38 jca Exp $
+# $OpenBSD: Makefile,v 1.24 2017/07/26 22:45:19 sthen Exp $
 
 COMMENT =	powerful and simple qt4 editor
 
 V =		33.3.0
-REVISION =	0
+REVISION =	1
 DISTNAME =	tea-${V}
 PKGNAME =	teaqt-${V}
 CATEGORIES =	editors x11
@@ -17,7 +17,7 @@ HOMEPAGE =	http://semiletov.org/tea/
 PERMIT_PACKAGE_CDROM =	Yes
 
 LIB_DEPENDS =	textproc/aspell/core
-WANTLIB += c m pthread ${LIBCXX} z QtGui QtXml aspell
+WANTLIB += c m pthread ${COMPILER_LIBCXX} z QtGui QtXml aspell
 WANTLIB += ICE SM X11 Xext Xi Xinerama Xrender fontconfig freetype
 
 MODULES =	devel/qmake x11/qt4

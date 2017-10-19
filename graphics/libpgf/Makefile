@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/10 11:46:21 sthen Exp $
+# $OpenBSD: Makefile,v 1.6 2017/07/26 22:45:24 sthen Exp $
 
 COMMENT =	PGF image format handling library
 V =		6.12.24
 DISTNAME =	libpgf-$V-src
+REVISION =	1
 PKGNAME =	${DISTNAME:C/-src//}
 
 SHARED_LIBS =	pgf		0.0
@@ -14,7 +15,7 @@ MAINTAINER =	KDE porting team <openbsd-kde@googlegroups.com>
 # LGPLv2.1+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =	m ${LIBCXX}
+WANTLIB =	m ${COMPILER_LIBCXX}
 
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=libpgf/}
 

@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.5 2017/01/09 05:39:18 bentley Exp $
+# $OpenBSD: Makefile,v 1.7 2017/09/06 11:06:03 naddy Exp $
 
 L =	dan
 LANG =	Danish
 V =	0.5.0
+REVISION =	0
 
 USE_GMAKE =	Yes
 

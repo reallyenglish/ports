@@ -1,23 +1,24 @@
-# $OpenBSD: Makefile,v 1.5 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/10/05 09:51:10 landry Exp $
 
 COMMENT=	universal charset detection library and tool
 
-DISTNAME=	uchardet-0.0.1
-REVISION=	1
+DISTNAME=	uchardet-0.0.6
+EXTRACT_SUFX=	.tar.xz
 
 SHARED_LIBS +=	uchardet                  0.0 # 0.0
 
 CATEGORIES=	textproc
 
-HOMEPAGE=	https://code.google.com/p/uchardet/
+HOMEPAGE=	https://www.freedesktop.org/wiki/Software/uchardet/
 
 # MPL 1.1
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c m ${LIBCXX}
+WANTLIB += c m ${COMPILER_LIBCXX}
 
-MASTER_SITES=	${MASTER_SITE_GOOGLECODE:=uchardet/}
+MASTER_SITES=	https://www.freedesktop.org/software/uchardet/releases/
 
 MODULES=	devel/cmake
+CONFIGURE_ARGS=	-DCMAKE_INSTALL_MANDIR="${PREFIX}/man"
 
 .include <bsd.port.mk>

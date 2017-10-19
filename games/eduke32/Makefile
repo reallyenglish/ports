@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.10 2017/05/31 08:10:01 espie Exp $
+# $OpenBSD: Makefile,v 1.13 2017/08/04 22:33:18 sthen Exp $
 
 COMMENT =	Enhanced Duke Nukem 3D engine
 RDATE =		20160610
@@ -7,7 +7,7 @@ DISTNAME =	eduke32_src_${RDATE}-${RTAG}
 PKGNAME =	eduke32-2.0.0.${RTAG}
 EXTRACT_SUFX =	.tar.xz
 CATEGORIES =	games x11
-REVISION =	0
+REVISION =	1
 
 HOMEPAGE =	http://www.eduke32.com/
 
@@ -26,7 +26,7 @@ BUILD_DEPENDS += devel/nasm
 .endif
 
 WANTLIB += c m ogg png pthread vorbis vorbisfile vpx z lz4
-WANTLIB += SDL2 SDL2_mixer FLAC execinfo ${LIBECXX}
+WANTLIB += SDL2 SDL2_mixer FLAC execinfo ${COMPILER_LIBCXX}
 
 LIB_DEPENDS =	archivers/lz4 \
 		audio/libvorbis \
@@ -97,8 +97,11 @@ MAKE_FLAGS +=	MISCLINKOPTS=-nopie
 
 .include <bsd.port.mk>
 .if ${PROPERTIES:Mclang}
+.  if ${MACHINE_ARCH} == i386
+# disable LTO, ld.lld doesn't work here on i386
+MAKE_FLAGS +=	LTO=0
+.  else
 # lto doesn't work with binutils, at all
 MAKE_FLAGS +=	LDFLAGS=-fuse-ld=/usr/bin/ld.lld
-# alternately, we could disable LTO
-# MAKE_FLAGS +=	LTO=0
+.  endif
 .endif

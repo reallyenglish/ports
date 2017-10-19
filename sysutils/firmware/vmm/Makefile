@@ -1,11 +1,15 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/25 20:11:53 sthen Exp $
+# $OpenBSD: Makefile,v 1.10 2017/07/26 22:39:58 jca Exp $
 
 ONLY_FOR_ARCHS=	amd64 i386
+
+# XXX errors with with clang
+# ./src/string.c:24:16: error: invalid output constraint '=Qi' in asm
+CC =		/usr/bin/gcc
 
 FW_DRIVER=	vmm
 FW_VER=		1.10.2
 SB_VER=		20100422
-REVISION=	3
+REVISION=	4
 DISTNAME=	seabios-${FW_VER}
 DISTFILES=	${DISTNAME}${EXTRACT_SUFX} \
 	sgabios-20100422{23d474943dcd55d0550a3d20b3d30e9040a4f15b}.tar.gz:0

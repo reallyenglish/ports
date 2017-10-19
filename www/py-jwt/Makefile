@@ -1,13 +1,12 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/24 09:30:00 sthen Exp $
+# $OpenBSD: Makefile,v 1.10 2017/10/06 13:46:17 sthen Exp $
 
 COMMENT =	JSON Web Token implementation in Python
 
-MODPY_EGG_VERSION = 1.5.0
+MODPY_EGG_VERSION = 1.5.3
 DISTNAME =	PyJWT-${MODPY_EGG_VERSION}
 PKGNAME =	py-jwt-${MODPY_EGG_VERSION}
 CATEGORIES =	www
 MAINTAINER =	Johan Huldtgren <jhuldtgren@gmail.com>
-REVISION =	0
 
 HOMEPAGE =	http://github.com/jpadilla/pyjwt
 
@@ -22,11 +21,14 @@ FLAVOR ?=
 MODPY_PI =	Yes
 MODPY_SETUPTOOLS = Yes
 
-RUN_DEPENDS =   security/py-cryptography${MODPY_FLAVOR}
+RUN_DEPENDS =   security/py-cryptography${MODPY_FLAVOR}>=1.4.0
 
 TEST_DEPENDS =	devel/py-test \
 		devel/py-test-cov \
 		devel/py-test-runner
+
+post-extract:
+	@find ${WRKSRC}/tests -name '__pycache__'  -print0 | xargs -0 rm -rf
 
 post-install:
 	mv ${PREFIX}/bin/pyjwt ${PREFIX}/bin/pyjwt${MODPY_BIN_SUFFIX}

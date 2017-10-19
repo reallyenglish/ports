@@ -1,9 +1,8 @@
-# $OpenBSD: Makefile,v 1.113 2017/04/27 08:41:20 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.116 2017/09/02 21:59:05 rpointel Exp $
 
 COMMENT =		lightweight and user-friendly e-mail client
 
-DISTNAME =		sylpheed-3.5.1
-REVISION =		0
+DISTNAME =		sylpheed-3.6.0
 
 SHARED_LIBS += 	 	sylph-0                   4.0 # 3.0
 SHARED_LIBS += 		sylpheed-plugin-0         4.0 # 3.0
@@ -28,11 +27,11 @@ WANTLIB += dbus-glib-1 enchant expat ffi fontconfig freetype gdk-x11-2.0
 WANTLIB += gdk_pixbuf-2.0 gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0
 WANTLIB += gpg-error gpgme graphite2 gthread-2.0 gtk-x11-2.0 gtkspell
 WANTLIB += harfbuzz m pango-1.0 pangocairo-1.0 pangoft2-1.0 pcre
-WANTLIB += pixman-1 png pthread pthread-stubs ssl ${LIBCXX} xcb
+WANTLIB += pixman-1 png pthread pthread-stubs ssl ${COMPILER_LIBCXX} xcb
 WANTLIB += xcb-render xcb-shm z
 
 RUN_DEPENDS =		devel/desktop-file-utils
-MASTER_SITES =		http://sylpheed.sraoss.jp/sylpheed/v3.5/
+MASTER_SITES =		http://sylpheed.sraoss.jp/sylpheed/v3.6/
 
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ARGS =	--disable-compface \

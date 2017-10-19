@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.22 2017/05/02 20:48:21 fcambus Exp $
+# $OpenBSD: Makefile,v 1.25 2017/07/26 22:45:19 sthen Exp $
 
 COMMENT=	source code editing component for GTK+
 
@@ -6,7 +6,7 @@ VERSION=	3.5.2
 DISTNAME=	scintilla${VERSION:S/.//g}
 PKGNAME=	scintilla-${VERSION}
 CATEGORIES=	editors x11
-REVISION=	1
+REVISION=	3
 
 SHARED_LIBS=	scintilla		9.0 \
 		scintilla_lexers	9.0
@@ -29,7 +29,7 @@ MAKE_FILE=	makefile
 MAKE_ENV=	CXX='${CXX}' CXXFLAGS='${CXXFLAGS}' \
 		CC='${CC}' GTK3=1
 
-WANTLIB=	m ${LIBCXX}
+WANTLIB=	m ${COMPILER_LIBCXX}
 
 # Not LIB_DEPENDS as it's only shared libraries that don't link directly
 # to gtk+3

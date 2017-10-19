@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.26 2017/04/28 01:51:30 espie Exp $
+# $OpenBSD: Makefile,v 1.28 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT=	anti-grain geometry graphics library
 
 DISTNAME=	agg-2.5
-REVISION=	6
+REVISION=	7
 SHARED_LIBS=	agg		3.0 \
 		aggfontfreetype	3.0 \
 		aggplatformsdl	3.0 \
@@ -15,7 +15,7 @@ HOMEPAGE=	http://www.antigrain.com/
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	X11 freetype iconv m sndio usbhid xcb z SDL>=6 ${LIBCXX} pthread
+WANTLIB=	X11 freetype iconv m sndio usbhid xcb z SDL>=6 ${COMPILER_LIBCXX} pthread
 
 MASTER_SITES=	${HOMEPAGE}
 

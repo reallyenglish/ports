@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT =		display a tree of processes
 
 DISTNAME =		dtpstree-1.0.3
-REVISION =		0
+REVISION =		2
 CATEGORIES =		sysutils
 
 HOMEPAGE =		http://code.douglasthrift.net/trac/dtpstree
@@ -13,7 +13,7 @@ MAINTAINER =		Douglas William Thrift <douglas@douglasthrift.net>
 # Apache 2.0
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c kvm m ncurses ${LIBCXX}
+WANTLIB =		c kvm m ncurses ${COMPILER_LIBCXX}
 
 MASTER_SITES =		http://code.douglasthrift.net/files/dtpstree/ \
 			http://apt.douglasthrift.net/files/dtpstree/

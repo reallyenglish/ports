@@ -1,6 +1,7 @@
-# $OpenBSD: Makefile,v 1.594 2017/06/19 17:15:26 bcallah Exp $
+# $OpenBSD: Makefile,v 1.599 2017/08/10 13:32:25 jasper Exp $
 
      SUBDIR =
+     SUBDIR += 2bwm
      SUBDIR += Xaw3d
      SUBDIR += XawMu
      SUBDIR += Xdialog
@@ -25,6 +26,7 @@
      SUBDIR += blackbox
      SUBDIR += blast
      SUBDIR += bricons
+     SUBDIR += bspwm
      SUBDIR += bwidget
      SUBDIR += byzi
      SUBDIR += cegui
@@ -144,6 +146,7 @@
      SUBDIR += keybinder3
      SUBDIR += keynav
      SUBDIR += klavaro
+     SUBDIR += krusader
      SUBDIR += lablgtk2
      SUBDIR += lemonbar
      SUBDIR += libdnd
@@ -165,7 +168,6 @@
      SUBDIR += mouseclock
      SUBDIR += mowitz
      SUBDIR += mplayer
-     SUBDIR += mrxvt
      SUBDIR += mterm
      SUBDIR += mxconns
      SUBDIR += nagstamon
@@ -265,6 +267,7 @@
      SUBDIR += stumpwm
      SUBDIR += swarp
      SUBDIR += swisswatch
+     SUBDIR += sxhkd
      SUBDIR += tabbed
      SUBDIR += tangerine-icon-theme
      SUBDIR += tango-icon-theme
@@ -337,6 +340,7 @@
      SUBDIR += xbanish
      SUBDIR += xbindkeys
      SUBDIR += xcalib
+     SUBDIR += xcape
      SUBDIR += xcb
      SUBDIR += xchm
      SUBDIR += xclip

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.17 2016/08/30 09:54:14 jasper Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/27 11:57:49 sthen Exp $
 
 COMMENT-main =		multi-protocol instant messenger for KDE
 COMMENT-sounds =	notification sounds for Kopete
@@ -6,8 +6,8 @@ DISTNAME =		kopete-${MODKDE4_VERSION}
 PKGNAME-main =		${DISTNAME}
 PKGNAME-sounds =	kde4-kopete-sounds-${MODKDE4_VERSION}
 PKG_ARCH-sounds =	*
-REVISION-main =		4
-REVISION-sounds =	3
+REVISION-main =		6
+REVISION-sounds =	4
 
 CATEGORIES =	net
 HOMEPAGE =	http://kopete.kde.org/
@@ -30,6 +30,7 @@ MULTI_PACKAGES =	-main -sounds
 
 WANTLIB-sounds =
 WANTLIB-main =  ${WANTLIB} c m pthread z
+WANTLIB-main += ${COMPILER_LIBCXX}
 WANTLIB-main += X11 Xss
 WANTLIB-main += lib/qt4/Qt3Support lib/qt4/QtDBus lib/qt4/QtGui
 WANTLIB-main += lib/qt4/QtNetwork lib/qt4/QtSql lib/qt4/QtSvg lib/qt4/QtXml
@@ -42,7 +43,7 @@ WANTLIB-main += ${KDE4LIB}/kpimidentities ${KDE4LIB}/kprintutils
 WANTLIB-main += ${KDE4LIB}/kresources ${KDE4LIB}/ktexteditor
 WANTLIB-main += ${KDE4LIB}/kutils ${KDE4LIB}/nepomuk
 WANTLIB-main += ${KDE4LIB}/nepomukutils ${KDE4LIB}/solid
-WANTLIB-main += gadu glib-2.0 idn jasper jpeg meanwhile otr qca2
+WANTLIB-main += gadu glib-2.0 idn jasper jpeg meanwhile otr qca
 WANTLIB-main += qimageblitz soprano xml2 xslt
 
 MODULES =	multimedia/phonon
@@ -61,7 +62,7 @@ LIB_DEPENDS-main =	${LIB_DEPENDS} \
 			net/libgadu \
 			net/meanwhile \
 			security/libotr>=4 \
-			security/qca2
+			security/qca
 
 # disabled until all GoogleTalk issues are resolved
 #WANTLIB-main += crypto expat mediastreamer_base mediastreamer_voip

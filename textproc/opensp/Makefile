@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.9 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT=	object-oriented SGML parser
 
 DISTNAME=	OpenSP-1.5.2
 PKGNAME=	${DISTNAME:L}
 CATEGORIES=	textproc
-REVISION=	0
+REVISION=	1
 
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=openjade/}
 
@@ -17,7 +17,7 @@ HOMEPAGE=	http://openjade.sourceforge.net/
 PERMIT_PACKAGE_CDROM=	Yes
 
 MODULES=	devel/gettext textproc/intltool
-WANTLIB=	c m pthread ${LIBCXX}
+WANTLIB=	c m pthread ${COMPILER_LIBCXX}
 USE_GMAKE=	Yes
 CONFIGURE_STYLE=gnu
 CONFIGURE_ARGS=	--with-libiconv-prefix=${LOCALBASE} \

@@ -1,14 +1,14 @@
-# $OpenBSD: Makefile,v 1.137 2017/06/08 07:33:37 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.142 2017/08/22 18:03:52 tj Exp $
 
 COMMENT=		GNU Transport Layer Security library
 
-V=			3.5.13
+V=			3.5.15
 DISTNAME=		gnutls-${V}
 EXTRACT_SUFX=		.tar.xz
 
 CATEGORIES=		security
 
-SHARED_LIBS +=  gnutls               44.1     # 44.5
+SHARED_LIBS +=  gnutls               44.1     # 44.7
 SHARED_LIBS +=  gnutlsxx             29.1     # 29.0
 
 HOMEPAGE=		http://www.gnutls.org/
@@ -21,12 +21,13 @@ PERMIT_PACKAGE_CDROM=	Yes
 WANTLIB += c ffi gmp hogweed iconv idn2 intl m nettle p11-kit pthread
 WANTLIB += tasn1 unistring z
 
-MASTER_SITES=		ftp://ftp.gnutls.org/gcrypt/gnutls/v${V:R}/ \
-			http://ftp.heanet.ie/mirrors/ftp.gnupg.org/gcrypt/gnutls/v${V:R}/
+MASTER_SITES=		https://gnupg.org/ftp/gcrypt/ \
+			https://ftp.heanet.ie/mirrors/ftp.gnupg.org/gcrypt/ \
+			ftp://ftp.gnutls.org/gcrypt/gnutls/v${V:R}/
 
 .include <bsd.port.arch.mk>
 .if ${PROPERTIES:Mclang} || ${MACHINE_ARCH} != amd64
-WANTLIB += ${LIBCXX}
+WANTLIB += ${COMPILER_LIBCXX}
 .else
 # assembly instructions
 MODULES +=	lang/clang

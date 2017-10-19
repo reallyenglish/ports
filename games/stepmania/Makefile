@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.16 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.19 2017/09/21 05:07:30 ajacoutot Exp $
 
 BROKEN-alpha=	libtomcrypt/src/headers/tomcrypt_cfg.h:130:6: error: #error You must specify a word size as well as endianess in tomcrypt_cfg.h
 
@@ -7,7 +7,7 @@ CATEGORIES = 	games emulators
 
 DISTNAME = 	stepmania-5.0b2a
 PKGNAME =	stepmania-5.0beta2a
-REVISION =	5
+REVISION =	7
 EXTRACT_SUFX = 	-src.tar.bz2
 HOMEPAGE =	http://www.stepmania.com
 MASTER_SITES = 	${MASTER_SITE_SOURCEFORGE:=stepmania/}
@@ -37,7 +37,7 @@ LIB_DEPENDS =	audio/libvorbis \
 
 WANTLIB += GL GLU X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi
 WANTLIB += Xinerama Xrandr Xrender Xtst c fontconfig freetype
-WANTLIB += m pthread ${LIBCXX} z
+WANTLIB += m pthread ${COMPILER_LIBCXX} z
 WANTLIB += GLEW avcodec avformat avutil bz2 gio-2.0 glib-2.0 gobject-2.0
 WANTLIB += mad ogg pulse swscale vorbis vorbisfile
 WANTLIB += atk-1.0 cairo gdk-x11-2.0 gdk_pixbuf-2.0 gtk-x11-2.0

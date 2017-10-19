@@ -1,10 +1,13 @@
-# $OpenBSD: Makefile,v 1.26 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.30 2017/08/23 22:00:41 sthen Exp $
+
+# this version doesn't build with clang or newer gcc; needs an update.
+COMPILER=	base-gcc
 
 COMMENT=	general multi-lingual speech synthesis system
 V=		1.95
 DISTNAME=	festival-${V}-beta
 PKGNAME=	${DISTNAME:S/-beta/beta/}
-REVISION=	5
+REVISION=	7
 CATEGORIES=	audio
 MASTER_SITES=	http://www.cstr.ed.ac.uk/downloads/festival/${V}/ \
 		http://festvox.org/packed/festival/${V}/
@@ -51,7 +54,7 @@ PERMIT_DISTFILES_FTP=	Yes
 PERMIT_PACKAGE_CDROM?=	Yes
 PERMIT_PACKAGE_FTP=	Yes
 
-WANTLIB=		c m sndio ${LIBCXX} termcap
+WANTLIB=		c m sndio ${COMPILER_LIBCXX} termcap
 
 post-patch:
 	@cp ${FILESDIR}/OpenBSD.mak ${WRKSRC}/speech_tools/config/systems/OpenBSD.mak

@@ -1,8 +1,8 @@
-# $OpenBSD: clang.port.mk,v 1.22 2017/06/04 23:22:57 sthen Exp $
+# $OpenBSD: clang.port.mk,v 1.27 2017/09/08 05:58:19 ajacoutot Exp $
 
-MODCLANG_VERSION=	4.0.0
+MODCLANG_VERSION=	5.0.0
 
-MODCLANG_ARCHS ?=
+MODCLANG_ARCHS ?= ${LLVM_ARCHS}
 MODCLANG_LANGS ?=
 
 .if !${MODCLANG_LANGS:L:Mc}
@@ -19,27 +19,43 @@ ERRORS += "Fatal: unknown language ${_l}"
 
 _MODCLANG_ARCH_USES = No
 
-.if ${MODCLANG_ARCHS:L} != ""
-.  for _i in ${MODCLANG_ARCHS}
-.    if !empty(MACHINE_ARCH:M${_i})
+.for _i in ${MODCLANG_ARCHS}
+.  if !empty(MACHINE_ARCH:M${_i})
 _MODCLANG_ARCH_USES = Yes
-.    endif
-.  endfor
-.endif
+.  endif
+.endfor
+
+_MODCLANG_ARCH_CLANG = No
+
+.for _i in ${CLANG_ARCHS}
+.  if !empty(MACHINE_ARCH:M${_i})
+_MODCLANG_ARCH_CLANG = Yes
+.  endif
+.endfor
 
 .if ${_MODCLANG_ARCH_USES:L} == "yes"
 
 BUILD_DEPENDS += devel/llvm>=${MODCLANG_VERSION}
-COMPILER_LINKS = gcc ${LOCALBASE}/bin/clang cc ${LOCALBASE}/bin/clang
+COMPILER_LINKS = gcc ${LOCALBASE}/bin/clang cc ${LOCALBASE}/bin/clang \
+	clang ${LOCALBASE}/bin/clang
 
 .  if ${MODCLANG_LANGS:L:Mc++}
-COMPILER_LINKS += g++ ${LOCALBASE}/bin/clang++ c++ ${LOCALBASE}/bin/clang++
+COMPILER_LINKS += g++ ${LOCALBASE}/bin/clang++ c++ ${LOCALBASE}/bin/clang++ \
+	clang++ ${LOCALBASE}/bin/clang++
+
+.    if ${_MODCLANG_ARCH_CLANG:L} == "no"
 # uses libestdc++
 MODULES += gcc4
 MODCLANG_CPPLIBDEP = ${MODGCC4_CPPLIBDEP}
 LIB_DEPENDS += ${MODCLANG_CPPLIBDEP}
 MODCLANG_CPPWANTLIB = ${MODGCC4_CPPWANTLIB}
 WANTLIB += ${MODCLANG_CPPWANTLIB}
+.    else
+# uses libc++
+MODCLANG_CPPLIBDEP =
+MODCLANG_CPPWANTLIB = c++ c++abi pthread
+WANTLIB += ${MODCLANG_CPPWANTLIB}
+.    endif
 .  endif
 .endif
 

@@ -1,27 +1,27 @@
-# $OpenBSD: Makefile,v 1.11 2017/04/10 11:45:25 sthen Exp $
-# Original from: auclair.vincent
+# $OpenBSD: Makefile,v 1.16 2017/08/23 14:25:53 rsadowski Exp $
 
 COMMENT =		c++ commandline flags processing library
 
-DISTNAME =		gflags-1.2
-REVISION =		3
+GH_ACCOUNT =		gflags
+GH_PROJECT =		gflags
+GH_TAGNAME =		v2.2.1
 
-SHARED_LIBS +=		gflags               0.0      # .0.0
-SHARED_LIBS +=		gflags_nothreads     0.0      # .0.0
+SHARED_LIBS +=		gflags               1.0      # .0.0
+SHARED_LIBS +=		gflags_nothreads     1.0      # .0.0
 
 CATEGORIES =		devel
 
-HOMEPAGE =		https://code.google.com/p/google-gflags/
-
-MAINTAINER =		Vincent Auclair <auclair.vincent@gmail.com>
+HOMEPAGE =		https://gflags.github.io/gflags/
 
 # New BSD
 PERMIT_PACKAGE_CDROM =	Yes
 
-MASTER_SITES =		${MASTER_SITE_GOOGLECODE:=google-gflags/}
+WANTLIB += ${COMPILER_LIBCXX} m
 
-WANTLIB =		pthread m ${LIBCXX}
-CONFIGURE_STYLE =	gnu
-MAKE_FLAGS =		docdir='$$(prefix)/share/doc/gflags'
+MODULES =		devel/cmake
+
+CONFIGURE_ARGS +=	-DBUILD_SHARED_LIBS=ON \
+			-DBUILD_STATIC_LIBS=ON \
+			-DBUILD_TESTING=ON
 
 .include <bsd.port.mk>

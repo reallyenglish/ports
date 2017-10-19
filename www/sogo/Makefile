@@ -1,17 +1,16 @@
-# $OpenBSD: Makefile,v 1.69 2017/05/09 20:50:06 sebastia Exp $
-
-PORTROACH+=	limit:^2
+# $OpenBSD: Makefile,v 1.73 2017/07/27 10:05:20 sthen Exp $
 
 COMMENT = 	web based groupware server
 
-VERSION =	2.3.20
+VERSION =	3.2.10
 DISTNAME =	SOGo-${VERSION}
 PKGNAME =	sogo-${VERSION}
+REVISION =	0
 
-SHARED_LIBS +=	GDLContentStore 2.0
-SHARED_LIBS +=	NGCards		2.0
-SHARED_LIBS +=	SOGo		3.0
-SHARED_LIBS +=	SOGoUI		2.0
+SHARED_LIBS +=	GDLContentStore 3.0
+SHARED_LIBS +=	NGCards		3.0
+SHARED_LIBS +=	SOGo		4.1
+SHARED_LIBS +=	SOGoUI		2.1
 
 CATEGORIES =	www
 HOMEPAGE =	http://www.sogo.nu/
@@ -28,6 +27,7 @@ WANTLIB +=		c m pthread crypto memcached SBJson
 WANTLIB +=		DOM EOControl GDLAccess NGExtensions NGLdap
 WANTLIB +=		NGMime NGObjWeb NGStreams SaxObjC WEExtensions
 WANTLIB +=		objc2 gnustep-base curl
+WANTLIB += ${COMPILER_LIBCXX}
 
 LIB_DEPENDS +=		devel/libmemcached \
 			net/curl \
@@ -74,6 +74,12 @@ post-install:
 	${INSTALL_SCRIPT} -c -o ${SHAREOWN} -g ${SHAREGRP} \
 		${WRKSRC}/Scripts/sql-update-2.2.17_to_2.3.0-mysql.sh \
 		${PREFIX}/share/doc/sogo/sql-update-2.2.17_to_2.3.0-mysql.sh
+	${INSTALL_SCRIPT} -c -o ${SHAREOWN} -g ${SHAREGRP} \
+		${WRKSRC}/Scripts/sql-update-3.0.0-to-combined.sh \
+		${PREFIX}/share/doc/sogo/sql-update-3.0.0-to-combined.sh
+	${INSTALL_SCRIPT} -c -o ${SHAREOWN} -g ${SHAREGRP} \
+		${WRKSRC}/Scripts/sql-update-3.0.0-to-combined-mysql.sh \
+		${PREFIX}/share/doc/sogo/sql-update-3.0.0-to-combined-mysql.sh
 	${INSTALL_SCRIPT} -c -o ${SHAREOWN} -g ${SHAREGRP} \
 		${WRKSRC}/Scripts/updates.php \
 		${PREFIX}/share/doc/sogo/updates.php

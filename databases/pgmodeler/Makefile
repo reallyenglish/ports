@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.2 2016/12/25 14:34:39 zhuk Exp $
+# $OpenBSD: Makefile,v 1.4 2017/07/27 09:34:37 sthen Exp $
 
 COMMENT =	PostgreSQL Database Modeler
 
 VERSION =	0.8.2
 DISTNAME =	pgmodeler-${VERSION}
-REVISION =	0
+REVISION =	2
 
 GH_ACCOUNT =	pgmodeler
 GH_PROJECT =	pgmodeler
@@ -28,6 +28,9 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL Qt5Core Qt5Gui Qt5Network Qt5PrintSupport Qt5Svg
 WANTLIB += Qt5Widgets X11 Xext c execinfo m pq pthread xml2
+WANTLIB += ${COMPILER_LIBCXX}
+
+CONFIGURE_ENV =		CXXFLAGS="${CXXFLAGS} -std=c++11"
 
 MODULES =		devel/qmake \
 			x11/qt5

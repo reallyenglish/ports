@@ -1,37 +1,50 @@
-# $OpenBSD: Makefile,v 1.7 2017/04/10 11:45:27 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/08/21 07:03:10 jca Exp $
 
 COMMENT=	decision procedure for bit-vectors and arrays
 
-V=		0.1
-DISTNAME=	stp-ver-${V}-11-18-2008
-PKGNAME=	stp-${V}
-REVISION=	1
+GH_ACCOUNT=	stp
+GH_PROJECT=	stp
+GH_TAGNAME=	stp-2.2.0
+DISTNAME=	stp-2.2.0
+
+SHARED_LIBS +=  stp                       0.0 # 2.2
 
 CATEGORIES=	devel
 
-HOMEPAGE=	https://sites.google.com/site/stpfastprover/STP-Fast-Prover
+HOMEPAGE=	https://stp.github.io/
 
 # MIT license
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	c m ${LIBCXX}
+WANTLIB += ${COMPILER_LIBCXX} boost_program_options-mt c m minisat
 
-MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=stp-fast-prover/}
-EXTRACT_SUFX=	.tgz
+COMPILER=	gcc
+
+MODULES=	devel/cmake \
+		lang/python
+
+MODPY_RUNDEP=	No
+MODPY_VERSION=	${MODPY_DEFAULT_VERSION_3}
 
 BUILD_DEPENDS=	devel/bison
+LIB_DEPENDS=	devel/boost \
+		math/minisat
 
-MAKE_ENV=	CXX="${CXX}"
+# force-disable in case cryptominisat is imported.
+CONFIGURE_ARGS=	-DNOCRYPTOMINISAT:BOOL=ON
 
-USE_GMAKE=	Yes
-CONFIGURE_STYLE= simple
+# tests depend on llvm lit
+NO_TEST=	Yes
 
-do-install:
-	${INSTALL_DATA_DIR} ${PREFIX}/include/stp
+post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/stp
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/stp ${PREFIX}/bin
-	${INSTALL_DATA} ${WRKSRC}/lib/libstp.a ${PREFIX}/lib
-	${INSTALL_DATA} ${WRKSRC}/c_interface/*.h ${PREFIX}/include/stp
-	${INSTALL_DATA} ${WRKSRC}/PAPERS/*.pdf ${PREFIX}/share/doc/stp
+	${INSTALL_DATA} ${WRKSRC}/papers/*.pdf ${PREFIX}/share/doc/stp
+	${MODPY_BIN} -m compileall ${WRKINST}/${MODPY_SITEPKG}
+	find ${PREFIX}/bin -name 'stp*' -ls
+	# stp-X.Y.Z ends up as ${FULLPKGNAME} in PLIST
+	if [ -L ${PREFIX}/bin/stp ]; then \
+	    rm ${PREFIX}/bin/stp; \
+	    mv ${PREFIX}/bin/stp-* ${PREFIX}/bin/stp; \
+	fi
 
 .include <bsd.port.mk>

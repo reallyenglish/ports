@@ -1,11 +1,10 @@
-# $OpenBSD: Makefile,v 1.44 2017/01/30 11:34:15 jca Exp $
+# $OpenBSD: Makefile,v 1.46 2017/09/04 17:24:44 sthen Exp $
 
 COMMENT-main=	ISC DHCP Server
 COMMENT-client=	ISC DHCP Client
 COMMENT-omapi=	ISC DHCP OMAPI
 
-VERSION=	4.3.5
-REVISION=	0
+VERSION=	4.3.6
 DISTNAME=	isc-dhcp-${VERSION}
 PKGNAME=	isc-dhcp-${VERSION:S/-P/./}
 PKGNAME-main=	isc-dhcp-server-${VERSION:S/-P/./}
@@ -36,6 +35,12 @@ CONFIGURE_ARGS+= 	--enable-early-chroot \
 NO_TEST=		Yes
 
 EXAMPLEDIR=		share/examples/isc-dhcp
+
+MAKE_ENV +=	CC='${CC}'
+
+# because we may want to patch bind, you know
+post-extract:
+	cd ${WRKDIST}/bind && tar zxf bind.tar.gz
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/${EXAMPLEDIR}

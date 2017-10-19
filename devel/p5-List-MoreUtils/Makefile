@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.23 2017/05/26 12:34:33 bluhm Exp $
+# $OpenBSD: Makefile,v 1.26 2017/10/18 15:18:36 bluhm Exp $
 
 COMMENT =	provide the stuff missing in List::Util
 
-DISTNAME =	List-MoreUtils-0.419
+DISTNAME =	List-MoreUtils-0.426
 
 CATEGORIES =	devel
 
@@ -12,9 +12,15 @@ MAINTAINER =		Alexander Bluhm <bluhm@openbsd.org>
 PERMIT_PACKAGE_CDROM =	Yes
 
 MODULES =		cpan
-RUN_DEPENDS =		devel/p5-Exporter-Tiny>=0.038
+RUN_DEPENDS =		devel/p5-Exporter-Tiny>=0.038 \
+			devel/p5-List-MoreUtils-XS>=0.426
 TEST_DEPENDS =		devel/p5-Test-LeakTrace
 
 PKG_ARCH =		*
+
+# Do not use Config::AutoConf to figure out that we can load XS modules.
+# Reduces amount of bundled 3rd party code, makes review easier.
+post-extract:
+	rm -rf -- ${WRKSRC}/inc
 
 .include <bsd.port.mk>

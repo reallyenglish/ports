@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.51 2017/06/07 23:21:33 mlarkin Exp $
+# $OpenBSD: Makefile,v 1.53 2017/07/26 22:45:20 sthen Exp $
 
 # Other archs have not been tested
 ONLY_FOR_ARCHS =	amd64
@@ -16,7 +16,7 @@ V =			160
 DISTNAME =		mame0${V}s
 PKGNAME-main =		sdlmame-0.${V}
 PKGNAME-tools =		sdlmame-tools-0.${V}
-REVISION =		3
+REVISION =		4
 
 CATEGORIES =		emulators games
 
@@ -29,7 +29,7 @@ PERMIT_PACKAGE_FTP =	unclear license
 PERMIT_DISTFILES_FTP =	unclear license
 
 WANTLIB += SDL SDL_ttf X11 Xinerama c expat fontconfig freetype
-WANTLIB += m pthread ${LIBCXX} util z
+WANTLIB += m pthread ${COMPILER_LIBCXX} util z
 
 MASTER_SITES =		https://github.com/mamedev/mame/releases/download/mame0${V}/
 MASTER_SITES1 =		https://spacehopper.org/mirrors/

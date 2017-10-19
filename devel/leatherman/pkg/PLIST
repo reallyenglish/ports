@@ -1,5 +1,4 @@
-@comment $OpenBSD: PLIST,v 1.4 2017/05/30 18:01:27 zhuk Exp $
-include/boost/
+@comment $OpenBSD: PLIST,v 1.6 2017/09/08 09:53:49 sebastia Exp $
 include/boost/nowide/
 include/boost/nowide/args.hpp
 include/boost/nowide/cenv.hpp
@@ -49,6 +48,7 @@ include/leatherman/util/scoped_resource.hpp
 include/leatherman/util/strings.hpp
 include/leatherman/util/time.hpp
 include/leatherman/util/timer.hpp
+include/leatherman/util/uri.hpp
 include/leatherman/util/windows/
 include/leatherman/util/windows/scoped_handle.hpp
 include/leatherman/vendor/
@@ -123,8 +123,5 @@ lib/cmake/leatherman/util.cmake
 @lib lib/libleatherman_logging.so.${LIBleatherman_logging_VERSION}
 @lib lib/libleatherman_ruby.so.${LIBleatherman_ruby_VERSION}
 @lib lib/libleatherman_util.so.${LIBleatherman_util_VERSION}
-share/locale/
-share/locale/fr/
-share/locale/fr/LC_MESSAGES/
 share/locale/fr/LC_MESSAGES/leatherman_locale.mo
 share/locale/fr/LC_MESSAGES/leatherman_logging.mo

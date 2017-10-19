@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.28 2017/06/02 10:51:56 schwarze Exp $
+# $OpenBSD: Makefile,v 1.30 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT =	XMPP transport/gateway
 
 DISTNAME =	spectrum-1.4.8
 CATEGORIES =	net
-REVISION =	6
+REVISION =	7
 
 HOMEPAGE =	http://spectrum.im/
 MASTER_SITES =	https://github.com/downloads/hanzz/libtransport/
@@ -13,7 +13,7 @@ MAINTAINER =	Sebastian Reitenbach <sebastia@openbsd.org>
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c m pthread ${LIBCXX} gloox purple glib-2.0 gthread-2.0 ev
+WANTLIB += c m pthread ${COMPILER_LIBCXX} gloox purple glib-2.0 gthread-2.0 ev
 WANTLIB += PocoData PocoFoundation PocoDataMySQL PocoDataODBC PocoDataSQLite
 WANTLIB += Magick++-6.Q16
 

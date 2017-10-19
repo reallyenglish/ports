@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.20 2017/05/11 20:50:55 espie Exp $
+# $OpenBSD: Makefile,v 1.22 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT=		2D games framework for use with Lua
 
 V=			0.8.0
 DISTNAME=		love-$V-linux-src
 PKGNAME=		love-$V
-REVISION=		7
+REVISION=		8
 
 HOMEPAGE=		http://love2d.org/
 
@@ -19,7 +19,7 @@ WANTLIB += ${MODLUA_WANTLIB}
 WANTLIB += GL Half IL Iex IexMath IlmImf IlmThread Imath SDL X11
 WANTLIB += X11-xcb Xdamage Xext Xfixes Xxf86vm c drm
 WANTLIB += freetype glapi iconv jasper jpeg lcms m mng modplug mpg123
-WANTLIB += ogg openal physfs png pthread sndio ${LIBCXX}
+WANTLIB += ogg openal physfs png pthread sndio ${COMPILER_LIBCXX}
 WANTLIB += tiff usbhid vorbis vorbisfile xcb xcb-dri2 xcb-glx
 WANTLIB += z expat
 

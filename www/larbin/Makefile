@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.12 2017/05/07 07:31:14 jasper Exp $
+# $OpenBSD: Makefile,v 1.14 2017/07/26 22:45:31 sthen Exp $
 
 COMMENT=	little and fast Web crawler
 
 DISTNAME=	larbin-2.6.3
-REVISION=	1
+REVISION=	2
 CATEGORIES=	www
 
 HOMEPAGE=	http://larbin.sourceforge.net/index-eng.html
@@ -11,7 +11,7 @@ HOMEPAGE=	http://larbin.sourceforge.net/index-eng.html
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += adns>=1 c m pthread ${LIBCXX}
+WANTLIB += adns>=1 c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=larbin/}
 

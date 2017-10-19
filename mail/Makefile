@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.356 2017/06/08 12:53:38 sthen Exp $
+# $OpenBSD: Makefile,v 1.360 2017/09/16 13:13:42 sunil Exp $
 
      SUBDIR =
      SUBDIR += abook
@@ -67,6 +67,7 @@
      SUBDIR += imapproxy
      SUBDIR += imapsync
      SUBDIR += isync
+     SUBDIR += kopano
      SUBDIR += ldapvacation
      SUBDIR += libetpan
      SUBDIR += libspf2
@@ -80,6 +81,7 @@
      SUBDIR += mailscanner
      SUBDIR += mairix
      SUBDIR += majordomo
+     SUBDIR += mblaze
      SUBDIR += mboxgrep
      SUBDIR += metamail
      SUBDIR += mew
@@ -172,7 +174,6 @@
      SUBDIR += pecl-mailparse
      SUBDIR += perdition
      SUBDIR += pflogsumm
-     SUBDIR += pgpsendmail
      SUBDIR += pine-pgp-filters
      SUBDIR += pop3d
      SUBDIR += popa3d
@@ -237,6 +238,5 @@
      SUBDIR += wmpop3
      SUBDIR += xlbiff
      SUBDIR += z-push
-     SUBDIR += zarafa
 
 .include <bsd.port.subdir.mk>

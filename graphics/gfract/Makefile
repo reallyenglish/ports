@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.28 2017/05/24 19:33:53 espie Exp $
+# $OpenBSD: Makefile,v 1.30 2017/07/26 22:45:24 sthen Exp $
 
 COMMENT=		fractal program with GTK interface
 GH_ACCOUNT=		oskusalerma
@@ -7,6 +7,7 @@ GH_TAGNAME=		v1.0
 DISTFILES=		${DISTNAME}.tar.gz \
 			gfract-palettes-0.1.tar.gz:0
 CATEGORIES=		graphics math
+REVISION=		0
 
 HOMEPAGE=		http://www.oskusoft.com/osku/gfract/
 
@@ -18,7 +19,7 @@ WANTLIB += Xrandr Xrender atk-1.0 boost_filesystem boost_regex
 WANTLIB += boost_system c cairo fontconfig freetype gdk-x11-2.0
 WANTLIB += gdk_pixbuf-2.0 gio-2.0 glib-2.0 gobject-2.0 gtk-x11-2.0
 WANTLIB += intl m pango-1.0 pangocairo-1.0 pangoft2-1.0 png pthread
-WANTLIB += ${LIBCXX} z
+WANTLIB += ${COMPILER_LIBCXX} z
 
 MASTER_SITES0= 		http://distfiles.nl/
 

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.49 2017/05/19 22:25:53 espie Exp $
+# $OpenBSD: Makefile,v 1.52 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT=		BitTorrent library written in C++
 
@@ -10,7 +10,7 @@ NOT_FOR_ARCHS=		${GCC3_ARCHS}
 
 DISTNAME=		libtorrent-0.13.6
 EPOCH=			0
-REVISION=		1
+REVISION=		2
 SHARED_LIBS +=  	torrent 22.1	# .18.0
 CATEGORIES=		net devel
 
@@ -22,7 +22,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MASTER_SITES=		http://rtorrent.net/downloads/
 
-WANTLIB=		crypto m pthread ${LIBCXX} z
+WANTLIB=		crypto m pthread ${COMPILER_LIBCXX} z
 
 MODULES=		gcc4
 # for __sync atomic ops
@@ -31,7 +31,6 @@ MODGCC4_LANGS=		c++
 
 BUILD_DEPENDS=		devel/cppunit
 
-USE_LIBTOOL=		gnu
 CONFIGURE_STYLE=	autoconf
 AUTOCONF_VERSION=	2.69
 CONFIGURE_ARGS=		--enable-static \

@@ -1,16 +1,16 @@
-# $OpenBSD: Makefile,v 1.14 2017/05/11 16:28:58 espie Exp $
+# $OpenBSD: Makefile,v 1.16 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT=		gnutella client with an easy to use interface
 
 DISTNAME=		mutella-0.4.5
-REVISION=		0
+REVISION=		1
 CATEGORIES=		net
 
 HOMEPAGE=		http://mutella.sourceforge.net/
 
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
-WANTLIB=		c curses m pthread readline ${LIBCXX} z
+WANTLIB=		c curses m pthread readline ${COMPILER_LIBCXX} z
 
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=mutella/}
 

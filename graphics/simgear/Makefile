@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.10 2017/05/31 08:08:16 espie Exp $
+# $OpenBSD: Makefile,v 1.13 2017/08/21 17:55:37 rsadowski Exp $
 
 COMMENT =		library set for simulations, games and visualizations
 
 DISTNAME =		simgear-2016.3.1
+REVISION =		1
 
 SHARED_LIBS +=  SimGearCore               4.0 # 2.10
 SHARED_LIBS +=  SimGearScene              4.0 # 2.10
@@ -20,7 +21,7 @@ MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=flightgear/}
 EXTRACT_SUFX =		.tar.bz2
 
 WANTLIB += GL GLU OpenThreads curl expat m openal osg osgDB osgGA osgParticle
-WANTLIB += osgSim osgText osgUtil osgViewer pthread z ${LIBECXX}
+WANTLIB += osgSim osgText osgUtil osgViewer pthread z ${COMPILER_LIBCXX}
 
 MODULES =		devel/cmake
 COMPILER =		gcc

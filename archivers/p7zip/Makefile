@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.39 2017/04/10 11:45:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.42 2017/07/26 22:45:14 sthen Exp $
 
 COMMENT-main=	file archiver with high compression ratio
 COMMENT-rar=	rar modules for p7zip
 
 V=		16.02
-REVISION-main=	1
-REVISION-rar=	0
+REVISION-main=	3
+REVISION-rar=	1
 DISTNAME=	p7zip_${V}_src_all
 PKGNAME=	p7zip-${V}
 PKGNAME-main=	p7zip-${V}
@@ -22,7 +22,7 @@ PERMIT_PACKAGE_CDROM=		Yes
 PERMIT_PACKAGE_FTP=		Yes
 
 # uses pledge()
-WANTLIB=	m pthread ${LIBCXX}
+WANTLIB=	m pthread ${COMPILER_LIBCXX}
 WANTLIB-main=	${WANTLIB} c
 WANTLIB-rar=	${WANTLIB}
 

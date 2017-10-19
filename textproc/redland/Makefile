@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.24 2017/06/12 10:57:57 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.26 2017/07/26 22:45:31 sthen Exp $
 
 MULTI_PACKAGES=		-main -mysql -pgsql
 
@@ -12,9 +12,9 @@ PKGNAME-main=		redland-$V
 PKGNAME-mysql=		redland-mysql-$V
 PKGNAME-pgsql=		redland-pgsql-$V
 
-REVISION-main=		3
-REVISION-mysql=		4
-REVISION-pgsql=		4
+REVISION-main=		4
+REVISION-mysql=		5
+REVISION-pgsql=		5
 
 CATEGORIES=		textproc
 
@@ -62,7 +62,7 @@ WANTLIB-main=		${WANTLIB} c sqlite3
 
 LIB_DEPENDS-mysql=	${BASE_PKGPATH},-main \
 			databases/mariadb
-WANTLIB-mysql=		${WANTLIB} crypto mysqlclient rdf ${LIBCXX}
+WANTLIB-mysql=		${WANTLIB} crypto mysqlclient rdf ${COMPILER_LIBCXX}
 
 LIB_DEPENDS-pgsql=	${BASE_PKGPATH},-main \
 			databases/postgresql

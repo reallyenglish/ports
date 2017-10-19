@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.10 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT=	remake of Konami's Road Fighter
 
 DISTNAME=	roadfighter.src_1.0.1269
 PKGNAME=	${DISTNAME:S/.src_/-/}
-REVISION =	1
+REVISION =	2
 WRKDIST=	${WRKDIR}/${DISTNAME:S/.src_/-/}
 
 EXTRACT_SUFX=	.tgz
@@ -26,6 +26,6 @@ LIB_DEPENDS=	devel/sdl-sound \
 		devel/sdl-image \
 		devel/sdl-ttf \
 		devel/sdl-mixer
-WANTLIB=	SDL c ${LIBCXX} m pthread SDL_sound SDL_image SDL_ttf SDL_mixer
+WANTLIB=	SDL c ${COMPILER_LIBCXX} m pthread SDL_sound SDL_image SDL_ttf SDL_mixer
 
 .include <bsd.port.mk>

@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.185 2017/04/13 07:38:44 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.190 2017/09/19 11:51:50 ajacoutot Exp $
 
 COMMENT= 		Telepathy based messenger for GNOME
 
 GNOME_PROJECT=		empathy
-GNOME_VERSION=		3.12.13
+GNOME_VERSION=		3.12.14
+REVISION=		0
 
 SUBST_VARS=		GNOME_VERSION
 
@@ -12,28 +13,30 @@ CATEGORIES=		net
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += EGL FLAC GL ICE SM X11 X11-xcb Xcomposite Xcursor
-WANTLIB += Xdamage Xext Xfixes Xi Xinerama Xrandr Xrender
-WANTLIB += Xt Xtst atk-1.0 atk-bridge-2.0 atspi c cairo cairo-gobject
+WANTLIB += EGL FLAC GL ICE SM X11 X11-xcb Xcomposite Xcursor Xdamage
+WANTLIB += Xext Xfixes Xi Xinerama Xrandr Xrender Xt Xtst Xxf86vm
+WANTLIB += atk-1.0 atk-bridge-2.0 atspi c cairo cairo-gobject
 WANTLIB += canberra canberra-gtk3 champlain-0.12 champlain-gtk-0.12
 WANTLIB += clutter-1.0 clutter-gst-3.0 clutter-gtk-1.0 cogl cogl-pango
 WANTLIB += cogl-path dbus-1 dbus-glib-1 drm enchant epoxy execinfo
 WANTLIB += expat farstream-0.2 ffi folks folks-telepathy fontconfig
-WANTLIB += freetype gbm gck-1 gcr-base-3 gcr-ui-3 gcrypt gdbm
+WANTLIB += freetype gbm gck-1 gcr-base-3 gcr-ui-3 gcrypt
 WANTLIB += gdk-3 gdk_pixbuf-2.0 gee-0.8 geocode-glib gio-2.0 glapi
-WANTLIB += glib-2.0 gmodule-2.0 gmp gnutls goa-1.0 gobject-2.0
-WANTLIB += gpg-error graphite2 gstapp-1.0 gstaudio-1.0 gstbase-1.0
-WANTLIB += gstfft-1.0 gstpbutils-1.0 gstreamer-1.0 gsttag-1.0
-WANTLIB += gstvideo-1.0 gthread-2.0 gtk-3 harfbuzz harfbuzz-icu
-WANTLIB += hogweed icudata icui18n icuuc javascriptcoregtk-3.0
-WANTLIB += jpeg json-glib-1.0 ltdl lzma m mission-control-plugins
-WANTLIB += nettle notify ogg orc-0.4 p11-kit pango-1.0 pangocairo-1.0
-WANTLIB += pangoft2-1.0 pcre pixman-1 png pthread pthread-stubs
-WANTLIB += pulse pulse-mainloop-glib secret-1 sndfile soup-2.4
-WANTLIB += sqlite3 ${LIBCXX} tasn1 telepathy-farstream telepathy-glib
-WANTLIB += telepathy-logger vorbis vorbisenc vorbisfile webkitgtk-3.0
-WANTLIB += webp xcb xcb-dri2 xcb-render xcb-shm xcb-xfixes unistring
-WANTLIB += xml2 xslt z Xxf86vm xcb-glx iconv intl idn2
+WANTLIB += glib-2.0 gmodule-2.0 goa-1.0 gobject-2.0 gpg-error
+WANTLIB += graphite2 gstapp-1.0 gstaudio-1.0 gstbase-1.0 gstfft-1.0
+WANTLIB += gstpbutils-1.0 gstreamer-1.0 gsttag-1.0 gstvideo-1.0
+WANTLIB += gthread-2.0 gtk-3 harfbuzz harfbuzz-icu hyphen iconv
+WANTLIB += icudata icui18n icuuc intl javascriptcoregtk-4.0 jpeg
+WANTLIB += json-glib-1.0 ltdl lzma m mission-control-plugins notify
+WANTLIB += ogg orc-0.4 p11-kit pango-1.0 pangocairo-1.0 pangoft2-1.0
+WANTLIB += pcre pixman-1 png pthread-stubs pulse pulse-mainloop-glib
+WANTLIB += secret-1 sndfile soup-2.4 sqlite3 telepathy-farstream
+WANTLIB += telepathy-glib telepathy-logger vorbis vorbisenc vorbisfile
+WANTLIB += webkit2gtk-4.0 webp xcb xcb-dri2 xcb-glx xcb-render
+WANTLIB += xcb-shm xcb-xfixes xml2 xslt z tasn1
+WANTLIB += GLESv2 gstallocators-1.0 gstbadallocators-1.0 gstgl-1.0
+WANTLIB += ${COMPILER_LIBCXX}
+
 
 MODULES=		devel/dconf \
 			lang/python \
@@ -55,7 +58,7 @@ LIB_DEPENDS=		audio/libcanberra,-gtk3 \
 			net/telepathy/telepathy-logger \
 			net/telepathy/telepathy-mission-control \
 			textproc/enchant \
-			www/webkit,gtk3 \
+			www/webkitgtk4 \
 			x11/gnome/gcr \
 			x11/gnome/online-accounts
 
@@ -81,10 +84,6 @@ CONFIGURE_ARGS=		--disable-gudev
 
 # needs signond, libsignon-glib -- Ubuntu/Meego
 CONFIGURE_ARGS +=	--disable-ubuntu-online-accounts
-
-# XXX
-pre-configure:
-	sed -i 's,clutter-gst-2.0,clutter-gst-3.0,g' ${WRKSRC}/configure
 
 post-install:
 	rm ${PREFIX}/lib/mission-control-plugins.0/*.{a,la}

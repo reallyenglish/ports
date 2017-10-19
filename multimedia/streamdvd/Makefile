@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.10 2017/05/13 00:15:38 espie Exp $
+# $OpenBSD: Makefile,v 1.13 2017/07/26 22:45:27 sthen Exp $
 
 COMMENT=	fast tool to backup video DVDs 'on the fly'
 
 DISTNAME=	streamdvd-0.4
-REVISION=	1
+REVISION =	3
 CATEGORIES=	multimedia
 MASTER_SITES=	http://www.badabum.de/down/
 
@@ -17,7 +17,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 NO_TEST=	Yes
 
 LIB_DEPENDS=	devel/libdvdread>=4.2.0
-WANTLIB=	c m ${LIBCXX} dvdread
+WANTLIB=	c m ${COMPILER_LIBCXX} dvdread
 
 WRKDIST=	${WRKDIR}/StreamDVD-0.4
 

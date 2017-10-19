@@ -1,14 +1,14 @@
-# $OpenBSD: Makefile,v 1.16 2017/05/27 19:57:07 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT =	STUN server implementing RFCs 5389, 5769, and 5780
 NOT_FOR_ARCHS = arm hppa # atomic ops
 
-VERSION =	1.2.9
+VERSION =	1.2.13
 DISTNAME =	stunserver-${VERSION}
 PKGNAME =	stuntman-${VERSION}
 CATEGORIES =	telephony net
 EXTRACT_SUFX =	.tgz
-REVISION =	1
+REVISION =	0
 
 MAINTAINER =	Roman Kravchuk <kravchuk.kp@gmail.com>
 
@@ -19,7 +19,7 @@ MASTER_SITES =	${HOMEPAGE}
 # Apache 2.0 license
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB +=	c crypto m pthread ${LIBCXX}
+WANTLIB +=	c crypto m pthread ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS =	devel/boost
 

@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.44 2017/05/18 23:28:53 espie Exp $
+# $OpenBSD: Makefile,v 1.48 2017/09/27 10:35:22 dcoppa Exp $
 
 COMMENT=	UCB/LBNL Network Simulator Version 2
 
 V=		2.35
 DISTNAME=	ns-src-$V
 PKGNAME=	ns-$V
-REVISION =	0
+REVISION =	3
 CATEGORIES=	net
 MAINTAINER =	Stuart Cassoff <stwo@users.sourceforge.net>
 
@@ -15,7 +15,7 @@ HOMEPAGE=	http://nsnam.sourceforge.net/
 PERMIT_PACKAGE_CDROM=	Yes
 
 MODULES +=	x11/tk
-WANTLIB +=	X11 Xext c m pcap ${LIBCXX} otcl
+WANTLIB +=	X11 Xext c m pcap ${COMPILER_LIBCXX} otcl
 WANTLIB +=	${MODTK_WANTLIB}
 
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=nsnam/}
@@ -25,7 +25,9 @@ BUILD_DEPENDS=	devel/tclcl
 LIB_DEPENDS=	lang/otcl \
 		${MODTK_LIB_DEPENDS}
 
-CONFIGURE_STYLE=gnu
+CONFIGURE_STYLE=autoconf no-autoheader
+AUTOCONF_VERSION=2.68
+
 CONFIGURE_ARGS=	--with-tcl-ver=${MODTCL_VERSION} \
 		--with-tk-ver=${MODTK_VERSION} \
 		--with-tcl=${LOCALBASE} \

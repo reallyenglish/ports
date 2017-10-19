@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.29 2016/12/05 15:21:35 sthen Exp $
+# $OpenBSD: Makefile,v 1.31 2017/08/22 10:20:29 sthen Exp $
 
 SHARED_LIBS +=  scamperfile               1.1 # 0.0
 
 COMMENT =	parallel internet measurement utility
 
-V =		20161204
+V =		20170822
 DISTNAME =	scamper-cvs-$V
 PKGNAME =	scamper-$V
 
@@ -17,7 +17,7 @@ MAINTAINER =	Stuart Henderson <sthen@openbsd.org>
 # GPLv2 only
 PERMIT_PACKAGE_CDROM =	 Yes
 
-WANTLIB += c crypto m ssl
+WANTLIB += c crypto m ssl pthread
 
 MASTER_SITES =	http://www.caida.org/tools/measurement/scamper/code/
 

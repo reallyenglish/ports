@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.11 2017/04/29 16:16:38 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.13 2017/08/24 09:31:35 dcoppa Exp $
 COMMENT =		accounting for KDE 4
 CATEGORIES =		productivity x11
 HOMEPAGE =		https://kmymoney.org/
 MAINTAINER =		Vadim Zhukov <zhuk@openbsd.org>
 VERSION =		4.8.0
 DISTNAME =		kmymoney-${VERSION}
-REVISION =		0
+REVISION =		1
 
 SHARED_LIBS =	kmm_kdchart				1.1
 SHARED_LIBS +=	kmm_mymoney				1.1
@@ -19,6 +19,7 @@ SHARED_LIBS +=	payeeidentifier_nationalAccount		0.0 # 4.14
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB =  c m pthread z
+WANTLIB += ${COMPILER_LIBCXX}
 WANTLIB += lib/qt4/QtDBus lib/qt4/QtGui lib/qt4/QtNetwork lib/qt4/QtSql
 WANTLIB += lib/qt4/QtSvg lib/qt4/QtXml
 WANTLIB += ${KDE4LIB}/kabc ${KDE4LIB}/kcmutils ${KDE4LIB}/kdeui
@@ -64,9 +65,6 @@ CONFIGURE_ARGS =	-DENABLE_KBANKING:Bool=Yes \
 			-DCMAKE_DISABLE_FIND_PACKAGE_Doxygen:Bool=Yes
 
 TEST_IS_INTERACTIVE =	X11
-
-# fails to pick up something MOC-generated in kmymoney/plugins/onlinetasks/sepa
-USE_NINJA =	No
 
 post-install:
 	${MODPY_BIN} ${MODPY_LIBDIR}/compileall.py ${PREFIX}/share/apps/kmm_weboob/weboob.py

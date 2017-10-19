@@ -1,35 +1,53 @@
-$OpenBSD: patch-src_Flow_cpp,v 1.2 2016/07/09 12:14:28 sthen Exp $
---- src/Flow.cpp.orig	Mon Jun 27 20:31:18 2016
-+++ src/Flow.cpp	Sat Jul  9 12:55:43 2016
-@@ -1795,9 +1795,9 @@ bool Flow::isIdleFlow() {
+$OpenBSD: patch-src_Flow_cpp,v 1.4 2017/10/17 10:39:12 sthen Exp $
+
+From d7921296810e5a1997bf5b0c69693e28b9ca6491 Mon Sep 17 00:00:00 2001
+From: Simone Mainardi <mainardi@ntop.org>
+Date: Fri, 13 Oct 2017 16:34:07 +0200
+Subject: [PATCH] Fix possible dissectHTTP reads beyond end of payload
+
+Index: src/Flow.cpp
+--- src/Flow.cpp.orig
++++ src/Flow.cpp
+@@ -2451,8 +2451,9 @@ void Flow::dissectHTTP(bool src2dst_direction, char *p
+     h = srv_host->getHTTPstats(); if(h) h->incRequestAsReceiver(payload); /* Rcvd */
+     dissect_next_http_packet = true;
  
- /* *************************************** */
+-    if(payload && ((space = strchr(payload, ' ')) != NULL)) {
+-      u_int l = space-payload;
++    /* use memchr to prevent possibly non-NULL terminated HTTP requests */
++    if(payload && ((space = (char*)memchr(payload, ' ', payload_len)) != NULL)) {
++      u_int l = space - payload;
  
--void Flow::updatePacketStats(InterarrivalStats *stats, const struct timeval *when) {
-+void Flow::updatePacketStats(InterarrivalStats *stats, const struct bpf_timeval *when) {
-   if(stats->lastTime.tv_sec != 0) {
--    float deltaMS = (float)(Utils::timeval2usec((struct timeval*)when) - Utils::timeval2usec(&stats->lastTime))/(float)1000;
-+    float deltaMS = (float)(Utils::timeval2usec(when) - Utils::timeval2usec(&stats->lastTime))/(float)1000;
+       if((!strncmp(payload, "GET", 3))
+ 	 || (!strncmp(payload, "POST", 4))
+@@ -2467,9 +2468,10 @@ void Flow::dissectHTTP(bool src2dst_direction, char *p
+ 	  protos.http.last_method[l] = '\0';
+ 	}
  
-     if(deltaMS > 0) {
-       if(stats->max_ms == 0)
-@@ -1811,7 +1811,7 @@ void Flow::updatePacketStats(InterarrivalStats *stats,
-     }
-   }
++	payload_len -= (l + 1);
+ 	payload = &space[1];
+-	if((space = strchr(payload, ' ')) != NULL) {
+-	  u_int l = min_val(space-payload, 512); /* Avoid jumbo URLs */
++	if((space = (char*)memchr(payload, ' ', payload_len)) != NULL) {
++	  l = min_val(space - payload, 512); /* Avoid jumbo URLs */
  
--  memcpy(&stats->lastTime, when, sizeof(struct timeval));
-+  memcpy(&stats->lastTime, when, sizeof(struct bpf_timeval));
- }
+ 	  /* Stop at the first non-printable char of the HTTP URL */
+ 	  for(u_int i=0; i<l; i++) {
+@@ -2496,11 +2498,14 @@ void Flow::dissectHTTP(bool src2dst_direction, char *p
+       h = srv_host->getHTTPstats(); if(h) h->incResponseAsSender(payload); /* Sent */
+       dissect_next_http_packet = false;
  
- /* *************************************** */
-@@ -1830,8 +1830,8 @@ void Flow::dumpPacketStats(lua_State* vm, bool cli2srv
+-      if((space = strchr(payload, ' ')) != NULL) {
++      if((space = (char*)memchr(payload, ' ', payload_len)) != NULL) {
++	u_int l = space - payload;
++
++	payload_len -= (l + 1);
+ 	payload = &space[1];
+-	if((space = strchr(payload, ' ')) != NULL) {
++	if((space = (char*)memchr(payload, ' ', payload_len)) != NULL) {
+ 	  char tmp[32];
+-	  int l = min_val((int)(space-payload), (int)(sizeof(tmp)-1));
++	  l = min_val(space - payload, (int)(sizeof(tmp) - 1));
  
- /* *************************************** */
- 
--void Flow::incStats(bool cli2srv_direction, u_int pkt_len,
--		    u_int payload_len, const struct timeval *when) {
-+void Flow::incStats(bool cli2srv_direction, u_int32_t pkt_len,
-+		    u_int16_t payload_len, const struct bpf_timeval *when) {
-   updateSeen();
-   updatePacketStats(cli2srv_direction ? &cli2srvStats.pktTime : &srv2cliStats.pktTime, when);
- 
+ 	  strncpy(tmp, payload, l);
+ 	  tmp[l] = 0;

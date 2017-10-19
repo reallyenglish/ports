@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.7 2017/06/03 09:57:19 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.12 2017/09/23 11:41:31 sthen Exp $
 
 USE_WXNEEDED=		Yes
 
@@ -10,7 +10,7 @@ SHARED_LIBS +=  atrildocument             3.0 # 3.0
 SHARED_LIBS +=  atrilview                 3.0 # 3.0
 
 MATE_PROJECT=		atril
-REVISION=		3
+REVISION=		6
 
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
@@ -20,7 +20,7 @@ WANTLIB += Xext Xfixes Xi Xinerama Xrandr Xrender Xt Xxf86vm bz2
 WANTLIB += c crypto drm epoxy expat ffi fontconfig freetype gbm
 WANTLIB += gio-2.0 glapi glib-2.0 gmodule-2.0 gobject-2.0 gthread-2.0
 WANTLIB += iconv intl m pcre pixman-1 pthread pthread-stubs sqlite3
-WANTLIB += ${LIBCXX} xcb xcb-dri2 xcb-glx xcb-render xcb-shm xcb-xfixes
+WANTLIB += ${COMPILER_LIBCXX} xcb xcb-dri2 xcb-glx xcb-render xcb-shm xcb-xfixes
 WANTLIB += archive atk-1.0 atk-bridge-2.0 atspi avahi-common
 WANTLIB += cairo-gobject cairo caja-extension dbus-1 djvulibre
 WANTLIB += enchant ${LIBECXX} gailutil-3 gcrypt gdk-3 gdk_pixbuf-2.0
@@ -32,6 +32,7 @@ WANTLIB += lz4 lzma nettle notify openjp2 orc-0.4 p11-kit pango-1.0
 WANTLIB += pangocairo-1.0 pangoft2-1.0 png poppler-glib poppler secret-1
 WANTLIB += soup-2.4 spectre tasn1 tiff unistring webkit2gtk-4.0 webp xml2
 WANTLIB += z xslt
+WANTLIB += GLESv2 gstallocators-1.0 gstbadallocators-1.0 gstgl-1.0
 
 MODULES=		devel/dconf \
 			x11/gnome
@@ -52,5 +53,6 @@ RUN_DEPENDS=		devel/gsettings-desktop-schemas
 MODGNOME_TOOLS=		desktop-file-utils gtk-update-icon-cache yelp
 
 CONFIGURE_STYLE=	gnu
+CONFIGURE_ENV +=	ac_cv_lib_kpathsea_kpse_init_prog=no
 
 .include <bsd.port.mk>

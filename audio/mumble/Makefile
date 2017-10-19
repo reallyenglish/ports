@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.27 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.29 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT =		low-latency voice chat client
 
 GH_ACCOUNT =		mumble-voip
 GH_PROJECT =		mumble
 GH_TAGNAME =		1.2.19
+REVISION =		0
 
 CATEGORIES =		audio
 
@@ -17,7 +18,7 @@ WANTLIB +=		ICE SM X11 Xext Xi Xinerama Xrender c crypto
 WANTLIB +=		fontconfig freetype lib/qt4/QtDBus lib/qt4/QtGui
 WANTLIB +=		lib/qt4/QtNetwork lib/qt4/QtSql lib/qt4/QtSvg
 WANTLIB +=		lib/qt4/QtXml m opus portaudio protobuf
-WANTLIB +=		pthread sndfile speex speexdsp ssl ${LIBCXX}
+WANTLIB +=		pthread sndfile speex speexdsp ssl ${COMPILER_LIBCXX}
 
 MODULES =		devel/qmake x11/qt4
 SEPARATE_BUILD =	No

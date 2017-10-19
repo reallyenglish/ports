@@ -1,26 +1,25 @@
-# $OpenBSD: Makefile,v 1.16 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.21 2017/09/02 21:42:41 jeremy Exp $
 
 BROKEN-hppa =	../../include/mednafen/state.h:21:7: error: 'exception_ptr' in namespace 'std' does not name a type
 COMMENT =	emulates numerous game consoles
 
-V =		0.9.39.2
-DISTNAME =	mednafen-${V}
+DISTNAME =	mednafen-0.9.46
 
 CATEGORIES =	emulators games
-HOMEPAGE =	http://mednafen.fobby.net/
+HOMEPAGE =	https://mednafen.github.io
 
 MAINTAINER =	Jeremy Evans <jeremy@openbsd.org>
 
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 
-MASTER_SITES =	http://mednafen.fobby.net/releases/files/
-EXTRACT_SUFX =	.tar.bz2
+MASTER_SITES =	${HOMEPAGE}/releases/files/
+EXTRACT_SUFX =	.tar.xz
 
 MODULES =	devel/gettext
 
 WANTLIB += SDL c m pthread sndfile sndio usbhid z
-WANTLIB += FLAC ogg vorbis vorbisenc ${LIBECXX}
+WANTLIB += FLAC ogg vorbis vorbisenc ${COMPILER_LIBCXX}
 
 USE_GMAKE =	Yes
 COMPILER =	gcc
@@ -34,7 +33,7 @@ USE_WXNEEDED =	Yes
 
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV =		CFLAGS="-I${LOCALBASE}/include -I${LOCALBASE}/include/SDL" \
-			LDFLAGS="-L${LOCALBASE}/lib -pthread"
+			LDFLAGS="-L${LOCALBASE}/lib -pthread -nopie"
 CONFIGURE_ARGS =	--disable-alsa \
 			--disable-rpath \
 			--disable-jack \

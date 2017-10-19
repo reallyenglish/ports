@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.19 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT=		forensic toolkit based on TCT
 
 DISTNAME=		sleuthkit-4.3.0
 CATEGORIES=		sysutils security
+REVISION=		0
 
 SHARED_LIBS +=		tsk	0.0 # 14.0
 
@@ -17,7 +18,7 @@ PERMIT_PACKAGE_FTP=	Yes
 
 MASTER_SITES =		https://github.com/sleuthkit/sleuthkit/releases/download/${DISTNAME}/
 
-WANTLIB += 		c m pthread ${LIBCXX} z
+WANTLIB += 		c m pthread ${COMPILER_LIBCXX} z
 
 CONFIGURE_STYLE =	simple
 

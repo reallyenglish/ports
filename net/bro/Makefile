@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.37 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.40 2017/10/12 17:53:52 ajacoutot Exp $
 
 COMMENT=		network analysis and security monitoring framework
 
-DISTNAME=		bro-2.5
-REVISION=		5
+DISTNAME=		bro-2.5.1
+REVISION=		1
 
 SHARED_LIBS +=  broccoli                  5.1 # 5.1
 
@@ -17,7 +17,7 @@ MAINTAINER=		Antoine Jacoutot <ajacoutot@openbsd.org>
 PERMIT_PACKAGE_CDROM= 	Yes
 
 WANTLIB += GeoIP c crypto m pcap pthread ssl z
-WANTLIB += ${MODPY_WANTLIB} lib/libbind/bind
+WANTLIB += ${MODPY_WANTLIB} lib/libbind/bind ${COMPILER_LIBCXX}
 
 MASTER_SITES=		https://www.bro.org/downloads/
 

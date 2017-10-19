@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.8 2017/05/31 08:08:16 espie Exp $
+# $OpenBSD: Makefile,v 1.10 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT =		OSM data to PostgreSQL converter
 #https://github.com/openstreetmap/osm2pgsql/issues/634
@@ -7,6 +7,7 @@ BROKEN =		doesnt build with geos 3.6 API
 GH_TAGNAME =		0.90.1
 GH_PROJECT =		osm2pgsql
 GH_ACCOUNT =		openstreetmap
+REVISION =		0
 
 CATEGORIES =		geo databases
 
@@ -18,7 +19,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 USE_GMAKE =		Yes
 
 WANTLIB += boost_system-mt boost_filesystem-mt bz2 c expat
-WANTLIB += geos m pthread pq proj z ${MODLUA_WANTLIB} ${LIBECXX}
+WANTLIB += geos m pthread pq proj z ${MODLUA_WANTLIB} ${COMPILER_LIBCXX}
 
 # postgresql needs to be first otherwise tests are done by cmake module
 MODULES =		databases/postgresql    \

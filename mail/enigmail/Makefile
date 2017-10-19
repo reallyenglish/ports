@@ -1,17 +1,17 @@
-# $OpenBSD: Makefile,v 1.38 2016/11/25 14:01:25 giovanni Exp $
+# $OpenBSD: Makefile,v 1.40 2017/08/31 07:26:32 giovanni Exp $
 
 # keep in synch with mozilla.port.mk
 ONLY_FOR_ARCHS =	i386 amd64 powerpc sparc64
 COMMENT-main =		GnuPG extension for Thunderbird
 COMMENT-seamonkey =	GnuPG extension for Seamonkey
 
-V =		1.9.6
+V =		1.9.8.2
 DISTNAME =	enigmail-${V}
 PKGNAME-main =	${PKGNAME}
 PKGNAME-seamonkey =	enigmail-seamonkey-${V}
 EPOCH =		0
-HOMEPAGE =	http://www.mozilla-enigmail.org/
-MASTER_SITES =	http://www.mozilla-enigmail.org/download/source/
+HOMEPAGE =	https://www.enigmail.net/
+MASTER_SITES =	https://www.enigmail.net/download/source/
 
 CATEGORIES =	mail
 MULTI_PACKAGES =	-main -seamonkey

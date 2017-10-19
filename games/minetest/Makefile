@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.18 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.20 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT =		infinite-world block sandbox game
 V =			0.4.14
 DISTNAME =		minetest-${V}
 CATEGORIES =		games x11
-REVISION =		0
+REVISION =		1
 
 HOMEPAGE =		http://www.minetest.net/
 
@@ -12,7 +12,7 @@ HOMEPAGE =		http://www.minetest.net/
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL GLU ICE Irrlicht SM X11 Xext Xxf86vm bz2 c curl freetype jpeg m ogg openal
-WANTLIB += png pthread spatialindex sqlite3 ${LIBCXX} vorbis vorbisfile z
+WANTLIB += png pthread spatialindex sqlite3 ${COMPILER_LIBCXX} vorbis vorbisfile z
 WANTLIB += luajit-${MODLUA_VERSION}
 
 MASTER_SITES =		https://github.com/minetest/

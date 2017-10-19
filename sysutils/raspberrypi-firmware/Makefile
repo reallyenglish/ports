@@ -1,9 +1,9 @@
-#	$OpenBSD: Makefile,v 1.2 2017/03/02 12:04:54 sthen Exp $
+#	$OpenBSD: Makefile,v 1.5 2017/08/18 02:58:53 jsg Exp $
 
 COMMENT=	Raspberry Pi firmware
 GH_ACCOUNT=	raspberrypi
 GH_PROJECT=	firmware
-GH_TAGNAME=	1.20170215
+GH_TAGNAME=	1.20170811
 DISTNAME=	${GH_ACCOUNT}-${GH_PROJECT}-${GH_TAGNAME}
 
 CATEGORIES=	sysutils

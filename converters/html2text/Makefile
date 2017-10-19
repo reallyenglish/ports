@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.11 2017/04/10 11:45:24 sthen Exp $
+# $OpenBSD: Makefile,v 1.14 2017/07/26 22:45:16 sthen Exp $
 
 PORTROACH=		limit:.*[^a]$$
 
 COMMENT=		advanced HTML-to-text converter
 
 DISTNAME=		html2text-1.3.2a
-REVISION=		1
+REVISION =		3
 CATEGORIES=		converters textproc
 
 
@@ -14,7 +14,7 @@ HOMEPAGE=		http://www.mbayer.de/html2text/
 # GPL
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c m ${LIBCXX}
+WANTLIB += c m ${COMPILER_LIBCXX}
 
 MASTER_SITES=		http://www.mbayer.de/html2text/downloads/ \
 			ftp://ftp.ibiblio.org/pub/linux/apps/www/converters/

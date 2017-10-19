@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.10 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.13 2017/07/16 19:19:01 espie Exp $
 
 COMMENT=	open-source turn-key solution for DNSSEC
 
-DISTNAME=	opendnssec-1.4.13
+DISTNAME=	opendnssec-1.4.14
 
 CATEGORIES=	security
 
@@ -38,7 +38,7 @@ LIB_DEPENDS+=	databases/sqlite3
 
 .if ${FLAVOR:Mmysql}
 CONFIGURE_ARGS+= --with-database-backend=mysql
-WANTLIB+=	mysqlclient_r ssl ${LIBCXX}
+WANTLIB+=	mysqlclient_r ssl ${COMPILER_LIBCXX}
 LIB_DEPENDS+=	databases/mariadb
 .endif
 

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.1011 2017/06/15 16:39:16 czarkoff Exp $
+# $OpenBSD: Makefile,v 1.1025 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += GeoIP
@@ -53,7 +53,6 @@
      SUBDIR += crawl
      SUBDIR += ctrace
      SUBDIR += curl
-     SUBDIR += cutegram
      SUBDIR += cvsync
      SUBDIR += czmq
      SUBDIR += daq
@@ -69,7 +68,6 @@
      SUBDIR += dlint
      SUBDIR += dnscrypt-proxy
      SUBDIR += dnsdist
-     SUBDIR += dnsfilter
      SUBDIR += dnsmasq
      SUBDIR += dnsreflector
      SUBDIR += dnstop
@@ -190,7 +188,6 @@
      SUBDIR += ladvd
      SUBDIR += ldns
      SUBDIR += lftp
-     SUBDIR += libaccounts-glib
      SUBDIR += libbgpdump
      SUBDIR += libbind
      SUBDIR += libcares
@@ -233,11 +230,13 @@
      SUBDIR += maradns-deadwood
      SUBDIR += mbrowse
      SUBDIR += mcabber
+     SUBDIR += mcast-proxy
      SUBDIR += meanwhile
      SUBDIR += megatools
      SUBDIR += mfi
      SUBDIR += microblog-purple
      SUBDIR += minbif
+     SUBDIR += mininet
      SUBDIR += miniupnp
      SUBDIR += mirmon
      SUBDIR += mirror
@@ -246,7 +245,6 @@
      SUBDIR += mlvpn
      SUBDIR += mon
      SUBDIR += monitoring-plugins
-     SUBDIR += mono-zeroconf
      SUBDIR += mosh
      SUBDIR += mosquitto
      SUBDIR += mrtg
@@ -294,6 +292,7 @@
      SUBDIR += ntopng
      SUBDIR += ntp
      SUBDIR += nylon
+     SUBDIR += obfs4proxy
      SUBDIR += ocserv
      SUBDIR += oggfwd
      SUBDIR += oidentd
@@ -541,6 +540,7 @@
      SUBDIR += py-dnslib
      SUBDIR += py-dnslib,python3
      SUBDIR += py-dnspython
+     SUBDIR += py-dnspython,python3
      SUBDIR += py-dpkt
      SUBDIR += py-flowd
      SUBDIR += py-flowtools
@@ -559,6 +559,7 @@
      SUBDIR += py-msgpack,python3
      SUBDIR += py-nbxmpp
      SUBDIR += py-netaddr
+     SUBDIR += py-netaddr,python3
      SUBDIR += py-netifaces
      SUBDIR += py-netifaces,python3
      SUBDIR += py-nmap
@@ -571,6 +572,8 @@
      SUBDIR += py-s3transfer
      SUBDIR += py-s3transfer,python3
      SUBDIR += py-slixmpp
+     SUBDIR += py-smbc
+     SUBDIR += py-smbc,python3
      SUBDIR += py-snmp
      SUBDIR += py-socketio-client
      SUBDIR += py-socketio-client,python3
@@ -603,12 +606,10 @@
      SUBDIR += rtmpdump
      SUBDIR += rtorrent
      SUBDIR += ruby-agcaldav
-     SUBDIR += ruby-eventmachine,ruby22
      SUBDIR += ruby-eventmachine,ruby23
      SUBDIR += ruby-eventmachine,ruby24
      SUBDIR += ruby-macaddr
      SUBDIR += ruby-mfi
-     SUBDIR += ruby-msgpack,ruby22
      SUBDIR += ruby-msgpack,ruby23
      SUBDIR += ruby-msgpack,ruby24
      SUBDIR += ruby-net-dns
@@ -667,8 +668,8 @@
      SUBDIR += tcpstat
      SUBDIR += tcptrace
      SUBDIR += tcptraceroute
+     SUBDIR += telegram-purple
      SUBDIR += telepathy
-     SUBDIR += texapp
      SUBDIR += thcrut
      SUBDIR += tinc
      SUBDIR += tintin++
@@ -715,6 +716,7 @@
      SUBDIR += whatweb
      SUBDIR += wide-dhcpv6
      SUBDIR += wifind
+     SUBDIR += wireless
      SUBDIR += wireshark
      SUBDIR += wmifinfo
      SUBDIR += wmnet

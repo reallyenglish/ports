@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.15 2017/04/10 11:45:24 sthen Exp $
+# $OpenBSD: Makefile,v 1.18 2017/07/26 22:45:16 sthen Exp $
 
 COMMENT =		audio plugin API
 
 VERSION =		2.2.1
 DISTNAME =		vamp-plugin-sdk-${VERSION}
-REVISION =		1
+REVISION =		3
 CATEGORIES =		audio
 
 SHARED_LIBS +=		vamp-sdk	1.0
@@ -15,7 +15,7 @@ HOMEPAGE =		http://www.vamp-plugins.org/
 # BSD
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		c m ${LIBCXX}
+WANTLIB =		c m ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=vamp/}
 

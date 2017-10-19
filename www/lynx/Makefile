@@ -1,7 +1,7 @@
-# $OpenBSD: Makefile,v 1.33 2017/05/13 10:16:05 fcambus Exp $
+# $OpenBSD: Makefile,v 1.36 2017/07/28 17:05:29 fcambus Exp $
 
 V =		2.8.9
-PL =		14
+PL =		16
 COMMENT =	text web browser
 DISTNAME =	lynx${V}dev.${PL}
 PKGNAME =	lynx-${V}pl${PL}

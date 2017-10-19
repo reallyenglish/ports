@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.10 2017/07/26 22:45:29 sthen Exp $
 
 PORTROACH=	limit:^1\.
 PORTROACH_COMMENT=	the 2.x version has a different user interface
@@ -6,6 +6,7 @@ PORTROACH_COMMENT=	the 2.x version has a different user interface
 COMMENT=	software PKCS\#11 cryptographic token
 
 DISTNAME=	softhsm-1.3.8
+REVISION=	0
 
 CATEGORIES=	security
 
@@ -16,7 +17,7 @@ MAINTAINER=	Patrik Lundin <patrik@sigterm.se>
 # BSD
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += botan-1.10 bz2 c crypto gmp m pthread sqlite3 ${LIBCXX} z
+WANTLIB += botan-1.10 bz2 c crypto gmp m pthread sqlite3 ${COMPILER_LIBCXX} z
 
 MASTER_SITES=	http://dist.opendnssec.org/source/
 

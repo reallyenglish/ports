@@ -1,17 +1,15 @@
-# $OpenBSD: Makefile,v 1.320 2017/06/14 05:30:05 landry Exp $
+# $OpenBSD: Makefile,v 1.329 2017/09/28 16:39:11 landry Exp $
 
 COMMENT =	Mozilla web browser
+ONLY_FOR_ARCHS =	amd64 i386
 
 # Don't forget to bump www/firefox-i18n after updates.
 
-MOZILLA_VERSION =	54.0
-MOZILLA_BRANCH =	release
+MOZILLA_VERSION =	56.0
 MOZILLA_PROJECT =	firefox
 MOZILLA_CODENAME =	browser
-BROKEN-sparc64 =	xpcshell SIGBUS during fake
-EXTRACT_SUFX =		.tar.xz
 
-SO_VERSION =	72.0
+SO_VERSION =	74.0
 # NOTE: Must bump minor version if any shlib's are removed from the
 # components dir to avoid pkg_add -r issues.
 MOZILLA_LIBS =	mozavcodec mozavutil mozgtk xul clearkey lgpllibs
@@ -33,10 +31,13 @@ MODCLANG_ARCHS =	amd64 i386
 MOZILLA_USE_BUNDLED_LIBEVENT =	Yes
 # firefox >= 46 defaults to gtk+3
 MOZILLA_USE_GTK3 = Yes
-# firefox >= 53 needs rust and cargo
-BUILD_DEPENDS +=	lang/rust devel/cargo
+# 56 requires 59.1
+MOZILLA_USE_BUNDLED_ICU =	Yes
 
-WANTLIB += X11-xcb pixman-1 pthread-stubs xcb xcb-shm ${LIBECXX}
+# firefox >= 53 needs rust
+BUILD_DEPENDS +=	lang/rust
+
+WANTLIB += X11-xcb pixman-1 pthread-stubs xcb xcb-shm ${COMPILER_LIBCXX}
 
 # Regression tests are too hard to adapt to run here
 NO_TEST =	Yes
@@ -44,16 +45,15 @@ NO_TEST =	Yes
 CONFIGURE_STYLE =	simple
 CONFIGURE_ARGS +=	--prefix=${PREFIX}
 
-# to be able to link when building with clang on i386
-.if ${MACHINE_ARCH} == "i386"
-CONFIGURE_ARGS +=	--disable-debug-symbols
-.endif
-
-# relies on pulseaudio for sound and broken at runtime
-#CONFIGURE_ARGS +=	--disable-webrtc
+# needed to find sqlite header
+CONFIGURE_ENV =		CPPFLAGS="-I${LOCALBASE}/include"
 
 # bug 857628
 CONFIGURE_ARGS +=	--enable-pie
+CONFIGURE_ARGS +=	--enable-release #1386371
+CONFIGURE_ARGS +=	--enable-rust-simd #1261841
+# bug 1341234
+CONFIGURE_ARGS +=	--disable-stylo
 
 post-install:
 	${SUBST_MAN} ${FILESDIR}/mozilla-firefox.1 \

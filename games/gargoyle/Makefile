@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.21 2017/05/24 15:50:19 espie Exp $
+# $OpenBSD: Makefile,v 1.23 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT =	cross-platform interactive fiction player
 
@@ -7,7 +7,7 @@ GH_PROJECT =	garglk
 GH_TAGNAME =	stable-2011.1
 DISTNAME =	gargoyle-${GH_TAGNAME:S/stable-//}
 EPOCH =		0
-REVISION =	1
+REVISION =	2
 
 CATEGORIES =	games x11
 
@@ -25,7 +25,7 @@ WANTLIB += SDL SDL_mixer SDL_sound X11 Xcomposite Xcursor Xdamage
 WANTLIB += Xext Xfixes Xi Xinerama Xrandr Xrender atk-1.0 c cairo
 WANTLIB += expat fontconfig freetype gdk-x11-2.0 gdk_pixbuf-2.0
 WANTLIB += gio-2.0 glib-2.0 gobject-2.0 gtk-x11-2.0 jpeg m pango-1.0
-WANTLIB += pangocairo-1.0 pangoft2-1.0 png pthread smpeg ${LIBCXX}
+WANTLIB += pangocairo-1.0 pangoft2-1.0 png pthread smpeg ${COMPILER_LIBCXX}
 WANTLIB += vorbisfile z
 
 MODULES =	devel/gettext

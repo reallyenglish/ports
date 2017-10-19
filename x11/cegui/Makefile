@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.10 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.12 2017/07/26 22:45:32 sthen Exp $
 
 COMMENT =		widgets library for graphics engines
 
 V =			0.8.7
 DISTNAME =		cegui-${V}
+REVISION =		0
 
 PATCHORIG =		.orig.port
 
@@ -26,7 +27,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL GLEW GLU Irrlicht OIS OgreMain SDL2 SDL2_image boost_system-mt
 WANTLIB += boost_thread-mt c expat freeimage freetype glfw iconv m pcre 
-WANTLIB += pthread ${LIBECXX}
+WANTLIB += pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=crayzedsgui/}
 EXTRACT_SUFX =		.tar.bz2

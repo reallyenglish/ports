@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.22 2017/04/10 11:45:28 sthen Exp $
+# $OpenBSD: Makefile,v 1.24 2017/07/26 22:45:20 sthen Exp $
 
 COMMENT=	real-time strategy game
 
@@ -7,13 +7,14 @@ DISTNAME=	boswars-${V}-src
 PKGNAME=	boswars-${V}
 CATEGORIES=	games x11
 MASTER_SITES=	http://www.boswars.org/dist/releases/
+REVISION=	0
 
 HOMEPAGE=	http://www.boswars.org/
 
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB +=	GL SDL X11 c m ogg png pthread ${LIBCXX} theora vorbis z
+WANTLIB +=	GL SDL X11 c m ogg png pthread ${COMPILER_LIBCXX} theora vorbis z
 WANTLIB +=	${MODLUA_WANTLIB}
 
 MODULES=	devel/scons \

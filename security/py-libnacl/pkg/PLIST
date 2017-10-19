@@ -1,4 +1,4 @@
-@comment $OpenBSD: PLIST,v 1.2 2016/01/05 06:42:09 ajacoutot Exp $
+@comment $OpenBSD: PLIST,v 1.4 2017/07/21 09:06:31 ajacoutot Exp $
 lib/python${MODPY_VERSION}/site-packages/libnacl/
 lib/python${MODPY_VERSION}/site-packages/libnacl-${MODPY_EGG_VERSION}-py${MODPY_VERSION}.egg-info/
 lib/python${MODPY_VERSION}/site-packages/libnacl-${MODPY_EGG_VERSION}-py${MODPY_VERSION}.egg-info/PKG-INFO
@@ -7,6 +7,8 @@ lib/python${MODPY_VERSION}/site-packages/libnacl-${MODPY_EGG_VERSION}-py${MODPY_
 lib/python${MODPY_VERSION}/site-packages/libnacl-${MODPY_EGG_VERSION}-py${MODPY_VERSION}.egg-info/top_level.txt
 lib/python${MODPY_VERSION}/site-packages/libnacl/__init__.py
 lib/python${MODPY_VERSION}/site-packages/libnacl/__init__.pyc
+lib/python${MODPY_VERSION}/site-packages/libnacl/aead.py
+lib/python${MODPY_VERSION}/site-packages/libnacl/aead.pyc
 lib/python${MODPY_VERSION}/site-packages/libnacl/base.py
 lib/python${MODPY_VERSION}/site-packages/libnacl/base.pyc
 lib/python${MODPY_VERSION}/site-packages/libnacl/blake.py
@@ -17,6 +19,8 @@ lib/python${MODPY_VERSION}/site-packages/libnacl/encode.py
 lib/python${MODPY_VERSION}/site-packages/libnacl/encode.pyc
 lib/python${MODPY_VERSION}/site-packages/libnacl/public.py
 lib/python${MODPY_VERSION}/site-packages/libnacl/public.pyc
+lib/python${MODPY_VERSION}/site-packages/libnacl/sealed.py
+lib/python${MODPY_VERSION}/site-packages/libnacl/sealed.pyc
 lib/python${MODPY_VERSION}/site-packages/libnacl/secret.py
 lib/python${MODPY_VERSION}/site-packages/libnacl/secret.pyc
 lib/python${MODPY_VERSION}/site-packages/libnacl/sign.py

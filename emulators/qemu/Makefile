@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.165 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.170 2017/10/13 04:48:34 ajacoutot Exp $
 
 USE_WXNEEDED=	Yes
 
@@ -6,11 +6,10 @@ ONLY_FOR_ARCHS=	aarch64 amd64 arm i386 powerpc sparc64
 
 COMMENT=	multi system emulator
 
-DISTNAME=	qemu-2.9.0
-REVISION=	1
+DISTNAME=	qemu-2.10.1
 CATEGORIES=	emulators
 MASTER_SITES=	http://wiki.qemu.org/download/
-EXTRACT_SUFX=	.tar.bz2
+EXTRACT_SUFX=	.tar.xz
 
 HOMEPAGE=	http://www.qemu.org/
 
@@ -19,15 +18,14 @@ MAINTAINER=	Brad Smith <brad@comstyle.com>
 # GPLv2, LGPLv2 and BSD
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	SDL X11 Xcomposite Xcursor Xdamage Xext Xfixes Xi Xinerama \
-		Xrandr Xrender atk-1.0 bz2 c cairo curl drm epoxy fdt \
-		fontconfig freetype gbm gdk-x11-2.0 gdk_pixbuf-2.0 gio-2.0 \
-		glib-2.0 gnutls gobject-2.0 gthread-2.0 gtk-x11-2.0 intl \
-		iscsi jpeg lzo2 m ncursesw nettle nfs pango-1.0 pangocairo-1.0 \
-		pangoft2-1.0 pixman-1 png pthread pthread-stubs ssh2 \
-		usb-1.0 util vte z ${LIBECXX}
+WANTLIB=	SDL2 X11 atk-1.0 bz2 c cairo cairo-gobject curl drm epoxy \
+		fdt gbm gdk-3 gdk_pixbuf-2.0 gio-2.0 glib-2.0 gnutls \
+		gobject-2.0 gthread-2.0 gtk-3 intl iscsi jpeg lzo2 m \
+		ncursesw nettle nfs pango-1.0 pangocairo-1.0 pcre2-8 \
+		pixman-1 png pthread-stubs ssh2 usb-1.0 util vte-2.91 z \
+		${COMPILER_LIBCXX}
 
-# Using gcc4 for the TLS emulation layer
+# Using TLS emulation layer
 COMPILER =	gcc
 
 MODULES=	lang/python
@@ -43,15 +41,15 @@ LIB_DEPENDS=	archivers/bzip2 \
 		devel/libiscsi \
 		devel/libnfs \
 		devel/libusb1>=1.0.20 \
-		devel/sdl \
-		devel/vte \
+		devel/sdl2 \
+		devel/vte3 \
 		graphics/jpeg \
 		graphics/png \
 		net/curl \
 		security/gnutls \
 		security/libnettle \
 		security/libssh2 \
-		x11/gtk+2
+		x11/gtk+3
 
 MODPY_RUNDEP=	No
 
@@ -82,6 +80,7 @@ CONFIGURE_ARGS=	--prefix=${PREFIX} \
 		--enable-curses \
 		--disable-gcrypt \
 		--disable-smartcard \
+		--disable-snappy \
 		--disable-spice \
 		--disable-usb-redir \
 		--disable-vnc-sasl

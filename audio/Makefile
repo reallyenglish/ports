@@ -1,10 +1,9 @@
-# $OpenBSD: Makefile,v 1.386 2017/06/11 21:14:21 sthen Exp $
+# $OpenBSD: Makefile,v 1.393 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += abcde
      SUBDIR += adplay
      SUBDIR += adplug
-     SUBDIR += akode
      SUBDIR += alac_decoder
      SUBDIR += aqualung
      SUBDIR += ardour
@@ -15,6 +14,7 @@
      SUBDIR += audacious
      SUBDIR += audacious-plugins
      SUBDIR += audacity
+     SUBDIR += audiality2
      SUBDIR += beets
      SUBDIR += calf
      SUBDIR += cantata
@@ -113,10 +113,10 @@
      SUBDIR += moc
      SUBDIR += mono-taglib
      SUBDIR += morseplayer
+     SUBDIR += mp3applygain
      SUBDIR += mp3blaster
      SUBDIR += mp3cddb
      SUBDIR += mp3cut
-     SUBDIR += mp3gain
      SUBDIR += mp3info
      SUBDIR += mp3info,no_x11
      SUBDIR += mp3splt
@@ -212,17 +212,15 @@
      SUBDIR += pympd
      SUBDIR += quodlibet
      SUBDIR += radiotray
+     SUBDIR += rgain
      SUBDIR += rhythmbox
      SUBDIR += rsynth
      SUBDIR += rtunes
-     SUBDIR += ruby-id3lib,ruby22
      SUBDIR += ruby-id3lib,ruby23
      SUBDIR += ruby-id3lib,ruby24
      SUBDIR += ruby-sonos
-     SUBDIR += ruby-taglib,ruby22
      SUBDIR += ruby-taglib,ruby23
      SUBDIR += ruby-taglib,ruby24
-     SUBDIR += ruby-vorbis_comment,ruby22
      SUBDIR += ruby-vorbis_comment,ruby23
      SUBDIR += ruby-vorbis_comment,ruby24
      SUBDIR += schismtracker
@@ -240,6 +238,7 @@
      SUBDIR += sox
      SUBDIR += speech-dispatcher
      SUBDIR += speex
+     SUBDIR += speexdsp
      SUBDIR += squeezecenter
      SUBDIR += squeezelite
      SUBDIR += streamripper
@@ -249,6 +248,8 @@
      SUBDIR += tap-plugins
      SUBDIR += tempest
      SUBDIR += timidity
+     SUBDIR += timidity,gtk2
+     SUBDIR += timidity,xaw
      SUBDIR += tracker
      SUBDIR += tremor
      SUBDIR += tremor-tools

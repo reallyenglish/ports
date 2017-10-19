@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.8 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.11 2017/08/06 09:39:56 pascal Exp $
 
 ONLY_FOR_ARCHS =	amd64 i386
 
 COMMENT =		open source implementation of TES III: Morrowind
 
-V =			0.41.0
+V =			0.42.0
 DISTNAME =		openmw-$V
 
 CATEGORIES =		games
@@ -21,7 +21,7 @@ WANTLIB += QtGui QtNetwork QtOpenGL SDL2 avcodec avformat avutil
 WANTLIB += boost_filesystem-mt boost_program_options-mt boost_system-mt
 WANTLIB += c m openal osg osgAnimation
 WANTLIB += osgDB osgFX osgGA osgParticle osgText osgUtil
-WANTLIB += osgViewer pthread swresample swscale unshield ${LIBECXX}
+WANTLIB += osgViewer pthread swresample swscale unshield ${COMPILER_LIBCXX}
 
 GH_ACCOUNT =		OpenMW
 GH_PROJECT =		openmw

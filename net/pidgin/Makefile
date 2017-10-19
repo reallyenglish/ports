@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.134 2017/04/27 14:28:35 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.137 2017/09/01 09:53:09 ajacoutot Exp $
 
 COMMENT-main=	multi-protocol instant messaging client
 COMMENT-finch=	multi-protocol instant messaging client, console client
 COMMENT-libpurple= multi-protocol instant messaging library
 
-VERSION=	2.11.0
+VERSION=	2.12.0
 DISTNAME=	pidgin-${VERSION}
 PKGNAME-main=	pidgin-${VERSION}
 PKGNAME-finch=	finch-${VERSION}
@@ -17,16 +17,11 @@ CATEGORIES=	net
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=pidgin/}
 EXTRACT_SUFX=	.tar.bz2
 
-REVISION-main=		0
-REVISION-finch=		0
-REVISION-libpurple=	0
-
 SHARED_LIBS=	jabber		0.0 \
 		oscar		0.0 \
-		purple		6.3 \
-		purple-client	6.3 \
-		gnt		6.2 \
-		ymsg		0.0
+		purple		7.0 \
+		purple-client	7.0 \
+		gnt		7.0
 
 HOMEPAGE=	http://pidgin.im/
 
@@ -42,7 +37,7 @@ WANTLIB-main=	X11 ICE SM Xcomposite Xcursor Xdamage Xext Xfixes Xi \
 		Xinerama Xrandr Xrender Xss atk-1.0 cairo expat fontconfig \
 		freetype gdk-x11-2.0 gdk_pixbuf-2.0 graphite2 gtk-x11-2.0 \
 		harfbuzz pango-1.0 pangocairo-1.0 pangoft2-1.0 pixman-1 \
-		png pthread-stubs purple ${LIBCXX} xcb-render xcb-shm xcb \
+		png pthread-stubs purple ${COMPILER_LIBCXX} xcb-render xcb-shm xcb \
 		${WANTLIB}
 WANTLIB-libpurple= crypto meanwhile ssl silc silcclient ${WANTLIB}
 WANTLIB-finch=	X11 ncursesw panelw purple util xcb ${WANTLIB} \

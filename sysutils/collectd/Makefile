@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.48 2017/06/12 17:22:42 danj Exp $
+# $OpenBSD: Makefile,v 1.50 2017/07/08 17:37:36 ajacoutot Exp $
 
 COMMENT-main =		system metrics collection engine
 COMMENT-mysql =		collectd mysql plugin
@@ -25,6 +25,9 @@ PKGNAME-nut =		collectd-nut-$V
 PKGNAME-riemann =	collectd-riemann-$V
 CATEGORIES =		sysutils
 
+REVISION-main =		1
+REVISION =		0
+
 HOMEPAGE =		http://www.collectd.org/
 SHARED_LIBS +=		collectdclient 1.0
 
@@ -34,7 +37,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 MASTER_SITES =		${HOMEPAGE}/files/
 EXTRACT_SUFX =		.tar.bz2
 
-MODULES =		devel/gettext lang/python
+MODULES =		lang/python
 MODPY_RUNDEP =		No
 
 MULTI_PACKAGES =	-main -mysql -pgsql -rrdtool -snmp -virt -python -memcachec -nut -riemann
@@ -94,7 +97,7 @@ LIB_DEPENDS +=	net/curl \
 		devel/libyajl
 
 WANTLIB += c crypto gpg-error kvm curl xml2 ltdl lzma oping nghttp2
-WANTLIB += m pcap pthread ssl xml2 z statgrab gcrypt ${MODGETTEXT_WANTLIB}
+WANTLIB += m pcap pthread ssl xml2 z statgrab gcrypt iconv intl
 WANTLIB += yajl
 
 CONFIGURE_STYLE =	gnu

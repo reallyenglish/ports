@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.17 2017/04/10 11:46:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/26 22:45:26 sthen Exp $
 
 BROKEN-mips64 =		ICE on Interval_nt.h:98
 
@@ -10,7 +10,7 @@ COMMENT =		Computational Geometry Algorithms Library
 DISTNAME =		CGAL-4.6.3
 MASTER_SITES =		https://gforge.inria.fr/frs/download.php/file/35139/
 PKGNAME =		${DISTNAME:L}
-REVISION =		0
+REVISION =		1
 EPOCH =			0
 
 SHARED_LIBS =		CGAL		1.0 \
@@ -27,7 +27,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL GLU boost_system-mt boost_thread-mt gmp m mpfr pthread
 WANTLIB += boost_atomic-mt boost_chrono-mt boost_date_time-mt
-WANTLIB += ${LIBCXX} z lib/qt4/QtGui lib/qt4/QtOpenGL lib/qt4/QtSvg
+WANTLIB += ${COMPILER_LIBCXX} z lib/qt4/QtGui lib/qt4/QtOpenGL lib/qt4/QtSvg
 
 EXTRACT_SUFX =		.tar.xz
 

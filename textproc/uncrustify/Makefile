@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.11 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.14 2017/07/26 22:45:31 sthen Exp $
 
 COMMENT =		source code beautifier
 
 DISTNAME =		uncrustify-0.64
+REVISION =		1
 
 CATEGORIES =		textproc devel
 
@@ -13,7 +14,7 @@ MAINTAINER =		Remi Pointel <rpointel@openbsd.org>
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c m ${LIBCXX}
+WANTLIB += c m ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=uncrustify/}
 

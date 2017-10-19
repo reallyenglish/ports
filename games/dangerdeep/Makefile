@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/30 08:56:45 espie Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/26 22:45:20 sthen Exp $
 
 COMMENT =		WWII German submarine simulator
 
 PKGNAME =		dangerdeep-0.3.99.3327
-REVISION =		0
+REVISION =		1
 
 CATEGORIES =		games
 
@@ -15,7 +15,7 @@ HOMEPAGE =		http://dangerdeep.sourceforge.net/
 PERMIT_PACKAGE_CDROM =	Noncommercial
 PERMIT_PACKAGE_FTP =	Yes
 
-WANTLIB += GL GLU SDL SDL_image SDL_mixer bz2 c fftw3f m ${LIBCXX}
+WANTLIB += GL GLU SDL SDL_image SDL_mixer bz2 c fftw3f m ${COMPILER_LIBCXX}
 WANTLIB += pthread
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=dangerdeep/}

@@ -1,7 +1,8 @@
-# $OpenBSD: Makefile,v 1.3 2017/06/07 17:03:39 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.6 2017/07/30 15:49:36 espie Exp $
 
 COMMENT =	core components and tools of the Plasma Workspaces
 DISTNAME =	plasma-framework-${VERSION}
+REVISION =	2
 
 SHARED_LIBS =	KF5Plasma		2.0
 SHARED_LIBS +=	KF5PlasmaQuick		2.0
@@ -12,7 +13,7 @@ WANTLIB += KF5ConfigWidgets KF5CoreAddons KF5Declarative KF5GlobalAccel
 WANTLIB += KF5GuiAddons KF5I18n KF5IconThemes KF5JobWidgets KF5KIOCore
 WANTLIB += KF5KIOWidgets KF5Notifications KF5Package KF5QuickAddons
 WANTLIB += KF5Service KF5WidgetsAddons KF5WindowSystem KF5XmlGui
-WANTLIB += Qt5Core Qt5DBus Qt5Gui Qt5Network Qt5Qml Qt5Quick
+WANTLIB += ${COMPILER_LIBCXX} Qt5Core Qt5DBus Qt5Gui Qt5Network Qt5Qml Qt5Quick
 WANTLIB += Qt5Sql Qt5Svg Qt5Widgets Qt5X11Extras Qt5Xml SM X11
 WANTLIB += Xext c m xcb xcb-composite xcb-damage xcb-render
 WANTLIB += xcb-shape xcb-xfixes

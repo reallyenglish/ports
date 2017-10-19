@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.47 2017/04/10 11:46:36 sthen Exp $
+# $OpenBSD: Makefile,v 1.50 2017/07/26 22:45:33 sthen Exp $
 
 COMMENT-main=	python Qt4 bindings
 COMMENT-docs=	py-qt4 documentation
@@ -6,13 +6,14 @@ COMMENT-docs=	py-qt4 documentation
 # XXX Be particularly careful when testing updates. 
 #     API breaks often - do runtime tests, not just build tests.
 
-V=		4.11.4
-DISTNAME=	PyQt-x11-gpl-${V}
+V=		4.12
+DISTNAME=	PyQt4_gpl_x11-${V}
 PKGNAME=	py-qt4-${V}
 PKGNAME-main=	py-qt4-${V}
 PKGNAME-docs=	py-qt4-docs-${V}
-REVISION-main=	0
 EPOCH=		0
+REVISION-docs=	0
+REVISION-main=	0
 
 CATEGORIES=	x11 devel
 
@@ -24,7 +25,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 WANTLIB += GL ICE QtDBus QtDeclarative QtDesigner QtGui QtHelp QtMultimedia
 WANTLIB += QtNetwork QtOpenGL QtScript QtScriptTools QtSql QtSvg QtTest
 WANTLIB += QtWebKit QtXml QtXmlPatterns SM X11 Xext Xi Xinerama Xrender
-WANTLIB += c dbus-1 fontconfig freetype m phonon pthread ${LIBCXX}
+WANTLIB += c dbus-1 fontconfig freetype m phonon pthread ${COMPILER_LIBCXX}
 WANTLIB += ${MODPY_WANTLIB}
 
 MULTI_PACKAGES=	-main -docs

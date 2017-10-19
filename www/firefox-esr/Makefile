@@ -1,13 +1,11 @@
-# $OpenBSD: Makefile,v 1.58 2017/06/14 05:26:19 landry Exp $
+# $OpenBSD: Makefile,v 1.64 2017/09/28 16:41:13 landry Exp $
 
 COMMENT =	Firefox web browser, Extended Support Release
+ONLY_FOR_ARCHS =	amd64 i386
 
-MOZILLA_VERSION =	52.2.0esr
-MOZILLA_BRANCH =	esr52
+MOZILLA_VERSION =	52.4.0esr
 MOZILLA_PROJECT =	firefox
 MOZILLA_CODENAME =	browser
-BROKEN-sparc64 =	xpcshell SIGBUS during fake
-EXTRACT_SUFX =		.tar.xz
 
 PKGNAME =	${MOZILLA_PROJECT}-esr-${MOZILLA_VERSION:S/esr//}
 SO_VERSION =	4.0
@@ -31,7 +29,7 @@ MOZILLA_USE_BUNDLED_LIBEVENT =	Yes
 # firefox >= 46 defaults to gtk+3
 MOZILLA_USE_GTK3 = Yes
 
-WANTLIB += X11-xcb pixman-1 pthread-stubs xcb xcb-shm ${LIBECXX}
+WANTLIB += X11-xcb pixman-1 pthread-stubs xcb xcb-shm ${COMPILER_LIBCXX}
 
 # Regression tests are too hard to adapt to run here
 NO_TEST =	Yes
@@ -39,16 +37,8 @@ NO_TEST =	Yes
 CONFIGURE_STYLE =	simple
 CONFIGURE_ARGS +=	--prefix=${PREFIX}
 
-# to be able to link when building with clang on i386
-.if ${MACHINE_ARCH} == "i386"
-CONFIGURE_ARGS +=	--disable-debug-symbols
-.endif
-
 # avoid conflict with mainline firefox
 CONFIGURE_ARGS +=	--with-app-name=firefox-esr
-
-# relies on pulseaudio for sound and broken at runtime
-#CONFIGURE_ARGS +=	--disable-webrtc
 
 # bug 857628
 CONFIGURE_ARGS +=	--enable-pie

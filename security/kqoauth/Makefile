@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.5 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.7 2017/07/26 22:45:29 sthen Exp $
 
 COMMENT =	OAuth support library for Qt-based applications
 V =		0.97
@@ -6,6 +6,7 @@ DISTNAME =	${V}
 PKGNAME =	kqoauth-${V}
 CATEGORIES =	security devel
 HOMEPAGE =	https://github.com/kypeli/kQOAuth
+REVISION =	0
 
 SHARED_LIBS =	kqoauth		0.0
 
@@ -13,7 +14,7 @@ SHARED_LIBS =	kqoauth		0.0
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB =  ICE SM X11 Xext Xi Xinerama Xrender fontconfig freetype
-WANTLIB += m pthread ${LIBCXX}
+WANTLIB += m pthread ${COMPILER_LIBCXX}
 WANTLIB += lib/qt4/QtGui lib/qt4/QtNetwork
 
 MASTER_SITES =	${HOMEPAGE}/archive/

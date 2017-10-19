@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.219 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.227 2017/10/14 10:22:03 ajacoutot Exp $
 
 COMMENT-main=		Common Unix Printing System
 COMMENT-libs=		CUPS libraries and headers
 
-VERSION=		2.2.3
+VERSION=		2.2.5
 GH_ACCOUNT=		apple
 GH_PROJECT=		cups
 GH_TAGNAME=		v${VERSION}
@@ -27,7 +27,7 @@ MAINTAINER=		Antoine Jacoutot <ajacoutot@openbsd.org>
 # GPLv2 - LGPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += avahi-client avahi-common gnutls iconv m pthread ${LIBCXX} z
+WANTLIB += avahi-client avahi-common gnutls iconv m pthread ${COMPILER_LIBCXX} z
 
 WANTLIB-main += ${WANTLIB}
 WANTLIB-main += c cups cupscgi cupsimage cupsmime cupsppdc dbus-1 usb-1.0
@@ -38,7 +38,7 @@ BUILD_DEPENDS=		${MODGNU_AUTOMAKE_DEPENDS} \
 			${MODGNU_AUTOCONF_DEPENDS}
 
 # bootstrap prevents a cyclic dep: gtk+{2,3}->cups->avahi->gtk+{2,3}
-LIB_DEPENDS-libs=	net/avahi,no_gui,no_mono,bootstrap \
+LIB_DEPENDS-libs=	net/avahi,no_gui,bootstrap \
 			security/gnutls
 
 LIB_DEPENDS-main=	${BASE_PKGPATH},-libs=${VERSION} \
@@ -121,6 +121,6 @@ post-install:
 	rm -rf ${PREFIX}/share/applications
 
 # Remove systemV files
-	rm -rf ${WRKINST}/etc/rc.d/rc*.d
+	rm -rf ${WRKINST}/etc/rc.d/{init,rc*}.d
 
 .include <bsd.port.mk>

@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.28 2017/04/10 11:45:24 sthen Exp $
+# $OpenBSD: Makefile,v 1.30 2017/07/26 22:45:16 sthen Exp $
 
 COMMENT=	interactive electronics designing software
 
 V=		0.9.2
-REVISION=	1
+REVISION=	2
 
 GH_ACCOUNT=	fritzing
 GH_PROJECT=	fritzing-app
@@ -42,7 +42,7 @@ pre-configure:
 	${SUBST_CMD} ${WRKSRC}/phoenix.pro ${WRKSRC}/src/fapplication.cpp
 
 WANTLIB += ICE QtGui QtNetwork QtSql QtSvg QtXml SM X11 Xext Xi
-WANTLIB += Xinerama Xrender c fontconfig freetype m pthread ${LIBCXX}
+WANTLIB += Xinerama Xrender c fontconfig freetype m pthread ${COMPILER_LIBCXX}
 WANTLIB += z lib/qt4/QtSerialPort
 
 # -DLINUX_32 gets added to CFLAGS, though it's only used to figure out

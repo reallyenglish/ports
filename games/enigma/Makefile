@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.29 2017/05/04 23:00:48 espie Exp $
+# $OpenBSD: Makefile,v 1.31 2017/07/26 22:45:21 sthen Exp $
 
 COMMENT=	Oxyd/Rock'n'Roll clone
 
 V=		1.01
 DISTNAME=	enigma-${V}-64bit
 PKGNAME=	enigma-${V}
-REVISION =	5
+REVISION =	6
 
 CATEGORIES=	games x11
 
@@ -14,7 +14,7 @@ HOMEPAGE=	http://www.nongnu.org/enigma/
 # GPLv2
 PERMIT_PACKAGE_CDROM=   Yes
 
-WANTLIB=	SDL c m enet pthread ${LIBCXX} z SDL_image>=1 \
+WANTLIB=	SDL c m enet pthread ${COMPILER_LIBCXX} z SDL_image>=1 \
 		SDL_mixer>=2 SDL_ttf>=7 png>=8 zipios>=1 \
 		xerces-c
 

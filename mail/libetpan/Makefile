@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.27 2017/05/11 00:35:09 danj Exp $
+# $OpenBSD: Makefile,v 1.29 2017/07/26 22:45:26 sthen Exp $
 
 COMMENT=	mail purpose library
 
@@ -6,6 +6,7 @@ GH_ACCOUNT=	dinhviethoa
 GH_PROJECT=	libetpan
 GH_TAGNAME=	1.8
 CATEGORIES=	mail devel
+REVISION=	0
 
 SHARED_LIBS=	etpan	18.0	# 21.0
 
@@ -16,7 +17,7 @@ MAINTAINER=	Daniel Jakots <obsd@chown.me>
 # BSD
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += crypto curl expat iconv m nghttp2 pthread sasl2 ssl ${LIBCXX} z
+WANTLIB += crypto curl expat iconv m nghttp2 pthread sasl2 ssl ${COMPILER_LIBCXX} z
 
 AUTOCONF_VERSION=	2.69
 AUTOMAKE_VERSION=	1.15

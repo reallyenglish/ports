@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.8 2017/07/26 22:45:22 sthen Exp $
 
 ONLY_FOR_ARCHS =	amd64 i386
 
@@ -12,6 +12,8 @@ REV =			r6404
 DISTNAME =		speed-dreams-src-base-$V-${REV}
 PKGNAME-main =		speeddreams-$V
 PKGNAME-data =		speeddreams-data-$V
+REVISION-data =		0
+REVISION-main =		0
 
 CATEGORIES =		games
 
@@ -24,7 +26,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB-main += GL GLU ICE OpenThreads SDL2 SM X11 Xext Xrandr c enet
 WANTLIB-main += expat jpeg m ogg openal osg osgDB osgFX osgGA osgParticle
-WANTLIB-main += osgShadow osgUtil osgViewer png pthread ${LIBCXX} vorbis
+WANTLIB-main += osgShadow osgUtil osgViewer png pthread ${COMPILER_LIBCXX} vorbis
 WANTLIB-main += vorbisfile z
 WANTLIB-data = #empty
 

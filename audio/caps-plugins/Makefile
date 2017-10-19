@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:45:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT =		CAPS LADSPA plugins
 
 V =			0.9.24
 DISTNAME =		caps_${V}
+REVISION =		1
 PKGNAME =		caps-plugins-${V}
 CATEGORIES =		audio
 EXTRACT_SUFX =		.tar.bz2
@@ -13,7 +14,7 @@ HOMEPAGE =		http://quitte.de/dsp/caps.html
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		m ${LIBCXX}
+WANTLIB =		m ${COMPILER_LIBCXX}
 
 MASTER_SITES =		http://quitte.de/dsp/
 

@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.63 2017/05/15 19:56:03 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.66 2017/07/26 22:45:26 sthen Exp $
 
 COMMENT =	command-driven interactive function plotting program
 
 V =		4.6
 PATCHLEVEL =	6
-REVISION =	1
+REVISION =	3
 DISTNAME =	gnuplot-${V}.${PATCHLEVEL}
 CATEGORIES =	math graphics
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=gnuplot/}
@@ -15,7 +15,7 @@ HOMEPAGE =	http://www.gnuplot.info/
 # http://gnuplot.cvs.sourceforge.net/gnuplot/gnuplot/Copyright
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c m ncurses readline ${LIBCXX} z
+WANTLIB += c m ncurses readline ${COMPILER_LIBCXX} z
 
 BUILD_DEPENDS =	emacs->=24:editors/emacs
 

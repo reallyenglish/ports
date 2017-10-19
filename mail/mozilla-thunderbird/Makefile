@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.248 2017/06/18 20:24:47 landry Exp $
+# $OpenBSD: Makefile,v 1.255 2017/09/28 16:33:24 landry Exp $
 
 COMMENT-main =		Mozilla e-mail, rss and usenet client
 COMMENT-lightning =	Mozilla Thunderbird calendar extension
 
 # Don't forget to bump mail/thunderbird-i18n after updates.
 
-MOZILLA_VERSION =	52.2.0
+MOZILLA_VERSION =	52.2.1
 MOZILLA_BRANCH =	release
 MOZILLA_PROJECT =	thunderbird
 MOZILLA_CODENAME =	mail
@@ -13,8 +13,10 @@ EXTRACT_SUFX =		.tar.xz
 
 MULTI_PACKAGES =	-main -lightning
 PKGNAME-main =		${PKGNAME}
-PKGNAME-lightning =	lightning-5.4.2
+PKGNAME-lightning =	lightning-5.4.2.1
 EPOCH-lightning =	0
+REVISION-lightning =	1
+REVISION-main =		3
 
 HOMEPAGE =	http://www.mozilla.org/thunderbird/
 
@@ -51,9 +53,8 @@ CONFIGURE_ARGS +=	--prefix=${PREFIX}
 # and .../fts3/src/fts3_tokenizer.h which fails to find sqlite3.h.
 CONFIGURE_ENV =		CPPFLAGS="-I${LOCALBASE}/include"
 
-LIB_DEPENDS-lightning = STEM->=${MOZILLA_VERSION:S/b/beta/}:${BUILD_PKGPATH},-main
-WANTLIB-lightning =	lib/${MOZILLA_PROJECT}-${MOZILLA_VER}/xul \
-			c m $(LIBECXX) nspr4 plc4 plds4 pthread
+RUN_DEPENDS-lightning = STEM->=${MOZILLA_VERSION:S/b/beta/}:${BUILD_PKGPATH},-main
+WANTLIB-lightning =
 
 WANTLIB += X11-xcb pixman-1 pthread-stubs xcb xcb-shm
 

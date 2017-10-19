@@ -1,13 +1,16 @@
-# $OpenBSD: Makefile,v 1.53 2016/08/30 10:02:18 dcoppa Exp $
+# $OpenBSD: Makefile,v 1.58 2017/09/24 07:30:21 dcoppa Exp $
 
 COMMENT=	color terminal emulator with unicode support
-DISTNAME=	mlterm-3.7.2
-REVISION=	0
+DISTNAME=	mlterm-3.8.3
 
-SHARED_LIBS+=	kik	12.0 # 16.0
-SHARED_LIBS+=	mkf	15.0 # 17.0
+SHARED_LIBS+=	mef	0.0 # 1.0
+SHARED_LIBS+=	pobl	0.0 # 1.0
 
 CATEGORIES=	x11
+
+HOMEPAGE=	http://mlterm.sourceforge.net/
+
+MAINTAINER=	David Coppa <dcoppa@openbsd.org>
 
 # BSD
 PERMIT_PACKAGE_CDROM=	Yes
@@ -16,17 +19,17 @@ WANTLIB += X11 Xcomposite Xcursor Xdamage Xext Xfixes Xft Xi
 WANTLIB += Xinerama Xrandr Xrender atk-1.0 c cairo expat ffi
 WANTLIB += fontconfig freetype fribidi gdk_pixbuf-2.0 gdk-x11-2.0
 WANTLIB += gio-2.0 glib-2.0 gmodule-2.0 gobject-2.0 graphite2
-WANTLIB += gthread-2.0 gtk-x11-2.0 harfbuzz m pango-1.0 pangocairo-1.0
-WANTLIB += pangoft2-1.0 pcre pixman-1 png pthread pthread-stubs
-WANTLIB += util xcb xcb-render xcb-shm z
+WANTLIB += gthread-2.0 gtk-x11-2.0 harfbuzz iconv intl m pango-1.0
+WANTLIB += pangocairo-1.0 pangoft2-1.0 pcre pixman-1 png pthread
+WANTLIB += pthread-stubs util xcb xcb-render xcb-shm z
 
-HOMEPAGE=	http://mlterm.sourceforge.net/
 MASTER_SITES=	${MASTER_SITE_SOURCEFORGE:=mlterm/}
 
-LIB_DEPENDS=	devel/fribidi \
-		x11/gtk+2
+BUILD_DEPENDS=	devel/gettext-tools
 
-MODULES=	devel/gettext
+LIB_DEPENDS=	devel/fribidi \
+		devel/gettext \
+		x11/gtk+2
 
 FAKE_FLAGS=	INSTALL_DATA="${INSTALL_DATA}" \
 		INSTALL_SCRIPT="${INSTALL_SCRIPT}" \
@@ -38,6 +41,7 @@ CONFIGURE_ARGS=	--disable-canna \
 		--disable-dl-ctl \
 		--disable-fcitx \
 		--disable-ibus \
+		--disable-iiimf \
 		--disable-ind \
 		--disable-m17nlib \
 		--disable-scim \
@@ -49,8 +53,8 @@ CONFIGURE_ARGS=	--disable-canna \
 		--with-imagelib=gdk-pixbuf2 \
 		--with-tools=mlclient,mlconfig,mlcc,mlterm-menu,mlimgloader,mlfc
 CONFIGURE_ENV=	CPPFLAGS="-I${X11BASE}/include/freetype2"
-MAKE_ENV=	LIBkik_VERSION=${LIBkik_VERSION} \
-		LIBmkf_VERSION=${LIBmkf_VERSION}
+MAKE_ENV=	LIBmef_VERSION=${LIBmef_VERSION} \
+		LIBpobl_VERSION=${LIBpobl_VERSION}
 
 NO_TEST=	Yes
 

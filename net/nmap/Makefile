@@ -1,12 +1,13 @@
-# $OpenBSD: Makefile,v 1.125 2017/06/14 02:54:36 benoit Exp $
+# $OpenBSD: Makefile,v 1.131 2017/09/27 11:03:27 dcoppa Exp $
 
 COMMENT-main=	scan ports and fingerprint stack of network hosts
 COMMENT-zenmap=	graphical frontend for nmap
 
-MODPY_EGG_VERSION=	7.50
+MODPY_EGG_VERSION=	7.60
 DISTNAME=		nmap-${MODPY_EGG_VERSION}
 PKGNAME-main=		${DISTNAME}
 PKGNAME-zenmap=		nmap-zenmap-${MODPY_EGG_VERSION}
+REVISION-main=		0
 
 CATEGORIES=	net security
 MASTER_SITES=	http://nmap.org/dist/
@@ -27,7 +28,9 @@ MODLUA_VERSION=	5.3
 MODULES=	lang/python \
 		lang/lua
 
-CONFIGURE_STYLE=gnu
+CONFIGURE_STYLE=autoconf
+AUTOCONF_VERSION=2.69
+
 CONFIGURE_ENV=	CFLAGS="${CFLAGS} -I${LOCALBASE}/include" \
 		CPPFLAGS="${CPPFLAGS} -I${LOCALBASE}/include -I${MODLUA_INCL_DIR}" \
 		CXXFLAGS="${CXXFLAGS} -I${LOCALBASE}/include" \
@@ -42,9 +45,11 @@ CONFIGURE_ARGS=	--with-libpcap=included \
 		--without-nmap-update \
 		--disable-nls
 
-WANTLIB-main=	c crypto m ssl ${LIBCXX} pcre ${MODLUA_WANTLIB}
+WANTLIB-main=	c crypto m ssl ssh2 ${COMPILER_LIBCXX} pcre \
+		${MODLUA_WANTLIB} z
 LIB_DEPENDS-main=devel/pcre \
-		${MODLUA_LIB_DEPENDS}
+		${MODLUA_LIB_DEPENDS} \
+		security/libssh2
 
 RUN_DEPENDS-main=
 
@@ -60,5 +65,7 @@ pre-configure:
 	${SUBST_CMD} ${WRKSRC}/zenmap/install_scripts/unix/su-to-zenmap.sh \
 		${WRKSRC}/zenmap/install_scripts/unix/zenmap.desktop \
 		${WRKSRC}/zenmap/install_scripts/unix/zenmap-root.desktop
+	@cd ${WRKSRC}/nping ; env PATH=${PORTPATH} \
+		AUTOCONF_VERSION=${AUTOCONF_VERSION} autoconf
 
 .include <bsd.port.mk>

@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.5 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT =		sidescrolling space shmup
 
 V =			1.5.1.1
 DISTNAME =		starfighter-$V-src
 PKGNAME =		starfighter-$V
+REVISION =		0
 
 CATEGORIES =		games
 
@@ -15,7 +16,7 @@ MAINTAINER =		Anthony J. Bentley <anthony@anjbe.name>
 # GPLv3+
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += SDL2 SDL2_image SDL2_mixer c m pthread ${LIBCXX}
+WANTLIB += SDL2 SDL2_image SDL2_mixer c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SAVANNAH:=starfighter/1.5/}
 

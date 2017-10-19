@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.7 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/27 10:05:20 sthen Exp $
 
 COMMENT =		Qt API to store passwords and other secret data
 
 GH_ACCOUNT =		frankosterfeld
 GH_PROJECT =		qtkeychain
 GH_TAGNAME =		v0.7.0
+REVISION =		2
 
 SHARED_LIBS +=		qtkeychain	1.0 # 0.4
 SHARED_LIBS +=		qt5keychain	1.0 # 0.4
@@ -16,7 +17,7 @@ MAINTAINER =		Kirill Bychkov <kirby@openbsd.org>
 # BSD-like
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		m
+WANTLIB =		m ${COMPILER_LIBCXX}
 
 MODULES =		devel/cmake
 
@@ -33,7 +34,7 @@ QT = 			qt5
 CONFIGURE_ARGS += 	-DBUILD_WITH_QT4=OFF
 .else
 MODULES += 		x11/qt4
-WANTLIB += 		QtDBus ${LIBCXX}
+WANTLIB += 		QtDBus
 CONFIGURE_ARGS += 	-DBUILD_WITH_QT4=ON
 LIBNAME = 		QtKeychain
 LIBNAME_L = 		qtkeychain

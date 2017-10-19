@@ -1,14 +1,14 @@
-# $OpenBSD: Makefile,v 1.58 2017/06/02 08:56:32 schwarze Exp $
+# $OpenBSD: Makefile,v 1.67 2017/09/29 22:05:30 naddy Exp $
 
 COMMENT-main=		mail delivery agent with filtering abilities
 COMMENT-utils=		quota tools for the Courier mail suite
 
-V=			2.8.5
+V=			2.9.0
+REVISION=		0
 DISTNAME=		maildrop-$V
 PKGNAME-main=		maildrop-$V
 FULLPKGNAME-utils=	courier-utils-$V
 FULLPKGPATH-utils=	mail/maildrop,-utils
-REVISION=		0
 CATEGORIES=		mail
 
 HOMEPAGE=		http://www.courier-mta.org/maildrop/
@@ -25,7 +25,13 @@ MULTI_PACKAGES=		-main -utils
 # GPLv3
 PERMIT_PACKAGE_CDROM=	Yes
 
-CONFIGURE_STYLE=	gnu
+COMPILER =		gcc
+
+CONFIGURE_STYLE=	autoconf
+AUTOCONF_VERSION=	2.69
+# only libs/rfc822/configure.ac is patched
+AUTOCONF_DIR=		${WRKSRC}/libs/rfc822
+
 CONFIGURE_ENV=		LDFLAGS="-L${LOCALBASE}/lib" \
 			CPPFLAGS="${CFLAGS:C/ *$//} -I${LOCALBASE}/include" \
 			ac_cv_header_fam_h=no \
@@ -82,11 +88,11 @@ CONFIGURE_ARGS+=	--with-trashquota
 MODULES=		devel/gettext
 
 LIB_DEPENDS=		devel/libidn \
-			mail/courier-unicode>=1.3
+			mail/courier-unicode>=2.0
 
 WANTLIB =		c idn courier-unicode
 
-WANTLIB-main=		${WANTLIB} gdbm m ${LIBCXX} gdbm>=3 pcre>=1 courierauth
+WANTLIB-main=		${WANTLIB} gdbm m ${COMPILER_LIBCXX} gdbm>=3 pcre>=1 courierauth
 LIB_DEPENDS-main=	${LIB_DEPENDS} \
 			databases/gdbm \
 			devel/pcre \
@@ -100,6 +106,12 @@ DOCFILES=		README \
 			libs/maildir/README.sharedfolders.txt \
 			libs/maildir/README.maildirquota.txt \
 			libs/maildir/quotawarnmsg
+
+# avoid triggering autotools cascade after patching configure.ac
+pre-configure:
+	@for d in ${AUTOCONF_DIR}; do \
+	    touch -r $$d/aclocal.m4 $$d/configure.ac; \
+	done
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/maildrop

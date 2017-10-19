@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.438 2017/06/19 18:27:05 landry Exp $
+# $OpenBSD: Makefile,v 1.444 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += DevIL
@@ -61,6 +61,7 @@
      SUBDIR += ftgl
      SUBDIR += fyre
      SUBDIR += gd
+     SUBDIR += gdcm
      SUBDIR += gdk-pixbuf2
      SUBDIR += geeqie
      SUBDIR += gegl
@@ -114,9 +115,10 @@
      SUBDIR += jpeg
      SUBDIR += jpeg2ps
      SUBDIR += jpegdump
+     SUBDIR += jpegoptim
      SUBDIR += jpegpixi
-     SUBDIR += krita
      SUBDIR += k3dsurf
+     SUBDIR += krita
      SUBDIR += l2p
      SUBDIR += lcms
      SUBDIR += lcms2
@@ -173,12 +175,16 @@
      SUBDIR += openjpeg
      SUBDIR += openscenegraph
      SUBDIR += optipng
+     SUBDIR += orthanc
      SUBDIR += p5-Barcode-DataMatrix
      SUBDIR += p5-Barcode-DataMatrix-PNG
      SUBDIR += p5-Cairo
      SUBDIR += p5-Captcha-reCAPTCHA
      SUBDIR += p5-Chart
+     SUBDIR += p5-Chart-Clicker
      SUBDIR += p5-Color-Calc
+     SUBDIR += p5-Color-Library
+     SUBDIR += p5-Color-Scheme
      SUBDIR += p5-GD
      SUBDIR += p5-GD-Barcode
      SUBDIR += p5-GD-Graph
@@ -186,8 +192,12 @@
      SUBDIR += p5-GD-SVG
      SUBDIR += p5-GD-SecurityImage
      SUBDIR += p5-GD-TextUtil
+     SUBDIR += p5-Geometry-Primitive
+     SUBDIR += p5-Graphics-Color
      SUBDIR += p5-Graphics-ColorNames
      SUBDIR += p5-Graphics-ColorNames-WWW
+     SUBDIR += p5-Graphics-Primitive
+     SUBDIR += p5-Graphics-Primitive-Driver-Cairo
      SUBDIR += p5-Image-BioChrome
      SUBDIR += p5-Image-EXIF
      SUBDIR += p5-Image-ExifTool
@@ -197,6 +207,7 @@
      SUBDIR += p5-Image-Size
      SUBDIR += p5-Imager
      SUBDIR += p5-Imager-QRCode
+     SUBDIR += p5-Layout-Manager
      SUBDIR += p5-SVG
      SUBDIR += p5-SVG-Graph
      SUBDIR += p5-Sane
@@ -221,7 +232,6 @@
      SUBDIR += py-cycler,python3
      SUBDIR += py-dot
      SUBDIR += py-gd
-     SUBDIR += py-graphics
      SUBDIR += py-imagesize
      SUBDIR += py-imagesize,python3
      SUBDIR += py-matplotlib
@@ -234,13 +244,12 @@
      SUBDIR += pycha
      SUBDIR += qimageblitz
      SUBDIR += qiv
-     SUBDIR += quirc
      SUBDIR += quesoglc
+     SUBDIR += quirc
      SUBDIR += rawstudio
      SUBDIR += rawtherapee
      SUBDIR += ruby-color
      SUBDIR += ruby-gruff
-     SUBDIR += ruby-rmagick,ruby22
      SUBDIR += ruby-rmagick,ruby23
      SUBDIR += ruby-rmagick,ruby24
      SUBDIR += s10sh

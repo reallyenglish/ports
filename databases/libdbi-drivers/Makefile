@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.31 2017/06/03 16:24:05 steven Exp $
+# $OpenBSD: Makefile,v 1.33 2017/07/26 22:45:16 sthen Exp $
 
 V =			0.9.0
 COMMENT-main =		mysql driver for libdbi
@@ -13,6 +13,11 @@ PKGNAME-sqlite =	libdbi-drivers-sqlite-${V:S/-/./}
 PKGNAME-sqlite3 =	libdbi-drivers-sqlite3-${V:S/-/./}
 PKGNAME-freetds =	libdbi-drivers-freetds-${V:S/-/./}
 CATEGORIES =		databases
+REVISION-freetds =	0
+REVISION-main =		0
+REVISION-pgsql =	0
+REVISION-sqlite =	0
+REVISION-sqlite3 =	0
 
 HOMEPAGE =		http://libdbi-drivers.sourceforge.net/
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=libdbi-drivers/}
@@ -41,7 +46,7 @@ CONFIGURE_ARGS =	--disable-docs \
 			--with-freetds-incdir=${LOCALBASE}/include \
 			--with-freetds-libdir=${LOCALBASE}/lib
 
-WANTLIB-main =		crypto m pthread ssl ${LIBCXX} z mysqlclient dbi
+WANTLIB-main =		crypto m pthread ssl ${COMPILER_LIBCXX} z mysqlclient dbi
 LIB_DEPENDS-main =	databases/mariadb \
 			databases/libdbi
 RUN_DEPENDS-main =

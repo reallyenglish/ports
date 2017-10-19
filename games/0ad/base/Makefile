@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.17 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.21 2017/09/08 22:03:55 bentley Exp $
 
 COMMENT =		historical real-time strategy game
 
@@ -13,7 +13,7 @@ SHARED_LIBS +=  mozjs38-ps-release        ${SO_VERSION}
 WANTLIB += GL SDL2 X11 Xcursor boost_filesystem boost_system c curl
 WANTLIB += enet execinfo gloox iconv icui18n icuuc m miniupnpc
 WANTLIB += nspr4 ogg openal plc4 plds4 png pthread vorbis vorbisfile
-WANTLIB += xml2 z ${LIBECXX}
+WANTLIB += xml2 z ${COMPILER_LIBCXX}
 
 BUILD_DEPENDS =		archivers/zip \
 			shells/bash
@@ -27,12 +27,12 @@ LIB_DEPENDS =		audio/libvorbis \
 			graphics/png \
 			net/curl \
 			net/enet \
-			net/gloox \
+			net/gloox>=1.0.20 \
 			net/miniupnp/miniupnpc \
 			textproc/icu4c \
 			textproc/libxml
 RUN_DEPENDS =		devel/desktop-file-utils \
-			games/0ad/data
+			games/0ad/data=${V}
 MODULES =		lang/python
 
 # sync with devel/spidermonkey

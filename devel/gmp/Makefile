@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.32 2017/04/10 11:45:25 sthen Exp $
+# $OpenBSD: Makefile,v 1.35 2017/07/26 22:45:17 sthen Exp $
 
 COMMENT=	library for arbitrary precision arithmetic
 
 DISTNAME=	gmp-6.1.2
+REVISION =	1
 SHARED_LIBS +=  gmp                  10.0     # 13.2
 SHARED_LIBS +=  gmpxx                2.0      # 9.2
 CATEGORIES=	devel math
@@ -15,7 +16,7 @@ EXTRACT_SUFX=	.tar.xz
 # LGPLv3+
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	m ${LIBCXX}
+WANTLIB=	m ${COMPILER_LIBCXX}
 
 MASTER_SITES=	https://gmplib.org/download/gmp/ \
 		${MASTER_SITE_GNU:=gmp/}

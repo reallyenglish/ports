@@ -1,18 +1,19 @@
-# $OpenBSD: Makefile,v 1.10 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.14 2017/09/17 17:04:52 tj Exp $
 
 COMMENT =		open-source RSS/Atom feed reader for text terminals
 DISTNAME =		newsbeuter-2.9
 CATEGORIES =		www
+REVISION =		1
 
-HOMEPAGE =		http://newsbeuter.org/
+HOMEPAGE =		https://newsbeuter.org/
 
 # MIT
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += c crypto curl iconv intl json-c m ncursesw pthread
-WANTLIB += sqlite3 stfl xml2 ${LIBECXX}
+WANTLIB += sqlite3 stfl xml2 ${COMPILER_LIBCXX}
 
-MASTER_SITES =		http://newsbeuter.org/downloads/
+MASTER_SITES =		https://newsbeuter.org/downloads/
 
 COMPILER =		gcc
 

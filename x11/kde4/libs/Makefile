@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.79 2017/06/17 21:58:59 zhuk Exp $
+# $OpenBSD: Makefile,v 1.81 2017/07/27 11:57:50 sthen Exp $
 
 COMMENT-main =		KDE core libraries
 COMMENT-en_US =		KDE en_US locale data
 COMMENT-langlist =	list of languages supported by KDE
 CATEGORIES =		devel
 V =			4.14.10
-REVISION-main =		8
+REVISION-main =		10
 DISTNAME =		kdelibs-$V
 PKGNAME-main =		${DISTNAME}
 PKGNAME-en_US =		kde4-locale-en_US-$V
@@ -13,6 +13,8 @@ PKGNAME-langlist =	kde4-langlist-$V
 PKG_ARCH-en_US =	*
 PKG_ARCH-langlist =	*
 PKGSPEC-main =		kdelibs-${MODKDE4_SPEC}
+REVISION-en_US =	0
+REVISION-langlist =	0
 
 DPB_PROPERTIES =	parallel tag:kde4
 
@@ -71,6 +73,7 @@ SHARED_LIBS +=	kdeinit4_klauncher		50.2
 WANTLIB-en_US =
 WANTLIB-langlist =
 WANTLIB-main += ${WANTLIB} c m pthread util z
+WANTLIB-main += ${COMPILER_LIBCXX}
 WANTLIB-main += Half ICE Iex IlmImf IlmThread Imath SM X11 Xau Xcursor Xdmcp
 WANTLIB-main += Xext Xfixes Xft Xpm Xrender Xss Xtst
 WANTLIB-main += lib/qt4/Qt3Support lib/qt4/QtDBus lib/qt4/QtDeclarative
@@ -79,7 +82,7 @@ WANTLIB-main += lib/qt4/QtScript lib/qt4/QtSql lib/qt4/QtSvg
 WANTLIB-main += lib/qt4/QtWebKit lib/qt4/QtXml
 WANTLIB-main += aspell attica bz2 dbusmenu-qt enchant exslt fam
 WANTLIB-main += gif lib/inotify/inotify jasper jpeg lzma
-WANTLIB-main += png polkit-qt-core-1 qca2 soprano sopranoclient
+WANTLIB-main += png polkit-qt-core-1 qca soprano sopranoclient
 WANTLIB-main += streamanalyzer streams xml2 xslt
 
 MULTI_PACKAGES =	-main -langlist -en_US
@@ -120,7 +123,7 @@ LIB_DEPENDS-main =	${LIB_DEPENDS} \
 			graphics/giflib \
 			graphics/jasper \
 			graphics/openexr \
-			security/qca2 \
+			security/qca \
 			sysutils/gamin \
 			textproc/aspell/core \
 			textproc/enchant \

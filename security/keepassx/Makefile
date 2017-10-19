@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.13 2017/04/10 11:46:33 sthen Exp $
+# $OpenBSD: Makefile,v 1.16 2017/07/26 22:45:29 sthen Exp $
 
 COMMENT =	management tool for sensitive data
 
 V =		2.0.3
 DISTNAME =	keepassx-$V
+REVISION =	1
 CATEGORIES =	security
 
 HOMEPAGE =	https://www.keepassx.org/
@@ -20,7 +21,7 @@ MODULES =	x11/qt4 \
 
 CONFIGURE_ARGS=	-DWITH_CXX11=no
 
-WANTLIB += QtGui X11 Xi Xtst c gcrypt m ${LIBCXX} z
+WANTLIB += QtGui X11 Xi Xtst c gcrypt m ${COMPILER_LIBCXX} z
 
 LIB_DEPENDS =	security/libgcrypt
 

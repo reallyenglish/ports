@@ -1,24 +1,23 @@
-# $OpenBSD: Makefile,v 1.203 2017/06/14 05:23:10 landry Exp $
+# $OpenBSD: Makefile,v 1.210 2017/09/28 16:33:24 landry Exp $
 
+ONLY_FOR_ARCHS =	amd64 i386
 COMMENT-main =		Mozilla application suite
 COMMENT-lightning =	Mozilla Seamonkey calendar extension
-BROKEN-sparc64 =	xpcshell SIGBUS during fake
+ONLY_FOR_ARCHS =	amd64 i386
 
-MOZILLA_VERSION =	2.46
-MOZILLA_BRANCH =	release
+MOZILLA_VERSION =	2.48
+REVISION-main =		2
 MOZILLA_PROJECT =	seamonkey
 MOZILLA_CODENAME =	suite
-EXTRACT_SUFX =		.tar.xz
-REVISION-main =		6
 
 MULTI_PACKAGES =	-main -lightning
 PKGNAME-main =		${PKGNAME}
-PKGNAME-lightning =	lightning-seamonkey-5.1
+PKGNAME-lightning =	lightning-seamonkey-5.3
 EPOCH-lightning =	0
 
 HOMEPAGE =	http://www.seamonkey-project.org/
 
-SO_VERSION =	45.0
+SO_VERSION =	46.0
 # NOTE: Must bump minor version if any shlib's are removed from the
 # components dir to avoid pkg_add -r issues.
 
@@ -32,10 +31,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 MODULES =	www/mozilla devel/gettext lang/python
 MODPY_RUNDEP =	No
 
-# necessary glue to build with the correct compiler after fx 17
-COMPILER =		gcc clang
-
-MODGCC4_ARCHS =		powerpc sparc64 alpha
+COMPILER =		clang
 MODCLANG_ARCHS =	amd64 i386
 
 # gecko >= 44 doesnt build with base libevent
@@ -51,18 +47,15 @@ CONFIGURE_ARGS +=	--prefix=${PREFIX}
 
 LIB_DEPENDS-lightning = STEM->=${MOZILLA_VERSION:S/b/beta/}:${BUILD_PKGPATH},-main
 WANTLIB-lightning =	lib/${MOZILLA_PROJECT}-${MOZILLA_VER}/xul \
-			c m ${LIBCXX} nspr4 plc4 plds4 pthread
+			c m ${COMPILER_LIBCXX} nspr4 plc4 plds4 pthread
+
+WANTLIB += X11-xcb xcb xcb-shm
 
 # build lightning xpi
 CONFIGURE_ARGS +=	--enable-calendar
 
 # SQLITE_CFLAGS is set from pkgconfig, but it's not used for all files that need it
 CONFIGURE_ENV =		CPPFLAGS="-I${LOCALBASE}/include"
-
-# to be able to link when building with clang on i386 or gcc on powerpc
-.if ${MACHINE_ARCH} == "i386" || ${MACHINE_ARCH} == "powerpc"
-CONFIGURE_ARGS +=	--disable-debug-symbols
-.endif
 
 GNU_ARCH =	${MACHINE_ARCH:S/amd64/x86_64/}
 # guid for gdata-provider comes from em:id in install.rdf

@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/10 11:46:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.6 2017/07/26 22:45:26 sthen Exp $
 
 MAINTAINER = 	Marc Espie <espie@openbsd.org>
 CATEGORIES =	multimedia
@@ -8,6 +8,7 @@ V =		0.56
 DISTFILES =	ccextractor.${V:S/.//}-src.zip
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=ccextractor/}
 DISTNAME =	ccextractor-$V
+REVISION =	1
 WRKDIST =	${WRKDIR}/ccextractor.$V
 WRKSRC =	${WRKDIST}/src
 
@@ -27,6 +28,6 @@ do-install:
 		${INSTALL_DATA} $$i ${DOCDIR}; \
 	done
 
-WANTLIB +=	c m ${LIBCXX} 
+WANTLIB +=	c m ${COMPILER_LIBCXX} 
 
 .include <bsd.port.mk>

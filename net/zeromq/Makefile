@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.23 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.25 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT =		open source message queue optimised for performance
 
 DISTNAME =		zeromq-4.1.4
+REVISION =		0
 
 SHARED_LIBS +=  zmq                  4.1      # 5.0
 
@@ -14,7 +15,7 @@ MAINTAINER =		Rodrigo Mosconi <openbsd@mosconi.mat.br>
 # LGPLv3
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB += c m pthread sodium ${LIBCXX}
+WANTLIB += c m pthread sodium ${COMPILER_LIBCXX}
 
 MASTER_SITES =		http://download.zeromq.org/
 

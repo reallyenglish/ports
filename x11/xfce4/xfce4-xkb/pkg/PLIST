@@ -1,7 +1,5 @@
-@comment $OpenBSD: PLIST,v 1.9 2015/03/16 20:44:05 landry Exp $
-libexec/xfce4/
-libexec/xfce4/panel-plugins/
-@bin libexec/xfce4/panel-plugins/xfce4-xkb-plugin
+@comment $OpenBSD: PLIST,v 1.11 2017/09/13 07:37:05 landry Exp $
+lib/xfce4/panel/plugins/libxkb.so
 share/locale/ar/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/ast/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/be/LC_MESSAGES/xfce4-xkb-plugin.mo
@@ -39,6 +37,7 @@ share/locale/pt_BR/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/ro/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/ru/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/sk/LC_MESSAGES/xfce4-xkb-plugin.mo
+share/locale/sl/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/sq/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/sr/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/sv/LC_MESSAGES/xfce4-xkb-plugin.mo
@@ -52,8 +51,7 @@ share/locale/uz/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/uz@Latn/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/zh_CN/LC_MESSAGES/xfce4-xkb-plugin.mo
 share/locale/zh_TW/LC_MESSAGES/xfce4-xkb-plugin.mo
-share/xfce4/panel-plugins/
-share/xfce4/panel-plugins/xkb-plugin.desktop
+share/xfce4/panel/plugins/xkb.desktop
 share/xfce4/xkb/
 share/xfce4/xkb/flags/
 share/xfce4/xkb/flags/ae.svg
@@ -74,7 +72,6 @@ share/xfce4/xkb/flags/ch.svg
 share/xfce4/xkb/flags/cu.svg
 share/xfce4/xkb/flags/cz.svg
 share/xfce4/xkb/flags/de.svg
-share/xfce4/xkb/flags/dev.svg
 share/xfce4/xkb/flags/dj.svg
 share/xfce4/xkb/flags/dk.svg
 share/xfce4/xkb/flags/dvorak.svg
@@ -94,6 +91,7 @@ share/xfce4/xkb/flags/hr.svg
 share/xfce4/xkb/flags/hu.svg
 share/xfce4/xkb/flags/ie.svg
 share/xfce4/xkb/flags/il.svg
+share/xfce4/xkb/flags/in.svg
 share/xfce4/xkb/flags/iq.svg
 share/xfce4/xkb/flags/ir.svg
 share/xfce4/xkb/flags/is.svg

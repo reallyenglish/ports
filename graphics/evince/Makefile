@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.147 2017/04/23 21:45:58 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.152 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT=		GNOME document viewer
 
 GNOME_PROJECT=		evince
-GNOME_VERSION=		3.24.0
+GNOME_VERSION=		3.24.1
+REVISION=		0
 
 MAJ_V=			3.0
 SUBST_VARS=		MAJ_V
@@ -27,7 +28,7 @@ WANTLIB += glib-2.0 gmodule-2.0 gobject-2.0 gpg-error graphite2
 WANTLIB += gs gthread-2.0 gtk-3 harfbuzz jpeg lcms2 lzma m openjp2
 WANTLIB += pango-1.0 pangocairo-1.0 pangoft2-1.0 pcre pixman-1
 WANTLIB += png poppler poppler-glib pthread pthread-stubs secret-1
-WANTLIB += spectre ${LIBCXX} tiff xcb xcb-render xcb-shm xml2 z unistring
+WANTLIB += spectre ${COMPILER_LIBCXX} tiff xcb xcb-render xcb-shm xml2 z unistring
 WANTLIB += gmp hogweed nettle p11-kit tasn1 epoxy iconv intl
 WANTLIB += gstbase-1.0 gstreamer-1.0 gstvideo-1.0 orc-0.4 idn2
 

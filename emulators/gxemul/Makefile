@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.36 2017/04/28 07:37:00 fcambus Exp $
+# $OpenBSD: Makefile,v 1.39 2017/07/26 22:45:19 sthen Exp $
 
 COMMENT=		ARM/M88k/MIPS/PowerPC/SuperH machines emulator
 
 DISTNAME =		gxemul-0.6.0.1
 CATEGORIES=		emulators
-REVISION =		1
+REVISION =		3
 
 HOMEPAGE=		http://gxemul.sourceforge.net/
 
@@ -13,7 +13,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 MASTER_SITES=		${MASTER_SITE_SOURCEFORGE:=gxemul/}
 
-WANTLIB =		c m ${LIBCXX}
+WANTLIB =		c m ${COMPILER_LIBCXX}
 
 CONFIGURE_STYLE=	simple
 

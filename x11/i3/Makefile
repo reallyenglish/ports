@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.106 2016/11/13 20:46:23 dcoppa Exp $
+# $OpenBSD: Makefile,v 1.109 2017/09/25 06:30:43 dcoppa Exp $
 
 COMMENT =	improved dynamic tiling window manager
 
-DISTNAME =	i3-4.13
+DISTNAME =	i3-4.14.1
 CATEGORIES =	x11
 
 EXTRACT_SUFX =	.tar.bz2
@@ -35,6 +35,8 @@ RUN_DEPENDS =	devel/desktop-file-utils \
 		x11/i3status \
 		x11/p5-AnyEvent-I3
 
+TEST_DEPENDS =	x11/p5-AnyEvent-I3
+
 FAKE_FLAGS =	i3confdir="${PREFIX}/share/examples/i3/"
 
 SEPARATE_BUILD = Yes
@@ -43,7 +45,8 @@ USE_GMAKE =	Yes
 
 CONFIGURE_STYLE = gnu
 
-CONFIGURE_ARGS = --enable-builddir=${WRKBUILD}
+CONFIGURE_ARGS = --enable-builddir=${WRKBUILD} \
+		--enable-debug=no
 
 CONFIGURE_ENV =	CPPFLAGS="-I${X11BASE}/include \
 			  -I${LOCALBASE}/include" \

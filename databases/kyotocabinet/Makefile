@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.17 2017/04/16 20:27:48 sthen Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/26 22:45:16 sthen Exp $
 
 BROKEN-hppa=	undefined reference to __sync_fetch_and_add_8
 BROKEN-powerpc=	undefined reference to __sync_fetch_and_add_8
@@ -9,7 +9,7 @@ NOT_FOR_ARCHS=		${GCC3_ARCHS}
 COMMENT=	straightforward implementation of DBM
 
 DISTNAME=	kyotocabinet-1.2.76
-REVISION=	0
+REVISION=	1
 
 SHARED_LIBS +=	kyotocabinet 0.0 # 16.0
 
@@ -20,7 +20,7 @@ HOMEPAGE=	http://fallabs.com/kyotocabinet/
 # GPLv3
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c m pthread ${LIBCXX} z
+WANTLIB += c m pthread ${COMPILER_LIBCXX} z
 
 MASTER_SITES=	${HOMEPAGE}pkg/
 

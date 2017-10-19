@@ -1,22 +1,21 @@
-# $OpenBSD: Makefile,v 1.10 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.16 2017/10/12 06:28:17 sebastia Exp $
 
 COMMENT =		collection of C++ and CMake utility libraries
 
 GH_ACCOUNT =		puppetlabs
 GH_PROJECT =		leatherman
-GH_TAGNAME =		0.12.1
-REVISION =		1
+GH_TAGNAME =		1.3.0
 
 # N.B.: Upstream doesn't care about ABI, better just bump major on update
-SHARED_LIBS =	leatherman_curl           0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_dynamic_library 0.0 # 0.12                                 
-SHARED_LIBS +=	leatherman_execution      0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_file_util      0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_json_container 0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_locale         0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_logging        0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_ruby           0.0 # 0.12                                  
-SHARED_LIBS +=	leatherman_util           0.0 # 0.12                                  
+SHARED_LIBS =	leatherman_curl           1.1 # 0.12
+SHARED_LIBS +=	leatherman_dynamic_library 1.0 # 0.12                                 
+SHARED_LIBS +=	leatherman_execution      1.1 # 0.12                                  
+SHARED_LIBS +=	leatherman_file_util      1.1 # 0.12                                  
+SHARED_LIBS +=	leatherman_json_container 1.1 # 0.12                                  
+SHARED_LIBS +=	leatherman_locale         1.0 # 0.12                                  
+SHARED_LIBS +=	leatherman_logging        1.0 # 0.12                                  
+SHARED_LIBS +=	leatherman_ruby           1.0 # 0.12                                  
+SHARED_LIBS +=	leatherman_util           1.1 # 0.12                                  
 
 CATEGORIES =		devel
 
@@ -28,9 +27,9 @@ PERMIT_PACKAGE_CDROM =	Yes
 COMPILER =		gcc
 MODULES =		devel/cmake lang/python
 MODPY_BUILDDEP =	No
-MODPY_ADJ_FILES =	${WRKSRC}/scripts/cpplint.py
+MODPY_ADJ_FILES =	scripts/cpplint.py
 
-WANTLIB =  ${LIBECXX} m
+WANTLIB =  ${COMPILER_LIBCXX} m
 WANTLIB += boost_atomic-mt boost_chrono-mt boost_date_time-mt
 WANTLIB += boost_filesystem-mt boost_locale-mt boost_log-mt boost_log_setup-mt
 WANTLIB += boost_regex-mt boost_system-mt boost_thread-mt curl

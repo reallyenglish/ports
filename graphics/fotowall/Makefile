@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.4 2017/06/12 10:57:57 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.6 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT =	Pictures collage & creativity tool
 
 DISTNAME =	Fotowall-0.9
 PKGNAME =	${DISTNAME:L}
-REVISION =	0
+REVISION =	1
 
 CATEGORIES =	graphics
 
@@ -16,7 +16,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL ICE QtGui QtNetwork QtOpenGL QtSvg QtXml SM X11
 WANTLIB += Xext Xi Xinerama Xrender c fontconfig freetype m pthread
-WANTLIB += ${LIBCXX}
+WANTLIB += ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_GOOGLECODE:=fotowall/}
 

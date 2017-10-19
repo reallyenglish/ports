@@ -1,22 +1,24 @@
-# $OpenBSD: Makefile,v 1.9 2017/04/10 11:46:19 sthen Exp $
+# $OpenBSD: Makefile,v 1.13 2017/09/25 14:33:14 naddy Exp $
 
 COMMENT=		free software clone of Worms(R) game concept
 
 DISTNAME=		warmux-11.04.1
-REVISION=		4
+REVISION=		6
 WRKDIST=		${WRKDIR}/warmux-11.04
 CATEGORIES=		games
 
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB+= SDL SDL_gfx SDL_image SDL_mixer SDL_net SDL_ttf X11 c curl>=5
-WANTLIB+= m png pthread ${LIBCXX} xml2 z
+WANTLIB += ${COMPILER_LIBCXX} 
+WANTLIB += SDL SDL_gfx SDL_image SDL_mixer SDL_net SDL_ttf X11 c crypto
+WANTLIB += curl intl m nghttp2 png pthread ssl xml2 z
 
 MASTER_SITES=		http://download.gna.org/warmux/ \
 			http://download.gna.org/warmux/archive/
 EXTRACT_SUFX=		.tar.bz2
 
+BUILD_DEPENDS=		devel/gettext-tools
 RUN_DEPENDS=		devel/desktop-file-utils
 LIB_DEPENDS=		devel/sdl-gfx \
 			devel/sdl-image \
@@ -26,7 +28,6 @@ LIB_DEPENDS=		devel/sdl-gfx \
 			net/curl \
 			textproc/libxml
 
-MODULES=		devel/gettext
 CONFIGURE_STYLE=	gnu
 CONFIGURE_ENV+= 	CPPFLAGS="-I${LOCALBASE}/include -DSIZE_T_FIXEDPOINT_METHODS ${CFLAGS}" \
 			LDFLAGS="-L${LOCALBASE}/lib" \

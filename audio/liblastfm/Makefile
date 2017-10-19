@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.7 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.9 2017/07/26 22:45:15 sthen Exp $
 
 COMMENT =	Qt-based C++ library for the Last.fm webservices
 V =		1.0.9
 DISTNAME =	$V
 PKGNAME =	liblastfm-$V
 CATEGORIES =	audio devel net
-REVISION =	0
+REVISION =	1
 
 HOMEPAGE =	https://github.com/lastfm/liblastfm
 MAINTAINER =	Vadim Zhukov <zhuk@openbsd.org>
@@ -22,7 +22,7 @@ DIST_SUBDIR =	liblastfm
 WRKDIST =	${WRKDIR}/${PKGNAME}
 
 WANTLIB =  lib/qt4/QtDBus lib/qt4/QtNetwork lib/qt4/QtSql lib/qt4/QtXml
-WANTLIB += fftw3f c m pthread samplerate ${LIBCXX}
+WANTLIB += fftw3f c m pthread samplerate ${COMPILER_LIBCXX}
 
 LIB_DEPENDS =	audio/libsamplerate \
 		math/fftw3,float

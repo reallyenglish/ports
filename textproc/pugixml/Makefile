@@ -1,9 +1,10 @@
-# $OpenBSD: Makefile,v 1.3 2017/04/10 11:46:34 sthen Exp $
+# $OpenBSD: Makefile,v 1.7 2017/07/26 22:45:31 sthen Exp $
 
 COMMENT=	light-weight, simple and fast XML parser for C++
 
 V=		1.7
 DISTNAME=	pugixml-$V
+REVISION =	2
 
 SHARED_LIBS +=	pugixml                   0.0 # 1.7
 
@@ -16,7 +17,7 @@ MAINTAINER=	Stuart Henderson <sthen@openbsd.org>
 # MIT
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += m ${LIBCXX}
+WANTLIB += m ${COMPILER_LIBCXX}
 
 MASTER_SITES=	http://github.com/zeux/pugixml/releases/download/v$V/
 

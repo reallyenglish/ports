@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.68 2017/06/04 19:05:03 espie Exp $
+# $OpenBSD: Makefile,v 1.70 2017/07/26 22:45:17 sthen Exp $
 
 ONLY_FOR_ARCHS=	${GCC4_ARCHS} ${CLANG_ARCHS}
 
 COMMENT=	free peer-reviewed portable C++ source libraries
 
 VERSION=	1.58.0
-REVISION=	7
+REVISION=	8
 DISTNAME=	boost_${VERSION:S/./_/g}
 PKGNAME=	boost-${VERSION}
 CATEGORIES=	devel
@@ -55,7 +55,7 @@ MAINTAINER=	Brad Smith <brad@comstyle.com>
 # MIT-like
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB=	c bz2 iconv m pthread ${LIBCXX} util z
+WANTLIB=	c bz2 iconv m pthread ${COMPILER_LIBCXX} util z
 
 MODULES=	lang/python
 MODPY_RUNDEP=	No

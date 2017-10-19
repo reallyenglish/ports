@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.14 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.17 2017/07/26 22:45:30 sthen Exp $
 
 COMMENT =		CPU, RAM memory, and load monitor for use with tmux(1)
 
 GH_ACCOUNT =		thewtex
 GH_PROJECT =		tmux-mem-cpu-load
 GH_TAGNAME =		v3.4.0
+REVISION =		1
 
 CATEGORIES =		sysutils
 
@@ -21,7 +22,7 @@ COMPILER =		gcc clang
 MODGCC4_ARCHS =		alpha arm hppa mips64 mips64el powerpc sparc64
 MODCLANG_ARCHS =	amd64 i386
 
-WANTLIB +=		c m ${LIBECXX}
+WANTLIB +=		c m ${COMPILER_LIBCXX}
 
 post-install:
 	${INSTALL_DATA_DIR} ${PREFIX}/share/doc/tmux-mem-cpu-load/

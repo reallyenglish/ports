@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.41 2017/04/21 19:43:38 rsadowski Exp $
+# $OpenBSD: Makefile,v 1.44 2017/08/17 14:31:37 visa Exp $
 
 # Memory hog, stuck for days on the same file (configoptions.cpp) during build.
 # XXX check with different optimizer level? see doc/install.doc
@@ -10,6 +10,7 @@ COMMENT=	source code documentation generator tool
 VERSION=	1.8.13
 DISTNAME=	doxygen-${VERSION}.src
 PKGNAME=	doxygen-${VERSION}
+REVISION=	0
 
 CATEGORIES=	devel textproc
 
@@ -20,7 +21,7 @@ MAINTAINER=	Rafael Sadowski <rafael@sizeofvoid.org>
 # GPLv2
 PERMIT_PACKAGE_CDROM=	Yes
 
-WANTLIB += c iconv m pthread ${LIBCXX} xapian z
+WANTLIB += c iconv m pthread ${COMPILER_LIBCXX} xapian z
 
 MASTER_SITES=	http://ftp.stack.nl/pub/users/dimitri/ \
 		ftp://ftp.stack.nl/pub/users/dimitri/
@@ -34,8 +35,7 @@ MODULES=	devel/cmake \
 MODPY_RUNDEP=	No
 
 .if ${MACHINE_ARCH} == "mips64" || ${MACHINE_ARCH} == "mips64el"
-# ld(1) fails
-CONFIGURE_ARGS+=-Denglish_only:Bool=ON
+CXXFLAGS+=	-mxgot
 .endif
 
 BUILD_DEPENDS+=	devel/bison

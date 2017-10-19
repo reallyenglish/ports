@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.113 2017/05/31 08:08:15 espie Exp $
+# $OpenBSD: Makefile,v 1.115 2017/07/26 22:45:19 sthen Exp $
 
 # XXX error: 'nullptr' was not declared in this scope
 CXXFLAGS +=	-std=c++11
@@ -11,6 +11,7 @@ COMMENT=	free cross-platform WYSIWYG word processor
 
 VERSION=	3.0.2
 DISTNAME=	abiword-${VERSION}
+REVISION=	1
 
 MAJORVER=	${VERSION:C/..$//}
 SUBST_VARS=	MAJORVER
@@ -87,7 +88,8 @@ CONFIGURE_ARGS += \
 		--without-libtidy
 
 CONFIGURE_ENV=	CPPFLAGS="-I${LOCALBASE}/include" \
-		LDFLAGS="-L${LOCALBASE}/lib"
+		LDFLAGS="-L${LOCALBASE}/lib" \
+		ac_cv_prog_VALGRIND=
 
 post-install:
 	rm ${PREFIX}/lib/libabiword-${MAJORVER}*.{a,la}

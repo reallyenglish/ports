@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.5 2017/04/10 11:45:23 sthen Exp $
+# $OpenBSD: Makefile,v 1.7 2017/07/26 22:45:15 sthen Exp $
 
 BROKEN-alpha =	arctar.c:384: internal compiler error: in extract_insn, at recog.c:2077
 
 COMMENT =	UNIX port of Open Cubic Player
 
 DISTNAME =	ocp-0.1.21
-REVISION =	0
+REVISION =	1
 CATEGORIES =	audio
 
 HOMEPAGE =	http://stian.cubic.org/project-ocp.php
@@ -16,7 +16,7 @@ MAINTAINER =	Frederic Cambus <fcambus@openbsd.org>
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB +=	FLAC SDL adplug binio c iconv m mad ncurses ogg pthread
-WANTLIB +=	sidplay ${LIBCXX} vorbis vorbisfile z
+WANTLIB +=	sidplay ${COMPILER_LIBCXX} vorbis vorbisfile z
 
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=opencubicplayer/}
 

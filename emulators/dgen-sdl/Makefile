@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.14 2017/04/10 11:45:27 sthen Exp $
+# $OpenBSD: Makefile,v 1.16 2017/07/26 22:45:19 sthen Exp $
 
 BROKEN-alpha =		OOM or ICE on hqx/src/hq4x_32.c
 BROKEN-hppa =		OOM or ICE on hqx/src/hq4x_32.c
@@ -8,6 +8,7 @@ DISTNAME =		dgen-sdl-1.33
 CATEGORIES =		emulators games
 HOMEPAGE =		http://dgen.sourceforge.net/
 MAINTAINER =		Edd Barrett <edd@openbsd.org>
+REVISION =		0
 
 FLAVORS =		debugger
 FLAVOR ?=
@@ -23,7 +24,7 @@ FLAVOR ?=
 PERMIT_PACKAGE_CDROM =	No
 PERMIT_PACKAGE_FTP =	Yes
 
-WANTLIB =		GL SDL archive c m pthread ${LIBCXX}
+WANTLIB =		GL SDL archive c m pthread ${COMPILER_LIBCXX}
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=dgen/}
 

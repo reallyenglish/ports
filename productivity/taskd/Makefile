@@ -1,10 +1,10 @@
-# $OpenBSD: Makefile,v 1.9 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:29 sthen Exp $
 
 COMMENT =	lightweight server providing access to task data
 
 DISTNAME =	taskd-1.1.0
 CATEGORIES =	productivity net
-REVISION =	0
+REVISION =	1
 
 HOMEPAGE =	http://www.taskwarrior.org/
 
@@ -19,7 +19,7 @@ MODULES =	devel/cmake
 
 COMPILER =	gcc
 
-WANTLIB += c gnutls m pthread ${LIBECXX}
+WANTLIB += c gnutls m pthread ${COMPILER_LIBCXX}
 
 LIB_DEPENDS =	security/gnutls
 

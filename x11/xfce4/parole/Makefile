@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.39 2017/04/10 11:46:37 sthen Exp $
+# $OpenBSD: Makefile,v 1.42 2017/07/26 22:45:35 sthen Exp $
 
 COMMENT =	Xfce4 media player
 
-XFCE_VERSION =	0.9.1
+XFCE_VERSION =	0.9.2
 XFCE_GOODIE =	parole
 CATEGORIES +=	audio
+REVISION =	0
 
 # GPLv2
 PERMIT_PACKAGE_CDROM =	Yes
@@ -17,7 +18,7 @@ WANTLIB += gobject-2.0 graphite2 gstaudio-1.0 gstbase-1.0 gstpbutils-1.0
 WANTLIB += gstreamer-1.0 gsttag-1.0 gstvideo-1.0 gthread-2.0 gtk-3
 WANTLIB += harfbuzz m notify orc-0.4 pango-1.0 pangocairo-1.0
 WANTLIB += pangoft2-1.0 pcre pixman-1 png pthread pthread-stubs
-WANTLIB += startup-notification-1 ${LIBCXX} tag tag_c xcb xcb-render
+WANTLIB += startup-notification-1 ${COMPILER_LIBCXX} tag tag_c xcb xcb-render
 WANTLIB += xcb-shm xcb-util xfce4ui-2 xfce4util xfconf-0 z iconv intl
 
 MODULES =	x11/xfce4
@@ -27,6 +28,7 @@ MODXFCE_PURGE_LA =	lib/parole-0
 
 LIB_DEPENDS =	multimedia/gstreamer1/core \
 		multimedia/gstreamer1/plugins-base \
+		x11/dbus-glib \
 		x11/xfce4/libxfce4ui \
 		audio/taglib \
 		devel/libnotify

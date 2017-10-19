@@ -1,13 +1,13 @@
-# $OpenBSD: Makefile,v 1.19 2017/04/14 10:18:19 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.22 2017/08/19 13:36:38 ajacoutot Exp $
 
 COMMENT=		spell-checking library for GTK+
 
 GNOME_PROJECT=		gspell
-GNOME_VERSION=		1.4.1
+GNOME_VERSION=		1.4.2
 
 CATEGORIES=		textproc
 
-SHARED_LIBS +=  gspell-1             3.1      # 2.0
+SHARED_LIBS +=  gspell-1             3.1      # 3.0
 
 MAINTAINER=		Antoine Jacoutot <ajacoutot@openbsd.org>
 
@@ -20,7 +20,7 @@ WANTLIB += cairo cairo-gobject dbus-1 enchant epoxy expat ffi
 WANTLIB += fontconfig freetype gdk-3 gdk_pixbuf-2.0 gio-2.0 glib-2.0
 WANTLIB += gmodule-2.0 gobject-2.0 graphite2 gthread-2.0 gtk-3
 WANTLIB += harfbuzz iconv intl m pango-1.0 pangocairo-1.0 pangoft2-1.0
-WANTLIB += pcre pixman-1 png pthread pthread-stubs ${LIBCXX} xcb
+WANTLIB += pcre pixman-1 png pthread pthread-stubs ${COMPILER_LIBCXX} xcb
 WANTLIB += xcb-render xcb-shm z
 
 MODULES=		x11/gnome

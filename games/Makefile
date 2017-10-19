@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.347 2017/06/13 09:26:40 kirby Exp $
+# $OpenBSD: Makefile,v 1.354 2017/09/09 19:56:30 jeremy Exp $
 
      SUBDIR =
      SUBDIR += 0ad
@@ -52,6 +52,7 @@
      SUBDIR += cmatrix
      SUBDIR += connect4
      SUBDIR += corewars
+     SUBDIR += corsixth
      SUBDIR += cosmosmash
      SUBDIR += cowsay
      SUBDIR += cpat
@@ -132,14 +133,15 @@
      SUBDIR += ja2-stracciatella
      SUBDIR += jag
      SUBDIR += jbrickshooter
-     SUBDIR += kbilliards
      SUBDIR += kobodeluxe
      SUBDIR += kobodeluxe,harder
+     SUBDIR += koboredux
      SUBDIR += komi
      SUBDIR += late
      SUBDIR += lbreakout2
      SUBDIR += lgeneral
      SUBDIR += liberalcrimesquad
+     SUBDIR += liblcf 
      SUBDIR += life
      SUBDIR += lincity
      SUBDIR += lincity-ng
@@ -175,6 +177,7 @@
      SUBDIR += oolite
      SUBDIR += openarena
      SUBDIR += openmw
+     SUBDIR += openrct2
      SUBDIR += opensonic
      SUBDIR += openttd
      SUBDIR += openttd-data

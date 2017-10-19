@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.17 2017/04/10 11:45:27 sthen Exp $
+# $OpenBSD: Makefile,v 1.19 2017/07/26 22:45:19 sthen Exp $
 
 COMMENT-main =		highly accurate Game Boy Color emulator
 COMMENT-qt =		highly accurate Game Boy Color emulator with GUI
@@ -8,8 +8,8 @@ V =			0.5.0.${REV}
 DISTNAME =		gambatte_src-r${REV}
 PKGNAME-main =		gambatte-$V
 PKGNAME-qt =		gambatte-qt-$V
-REVISION-main =		2
-REVISION-qt =		1
+REVISION-main =		3
+REVISION-qt =		2
 
 MULTI_PACKAGES =	-main -qt
 
@@ -24,7 +24,7 @@ MAINTAINER =		Anthony J. Bentley <anthony@anjbe.name>
 # GPLv2 only
 PERMIT_PACKAGE_CDROM =	Yes
 
-cWANTLIB =	c m pthread ${LIBCXX} z
+cWANTLIB =	c m pthread ${COMPILER_LIBCXX} z
 WANTLIB-main =	${cWANTLIB} SDL
 WANTLIB-qt =	${cWANTLIB} GL QtCore QtGui QtOpenGL X11 Xext Xrandr Xv ossaudio usbhid Xi
 

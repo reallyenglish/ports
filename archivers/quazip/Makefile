@@ -1,7 +1,8 @@
-# $OpenBSD: Makefile,v 1.9 2017/04/10 11:45:22 sthen Exp $
+# $OpenBSD: Makefile,v 1.16 2017/07/28 11:23:44 naddy Exp $
 
 COMMENT =	Qt/C++ wrapper for ZIP/UNZIP package
-DISTNAME =	quazip-0.7.2
+DISTNAME =	quazip-0.7.3
+REVISION =	3
 CATEGORIES =	archivers
 
 # keep those in sync
@@ -9,11 +10,12 @@ SHARED_LIBS =	quazip	2.0		# 1.0
 SHARED_LIBS +=	quazip5	2.0		# 1.0
 
 HOMEPAGE =	http://quazip.sourceforge.net/
+MAINTAINER =	Brian Callahan <bcallah@openbsd.org>
 
-# LGPLv2.1
+# LGPLv2.1 with static linking exception
 PERMIT_PACKAGE_CDROM =		Yes
 
-WANTLIB += m z
+WANTLIB += ${COMPILER_LIBCXX} m z
 
 MASTER_SITES =	${MASTER_SITE_SOURCEFORGE:=quazip/}
 
@@ -29,10 +31,10 @@ FULLPKGNAME =		${PKGNAME:C/-/-qt5-/}
 MODULES +=		x11/qt5
 WANTLIB +=		Qt5Core
 CONFIGURE_ARGS =	-DBUILD_WITH_QT4=No
+CONFIGURE_ENV =		CXXFLAGS="${CXXFLAGS} -std=c++11"
 CMAKENAME =		QuaZip5
 .else
 MODULES +=		x11/qt4
-WANTLIB +=		${LIBCXX}
 CONFIGURE_ARGS =	-DBUILD_WITH_QT4=Yes
 CMAKENAME =		QuaZip
 .endif

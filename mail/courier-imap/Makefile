@@ -1,14 +1,14 @@
-# $OpenBSD: Makefile,v 1.110 2017/06/02 08:56:32 schwarze Exp $
+# $OpenBSD: Makefile,v 1.113 2017/09/26 17:30:37 giovanni Exp $
 
 COMMENT-main=		imap server for maildir format mailboxes
 COMMENT-pop3=		pop3 server for maildir format mailboxes
 
-V=			4.17.3
+V=			4.18.0
 DISTNAME=		courier-imap-${V}
+REVISION=		1
 PKGNAME-main=		${DISTNAME}
 FULLPKGNAME-pop3=	courier-pop3-${V}
 FULLPKGPATH-pop3=	mail/courier-imap,-pop3
-REVISION=		0
 
 CATEGORIES=		mail
 
@@ -21,15 +21,19 @@ MAINTAINER=		Giovanni Bechis <giovanni@openbsd.org>
 # GPLv3
 PERMIT_PACKAGE_CDROM=	Yes
 
+COMPILER =		gcc
+
 WANTLIB=		c courierauth courierauthcommon courierauthsasl gdbm
-WANTLIB+=		idn pcre
+WANTLIB+=		iconv intl idn m pcre ${COMPILER_LIBCXX}
 WANTLIB-pop3=		c courierauth courierauthcommon courierauthsasl
-WANTLIB-pop3+=		idn pcre ${MODGETTEXT_WANTLIB}
+WANTLIB-pop3+=		iconv intl idn m pcre ${COMPILER_LIBCXX}
 
 USE_GMAKE=		Yes
 CONFIGURE_STYLE=	autoconf automake
 AUTOCONF_VERSION=	2.69
 AUTOMAKE_VERSION=	1.15
+# only libs/rfc822/configure.ac is patched
+AUTOCONF_DIR=		${WRKSRC} ${WRKSRC}/libs/rfc822
 
 # AM_PROG_LIBTOOL, aclocal is run during build
 BUILD_DEPENDS +=	devel/libtool
@@ -93,13 +97,13 @@ CONFIGURE_ARGS+=	--disable-workarounds-for-imap-client-bugs
 MULTI_PACKAGES=		-main -pop3
 
 LIB_DEPENDS-main=	${LIB_DEPENDS} \
-			mail/courier-unicode>=1.3 \
-			databases/gdbm
+			devel/gettext \
+			databases/gdbm \
+			mail/courier-unicode>=2.0
+
 RUN_DEPENDS-pop3=	mail/courier-imap,-main
 
 WANTLIB-main=		${WANTLIB} ssl crypto courier-unicode
-
-MODULES=		devel/gettext
 
 CNFFILES=		etc/courier/imapd-ssl.dist etc/courier/imapd.dist \
 			etc/courier/pop3d-ssl.dist etc/courier/pop3d.dist \

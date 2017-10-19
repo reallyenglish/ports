@@ -1,15 +1,16 @@
-# $OpenBSD: Makefile,v 1.198 2017/06/03 21:04:49 sthen Exp $
+# $OpenBSD: Makefile,v 1.202 2017/09/22 21:30:32 sthen Exp $
 
 COMMENT-main=	WWW and FTP proxy cache and accelerator
 COMMENT-ldap=	LDAP authentication/ACL support for Squid
 COMMENT-ntlm=	NTLM authentication/ACL support for Squid
 
-V=		3.5.26
+V=		3.5.27
 DISTNAME=	squid-$V
 EXTRACT_SUFX=	.tar.xz
 PKGNAME-main=	squid-$V
 PKGNAME-ldap=	squid-ldap-$V
 PKGNAME-ntlm=	squid-ntlm-$V
+REVISION-ntlm=	0
 
 CATEGORIES=	www
 
@@ -22,10 +23,10 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += c m nettle pthread
 
-cWANTLIB=	${WANTLIB} ${LIBECXX} ffi gmp gnutls hogweed iconv
+cWANTLIB=	${WANTLIB} ${COMPILER_LIBCXX} ffi gmp gnutls hogweed iconv
 cWANTLIB+=	idn2 intl p11-kit tasn1 unistring z
 
-# bzr repository at https://code.launchpad.net/squid
+# repo at https://github.com/squid-cache/squid
 MASTER_SITES=	${HOMEPAGE}Versions/v${V:C/^([0-9]).*/\1/}/${V:C/([0-9.]{3}).*/\1/}/ \
 		http://ftp.mirrorservice.org/sites/ftp.squid-cache.org/pub/archive/${V:C/([0-9.]{3}).*/\1/}/
 
@@ -119,6 +120,7 @@ WANTLIB-ldap +=     ${cWANTLIB} crypto lber-2.4 ldap-2.4 sasl2 ssl
 
 RUN_DEPENDS-ntlm=   net/samba ${BASE_PKGPATH}
 LIB_DEPENDS-ntlm += security/libnettle
+WANTLIB-ntlm=       ${WANTLIB} ${COMPILER_LIBCXX}
 
 pre-build:
 	@cd ${WRKSRC}; \

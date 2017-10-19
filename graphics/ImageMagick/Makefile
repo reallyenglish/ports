@@ -1,17 +1,17 @@
-# $OpenBSD: Makefile,v 1.164 2017/05/21 15:02:41 sthen Exp $
+# $OpenBSD: Makefile,v 1.168 2017/09/06 14:18:08 sthen Exp $
 
 COMMENT=		image processing tools
 
-VER=			6.9.8
-DASHVER=		6
+VER=			6.9.9
+DASHVER=		11
 DISTNAME=		ImageMagick-${VER}-${DASHVER}
 PKGNAME=		ImageMagick-${VER}.${DASHVER}
 PORTROACH=		site:https://www.imagemagick.org/download/ limit:6.*
 EXTRACT_SUFX=		.tar.xz
 
-SHARED_LIBS +=	MagickCore-6.Q16     3.1      # 4.0
-SHARED_LIBS +=	MagickWand-6.Q16     3.0      # 4.0
-SHARED_LIBS +=	Magick++-6.Q16       5.1      # 7.0
+SHARED_LIBS +=	MagickCore-6.Q16     3.3      # 5.0
+SHARED_LIBS +=	MagickWand-6.Q16     3.1      # 5.0
+SHARED_LIBS +=	Magick++-6.Q16       5.1      # 8.0
 
 CATEGORIES=		graphics
 
@@ -27,7 +27,7 @@ PERMIT_PACKAGE_CDROM=	Yes
 
 WANTLIB += ICE SM X11 Xau Xdmcp Xext Xt bz2 c djvulibre expat
 WANTLIB += fftw3 fontconfig freetype iconv jbig jpeg lcms2 lzma m
-WANTLIB += openjp2 perl png pthread pthread-stubs ${LIBCXX} tiff
+WANTLIB += openjp2 perl png pthread pthread-stubs ${COMPILER_LIBCXX} tiff
 WANTLIB += webp xcb xml2 z
 
 LIB_DEPENDS =		archivers/bzip2 \

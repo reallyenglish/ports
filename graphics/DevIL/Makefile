@@ -1,9 +1,9 @@
-# $OpenBSD: Makefile,v 1.21 2017/05/07 12:49:54 espie Exp $
+# $OpenBSD: Makefile,v 1.23 2017/07/26 22:45:23 sthen Exp $
 
 COMMENT=		library for powerful image loading capabilities
 
 DISTNAME=		DevIL-1.7.8
-REVISION=		12
+REVISION=		13
 SHARED_LIBS+=		IL	1.0 # 2.0
 SHARED_LIBS+=		ILU	1.0 # 2.0
 SHARED_LIBS+=		ILUT	1.0 # 2.0
@@ -21,7 +21,7 @@ EXTRACT_SUFX=		.zip
 WANTLIB += GL GLU Half ICE Iex IexMath IlmImf IlmThread Imath
 WANTLIB += SDL SM X11 X11-xcb Xdamage Xext Xfixes Xi
 WANTLIB += Xmu Xrandr Xrender Xt Xxf86vm c drm glapi glut iconv jasper
-WANTLIB += jpeg lcms m mng png pthread sndio ${LIBCXX}
+WANTLIB += jpeg lcms m mng png pthread sndio ${COMPILER_LIBCXX}
 WANTLIB += tiff usbhid xcb xcb-dri2 xcb-glx z expat
 
 LIB_DEPENDS=		converters/libiconv \

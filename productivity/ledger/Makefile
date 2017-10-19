@@ -1,10 +1,11 @@
-# $OpenBSD: Makefile,v 1.19 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.21 2017/07/26 22:45:29 sthen Exp $
 
 COMMENT =		command line double-entry accounting ledger
 
 GH_TAGNAME =		v3.1.1
 GH_ACCOUNT =		ledger
 GH_PROJECT =		ledger
+REVISION =		0
 
 SHARED_LIBS +=  ledger                    0.0 # 3.0
 
@@ -19,7 +20,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += boost_date_time-mt boost_filesystem-mt boost_iostreams-mt
 WANTLIB += boost_regex-mt boost_system-mt boost_unit_test_framework-mt
-WANTLIB += c gmp m mpfr pthread ${LIBECXX}
+WANTLIB += c gmp m mpfr pthread ${COMPILER_LIBCXX}
 
 MODULES =		devel/cmake \
 			lang/python

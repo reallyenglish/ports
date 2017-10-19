@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.158 2017/06/15 14:40:37 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.161 2017/07/26 22:45:28 sthen Exp $
 
 PORTROACH=		skipv:${V}_py2.5
 
@@ -9,7 +9,7 @@ COMMENT-hpcups=		HP native CUPS driver
 COMMENT-hpijs=		HP ghostscript driver (spooler independent)
 COMMENT-gui=		HPLIP graphical tools
 
-V=			3.17.6
+V=			3.17.7
 DISTNAME=		hplip-${V}
 SUBST_VARS=		V
 
@@ -19,7 +19,11 @@ PKGNAME-hpaio=		hpaio-${V}
 PKGNAME-hpcups=		hpcups-${V}
 PKGNAME-hpijs=		hpijs-${V}
 PKGNAME-gui=		hplip-gui-${V}
-
+REVISION-common=	0
+REVISION-gui=		0
+REVISION-hpaio=		0
+REVISION-hpcups=	0
+REVISION-hpijs=		0
 REVISION-main=		0
 
 SHARED_LIBS +=  hpdiscovery          0.0      # 0.1
@@ -90,7 +94,7 @@ RUN_DEPENDS-hpaio=	# empty
 
 ### -hpcups
 WANTLIB-hpcups += ${cWANTLIB} z netsnmp hpdiscovery iconv intl
-WANTLIB-hpcups += c jpeg ${LIBCXX} hpip cups cupsimage dbus-1 idn2
+WANTLIB-hpcups += c jpeg ${COMPILER_LIBCXX} hpip cups cupsimage dbus-1 idn2
 WANTLIB-hpcups += z usb-1.0 avahi-client avahi-common hpmud
 WANTLIB-hpcups += ffi gmp gnutls hogweed nettle p11-kit tasn1
 WANTLIB-hpcups += unistring
@@ -104,7 +108,7 @@ RUN_DEPENDS-hpcups=	# empty
 
 ### -hpijs
 WANTLIB-hpijs += ${cWANTLIB} hpip usb-1.0 hpdiscovery
-WANTLIB-hpijs += c jpeg netsnmp ${LIBCXX} dbus-1 hpmud
+WANTLIB-hpijs += c jpeg netsnmp ${COMPILER_LIBCXX} dbus-1 hpmud
 
 LIB_DEPENDS-hpijs=	print/hplip,-common \
 			graphics/jpeg \

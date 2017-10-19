@@ -1,8 +1,8 @@
-# $OpenBSD: Makefile,v 1.6 2017/04/10 11:46:20 sthen Exp $
+# $OpenBSD: Makefile,v 1.8 2017/07/26 22:45:22 sthen Exp $
 
 COMMENT =	zuma-like arkade game
 DISTNAME =	zaz-1.0.0
-REVISION =	0
+REVISION =	1
 CATEGORIES =	games
 
 HOMEPAGE =	http://zaz.sourceforge.net/
@@ -12,7 +12,7 @@ MAINTAINER =	Matthias Kilian <kili@openbsd.org>
 # GPLv3+
 PERMIT_PACKAGE_CDROM =		Yes
 
-WANTLIB =	GL SDL SDL_image c freetype ftgl m ogg pthread ${LIBCXX} \
+WANTLIB =	GL SDL SDL_image c freetype ftgl m ogg pthread ${COMPILER_LIBCXX} \
 		theoradec theoraenc vorbis vorbisenc vorbisfile z
 
 EXTRACT_SUFX =	.tar.bz2

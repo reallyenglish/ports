@@ -1,9 +1,8 @@
-# $OpenBSD: Makefile,v 1.12 2017/06/12 10:57:57 ajacoutot Exp $
+# $OpenBSD: Makefile,v 1.15 2017/10/05 11:37:31 kirby Exp $
 
 COMMENT =		framework for writing networked applications in C
 
 GH_PROJECT = 		ccnet
-REVISION =		0
 
 SHARED_LIBS =		ccnet 2.0
 
@@ -11,7 +10,7 @@ SHARED_LIBS =		ccnet 2.0
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += c crypto event_core event_extra ffi gio-2.0 glib-2.0
-WANTLIB += gmodule-2.0 gobject-2.0 iconv intl jansson pcre pthread
+WANTLIB += gmodule-2.0 gobject-2.0 iconv intl jansson m pcre pthread
 WANTLIB += searpc sqlite3 ssl uuid z
 
 MODULES =		lang/python
@@ -25,7 +24,6 @@ LIB_DEPENDS =		databases/sqlite3 \
 			sysutils/e2fsprogs \
 			net/seafile/libsearpc
 
-USE_GMAKE =		Yes
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ENV +=	CPPFLAGS=-I${LOCALBASE}/include \
 			LDFLAGS=-L${LOCALBASE}/lib

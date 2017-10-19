@@ -1,11 +1,11 @@
-# $OpenBSD: Makefile,v 1.8 2017/04/10 11:45:26 sthen Exp $
+# $OpenBSD: Makefile,v 1.11 2017/07/26 22:45:18 sthen Exp $
 
 COMMENT =		object-oriented input system
 
 V =			1.3
 DISTNAME =		ois-v${V:S/./-/g}
 PKGNAME =		ois-${V}
-REVISION =		2
+REVISION =		4
 
 SHARED_LIBS =		OIS	0.0
 
@@ -18,7 +18,7 @@ MAINTAINER =		Pascal Stumpf <pascal@stumpf.co>
 # zlib/libpng
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		X11 m ${LIBCXX} xcb
+WANTLIB =		X11 m ${COMPILER_LIBCXX} xcb
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=wgois/}
 EXTRACT_SUFX =		.zip

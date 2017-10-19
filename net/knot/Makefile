@@ -1,12 +1,12 @@
-# $OpenBSD: Makefile,v 1.16 2017/06/03 10:44:41 jca Exp $
+# $OpenBSD: Makefile,v 1.19 2017/08/22 10:14:10 espie Exp $
 
 COMMENT =		authoritative DNS server
 
-DISTNAME =		knot-2.4.2
+DISTNAME =		knot-2.4.5
 REVISION =		0
 
 SHARED_LIBS +=	zscanner             1.0      # .1.0
-SHARED_LIBS +=	knot                 1.0      # .5.0
+SHARED_LIBS +=	knot                 1.1      # .5.0
 SHARED_LIBS +=	dnssec               0.0      # .3.0
 
 CATEGORIES =		net
@@ -27,7 +27,7 @@ MASTER_SITES =		https://secure.nic.cz/files/knot-dns/
 EXTRACT_SUFX =		.tar.xz
 
 # Needs TLS emulation, and atomic builtins on arm
-COMPILER =		base gcc
+COMPILER =		gcc
 COMPILER_LANGS =	c
 
 BUILD_DEPENDS =		devel/bison
@@ -37,8 +37,6 @@ LIB_DEPENDS =		devel/gettext \
 			devel/jansson \
 			security/gnutls
 
-USE_GMAKE =		Yes
-USE_LIBTOOL=		gnu
 CONFIGURE_STYLE =	gnu
 CONFIGURE_ARGS +=	--with-storage=${LOCALSTATEDIR}/db/knot \
 			--with-libidn \

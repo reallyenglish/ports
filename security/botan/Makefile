@@ -1,15 +1,15 @@
-# $OpenBSD: Makefile,v 1.23 2017/04/19 11:16:03 sthen Exp $
+# $OpenBSD: Makefile,v 1.27 2017/10/09 20:06:26 bluhm Exp $
 
 ONLY_FOR_ARCHS =	${GCC4_ARCHS} ${CLANG_ARCHS}
 
 COMMENT =	portable, easy to use, and efficient C++ crypto library
 
 PORTROACH =	limit:^1\.10\.
-VERSION =	1.10.16
+VERSION =	1.10.17
 DISTNAME =	Botan-${VERSION}
 PKGNAME =	botan-${VERSION}
 
-SHARED_LIBS =	botan-1.10	1.0
+SHARED_LIBS =	botan-1.10	1.1
 
 CATEGORIES =	security
 
@@ -20,7 +20,7 @@ MAINTAINER =		Alexander Bluhm <bluhm@openbsd.org>
 # BSD 2-Clause
 PERMIT_PACKAGE_CDROM =	Yes
 
-WANTLIB =		bz2 crypto gmp m pthread ${LIBCXX} z
+WANTLIB =		bz2 crypto gmp m pthread ${COMPILER_LIBCXX} z
 
 MASTER_SITES =		${HOMEPAGE}releases/
 
@@ -46,6 +46,7 @@ CONFIGURE_ARGS =	--cpu=${MACHINE_ARCH} \
 			--with-bzip2 \
 			--with-gnump \
 			--with-openssl \
+			--with-tr1-implementation=boost \
 			--with-zlib \
 			--without-sphinx
 

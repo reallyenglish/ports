@@ -1,8 +1,9 @@
-# $OpenBSD: Makefile,v 1.12 2017/04/10 11:46:32 sthen Exp $
+# $OpenBSD: Makefile,v 1.15 2017/07/26 22:45:28 sthen Exp $
 
 COMMENT =		mobile shell
 
-DISTNAME =		mosh-1.3.0
+DISTNAME =		mosh-1.3.2
+REVISION =		0
 
 CATEGORIES =		net
 
@@ -14,7 +15,7 @@ MAINTAINER =		Jeremie Courreges-Anglas <jca@wxcvbn.org>
 PERMIT_PACKAGE_CDROM =	Yes
 
 # uses pledge()
-WANTLIB +=		c crypto m ncursesw protobuf pthread ssl ${LIBCXX} util
+WANTLIB +=		c crypto m ncursesw protobuf pthread ssl ${COMPILER_LIBCXX} util
 WANTLIB +=		z
 
 MASTER_SITES =		${HOMEPAGE}

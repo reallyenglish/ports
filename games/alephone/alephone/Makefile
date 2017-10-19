@@ -1,4 +1,4 @@
-#	$OpenBSD: Makefile,v 1.21 2017/04/10 11:45:28 sthen Exp $
+#	$OpenBSD: Makefile,v 1.23 2017/07/26 22:45:20 sthen Exp $
 
 DIST_SUBDIR ?=		alephone
 COMMENT =		open source game engine based on Marathon 2: Durandal
@@ -6,6 +6,7 @@ COMMENT =		open source game engine based on Marathon 2: Durandal
 DATE =			20150620
 DISTNAME =		AlephOne-${DATE}
 PKGNAME =		alephone-1.2.1
+REVISION =		0
 
 EXTRACT_SUFX =		.tar.bz2
 CATEGORIES =		games x11
@@ -19,7 +20,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 MASTER_SITES =		https://github.com/Aleph-One-Marathon/alephone/releases/download/release-${DATE}/
 
-WANTLIB +=		GL GLU c m pthread ${LIBCXX} z
+WANTLIB +=		GL GLU c m pthread ${COMPILER_LIBCXX} z
 WANTLIB +=		SDL SDL_net SDL_image SDL_ttf mad png sndfile
 WANTLIB +=		smpeg speex speexdsp vorbisfile zzip
 WANTLIB += avcodec avformat avutil swscale boost_filesystem boost_system curl

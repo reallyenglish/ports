@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.825 2017/06/05 20:43:38 sebastia Exp $
+# $OpenBSD: Makefile,v 1.833 2017/10/14 16:23:46 jeremy Exp $
 
      SUBDIR =
      SUBDIR += ajaxterm
@@ -15,6 +15,7 @@
      SUBDIR += awstats
      SUBDIR += blogsum
      SUBDIR += bluefish
+     SUBDIR += buku
      SUBDIR += bozohttpd
      SUBDIR += c-icap
      SUBDIR += calamaris
@@ -28,7 +29,6 @@
      SUBDIR += chromium
      SUBDIR += cntlm
      SUBDIR += composer
-     SUBDIR += conkeror
      SUBDIR += cronolog
      SUBDIR += dansguardian
      SUBDIR += darkhttpd
@@ -367,7 +367,6 @@
      SUBDIR += polipo
      SUBDIR += pound
      SUBDIR += privoxy
-     SUBDIR += puppet-dashboard
      SUBDIR += puppetboard
      SUBDIR += py-CherryPy
      SUBDIR += py-aiohttp
@@ -448,6 +447,7 @@
      SUBDIR += py-tornado,python3
      SUBDIR += py-urlgrabber
      SUBDIR += py-urllib3
+     SUBDIR += py-urllib3,python3
      SUBDIR += py-waitress
      SUBDIR += py-webdav
      SUBDIR += py-weberror
@@ -471,48 +471,39 @@
      SUBDIR += rt
      SUBDIR += ruby-addressable
      SUBDIR += ruby-capybara
-     SUBDIR += ruby-capybara-webkit,ruby22
      SUBDIR += ruby-capybara-webkit,ruby23
      SUBDIR += ruby-capybara-webkit,ruby24
      SUBDIR += ruby-faraday
      SUBDIR += ruby-faraday_middleware
      SUBDIR += ruby-faraday_middleware-multi_json
-     SUBDIR += ruby-fcgi,ruby22
      SUBDIR += ruby-fcgi,ruby23
      SUBDIR += ruby-fcgi,ruby24
      SUBDIR += ruby-httpclient
      SUBDIR += ruby-httpi
      SUBDIR += ruby-mechanize
      SUBDIR += ruby-multipart-post
-     SUBDIR += ruby-ntlm,ruby22
      SUBDIR += ruby-ntlm,ruby23
      SUBDIR += ruby-ntlm,ruby24
-     SUBDIR += ruby-passenger,ruby22
      SUBDIR += ruby-passenger,ruby23
      SUBDIR += ruby-passenger,ruby24
-     SUBDIR += ruby-puma,ruby22
      SUBDIR += ruby-puma,ruby23
      SUBDIR += ruby-puma,ruby24
      SUBDIR += ruby-rack
      SUBDIR += ruby-rack-protection
      SUBDIR += ruby-rack-test
      SUBDIR += ruby-rainbows
-     SUBDIR += ruby-raindrops,ruby22
      SUBDIR += ruby-raindrops,ruby23
      SUBDIR += ruby-raindrops,ruby24
      SUBDIR += ruby-sanitize
      SUBDIR += ruby-savon
      SUBDIR += ruby-sinatra
-     SUBDIR += ruby-thin,ruby22
      SUBDIR += ruby-thin,ruby23
      SUBDIR += ruby-thin,ruby24
      SUBDIR += ruby-thin_http
-     SUBDIR += ruby-unicorn,ruby22
      SUBDIR += ruby-unicorn,ruby23
      SUBDIR += ruby-unicorn,ruby24
      SUBDIR += ruby-vegas
      SUBDIR += ruby-wasabi
-     SUBDIR += ruby-websocket-driver,ruby22
      SUBDIR += ruby-websocket-driver,ruby23
      SUBDIR += ruby-websocket-driver,ruby24
      SUBDIR += ruby-websocket-extensions
@@ -538,7 +529,6 @@
      SUBDIR += stagit
      SUBDIR += sthttpd
      SUBDIR += surf
-     SUBDIR += surf2
      SUBDIR += surfraw
      SUBDIR += swiggle
      SUBDIR += syweb
@@ -549,6 +539,7 @@
      SUBDIR += trac
      SUBDIR += trac-ldapplugin
      SUBDIR += tracnav
+     SUBDIR += ttyd
      SUBDIR += twill
      SUBDIR += uget
      SUBDIR += uriparser
@@ -573,6 +564,5 @@
      SUBDIR += xapian-omega
      SUBDIR += xcache
      SUBDIR += youtube-dl
-     SUBDIR += zendframework
 
 .include <bsd.port.subdir.mk>

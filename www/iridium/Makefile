@@ -1,4 +1,6 @@
-# $OpenBSD: Makefile,v 1.62 2017/05/31 08:08:17 espie Exp $
+# $OpenBSD: Makefile,v 1.65 2017/07/26 22:45:31 sthen Exp $
+
+.include <bsd.port.arch.mk>
 
 USE_WXNEEDED=		Yes
 
@@ -11,6 +13,8 @@ V=			58.0
 DISTNAME=		iridium-browser-${V}
 PKGNAME=		iridium-${V}
 DISTFILES=		${DISTNAME}${EXTRACT_SUFX}
+
+REVISION=		1
 
 CATEGORIES=		www
 
@@ -36,6 +40,10 @@ COMPILER =	clang gcc
 
 MODPY_RUNDEP=	No
 
+.if ${PROPERTIES:Mclang}
+PATCH_LIST=	patch-* clang-*
+.endif
+
 PATCHORIG=	.orig.port
 
 # uses pledge()
@@ -47,7 +55,7 @@ WANTLIB += png pthread
 WANTLIB += xml2 xslt
 WANTLIB += sndio
 WANTLIB += Xcomposite
-WANTLIB += ${LIBECXX}
+WANTLIB += ${COMPILER_LIBCXX}
 WANTLIB += Xi Xtst
 WANTLIB += Xdamage
 WANTLIB += Xcursor Xrandr gio-2.0

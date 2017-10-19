@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.8 2017/06/02 23:17:08 schwarze Exp $
+# $OpenBSD: Makefile,v 1.12 2017/08/02 22:57:59 naddy Exp $
 
 # see ${WRKBUILD}/arm-none-eabi/libgcc/config.log
 BROKEN-i386=	ICE: Floating point exception from xgcc during libgcc autoconf "checking for suffix of object files"
@@ -8,7 +8,7 @@ COMMENT=	gcc for ${CONFIG} cross-development, Linaro version
 
 VERSION=	6.3-2017.02
 DISTNAME=	gcc-linaro-${VERSION}
-REVISION=	0
+REVISION=	2
 EXTRACT_SUFX=	.tar.xz
 PKGNAME=	${CONFIG}-gcc-linaro-${VERSION:S/-/./g}
 
@@ -26,7 +26,7 @@ ERRORS+=	"either aarch64 or arm FLAVOR should be set"
 GCC_VERSION=	6.3.1
 SUBST_VARS+=	VERSION CONFIG GCC_VERSION
 
-WANTLIB=	c m ${LIBCXX} gmp mpfr mpc
+WANTLIB=	c m ${COMPILER_LIBCXX} gmp mpfr mpc
 DIST_SUBDIR=	gcc
 
 MAKE_GXX=	No
@@ -84,3 +84,10 @@ post-install:
 		${PREFIX}/lib/gcc/${CONFIG}/${VERSION}/
 
 .include <bsd.port.mk>
+
+# The preprocessed source exceeds the suggested implementation limit
+# of 256 for nesting levels of parenthesized expressions within a
+# full-expression as given in Annex B of the C++ standard.
+.if ${PROPERTIES:Mclang}
+CXXFLAGS+=	-fbracket-depth=512
+.endif

@@ -1,4 +1,4 @@
-# $OpenBSD: OpenBSD,v 1.142 2017/05/30 10:47:25 anton Exp $
+# $OpenBSD: OpenBSD,v 1.148 2017/10/16 20:51:20 remi Exp $
 #
 # This is a list of OpenBSD developers and related people.
 #
@@ -25,7 +25,9 @@
 35.698		139.713		"mcbride"	# Ryan Thomas McBride
 36.134		-86.70		"david"		# David Krause
 37.25230	-121.81576	"mlarkin"	# Mike Larkin
+37.40203	-122.06842	"pd"		# Pratik Vyas
 37.3706		-122.0138	"ckuethe"	# Chris Kuethe
+37.38		-122.08		"akoshibe"	# Ayaka Koshibe
 37.515049	-122.339528	"marc"		# Marco S. Hyman
 37.75		-122.41		"matthew"	# Matthew Dempsky
 37.9046		-104.9357	"abieber"	# Aaron Bieber
@@ -65,6 +67,7 @@
 45.095683	-93.4982	"jim"		# Jim Razmus II
 45.2002		5.7222		"ratchov"	# Alexandre Ratchov
 45.3333		4.3167		"syl"		# Sylvestre Gallon
+45.34		-75.79		"mortimer"	# Todd Mortimer
 45.43		12.13		"michele"	# Michele Marchetto
 45.4745		-73.6556	"msf"		# Mathieu Sauve-Frankel
 45.5		-122.5		"joshe"		# Joshua Elsasser
@@ -77,6 +80,7 @@
 47.29		19.3		"robert"	# Robert Nagy
 47.3154		7.3526		"mglocker"	# Marcus Glocker
 47.369024	8.538033	"stephan"	# Stephan A. Rickauer
+47.402103	8.502002	"remi"		# Remi Locherer
 47.404841	8.562961	"tb"		# Theo Buehler
 47.50		7.60		"dhartmei"	# Daniel Hartmeier
 47.532		7.648		"winiger"	# Marc Winiger
@@ -125,6 +129,7 @@
 51.6		-114.1		"deraadt"	# Theo de Raadt
 51.67938	5.1194		"weerd"		# Paul de Weerd
 51.86681	-0.1875		"jacekm"	# Jacek Masiulaniec
+52.37		4.89		"job"		# Job Snijders
 52.49		13.41		"stsp"		# Stefan Sperling
 52.47		13.34		"uwe"		# Uwe Stuehler
 52.26		4.63		"camield"	# Camiel Dobbelaar

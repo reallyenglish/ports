@@ -1,9 +1,11 @@
-# $OpenBSD: Makefile,v 1.199 2017/06/16 03:37:21 bcallah Exp $
+# $OpenBSD: Makefile,v 1.206 2017/09/23 13:31:43 sthen Exp $
 
      SUBDIR =
      SUBDIR += STk
      SUBDIR += abcl
+     SUBDIR += algol68g
      SUBDIR += antlr3
+     SUBDIR += apl
      SUBDIR += arena
      SUBDIR += bacon
      SUBDIR += brandy
@@ -13,6 +15,7 @@
      SUBDIR += clisp
      SUBDIR += clojure
      SUBDIR += cython
+     SUBDIR += cython,python3
      SUBDIR += datalog
      SUBDIR += duktape
      SUBDIR += eagle
@@ -45,6 +48,7 @@
      SUBDIR += jimtcl
      SUBDIR += jruby
      SUBDIR += kawa
+     SUBDIR += kona
      SUBDIR += librep
      SUBDIR += libv8
      SUBDIR += lua
@@ -64,7 +68,6 @@
      SUBDIR += obc
      SUBDIR += ocaml
      SUBDIR += ocaml-camlp4
-     SUBDIR += oo2c
      SUBDIR += open-cobol
      SUBDIR += otcl
      SUBDIR += p5-Language-Ook
@@ -81,14 +84,13 @@
      SUBDIR += ruby
      SUBDIR += rust
      SUBDIR += sbcl
-     SUBDIR += sbcl,threads
+#     SUBDIR += sbcl,threads
      SUBDIR += scala
      SUBDIR += scheme-report
      SUBDIR += scheme48
      SUBDIR += scm
      SUBDIR += scm,no_x11
      SUBDIR += seed7
-     SUBDIR += smlnj
      SUBDIR += spidermonkey
      SUBDIR += squeak
      SUBDIR += swi-prolog

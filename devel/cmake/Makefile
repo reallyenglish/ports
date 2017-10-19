@@ -1,13 +1,12 @@
-# $OpenBSD: Makefile,v 1.156 2017/04/21 18:37:43 kurt Exp $
+# $OpenBSD: Makefile,v 1.165 2017/09/22 13:42:54 dcoppa Exp $
 
 DPB_PROPERTIES =parallel
 
 COMMENT =	portable build system
 
-VER =		3.7.2
+VER =		3.9.3
 DISTNAME =	cmake-${VER}
 CATEGORIES =	devel
-REVISION =	0
 
 HOMEPAGE =	https://www.cmake.org/
 
@@ -19,7 +18,7 @@ MASTER_SITES =	${HOMEPAGE}files/v${VER:R}/
 PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += archive c curl expat form jsoncpp m ncurses pthread
-WANTLIB += ${LIBCXX} z
+WANTLIB += rhash ${COMPILER_LIBCXX} z
 
 # XXX: Ninja is broken on m88k
 .if ${MACHINE_ARCH} != "m88k"
@@ -30,7 +29,8 @@ BUILD_DEPENDS +=	textproc/py-sphinx>=1.4
 
 LIB_DEPENDS =		archivers/libarchive \
 			devel/jsoncpp \
-			net/curl
+			net/curl \
+			security/rhash
 
 CONFIGURE_STYLE =	simple
 CONFIGURE_ARGS =	--prefix=${PREFIX} \

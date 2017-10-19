@@ -1,4 +1,4 @@
-# $OpenBSD: Makefile,v 1.10 2017/04/10 11:46:21 sthen Exp $
+# $OpenBSD: Makefile,v 1.12 2017/07/26 22:45:24 sthen Exp $
 
 COMMENT =		extensible drawing editor
 
@@ -6,7 +6,7 @@ V =			7.1.2
 SUBST_VARS +=		V
 DISTNAME =		ipe-${V}-src
 PKGNAME =		ipe-${V}
-REVISION =		4
+REVISION =		5
 
 # their libraries would be installed as libxxx.so.${V}, overide this.
 SHLIB_VERSION =	0.0
@@ -26,7 +26,7 @@ PERMIT_PACKAGE_CDROM =	Yes
 
 WANTLIB += GL QtGui X11 Xrender c cairo expat fontconfig freetype
 WANTLIB += glib-2.0 gobject-2.0 ${MODLUA_WANTLIB} m pixman-1 png
-WANTLIB += pthread pthread-stubs ${LIBCXX} xcb xcb-render xcb-shm
+WANTLIB += pthread pthread-stubs ${COMPILER_LIBCXX} xcb xcb-render xcb-shm
 WANTLIB += z
 
 MASTER_SITES =		${MASTER_SITE_SOURCEFORGE:=ipe7/}
